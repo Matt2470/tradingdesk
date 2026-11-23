@@ -1,0 +1,71 @@
+# The four paper bots, every 15 minutes, on GitHub's computers (free for public repositories).
+# Paper money only: no exchange keys exist anywhere in this repository, and nothing here can send an order.
+# Each run: bring back the bots' state from the bot-data branch and the saved prices from the cache,
+# run one check (bun run engine), then publish the bots' state and the scoreboard to the bot-data branch.
+# GitHub can start scheduled runs late (sometimes 10-20 minutes) when it is busy; the bots catch up on every bar they missed.
+name: Bots
+
+on:
+  schedule:
+    - cron: "1,16,31,46 * * * *" # one minute after each 15-minute bar closes
+  workflow_dispatch: {}
+
+concurrency:
+  group: bots
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Bring back the bots' state
+        run: |
+          mkdir -p data
+          if git fetch --depth=1 origin bot-data 2>/dev/null; then
+            git archive FETCH_HEAD bot derived 2>/dev/null | tar -x -C data || true
+          fi
+          ls -R data | head -40
+
+      - name: Bring back saved prices
+        uses: actions/cache/restore@v4
+        with:
+          path: data/cache
+          key: prices-${{ github.run_id }}
+          restore-keys: prices-
+
+      - name: Run the bots once
+        env:
+          BINANCE_HOST: https://data-api.binance.vision
+          TZ: Europe/Madrid
+          TD_ENGINE: "1" # this copy is the one that trades: it ignores settings.remote
+        run: bun run engine --publish "$RUNNER_TEMP/out"
+
+      - name: Publish to the bot-data branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd "$RUNNER_TEMP/out"
+          git init -q
+          git checkout -q -b bot-data
+          git add -A
+          git -c user.name="tradingdesk-bots" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "Bots $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" bot-data
+
+      - name: Should the prices be saved this run?
+        id: hourly
+        run: echo "save=$(( ${{ github.run_number }} % 4 == 0 ))" >> "$GITHUB_OUTPUT"
+
+      - name: Save prices (once an hour; the cache is rebuilt from scratch if it is ever lost)
+        if: steps.hourly.outputs.save == '1' || github.event_name == 'workflow_dispatch'
+        uses: actions/cache/save@v4
+        with:
+          path: data/cache
+          key: prices-${{ github.run_id }}

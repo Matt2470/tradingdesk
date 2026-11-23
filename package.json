@@ -1,0 +1,17 @@
+{
+  "name": "tradingdesk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/server.ts --open",
+    "serve": "bun run src/server.ts",
+    "refresh": "bun run src/pipeline.ts",
+    "doctor": "bun run scripts/doctor.ts",
+    "smoke": "bun run scripts/smoke.ts",
+    "check:docs": "bun run scripts/check-claude-md.ts",
+    "check": "bun test && bun run scripts/smoke.ts && bun run scripts/check-claude-md.ts",
+    "research": "bun run scripts/research.ts",
+    "engine": "bun run scripts/engine.ts"
+  }
+}

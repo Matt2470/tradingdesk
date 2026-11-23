@@ -1,0 +1,29 @@
+# ALLOW-LIST: nothing is published unless it is named below. This keeps out data/ (the owner's trade exports, feedback
+# and the price cache), scout-to-alert/ (a separate project with its own .env keys) and anything added later.
+/*
+!/.gitignore
+!/CLAUDE.md
+!/README.md
+!/package.json
+!/start.vbs
+!/setup.bat
+!/restart.bat
+!/remove-from-startup.bat
+!/github-setup.bat
+!/github-update.bat
+!/config/
+!/docs/
+!/scripts/
+!/src/
+!/tests/
+!/web/
+!/deploy/
+!/.github/
+# Never, wherever they appear:
+.env
+.env.*
+*.pem
+*.key
+node_modules/
+*.log
+*.tmp

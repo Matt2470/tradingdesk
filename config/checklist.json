@@ -1,0 +1,122 @@
+[
+  {
+    "id": "restart-tf",
+    "screen": "All",
+    "title": "The app opens after restart.bat",
+    "how": "Double-click restart.bat. The first update downloads about 150 price files, so the first full Today can take 2 to 4 minutes. After that it should open in under 30 seconds."
+  },
+  {
+    "id": "live-minute",
+    "screen": "Today",
+    "title": "Prices update every minute",
+    "how": "Watch a crypto price for 2 minutes; it should change and the status line should say 'prices updated' less than a minute ago. Stocks only update while the US market is open."
+  },
+  {
+    "id": "bot-heartbeat",
+    "screen": "Paper bots",
+    "title": "I can see the bots are working",
+    "how": "Open Paper bots. The 'Last check' panel should say a time less than 16 minutes ago, how many charts it watched, and how many had a tested rule. Trades only start on a new signal, not on old ones."
+  },
+  {
+    "id": "today-tp",
+    "screen": "Today",
+    "title": "Buy and short advice shows the take-profit prices",
+    "how": "On a row that says Buy or Sell short, the sentence should give the stop and two take-profit prices, and say the rest follows a rising stop."
+  },
+  {
+    "id": "lighter-read",
+    "screen": "Paper bots",
+    "title": "The Lighter panel reads Lighter",
+    "how": "On Stocks and gold, scroll to 'Lighter (read-only)'. After the next strategy check it should say when it read Lighter and how many of your symbols can go live. Mark Problem if it says 'failed'."
+  },
+  {
+    "id": "lighter-24h",
+    "screen": "Today",
+    "title": "Stocks and gold move outside US market hours",
+    "how": "In the evening or at night (Madrid time), stock and gold prices on Today should still change each minute, and their 15 min, 30 min, 1 h and 4 h cells can show signals. The first time, Lighter's history takes about an hour to download in the background."
+  },
+  {
+    "id": "tp3-sl3",
+    "screen": "Paper bots",
+    "title": "TP1, TP2, TP3 and SL1, SL2, SL3 show on trades",
+    "how": "In Open trades, 'Next stop' says SL1, SL2, SL3 or 'rising stop', and 'Next take-profit' shows TP1, TP2 or TP3. In Closed trades you should see lines like 'Take-profit 3', 'Stop 2' or 'Rising stop (profit kept)'."
+  },
+  {
+    "id": "bot-clock",
+    "screen": "Paper bots",
+    "title": "The clock shows the bots are working, 24/7",
+    "how": "Each bot panel has a ticking clock and a light: green 'Working' if it checked in the last 17 minutes. The line under it says how many charts trade 24/7 on Lighter, and lists the few that only trade while the US market is open (not on Lighter or too thin there)."
+  },
+  {
+    "id": "bot-daily",
+    "screen": "Paper bots",
+    "title": "The day-by-day charts make the bot's week easy to read",
+    "how": "Under 'What the bot did': a line of the account value at the end of each day, green and red bars for each day's result (hover a bar for the numbers), and a day-by-day table. The clock line should say the stocks bot trades 24/7 on all its charts."
+  },
+  {
+    "id": "strategy-map",
+    "screen": "Strategies",
+    "title": "The map shows what works on each symbol and timeframe at a glance",
+    "how": "Open Strategies. Each cell shows the rule the bot uses there and its profit factor (darker = better), with BUY, SELL or IN when something is happening. Hover a cell for its record, click it to open that chart below. Switch to Crypto 24/7 for the crypto map. Below the map, one card per rule with small charts."
+  },
+  {
+    "id": "new-rules",
+    "screen": "Strategies",
+    "title": "The SMC rules are gone and the new ones are tested",
+    "how": "In Strategies, the cards should show 16 rules: no SMC, and new ones called Supertrend, MACD momentum cross and Breakout after a quiet spell (each with a short version). The map uses short names: Supertrend, MACD, Squeeze."
+  },
+  {
+    "id": "comp-switch",
+    "screen": "Paper bots",
+    "title": "I can switch between the four bots",
+    "how": "Open Paper bots and press each name. Each bot should show its own strategies (Leo and Nova only buy rules, Ursa and Raven only short rules), its own trades and its badges."
+  },
+  {
+    "id": "github-run",
+    "screen": "GitHub",
+    "title": "The bots run on GitHub every 15 minutes",
+    "how": "After setting up the repository, open its Actions tab: the 'Bots' workflow should run about every 15 minutes with a green tick, and the bot-data branch should show a new commit each time."
+  },
+  {
+    "id": "github-pc",
+    "screen": "Paper bots",
+    "title": "The PC shows what the GitHub bots did",
+    "how": "After adding the remote setting, restart.bat. The bot clock should keep saying Working even with the PC off for a while, and the trades should match the bot-data branch."
+  },
+  {
+    "id": "comp-board2",
+    "screen": "Competition",
+    "title": "The scoreboard shows tiers, award and loan",
+    "how": "Open Competition. Each card should show the bot's tier (Rookie at first), badges in a row, money between the $125 bust line and the $500 badge, its locked award, what it still owes, and the charts it chose."
+  },
+  {
+    "id": "comp-weekend",
+    "screen": "Competition",
+    "title": "Nothing trades at the weekend",
+    "how": "On Saturday open Competition and Paper bots: a 'Weekend pause' note, no open trades. On Monday the bots trade again."
+  },
+  {
+    "id": "comp-playbook",
+    "screen": "Paper bots",
+    "title": "Each bot shows the charts it chose",
+    "how": "Open Paper bots: under 'The charts ... chose' at most 6 symbols, each with one strategy and how it did on data it had not seen."
+  },
+  {
+    "id": "comp-sides2",
+    "screen": "Paper bots",
+    "title": "Leo only buys, Ursa and Raven only sell short, Nova chooses",
+    "how": "After a few days, check the closed trades: Leo only 'long', Ursa and Raven only 'short', Nova either."
+  },
+  {
+    "id": "nova-crypto",
+    "screen": "Paper bots",
+    "title": "Nova can trade crypto beyond the six on Today",
+    "how": "After a day or two (the first Lighter download takes many checks), Nova's 'charts she chose' may include other Lighter crypto (for example HYPE or DOGE), never the same chart and strategy as Raven."
+  },
+  {
+    "id": "twin",
+    "screen": "Competition",
+    "title": "I can see whether each bot beats chance",
+    "how": "Each card says how far the bot is ahead of or behind its random twin, and the ladder has an 'Against chance' column."
+  }
+]

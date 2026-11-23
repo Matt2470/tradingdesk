@@ -1,0 +1,213 @@
+//@version=6
+indicator("SMC Indicator", overlay = true, max_lines_count = 500, max_labels_count = 500, max_boxes_count = 500, max_bars_back = 500)
+
+// ───── Inputs ─────
+showBull  = input.bool(true, "Bullish: sell-side sweep + bullish BOS")
+showBear  = input.bool(true, "Bearish: buy-side sweep + bearish BOS")
+slen      = input.int(20, "Structure pivot length (trend)", minval = 2)
+len       = input.int(15, "Internal pivot length (sweep and BOS)", minval = 1)
+needClose = input.bool(true, "Sweep candle must close back inside the swept level")
+bosMode   = input.string("Close", "BOS confirmed by", options = ["Close", "Wick"])
+maxBars   = input.int(50, "Max bars between sweep and BOS", minval = 1)
+colBull   = input.color(color.teal, "Bullish color")
+colBear   = input.color(color.red, "Bearish color")
+showOB    = input.bool(true, "Show the OB that originates the BOS", group = "Order block")
+obZone    = input.string("Auto", "OB zone", options = ["Auto", "Full candle", "Body"], group = "Order block", tooltip = "Auto: full candle, but a wick longer than the % below is cut to the body")
+wickPct   = input.float(50, "Auto: max wick size (% of body)", minval = 0, group = "Order block")
+obExt     = input.int(200, "Max box extension (bars from the BOS)", minval = 1, group = "Order block")
+colObBull = input.color(color.new(color.teal, 75), "Bullish OB color", group = "Order block")
+colObBear = input.color(color.new(color.red, 75), "Bearish OB color", group = "Order block")
+
+// ───── Structure trend (last break of the major structure) ─────
+sph = ta.pivothigh(high, slen, slen)
+spl = ta.pivotlow(low, slen, slen)
+
+var float sHigh    = na
+var float sLow     = na
+var bool  sHighBrk = false
+var bool  sLowBrk  = false
+var int   trend    = 0     // 1 bullish, -1 bearish, 0 undefined
+
+if not na(sph)
+    sHigh    := sph
+    sHighBrk := false
+if not na(spl)
+    sLow    := spl
+    sLowBrk := false
+
+if not na(sHigh) and not sHighBrk and close > sHigh
+    trend    := 1
+    sHighBrk := true
+if not na(sLow) and not sLowBrk and close < sLow
+    trend   := -1
+    sLowBrk := true
+
+// ───── Internal pivots ─────
+ph = ta.pivothigh(high, len, len)
+pl = ta.pivotlow(low, len, len)
+
+var float lastPH    = na
+var int   lastPHbar = na
+var float lastPL    = na
+var int   lastPLbar = na
+var bool  phUsed    = false
+var bool  plUsed    = false
+var bool  iHighBrk  = false
+var bool  iLowBrk   = false
+var int   iTrend    = 0     // internal trend: last break of the internal structure
+
+if not na(ph)
+    lastPH    := ph
+    lastPHbar := bar_index - len
+    phUsed    := false
+    iHighBrk  := false
+if not na(pl)
+    lastPL    := pl
+    lastPLbar := bar_index - len
+    plUsed    := false
+    iLowBrk   := false
+
+if not na(lastPH) and not iHighBrk and close > lastPH
+    iTrend   := 1
+    iHighBrk := true
+if not na(lastPL) and not iLowBrk and close < lastPL
+    iTrend  := -1
+    iLowBrk := true
+
+// The pattern is only searched when major and internal structure agree
+bullTrend = trend == 1 and iTrend == 1
+bearTrend = trend == -1 and iTrend == -1
+
+bullSig = false
+bearSig = false
+
+// ───── Active order blocks ─────
+var array<box> obBoxes = array.new<box>()
+var array<int> obDirs  = array.new<int>()
+var array<int> obStart = array.new<int>()   // BOS bar
+bullTouch = false
+bearTouch = false
+
+// OB = last opposite candle at or before the extreme of the leg that makes the BOS.
+// dir = 1 (bullish BOS): extreme = lowest low since the sweep, OB = last bearish candle.
+// dir = -1 (bearish BOS): extreme = highest high since the sweep, OB = last bullish candle.
+makeOB(int dir, int fromBar, color col, color txtCol) =>
+    span = bar_index - fromBar
+    extK = 0
+    for k = 0 to span
+        if dir == 1 ? low[k] < low[extK] : high[k] > high[extK]
+            extK := k
+    obK = -1
+    for j = extK to math.min(extK + 100, 499)
+        if dir == 1 ? close[j] < open[j] : close[j] > open[j]
+            obK := j
+            break
+    if obK >= 0
+        bTop  = math.max(open[obK], close[obK])
+        bBot  = math.min(open[obK], close[obK])
+        body  = bTop - bBot
+        upLong = high[obK] - bTop > body * wickPct / 100
+        dnLong = bBot - low[obK] > body * wickPct / 100
+        top = obZone == "Body" or (obZone == "Auto" and upLong) ? bTop : high[obK]
+        bot = obZone == "Body" or (obZone == "Auto" and dnLong) ? bBot : low[obK]
+        b = box.new(bar_index - obK, top, bar_index, bot, border_color = col, bgcolor = col, extend = extend.none)
+        label.new(bar_index - obK, (top + bot) / 2, "OB", style = label.style_label_right, color = txtCol, textcolor = color.white, size = size.small)
+        array.push(obBoxes, b)
+        array.push(obDirs, dir)
+        array.push(obStart, bar_index)
+        if array.size(obBoxes) > 100
+            array.shift(obBoxes)
+            array.shift(obDirs)
+            array.shift(obStart)
+
+// Extend boxes until price returns to the OB or the max extension is reached
+if array.size(obBoxes) > 0
+    for i = array.size(obBoxes) - 1 to 0
+        b     = array.get(obBoxes, i)
+        dir   = array.get(obDirs, i)
+        start = array.get(obStart, i)
+        box.set_right(b, bar_index)
+        touched = bar_index > start and (dir == 1 ? low <= box.get_top(b) : high >= box.get_bottom(b))
+        if touched
+            if dir == 1
+                bullTouch := true
+            else
+                bearTouch := true
+        if touched or bar_index - start >= obExt
+            array.remove(obBoxes, i)
+            array.remove(obDirs, i)
+            array.remove(obStart, i)
+
+// ═════ BULLISH: sell-side sweep → bullish BOS ═════
+var bool  bPend    = false
+var float bSwLvl   = na
+var int   bSwFrom  = na
+var int   bSwBar   = na
+var float bSwExt   = na
+var float bBosLvl  = na
+var int   bBosFrom = na
+
+if bPend and bar_index > bSwBar
+    hit = bosMode == "Close" ? close > bBosLvl : high > bBosLvl
+    if hit
+        line.new(bSwFrom, bSwLvl, bSwBar, bSwLvl, color = colBull, width = 2, style = line.style_dashed)
+        label.new(bSwBar, bSwExt, "Sweep", style = label.style_label_up, color = colBull, textcolor = color.white, size = size.small)
+        line.new(bBosFrom, bBosLvl, bar_index, bBosLvl, color = colBull, width = 2)
+        label.new(bar_index, bBosLvl, "BOS", style = label.style_label_down, color = colBull, textcolor = color.white, size = size.small)
+        bullSig := true
+        bPend   := false
+        if showOB
+            makeOB(1, bSwBar, colObBull, colBull)
+    else if close < bSwExt or bar_index - bSwBar >= maxBars or trend != 1
+        bPend := false
+
+if showBull and not plUsed and not na(lastPL) and low < lastPL
+    plUsed := true
+    if bullTrend and (not needClose or close > lastPL) and not na(lastPH)
+        bPend    := true
+        bSwLvl   := lastPL
+        bSwFrom  := lastPLbar
+        bSwBar   := bar_index
+        bSwExt   := low
+        bBosLvl  := lastPH
+        bBosFrom := lastPHbar
+
+// ═════ BEARISH: buy-side sweep → bearish BOS ═════
+var bool  sPend    = false
+var float sSwLvl   = na
+var int   sSwFrom  = na
+var int   sSwBar   = na
+var float sSwExt   = na
+var float sBosLvl  = na
+var int   sBosFrom = na
+
+if sPend and bar_index > sSwBar
+    hit = bosMode == "Close" ? close < sBosLvl : low < sBosLvl
+    if hit
+        line.new(sSwFrom, sSwLvl, sSwBar, sSwLvl, color = colBear, width = 2, style = line.style_dashed)
+        label.new(sSwBar, sSwExt, "Sweep", style = label.style_label_down, color = colBear, textcolor = color.white, size = size.small)
+        line.new(sBosFrom, sBosLvl, bar_index, sBosLvl, color = colBear, width = 2)
+        label.new(bar_index, sBosLvl, "BOS", style = label.style_label_up, color = colBear, textcolor = color.white, size = size.small)
+        bearSig := true
+        sPend   := false
+        if showOB
+            makeOB(-1, sSwBar, colObBear, colBear)
+    else if close > sSwExt or bar_index - sSwBar >= maxBars or trend != -1
+        sPend := false
+
+if showBear and not phUsed and not na(lastPH) and high > lastPH
+    phUsed := true
+    if bearTrend and (not needClose or close < lastPH) and not na(lastPL)
+        sPend    := true
+        sSwLvl   := lastPH
+        sSwFrom  := lastPHbar
+        sSwBar   := bar_index
+        sSwExt   := high
+        sBosLvl  := lastPL
+        sBosFrom := lastPLbar
+
+// ───── Alerts (only when sweep + BOS complete) ─────
+alertcondition(bullSig, "Sell-side sweep + bullish BOS", "Sell-side sweep + bullish BOS")
+alertcondition(bearSig, "Buy-side sweep + bearish BOS", "Buy-side sweep + bearish BOS")
+alertcondition(bullTouch, "Price back at bullish OB", "Price back at bullish OB")
+alertcondition(bearTouch, "Price back at bearish OB", "Price back at bearish OB")

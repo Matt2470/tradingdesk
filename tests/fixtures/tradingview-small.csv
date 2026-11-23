@@ -1,0 +1,4 @@
+Hora,Saldo anterior,Saldo posterior,PyG realizadas (valor),PyG realizadas (divisa),Acción
+2026-01-02 10:00:00,1000,1010,10,USD,"Close long position for symbol NASDAQ:AMD at price 110.00 for 1 units. Position AVG Price was 100.000000, currency: USD, rate: 1.000000, point value: 1.000000"
+2026-01-01 10:00:00,1004,1000,-4,USD,"Close short position for symbol BITSTAMP:BTCUSD at price 102 for 2 units. Position AVG Price was 100.000000, currency: USD, rate: 1.000000, point value: 1.000000"
+2026-01-01 09:00:00,0,1004,1004,USD,"Deposit"
