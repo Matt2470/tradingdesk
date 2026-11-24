@@ -23,7 +23,7 @@ export interface BotState {
   positions: Record<string, BotPosition>; pending: Record<string, BotPending>; last: Record<string, string>;
   trades: BotTrade[]; equityCurve: { d: string; equity: number }[]; log: { d: string; msg: string }[];
   /** Heartbeat: when the bot last looked, and what it saw then. */
-  checked?: { at: string; markets: number; withStrategy: number; newBars: number };
+  checked?: { at: string; markets: number; withStrategy: number; newBars: number; /** "GitHub" or "PC": who ran this check. */ by?: string };
   /** Competition bots only (src/bot/accountant.ts): grant, badges, busts, performance index, monthly ledger. Replaces the circuit breaker. */
   accountant?: Accountant;
   /** Competition bots only: the side this bot trades ("long" = bullish, "short" = bearish, "both" = free to choose). */

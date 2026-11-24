@@ -23,7 +23,7 @@ if (i > 0) {
   for (const [path, local] of [...publishedFiles(st), ["derived/status.json", join(P.derived, "status.json")] as [string, string]]) {
     if (!existsSync(local)) continue; const dest = join(out, path); mkdirSync(dirname(dest), { recursive: true }); cpSync(local, dest);
   }
-  writeFileSync(join(out, "heartbeat.json"), JSON.stringify({ at: new Date().toISOString(), tookMs: Date.now() - t0, symbols: r.symbolsWithData, failedDownloads: bad.length, liveErrors: tk.errors.length }, null, 1));
+  writeFileSync(join(out, "heartbeat.json"), JSON.stringify({ at: new Date().toISOString(), by: "GitHub", tookMs: Date.now() - t0, symbols: r.symbolsWithData, failedDownloads: bad.length, liveErrors: tk.errors.length }, null, 1));
   writeFileSync(join(out, "README.md"), "# TradingDesk bot data\n\nWritten by the Bots workflow every 15 minutes: the four paper bots' state and the competition scoreboard.\nPretend money only. The TradingDesk app on the owner's PC reads these files when `remote` is set in config/settings.json.\n");
   console.log(`Published to ${out}.`);
 }

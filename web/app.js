@@ -41,6 +41,16 @@ const tierTag = (level, name) => `<span class="tier ${TIER_CLS[level] ?? "rookie
 /** "3 of 4 badges in a row to Pro" */
 function streakText(streak, toNext, tiers, names, level) { if (toNext == null) return `${streak} badges in a row: top tier reached`; const goal = streak + toNext; return `${streak} of ${goal} badges in a row to ${names[level + 1] ?? ""}`; }
 const ord = n => n + (n % 10 === 1 && n % 100 !== 11 ? "st" : n % 10 === 2 && n % 100 !== 12 ? "nd" : n % 10 === 3 && n % 100 !== 13 ? "rd" : "th");
+/** Who has been checking the bots: GitHub's runs and this PC's turns. */
+function checksPanel(c) {
+  const k = c.checks; if (!k || !k.last?.length) return "";
+  const last = k.last[0]; const age = Date.now() - Date.parse(last.at); const [cls, word] = botState(last.at);
+  const who = by => (by === "PC" ? "this PC" : by);
+  const day = Object.entries(k.last24h ?? {}).map(([b, n]) => `${who(b)} ${n}`).join(", ");
+  const note = k.sync?.note ? ` <span class="small">(${esc(k.sync.note)})</span>` : "";
+  return `<div class="panel goal" data-bot-at="${esc(last.at)}"><span class="dot ${cls}" data-bot-dot></span> <strong data-bot-word>${esc(word)}</strong> · last check ${esc(clock(last.at))} by ${esc(who(last.by))}, <span data-ago="${esc(last.at)}">${agoText(age)}</span>.
+    <span class="small">Checks in the last 24 hours: ${esc(day || "none")}. ${k.shared ? "GitHub and this PC take turns: whoever checks first saves the bots' state, so they keep trading when either one is off." : ""}</span>${note}</div>`;
+}
 function duelsPanel(c, name) {
   const d = c.duels; if (!d?.current) return "";
   const row = p => `<div class="duel">${name(p.a)} <strong class="${p.winner === p.a ? "gain" : ""}">${pct(p.aPct, 2)}</strong><span class="vs">vs</span><strong class="${p.winner === p.b ? "gain" : ""}">${pct(p.bPct, 2)}</strong> ${name(p.b)}</div>`;
@@ -334,6 +344,7 @@ const screens = {
     return `<div class="head"><div><h1>Competition</h1><p class="sub">Four paper bots compete for the title of Experienced trader. Each trades a ${money(c.startGrant)} loan from the accountant. Twice the grant earns a badge and locks the profit away; ${R.tiers[0]}, ${R.tiers[1]} and ${R.tiers[2]} badges in a row make a ${esc(R.tierNames[1])}, a ${esc(R.tierNames[2])} and an ${esc(R.tierNames[3])}. Half the grant costs the award a refill, or the bot its seat.</p></div></div>
     ${c.weekend ? `<div class="notice"><strong>Weekend pause.</strong> No trading from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday.</div>` : ""}
     <div class="panel goal"><strong>Experienced traders found: ${c.experienced} of 4.</strong> <span class="small">Recruits tried so far: ${c.recruitsTried}. The more recruits it takes, the more likely the winners are lucky rather than good: count this before trusting a title.</span></div>
+    ${checksPanel(c)}
     <div class="botgrid">${cards}</div>
     ${duelsPanel(c, name)}
     <h2>${esc(monthName(c.month))} so far</h2>${cur ? table(cur.standings) : ""}
@@ -384,7 +395,7 @@ function botClock(b) {
     `<strong>Trades 24/7</strong> on ${h.allDay} of ${h.total} charts. Still on market hours: ${h.marketHoursOnly.map(esc).join(", ")}.${left}`;
   return `<div class="panel botclock" data-bot-at="${esc(at ?? "")}">
     <div class="clockrow"><span class="dot ${cls}" data-bot-dot></span><strong data-bot-word>${esc(word)}</strong><span class="bigclock" data-clock>${new Date().toLocaleTimeString("en-GB")}</span></div>
-    <p class="small" style="margin:6px 0 0">Last check ${at ? `${esc(clock(at))}, <span data-ago="${esc(at)}">${agoText(Date.now() - Date.parse(at))}</span>` : "not yet"} · next check <span data-until="${esc(b.nextCheck ?? "")}">${b.nextCheck ? untilText(Date.parse(b.nextCheck) - Date.now()) : "-"}</span> · prices updated ${b.pricesAt ? `<span data-ago="${esc(b.pricesAt)}">${agoText(Date.now() - Date.parse(b.pricesAt))}</span>` : "-"}</p>
+    <p class="small" style="margin:6px 0 0">Last check ${at ? `${esc(clock(at))}${b.checked?.by ? ` by ${b.checked.by === "PC" ? "this PC" : esc(b.checked.by)}` : ""}, <span data-ago="${esc(at)}">${agoText(Date.now() - Date.parse(at))}</span>` : "not yet"} · next check <span data-until="${esc(b.nextCheck ?? "")}">${b.nextCheck ? untilText(Date.parse(b.nextCheck) - Date.now()) : "-"}</span> · prices updated ${b.pricesAt ? `<span data-ago="${esc(b.pricesAt)}">${agoText(Date.now() - Date.parse(b.pricesAt))}</span>` : "-"}</p>
     ${hoursLine ? `<p class="small" style="margin:6px 0 0">${hoursLine}</p>` : ""}
   </div>`;
 }

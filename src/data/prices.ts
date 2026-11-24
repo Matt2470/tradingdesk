@@ -7,7 +7,7 @@
 // and Yahoo 1-minute charts for a small set of the other stocks.
 import { join } from "node:path";
 import { aggregateUtc, getCandles, lighterFile, LIGHTER_API, LIGHTER_KEEP_DAYS, LIGHTER_RES_MS, mergeBars, pace, parseMarkets, type LighterRes, type LighterSnapshot } from "./lighter";
-import { P, readJson, writeJson, settings, lighterCryptoList, type Sym, type AssetClass } from "../config";
+import { P, readJson, writeJson, settings, lighterCryptoList, lighterOtherList, type Sym, type AssetClass } from "../config";
 import type { Bar } from "../core/strategies";
 
 export type Timeframe = "1m" | "5m" | "15m" | "30m" | "1h" | "4h" | "1d";
@@ -131,6 +131,12 @@ export function lighterScalpable(uni: Sym[]): Sym[] {
 export function loadScalp(symbol: string, tf: "1m" | "5m"): Cached | null {
   const c = readJson<LighterCache | null>(lighterPath(symbol, tf), null); if (!c || c.bars.length < 1000) return null;
   return { ...c, source: `lighter ${tf}`, clock: "utc" };
+}
+/** Non-crypto Lighter perps (config/lighter-other.json) not in the universe, while liquid there: for Leo and Ursa. */
+export function lighterOtherExtras(uni: Sym[]): Sym[] {
+  const snap = readJson<LighterSnapshot | null>(lighterFile(), null); if (!snap) return [];
+  const have = new Set(uni.map(s => s.symbol));
+  return lighterOtherList().filter(sym => !have.has(sym) && liquidOnLighter(snap.markets[sym])).map(sym => ({ symbol: sym, yahoo: "", class: "stock" as const, group: "Lighter markets", traded: true, lighterOnly: true }));
 }
 /** Lighter-only crypto needs this many 1h bars (about 17 days) before its charts can be judged. */
 export const LIGHTER_ONLY_MIN_BARS = 400;

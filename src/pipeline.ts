@@ -20,8 +20,9 @@ import { STRATEGIES } from "./core/strategies";
 import { barsPerYear } from "./core/rank";
 import { DEFAULT_EXITS } from "./core/exits";
 import { refreshLighter } from "./data/lighter";
-import { lighterIds, lighterCryptoExtras, loadLighterOnly, barEndMs, lighterScalpable, loadScalp } from "./data/prices";
+import { lighterIds, lighterCryptoExtras, lighterOtherExtras, loadLighterOnly, barEndMs, lighterScalpable, loadScalp } from "./data/prices";
 import { twinStrategy, twinId, unitHash } from "./bot/bot";
+import { syncPull, syncPush } from "./data/sync";
 
 export type View = "market" | "crypto";
 export const viewOf = (v: string | null): View => (v === "crypto" ? "crypto" : "market");
@@ -41,7 +42,13 @@ export const botById = (id: string | null, st: Settings = settings()) => competi
 /** Files the GitHub run publishes on its data branch, by path on that branch -> local path. */
 export function publishedFiles(st: Settings = settings()): [string, string][] {
   return [...competitors(st).flatMap(b => [[`bot/state-${b.id}.json`, botFiles(b.id).state], [`derived/bot-${b.id}.json`, botFiles(b.id).view], [`derived/shortlist-${b.id}.json`, botFiles(b.id).shortlist]] as [string, string][]),
-    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()]];
+    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()]];
+}
+/** Who checked the bots, when: the newest 200 checks (GitHub's runs and the PC's), shared through bot-data. */
+export const RUNS = () => join(P.bot, "runs.json");
+export function logRun(by: string, tookMs: number, symbols: number, failed: number) {
+  const runs = readJson<{ at: string; by: string; tookMs: number; symbols: number; failed: number }[]>(RUNS(), []);
+  runs.push({ at: new Date().toISOString(), by, tookMs, symbols, failed }); writeJson(RUNS(), runs.slice(-200));
 }
 /** Remote mode: copy the bots' state from the public repo's data branch. A file that fails to download keeps its last copy. */
 export async function pullRemote(st: Settings): Promise<{ ok: number; failed: string[]; at: string | null }> {
@@ -163,12 +170,16 @@ function replaceFired(b: CompetitionBot, s: BotState, st: Settings, now: number)
 /** The bot's short list, re-picked when it is older than selection.refreshDays or the rules that judge it changed. */
 /** The competition's weekend pause, bar by bar, for the backtests that choose the bots' strategies and charts. */
 const pausedBars = (bars: { d: string }[], tf: Timeframe, cls: Sym["class"], clock?: "utc") => bars.map(x => inWeekendPause(barEndMs(x.d, tf, clock === "utc" ? "crypto" : cls)));
+let readOnly = false;
 function shortlistFor(b: CompetitionBot, st: Settings, markets: { s: Sym; tf: Timeframe; complete: { d: string }[]; c?: { clock?: "utc" } | null }[], now: number): Shortlist & { sig?: string } {
-  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, markets.length, "weekend-v3"]);
+  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, b.allLighter ?? false, "weekend-v3"]);
   const old = readJson<(Shortlist & { sig?: string }) | null>(botFiles(b.id).shortlist, null);
-  if (old && st.remote?.repo) return old; // remote mode: the GitHub run picks it
-  if (old && old.sig === sig && now - Date.parse(old.pickedAt) < st.selection.refreshDays * 864e5) return old;
+  if (old && readOnly) return old; // watching only: whoever trades picks it
+  // Re-pick weekly, when the rules change, or when clearly more charts exist than at the last pick (new downloads). Not
+  // when there are fewer: the PC and GitHub may hold different amounts of data and must not undo each other's pick.
+  if (old && old.sig === sig && now - Date.parse(old.pickedAt) < st.selection.refreshDays * 864e5 && markets.length <= ((old as { seen?: number }).seen ?? 0) * 1.2) return old;
   const picked = { ...pickShortlist(markets.map(m => ({ key: `${m.s.symbol}@${m.tf}`, bars: m.complete as never, opt: { costBps: costFor(st, m.s, m.tf), maxLosingBars: st.backtest.maxLosingBars, barsPerYear: barsPerYear(m.complete as never, m.s.class === "crypto" ? 365 : 252), exits: st.exits ?? DEFAULT_EXITS, paused: pausedBars(m.complete, m.tf, m.s.class, m.c?.clock) } })), st.backtest, { ...st.selection, now, side: b.side === "both" ? undefined : b.side }), sig };
+  (picked as { seen?: number }).seen = markets.length;
   writeJson(botFiles(b.id).shortlist, picked);
   return picked;
 }
@@ -213,7 +224,7 @@ function botView(b: CompetitionBot, s: BotState, st: Settings, px: (k: string) =
   return {
     id: b.id, name: s.persona?.name ?? b.name, recruit: s.persona?.recruit ?? 1, side: b.side, motto: b.motto ?? "", accountant: s.accountant ?? null,
     tier: s.accountant ? { level: tierOf(s.accountant, rulesOf(st)), name: tierName(s.accountant, rulesOf(st)), toNext: toNextTier(s.accountant, rulesOf(st)), tiers: st.competition.tiers, names: TIER_NAMES } : null,
-    playbook: s.playbook ?? [], weekend: inWeekendPause(Date.parse(at)), lighterCrypto: !!b.lighterCrypto,
+    playbook: s.playbook ?? [], weekend: inWeekendPause(Date.parse(at)), lighterCrypto: !!b.lighterCrypto, allLighter: !!b.allLighter,
     twin: s.twin ? { equity: equityOf(s.twin, px), indexPct: (equityOf(s.twin, px) / s.twin.startEquity - 1) * 100, trades: new Set(s.twin.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: s.twin.trades.filter(t => t.pnl > 0).length, positions: Object.keys(s.twin.positions).length } : null,
     // The bot's books: cash + award + paid to the accountant must equal the grant + every closed trade's profit.
     books: s.accountant ? { difference: +reconcile(s.accountant, s.cash, s.trades.reduce((t, x) => t + x.pnl, 0), s.fundingPaid ?? 0).toFixed(4) } : null,
@@ -245,11 +256,17 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   if (opts.fetch !== false) await refreshLighter(st, now).catch(() => undefined);
   const fetchStatus = opts.fetch === false
     ? uni.flatMap(s => tfs.filter(tf => tf === "1d" || s.class !== "index").map(tf => { const c = loadCached(s.symbol, tf, s.class); return { symbol: s.symbol, tf, ok: !!c, cached: true, source: c?.source, bars: c?.bars.length, lastBar: c?.bars.at(-1)?.d, fetchedAt: c?.fetchedAt, error: c ? undefined : "no saved prices" } as FetchStatus; }))
-    : await refreshPrices(uni, opts.force, now, competitors(st).some(b => b.lighterCrypto) ? lighterCryptoExtras(uni) : [], lighterScalpable(uni.filter(x => x.traded)), st.competition.scalpTimeframes);
+    : await refreshPrices(uni, opts.force, now, [...(competitors(st).some(b => b.lighterCrypto) ? lighterCryptoExtras(uni) : []), ...(competitors(st).some(b => b.allLighter) ? lighterOtherExtras(uni) : [])], lighterScalpable(uni.filter(x => x.traded)), st.competition.scalpTimeframes);
   // Remote mode: the bots live on GitHub. Bring their latest state here; this PC only shows it (and evaluates charts for the screens).
-  const remote = st.remote?.repo ? await pullRemote(st).catch(() => null) : null;
+  // Shared mode (settings.remote): take the newest bot state from GitHub's bot-data branch (commit = lease). If that works
+  // and remote.trade is not false, this PC trades the bots too and pushes the result back with the lease (src/data/sync.ts).
+  // If git is missing or GitHub cannot be reached, it only shows the bots (read from raw files), as before.
+  let lease: string | null = null; let syncError = "";
+  if (st.remote?.repo && st.remote.trade !== false) { const r = syncPull(st.remote.repo, st.remote.branch, publishedFiles(st)); lease = r.sha; syncError = r.error ?? ""; }
+  const remote = st.remote?.repo && !lease ? await pullRemote(st).catch(() => null) : null;
+  const trading = !st.remote?.repo || !!lease; readOnly = !trading;
   const live = loadLive(); let retested = 0;
-  const hungry = st.remote?.repo ? new Set<string>() : leagueDuties(st, now);
+  const hungry = trading ? leagueDuties(st, now) : new Set<string>();
   // Lighter funding, charged every hour on open positions (rate read as per fundingPeriodHours).
   const fundingRates = readJson<{ funding?: Record<string, number> } | null>(join(P.derived, "lighter.json"), null)?.funding ?? {};
   const fundingOf = (key: string) => (fundingRates[underlying(key)] ?? 0) / st.competition.fundingPeriodHours;
@@ -264,11 +281,12 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     const tradable = st.lighter?.prices24h === false ? null : lighterIds(uni);
     const botTrades = (x: Sym) => tradedBy(v, x) && (v === "crypto" || !tradable || tradable[x.symbol] != null);
     // Lighter-only crypto (1h and 4h): only for a bot with lighterCrypto (Nova). Not on Today and not tested for the screens.
-    const extras = v === "crypto" && competitors(st).some(b => b.view === v && b.lighterCrypto) ? lighterCryptoExtras(uni) : [];
+    const wide = (b: CompetitionBot) => !!(b.lighterCrypto || b.allLighter);
+    const extras = !competitors(st).some(b => b.view === v && wide(b)) ? [] : v === "crypto" ? lighterCryptoExtras(uni) : lighterOtherExtras(uni);
     const extraCharts = extras.flatMap(s => (["1h", "4h"] as Timeframe[]).filter(tf => tfs.includes(tf)).map(tf => { const c = loadLighterOnly(s.symbol, tf); return c ? { s, tf, c, ...splitComplete(c.bars, "crypto", c.meta, now, tf) } : null; }).filter(<T,>(x: T | null): x is T => !!x));
     // Scalping charts (1m, 5m from Lighter): for the competition bots only, never on the screens.
     const scalpCharts = lighterScalpable(uni.filter(x => inView(v, x) && botTrades(x))).flatMap(s => st.competition.scalpTimeframes.map(tf => { const c = loadScalp(s.symbol, tf); return c ? { s, tf: tf as Timeframe, c, ...splitComplete(c.bars, "crypto", c.meta, now, tf) } : null; }).filter(<T,>(x: T | null): x is T => !!x));
-    const bots = competitors(st).filter(b => b.view === v).map(b => ({ b, state: loadBot(b, st, now), shortlist: shortlistFor(b, st, [...charts.filter(m => botTrades(m.s)), ...scalpCharts, ...(b.lighterCrypto ? extraCharts : [])], now) }));
+    const bots = competitors(st).filter(b => b.view === v).map(b => ({ b, state: loadBot(b, st, now), shortlist: shortlistFor(b, st, [...charts.filter(m => botTrades(m.s)), ...scalpCharts, ...(wide(b) ? extraCharts : [])], now) }));
     const held = new Set(bots.flatMap(({ state }) => [...Object.keys(state.positions), ...Object.keys(state.pending)].map(underlying)));
     // Charts are judged once for both bots of this world: only strategies on one of their short lists can make a signal.
     const chosen = [...new Set(bots.flatMap(x => x.shortlist.chosen))];
@@ -292,7 +310,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     const stBot: Settings = { ...st, bot: { ...st.bot, riskPctPerTrade: st.competition.riskPctPerTrade, maxDrawdownPct: 0 } };
     const side = (id: string) => STRATEGIES.find(x => x.id === id)?.side;
     const scalpMarket: Record<string, MarketView> = Object.fromEntries(scalpCharts.map(m => [`${m.s.symbol}@${m.tf}`, { cls: m.s.class, group: m.s.group, tf: m.tf, complete: m.complete, partial: m.partial, clock: "utc" as const }]));
-    const extraMarket: Record<string, MarketView> = Object.fromEntries(extraCharts.map(m => [`${m.s.symbol}@${m.tf}`, { cls: "crypto" as const, group: m.s.group, tf: m.tf, complete: m.complete, partial: m.partial, clock: "utc" as const }]));
+    const extraMarket: Record<string, MarketView> = Object.fromEntries(extraCharts.map(m => [`${m.s.symbol}@${m.tf}`, { cls: m.s.class, group: m.s.group, tf: m.tf, complete: m.complete, partial: m.partial, clock: "utc" as const }]));
     for (const s of extras) byKey[s.symbol] = s;
     const fullMarket = { ...market, ...scalpMarket, ...extraMarket }; const baseMarket = { ...market, ...scalpMarket };
     const run = (st2: Settings, s: BotState, mk: Record<string, MarketView>, allowed: Record<string, string[]>) => step(s, mk, allowed, st2, { now, costBps: k => costFor(st, byKey[underlying(k)], tfOf(k)), lookup: twinStrategy, funding: fundingOf });
@@ -300,9 +318,9 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     // its world already trades, so every bot plays its own game.
     const order = [...bots].sort((p, q) => Number(p.b.side === "both") - Number(q.b.side === "both")); const taken = new Set<string>();
     for (const x of order) {
-      if (st.remote?.repo) continue; // the GitHub run steps them; never twice
-      const { b, shortlist } = x; let state = x.state; const mk = b.lighterCrypto ? fullMarket : baseMarket;
-      const tradable = (key: string) => { const sy = byKey[underlying(key)]; return !!sy && (sy.lighterOnly ? !!b.lighterCrypto : botTrades(sy)); };
+      if (!trading) continue; // watching only
+      const { b, shortlist } = x; let state = x.state; const mk = wide(b) ? fullMarket : baseMarket;
+      const tradable = (key: string) => { const sy = byKey[underlying(key)]; return !!sy && (sy.lighterOnly ? wide(b) : botTrades(sy)); };
       // The bot's own choice: up to maxCharts charts, each with the strategy that did best there on data it had not seen.
       const pick = (s: BotState) => { s.hungry = hungry.has(b.id); s.playbook = pickPlaybook(shortlist, st.competition.maxCharts + (hungry.has(b.id) ? st.competition.hungryExtraCharts : 0), new Set([...(readRoster().banned[b.id] ?? []), ...(b.side === "both" ? taken : [])])).filter(p => (b.side === "both" || side(p.id) === b.side) && tradable(p.key)); };
       const allowedFor = (s: BotState) => Object.fromEntries((s.playbook ?? []).map(p => [p.key, [p.id]]));
@@ -319,6 +337,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       }
       if (!state.fired) { state.twin ??= newTwin(state); delete state.twin.twin; run(stBot, state.twin, mk, twinAllowed(state)); }
       for (const p of state.playbook ?? []) taken.add(`${p.key}|${p.id}`);
+      if (state.checked) state.checked.by = process.env.TD_ENGINE === "1" ? "GitHub" : "PC";
       writeJson(botFiles(b.id).state, state);
     }
     const px = (k: string) => live.prices[underlying(k)]?.price ?? fullMarket[k]?.partial?.c ?? fullMarket[k]?.complete.at(-1)?.c;
@@ -330,6 +349,11 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   const res: RefreshResult = { at: new Date().toISOString(), tookMs: Date.now() - t0, fetch: fetchStatus, symbolsWithData: new Set(fetchStatus.filter(f => f.bars).map(f => f.symbol)).size, retested, ...(remote ? { remote: { ok: remote.ok, failed: remote.failed.length, at: remote.at } } : {}) };
   writeJson(STATUS(), res);
   writeCompetition(now);
+  logRun(process.env.TD_ENGINE === "1" ? "GitHub" : st.remote?.repo ? (trading ? "PC" : "PC (watching)") : "PC (alone)", Date.now() - t0, res.symbolsWithData, fetchStatus.filter(f => !f.ok && !f.skipped).length);
+  if (lease && st.remote) {
+    const pushed = syncPush(st.remote.repo, st.remote.branch, lease, publishedFiles(st), { "heartbeat.json": JSON.stringify({ at: new Date().toISOString(), by: "PC", tookMs: Date.now() - t0 }, null, 1), "README.md": "# TradingDesk bot data\n\nThe four paper bots' state and the competition scoreboard, written by whoever checked the bots last (GitHub's workflow or the owner's PC). Pretend money only.\n" });
+    writeJson(join(P.derived, "remote.json"), { mode: "shared", trading: true, lease, pushed: pushed.pushed, note: pushed.error ?? "", at: new Date().toISOString(), repo: st.remote.repo, branch: st.remote.branch });
+  } else if (st.remote?.repo && syncError) { const r = readJson<Record<string, unknown>>(join(P.derived, "remote.json"), {}); writeJson(join(P.derived, "remote.json"), { ...r, mode: "watching", trading: false, note: syncError }); }
   writeBoard(now);
   return res;
 }
@@ -469,7 +493,10 @@ export function writeCompetition(now = Date.now()) {
   const ladder = [...bots].sort((a, b) => b.tier - a.tier || b.streak - a.streak || b.badges - a.badges || b.index - a.index).map((b, i) => ({ id: b.id, rank: i + 1 }));
   const duels = duelsOf(bots, now);
   const locker = lockerRoom(bots, duels, roster);
-  writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
+  const runs = readJson<{ at: string; by: string; tookMs: number; failed: number }[]>(RUNS(), []);
+  const day = runs.filter(r => now - Date.parse(r.at) < 864e5); const remoteNote = readJson<Record<string, unknown> | null>(join(P.derived, "remote.json"), null);
+  const checks = { last: runs.slice(-12).reverse(), last24h: Object.fromEntries([...new Set(day.map(r => r.by))].map(b => [b, day.filter(r => r.by === b).length])), shared: !!st.remote?.repo, sync: remoteNote };
+  writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, checks, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
     rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, ...b }) => b), months, ladder,
     // The accountant's own books: loans (lent = repaid + lost + still owed) and the bank (start - lent + repaid - prizes = available).
     books: (() => { const k = bankOf(st); return { ...k, funding: +bots.reduce((t, b) => t + b.fundingPaid, 0).toFixed(2),

@@ -175,6 +175,14 @@ as a single commit to `bot-data`. Binance is read through `BINANCE_HOST` (GitHub
 api.binance.com). The PC switches to reading by setting `remote: { "repo": "owner/name", "branch": "bot-data" }` in
 `config/settings.json`: `pullRemote()` copies those files from raw.githubusercontent.com at each refresh, and the PC
 never steps the bots, so they are never stepped twice. The engine refuses to run with `remote` set.
+Taking turns (owner, 2026-11-24): GitHub's schedule runs late or skips hours, so the PC trades the bots too whenever it
+is on (`remote.trade`, default true). Both sides fetch bot-data, note its commit, step, and publish one new commit with
+`--force-with-lease=bot-data:<that commit>` (PC: `src/data/sync.ts`, a git clone in `data/sync`; GitHub: the workflow's
+`BOTDATA_SHA`). A refused push means the other side stepped first: its result is kept and this run's is thrown away,
+so the bots are never stepped twice from one state. `bot/runs.json` (shared) records every check and who ran it; the
+scoreboard shows the last one and the 24-hour counts. If git or GitHub cannot be reached, the PC only shows the bots.
+Short lists are re-picked weekly, on a rule change, or when clearly more charts exist than at the last pick (never when
+fewer: the two sides hold different amounts of data).
 Setup: `github-setup.bat` (asks for the repository address) runs `scripts/github-setup.ts`: it copies
 `deploy/github-workflow-bots.yml` to `.github/workflows/bots.yml` (the remote file tools cannot write `.github`), stages
 with the allow-list `.gitignore`, refuses if any file is outside the allowed folders or looks like a key or password,
@@ -288,6 +296,10 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    not in `config/universe.json` (`lighterCryptoExtras`; 1h candles from Lighter only, `loadLighterOnly`). Those symbols
    are not on Today and not tested for the screens. A free bot chooses last and may not copy a chart-and-strategy pair
    another bot of its world already trades.
+8j2. **Leo and Ursa trade every Lighter market that is not crypto** (owner, 2026-11-24): `allLighter: true` adds every
+   ticker in `config/lighter-other.json` (stocks, ETFs, indices, commodities, currencies, a bond, pre-IPO) that is liquid
+   on Lighter and not in the universe, on 1h and 4h charts from Lighter candles (`lighterOtherExtras`, class "stock").
+   Lighter has no options on these (only BTC and ETH binary options), so the bots trade perps only.
 8k. **Scalping** (owner, 2026-11-23: "aloud them to scalp on 1 min or 5 min"). `competition.scalpTimeframes` (["1m",
    "5m"]) adds Lighter 1m candles (3 days kept) and 5m candles (20 days) for every universe symbol liquid on Lighter
    (`lighterScalpable`, `loadScalp`, at least 1,000 candles). They enter only the competition bots' short lists,

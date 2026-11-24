@@ -125,14 +125,16 @@
         "name": "Leo",
         "view": "market",
         "side": "long",
-        "motto": "Buys strength in stocks and gold."
+        "motto": "Buys strength in stocks, gold and every other Lighter market that is not crypto.",
+        "allLighter": true
       },
       {
         "id": "stocks-bear",
         "name": "Ursa",
         "view": "market",
         "side": "short",
-        "motto": "Sells weakness in stocks and gold."
+        "motto": "Sells weakness in stocks, gold and every other Lighter market that is not crypto.",
+        "allLighter": true
       },
       {
         "id": "crypto-bull",
@@ -151,5 +153,8 @@
       }
     ]
   },
-  "remote": null
+  "remote": {
+    "repo": "Matt2470/tradingdesk",
+    "branch": "bot-data"
+  }
 }

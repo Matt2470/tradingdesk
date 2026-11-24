@@ -37,13 +37,14 @@ export interface Settings {
   competition: Competition;
   /** The bots run on GitHub (a public repo, every 15 minutes). When set, this PC reads their state from the repo's
    *  data branch and never steps the bots itself, so two copies never trade the same bots. Null = the bots run here. */
-  remote?: { repo: string; branch: string } | null;
+  remote?: { repo: string; branch: string; /** Shared mode (default true): this PC trades the bots too, taking turns with GitHub through bot-data. false = only show them. */ trade?: boolean } | null;
   risk: { accountUsd?: number; maxLeverage?: number; maxHoldHoursLosing: number; maxNotionalUsd: number; maxAddsToLoser: number };
 }
 
 export interface CompetitionBot { id: string; name: string; view: "market" | "crypto";
   /** "long" bullish, "short" bearish, "both" free to choose. */ side: "long" | "short" | "both"; motto?: string;
-  /** Also trades every liquid crypto on Lighter listed in config/lighter-crypto.json (owner, 2026-11-23, for Nova). */ lighterCrypto?: boolean }
+  /** Also trades every liquid crypto on Lighter listed in config/lighter-crypto.json (owner, 2026-11-23, for Nova). */ lighterCrypto?: boolean;
+  /** Also trades every liquid non-crypto perp on Lighter listed in config/lighter-other.json: more stocks, indices, commodities, currencies, pre-IPO (owner, 2026-11-24, for Leo and Ursa). */ allLighter?: boolean }
 export interface Competition {
   startGrant: number; /** Risk per trade for competition bots (% of the account). */ riskPctPerTrade: number;
   /** Days after hiring before the first weekly activity check. */ graceDays: number;
@@ -62,8 +63,8 @@ export interface Competition {
 export const DEFAULT_COMPETITION: Competition = { startGrant: 250, riskPctPerTrade: 2, graceDays: 7, maxStrikes: 3, bankUsd: 1500, tiers: [4, 8, 12], maxCharts: 8, scalpTimeframes: ["1m", "5m"], minTradesPerWeek: 5, fundingPeriodHours: 8, monthlyPrize: 25, hungryExtraCharts: 2,
   recruitNames: ["Atlas", "Bruno", "Cleo", "Dante", "Echo", "Freya", "Gus", "Hana", "Iris", "Juno", "Kai", "Luna", "Milo", "Nina", "Otto", "Pia", "Quinn", "Rosa", "Sol", "Tara", "Uma", "Vito", "Wren", "Yara", "Zeno"],
   bots: [
-  { id: "stocks-bull", name: "Leo", view: "market", side: "long", motto: "Buys strength in stocks and gold." },
-  { id: "stocks-bear", name: "Ursa", view: "market", side: "short", motto: "Sells weakness in stocks and gold." },
+  { id: "stocks-bull", name: "Leo", view: "market", side: "long", motto: "Buys strength in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
+  { id: "stocks-bear", name: "Ursa", view: "market", side: "short", motto: "Sells weakness in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
   { id: "crypto-bull", name: "Nova", view: "crypto", side: "both", motto: "Free to buy or sell short, on any crypto Lighter trades.", lighterCrypto: true },
   { id: "crypto-bear", name: "Raven", view: "crypto", side: "short", motto: "Sells weakness in crypto." },
 ] };
@@ -120,4 +121,6 @@ export function universe(): Sym[] {
 }
 export const exists = existsSync;
 /** Crypto tickers on Lighter that a bot with lighterCrypto may trade (only while liquid there). The owner may edit the list. */
+/** Non-crypto tickers on Lighter (stocks, ETFs, indices, commodities, currencies, bonds, pre-IPO) that a bot with allLighter may trade. */
+export function lighterOtherList(): string[] { return readJson<string[]>(join(ROOT, "config", "lighter-other.json"), []).filter(x => typeof x === "string").map(x => x.toUpperCase()); }
 export function lighterCryptoList(): string[] { return readJson<string[]>(join(ROOT, "config", "lighter-crypto.json"), []).filter(x => typeof x === "string").map(x => x.toUpperCase()); }

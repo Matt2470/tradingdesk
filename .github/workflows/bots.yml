@@ -1,8 +1,9 @@
 # The four paper bots, every 15 minutes, on GitHub's computers (free for public repositories).
 # Paper money only: no exchange keys exist anywhere in this repository, and nothing here can send an order.
-# Each run: bring back the bots' state from the bot-data branch and the saved prices from the cache,
-# run one check (bun run engine), then publish the bots' state and the scoreboard to the bot-data branch.
-# GitHub can start scheduled runs late (sometimes 10-20 minutes) when it is busy; the bots catch up on every bar they missed.
+# Each run: bring back the bots' state from the bot-data branch (and remember which commit it was), bring back the saved
+# prices, run one check (bun run engine), then publish to bot-data ONLY if nobody else did meanwhile
+# (--force-with-lease). The owner's PC takes turns the same way (src/data/sync.ts), so when GitHub is late, the PC keeps
+# the bots going, and the bots are never stepped twice from the same state.
 name: Bots
 
 on:
@@ -30,7 +31,10 @@ jobs:
         run: |
           mkdir -p data
           if git fetch --depth=1 origin bot-data 2>/dev/null; then
+            echo "BOTDATA_SHA=$(git rev-parse FETCH_HEAD)" >> "$GITHUB_ENV"
             git archive FETCH_HEAD bot derived 2>/dev/null | tar -x -C data || true
+          else
+            echo "BOTDATA_SHA=" >> "$GITHUB_ENV"
           fi
           ls -R data | head -40
 
@@ -57,14 +61,15 @@ jobs:
           git checkout -q -b bot-data
           git add -A
           git -c user.name="tradingdesk-bots" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "Bots $(date -u +%Y-%m-%dT%H:%MZ)"
-          git push -qf "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" bot-data
+          # Only if bot-data is still the commit this run started from; otherwise the PC stepped the bots first and wins.
+          if git push -q --force-with-lease="refs/heads/bot-data:${BOTDATA_SHA}" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" bot-data; then
+            echo "Published."
+          else
+            echo "Not published: the PC checked the bots in the meantime, and its result is kept."
+          fi
 
-      - name: Should the prices be saved this run?
-        id: hourly
-        run: echo "save=$(( ${{ github.run_number }} % 4 == 0 ))" >> "$GITHUB_OUTPUT"
-
-      - name: Save prices (once an hour; the cache is rebuilt from scratch if it is ever lost)
-        if: steps.hourly.outputs.save == '1' || github.event_name == 'workflow_dispatch'
+      - name: Save prices (every run; GitHub drops the oldest saved copies by itself)
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: data/cache
