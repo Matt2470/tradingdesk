@@ -16,7 +16,7 @@ import { DEFAULT_EXITS, openLegs, onBar, onClose, nextTarget, nextStop, type Leg
 
 export interface BotPosition { side: "long" | "short"; qty: number; entry: number; entryDate: string; stop: number; target?: number | null; strategyId: string; held: number;
   /** Size at entry; qty shrinks as take-profits fill. */ qty0?: number; /** Profit of the parts already closed. */ realized?: number; /** Funding paid (+) or received (-) so far, and when it was last charged (ms). */ funding?: number; fundingAt?: number; /** Next price where part of it closes at a loss, and its name (SL1, SL2, SL3, rising stop). */ nextStop?: { px: number; name: string }; /** Exit engine state (stop, take-profits filled, trailing). */ legs?: Legs }
-export interface BotPending { type: "entry" | "exit"; signalDate: string; strategyId: string; stopDist?: number; stopPrice?: number; reason?: string }
+export interface BotPending { type: "entry" | "exit"; signalDate: string; strategyId: string; stopDist?: number; stopPrice?: number; reason?: string; /** Entry signals: the signal bar's close and ATR (14), for the slippage cap. */ signalPx?: number; atr?: number }
 export interface BotTrade { symbol: string; side: "long" | "short"; strategyId: string; entryDate: string; exitDate: string; entry: number; exit: number; qty: number; pnl: number; retPct: number; reason: string; /** Funding paid over the whole trade (on its last part only); already in cash, not in pnl. */ funding?: number }
 export interface BotState {
   startedAt: string; startEquity: number; cash: number; peak?: number; halted?: { at: string; reason: string } | null;
@@ -46,7 +46,10 @@ export interface BotState {
 }
 export interface MarketView { cls: AssetClass; group?: string; tf?: Timeframe; complete: Bar[]; partial: Bar | null; /** "utc": around-the-clock bars (Lighter): daily bars close at midnight UTC. */ clock?: "utc" }
 export interface BotOpts { costBps?: number | ((key: string) => number); now?: number;
-  /** Funding per hour for a chart key, as a fraction of the position's value (Lighter: positive = longs pay shorts). */ funding?: (key: string) => number; /** Strategies that are not in the list (the random twin's). */ lookup?: (id: string) => Strategy | undefined }
+  /** Funding per hour for a chart key, as a fraction of the position's value (Lighter: positive = longs pay shorts). */ funding?: (key: string) => number; /** Strategies that are not in the list (the random twin's). */ lookup?: (id: string) => Strategy | undefined;
+  /** Why a new entry may not open on this chart and side (the desk's correlation cap), or null. */ blocked?: (key: string, side: "long" | "short") => string | null;
+  /** Close every position with this reason and open nothing (the desk's daily loss limit). */ flatten?: string;
+  /** Cancel an entry when the open is more than this many ATRs from the signal bar's close (the price ran away). */ maxSlipAtr?: number }
 type Px = (key: string) => number | undefined;
 const sign = (p: { side: "long" | "short" }) => (p.side === "short" ? -1 : 1);
 const findStrategy = strategyById;
@@ -95,8 +98,11 @@ export function step(s: BotState, market: Record<string, MarketView>, allowed: R
   const note = (d: string, msg: string) => { s.log.push({ d, msg }); if (s.log.length > 300) s.log.shift(); };
   const label = (k: string) => (k.includes("@") ? `${underlying(k)} ${tfOf(k)}` : k);
   const fillEntry = (k: string, d: string, open: number, p: BotPending, cost: number) => {
-    delete s.pending[k]; const strat = strategyById(p.strategyId); if (!strat || s.halted) return;
+    delete s.pending[k]; const strat = strategyById(p.strategyId); if (!strat || s.halted || o.flatten) return;
     const dir = strat.side === "short" ? -1 : 1; const word = dir > 0 ? "buy" : "short sale";
+    if (o.maxSlipAtr && p.signalPx && p.atr && p.atr > 0 && Math.abs(open - p.signalPx) > o.maxSlipAtr * p.atr)
+      return note(d, `${label(k)}: ${word} cancelled, the price ran away (open ${open.toFixed(2)} is ${(Math.abs(open - p.signalPx) / p.atr).toFixed(2)} ATR from the signal close ${p.signalPx.toFixed(2)}, limit ${o.maxSlipAtr}).`);
+    const why = o.blocked?.(k, strat.side); if (why) return note(d, `${label(k)}: ${word} skipped, ${why} (the desk's correlation cap).`);
     const held = Object.keys(s.positions).find(q => underlying(q) === underlying(k));
     if (held) return note(d, `${label(k)}: ${word} skipped, already holding ${underlying(k)} on ${tfOf(held)}.`);
     if (Object.keys(s.positions).length >= st.bot.maxPositions) return note(d, `${label(k)}: ${word} skipped, already holding ${st.bot.maxPositions} positions.`);
@@ -169,10 +175,10 @@ export function step(s: BotState, market: Record<string, MarketView>, allowed: R
         if (strat?.exit(x, i, p.held)) s.pending[k] = { type: "exit", signalDate: d, strategyId: p.strategyId, reason: "rule" };
         else if (st.backtest.maxLosingBars > 0 && p.held >= st.backtest.maxLosingBars && L.hits === 0 && dir * (x.c[i] - p.entry) < 0) s.pending[k] = { type: "exit", signalDate: d, strategyId: p.strategyId, reason: "time-stop" };
       }
-    } else if (!s.pending[k] && !s.halted && events[e].end >= hired - 30 * 60e3) { // never act on a bar that closed before the bot was hired
+    } else if (!s.pending[k] && !s.halted && !o.flatten && events[e].end >= hired - 30 * 60e3) { // never act on a bar that closed before the bot was hired
       for (const id of allowed[k] ?? []) {
         const strat = strategyById(id);
-        if (strat && i >= strat.warmup && strat.entry(x, i)) { s.pending[k] = { type: "entry", signalDate: d, strategyId: strat.id, stopDist: strat.stopAtr * I.atr(x, 14)[i], ...(strat.stopPrice ? { stopPrice: strat.stopPrice(x, i) } : {}) }; break; }
+        if (strat && i >= strat.warmup && strat.entry(x, i)) { const atr = I.atr(x, 14)[i]; s.pending[k] = { type: "entry", signalDate: d, strategyId: strat.id, stopDist: strat.stopAtr * atr, signalPx: x.c[i], ...(atr > 0 ? { atr } : {}), ...(strat.stopPrice ? { stopPrice: strat.stopPrice(x, i) } : {}) }; break; }
       }
     }
     seen(k, events[e].end, x.c[i]); s.last[k] = d;
@@ -202,6 +208,13 @@ export function step(s: BotState, market: Record<string, MarketView>, allowed: R
     }
     s.equityCurve.push({ d: new Date(events[e].end).toISOString().slice(0, 16), equity: +eq.toFixed(2) });
     if (s.equityCurve.length > 3000) s.equityCurve.splice(0, s.equityCurve.length - 3000);
+  }
+  // The desk's daily loss limit: close everything at the latest prices and cancel every order.
+  if (o.flatten && !s.fired) {
+    const open = Object.keys(s.positions); const when = new Date(o.now ?? Date.now()).toISOString().slice(0, 16);
+    for (const q of open) closePos(q, when, px(q) ?? s.positions[q].entry, o.flatten, market[q] ? costOf(q) : 0);
+    if (open.length || Object.keys(s.pending).length) { note(when, `Desk stop: ${open.length} position${open.length === 1 ? "" : "s"} closed and orders cancelled (the desk hit its daily loss limit). Trading starts again tomorrow.`); s.pending = {};
+      const eq = equityOf(s, px); if (s.accountant) track(s.accountant, when, eq); s.equityCurve.push({ d: when, equity: +eq.toFixed(2) }); }
   }
   // Orders waiting for "the next open" fill as soon as the current (unfinished) bar exists (never during the weekend pause).
   if (!s.fired && !paused(o.now ?? Date.now())) for (const [k, pend] of Object.entries(s.pending)) {

@@ -3,7 +3,7 @@
 // Every strategy is defined by a rule (`build`) and its settings (`params`). The settings are fixed textbook
 // values (or the owner's indicator defaults) and are never tuned to past data. `variants()` moves each setting
 // 25% down and up, one at a time, ONLY to show how fragile a result is; a variant is never traded.
-import { sma, ema, rsi, atr, highest, lowest, stdev, efficiency, supertrend, macd, type Series } from "./indicators";
+import { sma, ema, rsi, atr, highest, lowest, stdev, efficiency, supertrend, macd, adx, type Series } from "./indicators";
 
 export interface Bar { d: string; o: number; h: number; l: number; c: number; v: number }
 export interface Ctx { n: number; d: string[]; o: Series; h: Series; l: Series; c: Series; v: Series; ind: (key: string, make: () => Series) => Series; memo: <T>(key: string, make: () => T) => T }
@@ -28,6 +28,7 @@ export const I = {
   /** Bollinger bandwidth: band width as a share of the middle line. */
   bw: (x: Ctx, p: number) => x.ind("bw" + p, () => { const m = I.sma(x, p), d = I.sd(x, p); return m.map((v, i) => (4 * d[i]) / v); }),
   bwLow: (x: Ctx, p: number, look: number) => x.ind(`bwlow${p}:${look}`, () => lowest(I.bw(x, p), look)),
+  adx: (x: Ctx, p: number) => x.ind("adx" + p, () => adx(x.h, x.l, x.c, p)),
 };
 
 type P = Record<string, number>;
@@ -151,7 +152,19 @@ const SHORT: Def[] = [
     build: p => ({ warmup: Math.max(p.trend, p.look + p.length) + 2, entry: (x, i) => { const bw = I.bw(x, p.length), low = I.bwLow(x, p.length, p.look); let quiet = false; for (let k = 1; k <= p.recent; k++) if (bw[i - k] <= low[i - k] * 1.0001) quiet = true; return quiet && x.c[i] < I.sma(x, p.length)[i] - 2 * I.sd(x, p.length)[i] && x.c[i] < I.sma(x, p.trend)[i]; }, exit: (x, i) => x.c[i] > I.sma(x, p.length)[i] }),
   },
 ];
-const DEFS: (Def & { side: "long" | "short" })[] = [...LONG.map(d => ({ ...d, side: "long" as const })), ...SHORT.map(d => ({ ...d, side: "short" as const }))];
+const BASE: (Def & { side: "long" | "short" })[] = [...LONG.map(d => ({ ...d, side: "long" as const })), ...SHORT.map(d => ({ ...d, side: "short" as const }))];
+/** Market-type filters (owner, 2026-11-25, from the desk proposal): each trend rule also comes in a version that
+ *  trades only while the trend is strong (ADX 14 above 25), and each mean-reversion rule in a version that stops once
+ *  a strong trend starts (ADX 14 at 28 or more). The breakout after a quiet spell is left as it is. They are ordinary
+ *  strategies: the weekly test on unseen data decides whether a filtered or an unfiltered version is worth trading. */
+const FILTERED: (Def & { side: "long" | "short" })[] = BASE.filter(d => !d.id.startsWith("squeeze")).map(d => {
+  const trend = d.family === "trend"; const lim = trend ? 25 : 28;
+  return { ...d, id: `${d.id}_adx`, name: `${d.name}, ${trend ? "strong trend only" : "no strong trend"}`,
+    plain: `${d.plain} Only ${trend ? "while the trend is strong (ADX above 25)" : "while there is no strong trend (ADX below 28)"}.`,
+    indicators: [...d.indicators, `ADX 14 ${trend ? ">" : "<"} ${lim}`], params: { ...d.params, adx: lim },
+    build: (p: P) => { const r = d.build(p); return { ...r, warmup: Math.max(r.warmup, 30), entry: (x: Ctx, i: number) => { const a = I.adx(x, 14)[i]; return Number.isFinite(a) && (trend ? a > p.adx : a < p.adx) && r.entry(x, i); } }; } };
+});
+const DEFS: (Def & { side: "long" | "short" })[] = [...BASE, ...FILTERED];
 const make = (d: (typeof DEFS)[number], p: P): Strategy => { const { build, floats: _f, ...meta } = d; return { ...meta, params: p, ...build(p) }; };
 export const STRATEGIES: Strategy[] = DEFS.map(d => make(d, d.params));
 export const strategyById = (id: string) => STRATEGIES.find(s => s.id === id);

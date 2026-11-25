@@ -164,3 +164,8 @@ table.map tr.grp td { background: transparent; color: var(--muted); font-size: .
 .locker li{padding:8px 0;border-bottom:1px solid var(--line)}
 .locker q{quotes:"\201C" "\201D";margin-left:4px}
 .locker .when{display:inline-block;min-width:110px}
+/* Accountant screen */
+.approval{margin:0 0 10px;border-left:4px solid var(--warn)}
+.approval button{min-width:72px}
+.report{border-top:1px solid var(--line);padding:2px 0 8px}
+.report:first-of-type{border-top:0}

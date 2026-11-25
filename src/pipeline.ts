@@ -23,6 +23,9 @@ import { refreshLighter } from "./data/lighter";
 import { lighterIds, lighterCryptoExtras, lighterOtherExtras, loadLighterOnly, barEndMs, lighterScalpable, loadScalp } from "./data/prices";
 import { twinStrategy, twinId, unitHash } from "./bot/bot";
 import { syncPull, syncPush } from "./data/sync";
+import { newDesk, deskCheck, correlation, correlationBlock, tierBps, type DeskState } from "./bot/desk";
+import { readApprovals, mergeAnswers, ask, weeklyReports, dailyReports, APPROVALS, type Approval, type ReportBot } from "./bot/office";
+import { lighterFile, type LighterSnapshot } from "./data/lighter";
 
 export type View = "market" | "crypto";
 export const viewOf = (v: string | null): View => (v === "crypto" ? "crypto" : "market");
@@ -42,7 +45,7 @@ export const botById = (id: string | null, st: Settings = settings()) => competi
 /** Files the GitHub run publishes on its data branch, by path on that branch -> local path. */
 export function publishedFiles(st: Settings = settings()): [string, string][] {
   return [...competitors(st).flatMap(b => [[`bot/state-${b.id}.json`, botFiles(b.id).state], [`derived/bot-${b.id}.json`, botFiles(b.id).view], [`derived/shortlist-${b.id}.json`, botFiles(b.id).shortlist]] as [string, string][]),
-    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()]];
+    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()], ["bot/desk.json", DESK()], ["bot/approvals.json", APPROVALS()]];
 }
 /** Who checked the bots, when: the newest 200 checks (GitHub's runs and the PC's), shared through bot-data. */
 export const RUNS = () => join(P.bot, "runs.json");
@@ -68,6 +71,13 @@ export const timeframes = (st: Settings): Timeframe[] => TIMEFRAMES.filter(t => 
 const inView = (v: View, s: Sym) => (v === "crypto" ? s.class === "crypto" : s.class !== "crypto");
 const tradedBy = (v: View, s: Sym) => (v === "crypto" ? s.class === "crypto" : s.class === "stock" || s.class === "metal");
 const costFor = (st: Settings, s: Sym, tf: Timeframe) => (s.class === "crypto" && tf !== "1d" ? st.intraday.costBps : st.costBps[s.class]);
+/** Open interest on Lighter by symbol (read once per refresh), for the competition bots' spread and slippage tiers. */
+let OI: Record<string, number | null> = {};
+/** The competition bots' cost per side: by the market's open interest on Lighter (competition.costTiers), else costFor. */
+const botCost = (st: Settings, s: Sym, tf: Timeframe) => tierBps(OI[s.symbol], st.competition.costTiers) ?? costFor(st, s, tf);
+/** The desk guard's state (src/bot/desk.ts), shared through bot-data. */
+export const DESK = () => join(P.bot, "desk.json");
+export const OFFICE = () => join(P.derived, "office.json");
 
 // Evaluations are re-run only when a new bar has closed (or the settings changed): the full set takes seconds.
 const cache = new Map<string, { sig: string; summary: SymbolEval }>();
@@ -180,13 +190,13 @@ function replaceFired(b: CompetitionBot, s: BotState, st: Settings, now: number)
 const pausedBars = (bars: { d: string }[], tf: Timeframe, cls: Sym["class"], clock?: "utc") => bars.map(x => inWeekendPause(barEndMs(x.d, tf, clock === "utc" ? "crypto" : cls)));
 let readOnly = false;
 function shortlistFor(b: CompetitionBot, st: Settings, markets: { s: Sym; tf: Timeframe; complete: { d: string }[]; c?: { clock?: "utc" } | null }[], now: number): Shortlist & { sig?: string } {
-  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, b.allLighter ?? false, "weekend-v3"]);
+  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, b.allLighter ?? false, st.competition.costTiers, "weekend-v3"]);
   const old = readJson<(Shortlist & { sig?: string }) | null>(botFiles(b.id).shortlist, null);
   if (old && readOnly) return old; // watching only: whoever trades picks it
   // Re-pick weekly, when the rules change, or when clearly more charts exist than at the last pick (new downloads). Not
   // when there are fewer: the PC and GitHub may hold different amounts of data and must not undo each other's pick.
   if (old && old.sig === sig && now - Date.parse(old.pickedAt) < st.selection.refreshDays * 864e5 && markets.length <= ((old as { seen?: number }).seen ?? 0) * 1.2) return old;
-  const picked = { ...pickShortlist(markets.map(m => ({ key: `${m.s.symbol}@${m.tf}`, bars: m.complete as never, opt: { costBps: costFor(st, m.s, m.tf), maxLosingBars: st.backtest.maxLosingBars, barsPerYear: barsPerYear(m.complete as never, m.s.class === "crypto" ? 365 : 252), exits: st.exits ?? DEFAULT_EXITS, paused: pausedBars(m.complete, m.tf, m.s.class, m.c?.clock) } })), st.backtest, { ...st.selection, now, side: b.side === "both" ? undefined : b.side }), sig };
+  const picked = { ...pickShortlist(markets.map(m => ({ key: `${m.s.symbol}@${m.tf}`, bars: m.complete as never, opt: { costBps: botCost(st, m.s, m.tf), maxLosingBars: st.backtest.maxLosingBars, barsPerYear: barsPerYear(m.complete as never, m.s.class === "crypto" ? 365 : 252), exits: st.exits ?? DEFAULT_EXITS, paused: pausedBars(m.complete, m.tf, m.s.class, m.c?.clock) } })), st.backtest, { ...st.selection, now, side: b.side === "both" ? undefined : b.side }), sig };
   (picked as { seen?: number }).seen = markets.length;
   writeJson(botFiles(b.id).shortlist, picked);
   return picked;
@@ -275,6 +285,24 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   const trading = !st.remote?.repo || !!lease; readOnly = !trading;
   const live = loadLive(); let retested = 0;
   const hungry = trading ? leagueDuties(st, now) : new Set<string>();
+  OI = Object.fromEntries(Object.entries(readJson<LighterSnapshot | null>(lighterFile(), null)?.markets ?? {}).map(([k, m]) => [k, m.openInterestUsd]));
+  // The desk guard (src/bot/desk.ts): the four bots as one desk, checked before they trade.
+  const stamp = new Date(now).toISOString().slice(0, 16);
+  const working = competitors(st).map(b => ({ b, s: readJson<BotState | null>(botFiles(b.id).state, null) })).filter(x => x.s?.accountant && !x.s.fired);
+  const desk = readJson<DeskState>(DESK(), newDesk()); desk.daily ??= {};
+  const guard = trading ? deskCheck(desk, working.map(x => ({ who: `${x.b.id}#${x.s!.persona?.recruit ?? 1}`, index: x.s!.accountant!.index })), stamp, st.competition.desk) : { stop: false, halve: !!desk.halved, dayPct: 0, fromHighPct: 0 };
+  if (trading) writeJson(DESK(), { ...desk, last: guard });
+  // The owner's decisions: requests shared through bot-data, answers kept on this PC only (src/bot/office.ts).
+  const approvals = readApprovals(); let approvalsChanged = mergeAnswers(approvals);
+  // Correlation cap: every bot's open positions (updated as each bot trades), and hourly closes for the correlations.
+  const allSyms = Object.fromEntries([...uni, ...lighterCryptoExtras(uni), ...lighterOtherExtras(uni)].map(x => [x.symbol, x]));
+  const holdings = new Map<string, { name: string; sym: string; side: "long" | "short" }[]>(competitors(st).map(b => { const s = readJson<BotState | null>(botFiles(b.id).state, null);
+    return [b.id, s && !s.fired ? Object.entries(s.positions).map(([k, p]) => ({ name: s.persona?.name ?? b.name, sym: underlying(k), side: p.side })) : []]; }));
+  const closes = new Map<string, Map<string, number>>();
+  const closesOf = (sym: string) => { let m = closes.get(sym); if (m) return m; const x = allSyms[sym]; const c = x ? (x.lighterOnly ? loadLighterOnly(sym, "1h") : loadCached(sym, "1h", x.class) ?? loadLighterOnly(sym, "1h")) : null;
+    m = new Map((c?.bars ?? []).slice(-st.competition.desk.corrDays * 24).map(bar => [bar.d, bar.c] as [string, number])); closes.set(sym, m); return m; };
+  const corrs = new Map<string, number | null>();
+  const corrOf = (a: string, b: string) => { const k = a < b ? `${a}|${b}` : `${b}|${a}`; if (!corrs.has(k)) corrs.set(k, correlation(closesOf(a), closesOf(b))); return corrs.get(k)!; };
   // Lighter funding, charged every hour on open positions (rate read as per fundingPeriodHours).
   const fundingRates = readJson<{ funding?: Record<string, number> } | null>(join(P.derived, "lighter.json"), null)?.funding ?? {};
   const fundingOf = (key: string) => (fundingRates[underlying(key)] ?? 0) / st.competition.fundingPeriodHours;
@@ -321,7 +349,11 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     const extraMarket: Record<string, MarketView> = Object.fromEntries(extraCharts.map(m => [`${m.s.symbol}@${m.tf}`, { cls: m.s.class, group: m.s.group, tf: m.tf, complete: m.complete, partial: m.partial, clock: "utc" as const }]));
     for (const s of extras) byKey[s.symbol] = s;
     const fullMarket = { ...market, ...scalpMarket, ...extraMarket }; const baseMarket = { ...market, ...scalpMarket };
-    const run = (st2: Settings, s: BotState, mk: Record<string, MarketView>, allowed: Record<string, string[]>) => step(s, mk, allowed, st2, { now, costBps: k => costFor(st, byKey[underlying(k)], tfOf(k)), lookup: twinStrategy, funding: fundingOf });
+    const run = (st2: Settings, s: BotState, mk: Record<string, MarketView>, allowed: Record<string, string[]>, desk?: { id: string }) => step(s, mk, allowed, st2, { now, costBps: k => botCost(st, byKey[underlying(k)], tfOf(k)), lookup: twinStrategy, funding: fundingOf, maxSlipAtr: st.competition.maxSlipAtr,
+      // The desk's rules apply to the real bots, not to their random twins (a twin only measures luck).
+      ...(desk ? { flatten: guard.stop ? "desk-stop" : undefined, blocked: (k: string, side: "long" | "short") => correlationBlock(underlying(k), side, [...holdings].filter(([id]) => id !== desk.id).flatMap(([, h]) => h), corrOf, st.competition.desk.maxCorrelation) } : {}) });
+    // Drawdown rule: half the risk per trade while the desk is too far under its best.
+    const stDesk: Settings = guard.halve ? { ...stBot, bot: { ...stBot.bot, riskPctPerTrade: stBot.bot.riskPctPerTrade / 2 } } : stBot;
     // Bots with a fixed side choose first; a free bot (side "both") may not copy a chart-and-strategy pair another bot of
     // its world already trades, so every bot plays its own game.
     const order = [...bots].sort((p, q) => Number(p.b.side === "both") - Number(q.b.side === "both")); const taken = new Set<string>();
@@ -336,15 +368,29 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       const twinAllowed = (s: BotState) => Object.fromEntries((s.playbook ?? []).map(p => [p.key, [twinId(p.key, p.id, (p as PlaybookPair).rate ?? 0)]]));
       const newTwin = (s: BotState) => ({ ...newState(st.competition.startGrant, s.startedAt), weekends: true });
       pick(state);
-      run(stBot, state, mk, allowedFor(state));
+      run(stDesk, state, mk, allowedFor(state), b);
       // A stopped bot (bust line, no award to rescue it) waits for the end of the week; one replaced for quiet weeks goes at
       // once. Either way a recruit is hired only if the accountant has a grant's worth of money left.
       if (state.fired) {
         state.fired.replaceAt ??= /quiet weeks/.test(state.fired.reason) ? new Date(now).toISOString().slice(0, 16) : nextMondayMadrid(state.fired.at);
-        if (now >= Date.parse(state.fired.replaceAt + ":00Z") && bankOf(st).available >= st.competition.startGrant) { state = replaceFired(b, state, st, now); pick(state); run(stBot, state, mk, allowedFor(state)); x.state = state; }
+        // Hiring waits for the owner's yes on the Accountant screen (competition.approvals.hire).
+        const who = state.persona ?? { name: b.name, recruit: 1, slot: b.id }; const hireId = `hire-${b.id}-${who.recruit + 1}`;
+        const due = now >= Date.parse(state.fired.replaceAt + ":00Z") && bankOf(st).available >= st.competition.startGrant;
+        if (due && st.competition.approvals.hire && !approvals.some(a => a.id === hireId)) {
+          ask(approvals, { id: hireId, kind: "hire", slot: b.id, at: stamp, title: `Hire a recruit for ${who.name}'s seat?`, detail: `${who.name} was stopped on ${state.fired.at.replace("T", " ")} UTC: ${state.fired.reason} A recruit gets a new ${st.competition.startGrant} USD loan from the bank (${bankOf(st).available.toFixed(2)} USD available). Say no to leave the seat empty.` });
+          approvalsChanged = true;
+        }
+        const ok = !st.competition.approvals.hire || approvals.find(a => a.id === hireId)?.status === "yes";
+        if (due && ok) { state = replaceFired(b, state, st, now); pick(state); run(stDesk, state, mk, allowedFor(state), b); x.state = state; }
+      }
+      // A bot that reaches the top tier asks for real money. A yes is recorded only: real orders are not built (and will be asked again).
+      if (!state.fired && st.competition.approvals.realMoney && state.accountant && tierOf(state.accountant, rulesOf(st)) >= 3) {
+        const who = state.persona ?? { name: b.name, recruit: 1, slot: b.id }; const id = `real-${b.id}-${who.recruit}`;
+        if (!approvals.some(a => a.id === id)) { ask(approvals, { id, kind: "real-money", slot: b.id, at: stamp, title: `${who.name} is an Experienced trader: move to real money?`, detail: `${who.name} has ${state.accountant.streak} badges in a row. A yes is recorded only: real orders on Lighter are not built yet, and before any real money the stops and take-profits must sit on Lighter as real orders. You will be asked again before anything real happens.` }); approvalsChanged = true; }
       }
       if (!state.fired) { state.twin ??= newTwin(state); delete state.twin.twin; run(stBot, state.twin, mk, twinAllowed(state)); }
       for (const p of state.playbook ?? []) taken.add(`${p.key}|${p.id}`);
+      holdings.set(b.id, state.fired ? [] : Object.entries(state.positions).map(([k, p]) => ({ name: state.persona?.name ?? b.name, sym: underlying(k), side: p.side })));
       if (state.checked) state.checked.by = process.env.TD_ENGINE === "1" ? "GitHub" : "PC";
       writeJson(botFiles(b.id).state, state);
     }
@@ -354,6 +400,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       notTraded: uni.filter(x => tradedBy(v, x) && !botTrades(x)).map(x => x.symbol).sort() };
     for (const { b, state, shortlist } of bots) writeJson(botFiles(b.id).view, botView(b, state, st, px, at, shortlist, hours));
   }
+  if (approvalsChanged && trading) writeJson(APPROVALS(), approvals);
   const res: RefreshResult = { at: new Date().toISOString(), tookMs: Date.now() - t0, fetch: fetchStatus, symbolsWithData: new Set(fetchStatus.filter(f => f.bars).map(f => f.symbol)).size, retested, ...(remote ? { remote: { ok: remote.ok, failed: remote.failed.length, at: remote.at } } : {}) };
   writeJson(STATUS(), res);
   writeCompetition(now);
@@ -492,7 +539,8 @@ export function writeCompetition(now = Date.now()) {
       month: m ? { badges: m.badges, saves: m.saves, interest: +m.interest.toFixed(2), returnPct: +((live / m.indexStart - 1) * 100).toFixed(2), trades: m.trades, wins: m.wins, pnl: +m.pnl.toFixed(2) } : null,
       events: a.events.filter(e => e.kind !== "weekend" && e.kind !== "active").slice(-12).reverse(), allEvents: a.events, daily: a.daily ?? {}, months: a.months,
       fundingPaid: v?.fundingPaid ?? 0, hungry: !!v?.hungry, strikes: a.strikes ?? 0, stopped: v?.fired ?? null, ownMoney: a.debt <= 0.005, bonuses: +(a.bonuses ?? 0).toFixed(2),
-      bigTrades: wholeTrades(v?.trades ?? []).filter(t => Math.abs(t.pnl) >= st.competition.startGrant * 0.03) };
+      bigTrades: wholeTrades(v?.trades ?? []).filter(t => Math.abs(t.pnl) >= st.competition.startGrant * 0.03),
+      report: { id: c.id, name: v?.name ?? c.name, hiredAt: a.hiredAt, index: live, daily: a.daily ?? {}, trades: wholeTrades(v?.trades ?? []), events: a.events, equity, grant: a.grant, award: a.award, debt: a.debt, strikes: a.strikes ?? 0, tierName: tierName(a, rules), streak: a.streak, badges: a.badges, stopped: v?.fired ?? null } as ReportBot };
   });
   const allMonths = [...new Set([month, ...bots.flatMap(b => Object.keys(b.months))])].sort().reverse();
   const table = (mo: string) => standings(bots.map(b => ({ id: b.id, row: mo === month && b.months[mo] ? { ...b.months[mo], indexEnd: b.index } : b.months[mo] })));
@@ -505,11 +553,29 @@ export function writeCompetition(now = Date.now()) {
   const day = runs.filter(r => now - Date.parse(r.at) < 864e5); const remoteNote = readJson<Record<string, unknown> | null>(join(P.derived, "remote.json"), null);
   const checks = { last: runs.slice(-12).reverse(), last24h: Object.fromEntries([...new Set(day.map(r => r.by))].map(b => [b, day.filter(r => r.by === b).length])), shared: !!st.remote?.repo, sync: remoteNote };
   writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, checks, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
-    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, ...b }) => b), months, ladder,
+    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => b), months, ladder,
     // The accountant's own books: loans (lent = repaid + lost + still owed) and the bank (start - lent + repaid - prizes = available).
     books: (() => { const k = bankOf(st); return { ...k, funding: +bots.reduce((t, b) => t + b.fundingPaid, 0).toFixed(2),
       difference: +(k.lent - k.repaid - k.lost - k.owed).toFixed(2) }; })(),
     experienced: bots.filter(b => b.tier >= 3).length, recruitsTried: competitors(st).length + roster.fired.length, fired: [...roster.fired].reverse() });
+  writeOffice(st, bots.map(b => b.report), months, now);
+}
+/** The Accountant screen: decisions waiting for the owner, the accountant's daily and weekly reports, every bot's weekly report. */
+function writeOffice(st: Settings, bots: ReportBot[], months: unknown, now: number) {
+  const desk = readJson<(DeskState & { last?: ReturnType<typeof deskCheck> }) | null>(DESK(), null); const bank = bankOf(st);
+  const days = dailyReports(bots, desk?.daily ?? {}, now, 14);
+  const weeks = Object.fromEntries(bots.map(b => [b.id, weeklyReports(b, now, st.competition.minTradesPerWeek, 8)]));
+  // The accountant's weekly report to the owner: the four bots' weeks added up.
+  const weekly = (weeks[bots[0]?.id] ?? []).map((w, i) => { const all = bots.map(b => weeks[b.id][i]).filter(Boolean);
+    return { week: w.week, live: w.live, trades: all.reduce((t, x) => t + x.trades, 0), pnl: +all.reduce((t, x) => t + x.pnl, 0).toFixed(2), badges: all.reduce((t, x) => t + x.badges, 0), saves: all.reduce((t, x) => t + x.saves, 0), strikes: all.filter(x => x.strike).length,
+      best: all.some(x => x.trades || x.returnPct) ? [...all].sort((x, y) => y.returnPct - x.returnPct).map(x => bots.find(b => weeks[b.id].includes(x))?.name)[0] ?? null : null }; });
+  const risk = bots.map(b => ({ id: b.id, name: b.name, equity: +b.equity.toFixed(2), bustLine: b.grant / 2, cushion: +(b.equity - b.grant / 2).toFixed(2), award: +b.award.toFixed(2), debt: +b.debt.toFixed(2), strikes: b.strikes, tier: b.tierName, streak: b.streak, stopped: !!b.stopped,
+    // What the accountant itself can still lose on this bot: what it is owed, up to the money above the stop line (half the grant).
+    accountantAtRisk: b.stopped ? 0 : +Math.min(b.debt, b.grant / 2).toFixed(2) }));
+  const pending = readApprovals();
+  writeJson(OFFICE(), { at: new Date(now).toISOString(), bank, desk: desk ? { index: +desk.index.toFixed(3), high: +desk.high.toFixed(3), stoppedDay: desk.stoppedDay ?? null, halved: !!desk.halved, last: desk.last ?? null, log: desk.log.slice(-20).reverse() } : null,
+    rules: { ...st.competition.desk, costTiers: st.competition.costTiers, maxSlipAtr: st.competition.maxSlipAtr, approvals: st.competition.approvals, minTradesPerWeek: st.competition.minTradesPerWeek },
+    approvals: [...pending].sort((a, b) => Number(b.status === "pending") - Number(a.status === "pending") || (a.at < b.at ? 1 : -1)), days, weekly, weeks, risk, months });
 }
 
 if (import.meta.main) {

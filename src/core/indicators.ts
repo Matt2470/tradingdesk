@@ -82,3 +82,21 @@ export function macd(c: Series, fast: number, slow: number, sig: number): { line
   if (first >= 0) { const e = ema(line.slice(first), sig); for (let i = 0; i < e.length; i++) signal[first + i] = e[i]; }
   return { line, signal };
 }
+
+/** Wilder ADX: trend strength from 0 to 100, whatever the direction (above about 25 = a strong trend). */
+export function adx(h: Series, l: Series, c: Series, p: number): Series {
+  const n = c.length, out = nan(n); let tr = 0, pdm = 0, ndm = 0, dxSum = 0, a = NaN, k = 0;
+  for (let i = 1; i < n; i++) {
+    const up = h[i] - h[i - 1], dn = l[i - 1] - l[i];
+    const t = Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1]));
+    const pd = up > dn && up > 0 ? up : 0, nd = dn > up && dn > 0 ? dn : 0;
+    if (i <= p) { tr += t; pdm += pd; ndm += nd; if (i < p) continue; }
+    else { tr = tr - tr / p + t; pdm = pdm - pdm / p + pd; ndm = ndm - ndm / p + nd; }
+    const pdi = tr ? (100 * pdm) / tr : 0, ndi = tr ? (100 * ndm) / tr : 0; const dx = pdi + ndi ? (100 * Math.abs(pdi - ndi)) / (pdi + ndi) : 0;
+    k++;
+    if (k < p) { dxSum += dx; continue; }
+    if (k === p) { dxSum += dx; a = dxSum / p; } else a = (a * (p - 1) + dx) / p;
+    out[i] = a;
+  }
+  return out;
+}

@@ -84,6 +84,8 @@ see "Stop and ask".
 | `src/data/lighter.ts` | Lighter, read-only: market list and limits, funding, an account by index, and which symbols could go live. | config |
 | `src/bot/bot.ts` | Paper bot state machine (`step`), markets keyed `SYMBOL@tf`, state migration. | core, prices (`barEndMs`), config types, accountant |
 | `src/bot/accountant.ts` | The competition's accountant: grants, badges, busts, the performance index, monthly standings. Pure. | nothing |
+| `src/bot/desk.ts` | The desk guard: daily loss limit, drawdown rule, correlation cap, cost tiers by Lighter open interest. Pure. | accountant |
+| `src/bot/office.ts` | The accountant's office: the owner's yes/no decisions (`data/bot/approvals.json`, answers in `data/owner-answers.json`), the bots' weekly reports and the accountant's daily and weekly reports. | config, accountant |
 | `src/journal/csv.ts`, `src/journal/lighter.ts`, `src/journal/tradingview.ts`, `src/journal/stats.ts` | Read the owner's exports, build round trips, summaries and rule checks. Not shown on any screen since 2026-11-15. | config |
 | `src/brief.ts` | Reads and validates the old morning brief file. Unused since 2026-11-22. | config |
 | `src/pipeline.ts` | `refresh()` when a 15-minute bar closes, `tick()` every minute, `writeBoard()` for Today. | everything above |
@@ -104,14 +106,15 @@ only as the `now` argument in `src/pipeline.ts` and `splitComplete` in `src/data
 Data folders (created at run time, never edited by hand except `imports`):
 `data/cache/bars` price cache (`SYMBOL.json` daily, `SYMBOL.15m.json`, `SYMBOL.30m.json`, `SYMBOL.1h.json`),
 `data/derived` what the dashboard reads (`board.json`, `today*.json`, `indicators*.json`, `bot-<id>.json`,
-`competition.json`, `live.json`, `status.json`, `shortlist-<id>.json`, `lighter.json`, `remote.json`, `evals/<view>/SYMBOL@tf.json`),
-`data/bot/state-<id>.json` the competition bots' ledgers (ids in `settings.competition.bots`); `data/bot/state.json`,
+`competition.json`, `office.json`, `live.json`, `status.json`, `shortlist-<id>.json`, `lighter.json`, `remote.json`, `evals/<view>/SYMBOL@tf.json`),
+`data/bot/desk.json` the desk guard, `data/bot/approvals.json` decisions asked of the owner (both shared through bot-data),
+`data/owner-answers.json` the owner's answers (this PC only, never published), `data/bot/state-<id>.json` the competition bots' ledgers (ids in `settings.competition.bots`); `data/bot/state.json`,
 `state-crypto.json` and `data/derived/bot.json`, `bot-crypto.json`, `shortlist.json`, `shortlist-crypto.json` belong to the two retired
 bots (kept, never stepped, never deleted), `data/briefs/YYYY-MM-DD.json` morning briefs,
 `data/feedback.json` the owner's test answers, `data/imports` the owner's CSV exports.
 
 API routes: `/api/ping`, `/api/board`, `/api/today`, `/api/eval`, `/api/indicators`, `/api/strategies`,
-`/api/bot`, `/api/bots`, `/api/competition`, `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
+`/api/bot`, `/api/bots`, `/api/competition`, `/api/office`, `/api/approve` (POST `{id, yes}`), `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
 `/api/today`, `/api/eval` and `/api/indicators` take `?view=market` (default) or `?view=crypto`; `/api/eval` also takes `key=SYMBOL@tf`.
 `/api/bot` and `/api/resume` take `?bot=<id>` (`/api/bot?view=crypto` gives that world's first bot).
 
@@ -291,10 +294,27 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    `inWeekendPause`) to every backtest that picks a competition bot's strategies and charts (`BtOpts.paused` in
    `src/core/backtest.ts`: a position open when a pause starts closes at that bar's open, reason "weekend"; nothing
    opens during it). The screens' tests (`evalSymbol`) do not pause.
+8k. **The desk guard** (owner, 2026-11-25, `src/bot/desk.ts`, settings `competition.desk`). Before the bots trade, each
+   refresh moves a desk index (100 at the start) by the average change of the working bots' performance indexes (a recruit
+   joins from its first check). Down `dailyLossPct` (3) in one Madrid day: every real bot closes everything (reason
+   "desk-stop") and opens nothing until the next Madrid day. `drawdownPct` (7) under the desk's best: risk per trade is
+   halved until the desk is back within `recoverPct` (3.5). Correlation cap: no new entry in the same direction as another
+   bot's open position on the same symbol, or on one whose hourly log returns over `corrDays` correlate above
+   `maxCorrelation` (0.8). The random twins are not affected (they only measure luck).
+8l. **Costs and the slippage cap.** The competition bots (trading and the weekly selection) pay spread and slippage per side
+   by the market's open interest on Lighter (`competition.costTiers`, 3 bps for the deepest markets up to 40 bps for the
+   thinnest); markets with no Lighter number keep `costBps`. An entry is cancelled when the open is more than
+   `competition.maxSlipAtr` (0.5) ATRs from the signal bar's close. The screens' tests keep the old costs.
+8m. **The owner decides.** With `competition.approvals.hire`, a recruit is hired only after the owner's yes on the Accountant
+   screen (a no leaves the seat empty; the answer can be changed). With `approvals.realMoney`, a bot reaching the top tier
+   asks for real money; a yes is recorded only, real orders stay "Stop and ask". Answers live only in
+   `data/owner-answers.json` on the PC and are merged into `data/bot/approvals.json` at every check, so a pull from bot-data
+   never loses one. The bots' weekly reports, the accountant's answers and its daily and weekly reports to the owner are
+   made from the ledgers (`src/bot/office.ts`); they never change how a bot trades.
 8j1. **Nico is free too** (owner, 2026-11-25: "as we are in a bearish trend"): his seat (`stocks-bull`) has `side: "both"`,
-   so he picks from all 16 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
+   so he picks from all 30 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
 8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all
-   16 strategies, long or short, and also from every crypto in `config/lighter-crypto.json` that is liquid on Lighter and
+   30 strategies, long or short, and also from every crypto in `config/lighter-crypto.json` that is liquid on Lighter and
    not in `config/universe.json` (`lighterCryptoExtras`; 1h candles from Lighter only, `loadLighterOnly`). Those symbols
    are not on Today and not tested for the screens. A free bot chooses last and may not copy a chart-and-strategy pair
    another bot of its world already trades.
@@ -366,6 +386,24 @@ passing long and the best passing short for a symbol (`allowed` in `src/core/ran
 | `supertrend_short` | Supertrend turns down (short) | trend |
 | `macd_cross_short` | MACD momentum cross down (short) | trend |
 | `squeeze_break_short` | Breakdown after a quiet spell (short) | trend |
+| `donchian_trend_adx` | 20-bar breakout, strong trend only | trend |
+| `ema_pullback_adx` | Pullback to the 20-bar average, strong trend only | trend |
+| `ma_cross_adx` | 20/50 average crossover, strong trend only | trend |
+| `rsi2_dip_adx` | Short-term dip in an uptrend, no strong trend | mean-reversion |
+| `bollinger_dip_adx` | Lower Bollinger band bounce, no strong trend | mean-reversion |
+| `supertrend_adx` | Supertrend turns up, strong trend only | trend |
+| `macd_cross_adx` | MACD momentum cross, strong trend only | trend |
+| `donchian_trend_short_adx` | 20-bar breakdown (short), strong trend only | trend |
+| `ema_pullback_short_adx` | Bounce to the 20-bar average (short), strong trend only | trend |
+| `ma_cross_short_adx` | 20/50 average cross down (short), strong trend only | trend |
+| `rsi2_dip_short_adx` | Short-term spike in a downtrend (short), no strong trend | mean-reversion |
+| `bollinger_dip_short_adx` | Upper Bollinger band fade (short), no strong trend | mean-reversion |
+| `supertrend_short_adx` | Supertrend turns down (short), strong trend only | trend |
+| `macd_cross_short_adx` | MACD momentum cross down (short), strong trend only | trend |
+
+On 2026-11-25 the owner asked for every suggestion of an outside desk proposal. Its market-type filters became the 14
+`_adx` versions above: trend rules trade only while ADX 14 is above 25, mean-reversion rules only while it is below 28
+(the breakouts after a quiet spell are left as they are). They are tested and picked like any other strategy.
 
 On 2026-11-22 the owner asked to remove the four SMC strategies and add what is worth testing. Added, with
 textbook settings: Supertrend (ATR 10, multiplier 3, with the 200-bar trend filter), MACD 12/26/9 crossing its
@@ -390,7 +428,7 @@ and take-profits; with no strategy behind them they have no exit rule.
 5. The existing tests "no lookahead" and "every strategy reports sane metrics" run on the new
    strategy automatically. If the second fails, the entry rule is too rare to evaluate; say so
    instead of forcing it.
-6. Update the counts `=== 16` (strategies per row and per timeframe summary) in `scripts/smoke.ts`.
+6. Update the counts `=== 30` (strategies per row and per timeframe summary) in `scripts/smoke.ts`.
 7. Report its real results from the Strategies screen as they are, including if it fails the gate.
 
 Short selling was added on 2026-11-15 at the owner's request. Keep in mind that the owner's

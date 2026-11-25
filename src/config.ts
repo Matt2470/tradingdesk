@@ -58,9 +58,23 @@ export interface Competition {
   /** Lighter's funding rate is read as a rate per this many hours and charged every hour (8 = the usual "8-hour rate"; unconfirmed). */ fundingPeriodHours: number;
   /** Prize the accountant pays into the monthly winner's award. */ monthlyPrize: number;
   /** Extra charts a bot may trade while it is last in the month (more chances to catch up, same risk per trade). */ hungryExtraCharts: number;
+  /** The four bots as one desk (owner, 2026-11-25, src/bot/desk.ts). dailyLossPct: a fall this big in one Madrid day closes
+   *  every position and stops new trades until the next day. drawdownPct: this far under the desk's best, risk per trade is
+   *  halved until the desk is back within recoverPct of it. maxCorrelation: a bot may not open a trade in the same direction as
+   *  another bot's open position on the same market or on one that moves with it (hourly returns over corrDays days). */
+  desk: { dailyLossPct: number; drawdownPct: number; recoverPct: number; maxCorrelation: number; corrDays: number };
+  /** Spread and slippage per side (bps) by the market's open interest on Lighter, biggest first; markets with no Lighter data keep costBps. */
+  costTiers: { minOiUsd: number; bps: number }[];
+  /** An entry is cancelled when the next open is more than this many ATRs (14) from the signal bar's close: the price ran away (0 = off). */
+  maxSlipAtr: number;
+  /** Decisions that wait for the owner's yes or no on the Accountant screen: hiring a recruit, and a bot asking for real money. */
+  approvals: { hire: boolean; realMoney: boolean };
   bots: CompetitionBot[];
 }
 export const DEFAULT_COMPETITION: Competition = { startGrant: 250, riskPctPerTrade: 2, graceDays: 7, maxStrikes: 3, bankUsd: 1500, tiers: [4, 8, 12], maxCharts: 8, scalpTimeframes: ["1m", "5m"], minTradesPerWeek: 5, fundingPeriodHours: 8, monthlyPrize: 25, hungryExtraCharts: 2,
+  desk: { dailyLossPct: 3, drawdownPct: 7, recoverPct: 3.5, maxCorrelation: 0.8, corrDays: 30 },
+  costTiers: [{ minOiUsd: 100e6, bps: 3 }, { minOiUsd: 10e6, bps: 5 }, { minOiUsd: 2e6, bps: 8 }, { minOiUsd: 500e3, bps: 15 }, { minOiUsd: 100e3, bps: 25 }, { minOiUsd: 0, bps: 40 }],
+  maxSlipAtr: 0.5, approvals: { hire: true, realMoney: true },
   recruitNames: ["Atlas", "Bruno", "Cleo", "Dante", "Echo", "Freya", "Gus", "Hana", "Iris", "Juno", "Kai", "Luna", "Milo", "Nina", "Otto", "Pia", "Quinn", "Rosa", "Sol", "Tara", "Uma", "Vito", "Wren", "Yara", "Zeno"],
   bots: [
   { id: "stocks-bull", name: "Nico", view: "market", side: "both", motto: "Free to buy or sell short, on stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
@@ -109,6 +123,12 @@ export function settings(): Settings {
   if (!(Array.isArray(c.scalpTimeframes) && c.scalpTimeframes.every(t => t === "1m" || t === "5m"))) throw new Error("config/settings.json: competition.scalpTimeframes may hold \"1m\" and \"5m\" only");
   if (!(c.minTradesPerWeek >= 0 && c.fundingPeriodHours >= 1 && c.monthlyPrize >= 0 && c.hungryExtraCharts >= 0 && c.hungryExtraCharts <= 10)) throw new Error("config/settings.json: competition needs minTradesPerWeek >= 0, fundingPeriodHours >= 1, monthlyPrize >= 0, hungryExtraCharts 0-10");
   if (!(c.maxCharts >= 1 && c.maxCharts <= 30) || !c.recruitNames.length) throw new Error("config/settings.json: competition.maxCharts must be 1-30 and recruitNames not empty");
+  c.desk = { ...DEFAULT_COMPETITION.desk, ...(c.desk ?? {}) }; c.approvals = { ...DEFAULT_COMPETITION.approvals, ...(c.approvals ?? {}) };
+  const k = c.desk; if (!(k.dailyLossPct > 0 && k.dailyLossPct <= 20 && k.drawdownPct > 0 && k.drawdownPct <= 50 && k.recoverPct >= 0 && k.recoverPct < k.drawdownPct && k.maxCorrelation > 0 && k.maxCorrelation <= 1 && k.corrDays >= 3))
+    throw new Error("config/settings.json: competition.desk needs dailyLossPct 0-20, drawdownPct 0-50, recoverPct below drawdownPct, maxCorrelation 0-1, corrDays at least 3");
+  if (!(Array.isArray(c.costTiers) && c.costTiers.length && c.costTiers.every((t, i) => t.minOiUsd >= 0 && t.bps >= 0 && t.bps <= 200 && (i === 0 || t.minOiUsd < c.costTiers[i - 1].minOiUsd)) && c.costTiers.at(-1)!.minOiUsd === 0))
+    throw new Error("config/settings.json: competition.costTiers needs falling minOiUsd values ending at 0, bps 0-200 each");
+  if (!(c.maxSlipAtr >= 0 && c.maxSlipAtr <= 10)) throw new Error("config/settings.json: competition.maxSlipAtr must be 0-10 (0 = off)");
   if (!(c.riskPctPerTrade > 0 && c.riskPctPerTrade <= 5)) throw new Error("config/settings.json: competition.riskPctPerTrade must be above 0 and at most 5");
   if (!c.bots.every(b => /^[a-z0-9-]+$/.test(b.id) && (b.view === "market" || b.view === "crypto") && (b.side === "long" || b.side === "short" || b.side === "both")) || new Set(c.bots.map(b => b.id)).size !== c.bots.length)
     throw new Error("config/settings.json: competition.bots need unique ids (a-z, 0-9, -), view \"market\" or \"crypto\", side \"long\", \"short\" or \"both\"");

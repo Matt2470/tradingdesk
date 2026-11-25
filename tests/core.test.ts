@@ -63,7 +63,7 @@ describe("backtest engine", () => {
       // The quiet-spell breakouts need the bands at their narrowest of 120 bars first, which a steady trend never gives.
       if (!s.id.startsWith("squeeze_")) expect(runBacktest(s.side === "long" ? up : dn, s, { costBps: 10, maxLosingBars: 10 }).metrics.trades).toBeGreaterThan(0);
     }
-    expect(STRATEGIES.filter(s => s.side === "short").every(s => s.id.endsWith("_short"))).toBe(true);
+    expect(STRATEGIES.filter(s => s.side === "short").every(s => /_short(_adx)?$/.test(s.id))).toBe(true);
   });
   test("a profit target closes the trade at the target; if stop and target share a bar, the stop wins", () => {
     const tgt = (side: "long" | "short"): Strategy => ({ ...once(20, 50, side), targetR: 2 });          // ATR 2: stop 6 away, target 12 away
@@ -143,6 +143,24 @@ describe("the strategies added on 2026-11-22", () => {
     expect(d[55]).toBe(1); expect(d[115]).toBe(-1);
   });
   test("there are 16 rules, 8 long and 8 short, and no SMC rules", () => {
-    expect(S).toHaveLength(16); expect(S.filter((x: any) => x.side === "short")).toHaveLength(8); expect(S.some((x: any) => x.id.startsWith("smc_"))).toBe(false);
+    expect(S).toHaveLength(30); expect(S.filter((x: any) => x.side === "short")).toHaveLength(15); expect(S.filter((x: any) => x.id.endsWith("_adx"))).toHaveLength(14); expect(S.some((x: any) => x.id.startsWith("smc_"))).toBe(false);
+  });
+});
+
+import { adx } from "../src/core/indicators";
+describe("market-type filters", () => {
+  test("ADX is high in a steady trend and low in a sideways market", () => {
+    const n = 300; const up = Array.from({ length: n }, (_, i) => 100 + i); const side = Array.from({ length: n }, (_, i) => 100 + Math.sin(i / 2) * 2);
+    const a1 = adx(up.map(x => x + 1), up.map(x => x - 1), up, 14), a2 = adx(side.map(x => x + 1), side.map(x => x - 1), side, 14);
+    expect(a1[n - 1]).toBeGreaterThan(40); expect(a2[n - 1]).toBeLessThan(20); expect(Number.isNaN(a1[10])).toBe(true);
+  });
+  test("a filtered rule only enters where its plain rule would, and only in its market type", async () => {
+    const { STRATEGIES, buildCtx, I } = await import("../src/core/strategies");
+    const { synthBars } = await import("../scripts/make-fixtures");
+    const x = buildCtx(synthBars(3, 1500, "2026-06-01", false)); const ad = I.adx(x, 14);
+    for (const f of STRATEGIES.filter(s => s.id.endsWith("_adx"))) {
+      const base = STRATEGIES.find(s => s.id === f.id.replace(/_adx$/, ""))!;
+      for (let i = f.warmup; i < x.n; i++) if (f.entry(x, i)) { expect(base.entry(x, i)).toBe(true); expect(base.family === "trend" ? ad[i] > 25 : ad[i] < 28).toBe(true); }
+    }
   });
 });

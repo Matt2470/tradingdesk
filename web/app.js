@@ -154,7 +154,7 @@ function record(r) {
   return `${r.trades} past trades, ${num(r.winRate, 0)}% won${rr}.${r.evidence === "thin" ? " Few trades, so the record is thin." : ""}${checks}`;
 }
 /** One sentence that says what to do with this symbol now, and a second line with the evidence. */
-const REASON = { milestone: "Milestone: closed for the accountant", bust: "Bust line: closed for the accountant", weekend: "Weekend pause", tp1: "Take-profit 1", tp2: "Take-profit 2", tp3: "Take-profit 3", sl1: "Stop 1", sl2: "Stop 2", sl3: "Stop 3", trail: "Rising stop (profit kept)", stop: "Stop", target: "Target", rule: "Strategy exit", "time-stop": "Too long at a loss", "circuit-breaker": "Safety stop" };
+const REASON = { "desk-stop": "Desk stop: the desk hit its daily loss limit", milestone: "Milestone: closed for the accountant", bust: "Bust line: closed for the accountant", weekend: "Weekend pause", tp1: "Take-profit 1", tp2: "Take-profit 2", tp3: "Take-profit 3", sl1: "Stop 1", sl2: "Stop 2", sl3: "Stop 3", trail: "Rising stop (profit kept)", stop: "Stop", target: "Target", rule: "Strategy exit", "time-stop": "Too long at a loss", "circuit-breaker": "Safety stop" };
 const soldPart = p => (p.qty0 && p.qty < p.qty0 * 0.999 ? ` ${num((1 - p.qty / p.qty0) * 100, 0)}% already sold for profit.` : "");
 /** "take profit at A and B, the last third rides a rising stop" */
 function tpText(tps, stop) {
@@ -166,7 +166,7 @@ function advice(s) {
   if (s.bot) {
     const b = s.bot; return [`The paper bot is ${sideWord(b.side)} on the ${TF_NAME[b.tf]} chart since ${bar(b.entryDate)}: ${signed(b.pnl, 2)}. ${b.nextStop ? `Next stop ${b.nextStop.name} ${price(b.nextStop.px)}` : `Stop ${price(b.stop)}`}${b.target ? `, next take-profit ${price(b.target)}` : ", the rest rides the rising stop"}.${soldPart(b)}`, `Opened by ${b.strategyId}.`];
   }
-  if (s.order) { const o = s.order; const what = o.type === "exit" ? "close its trade" : o.strategyId.endsWith("_short") ? "sell short" : "buy"; return [`The paper bot will ${what} at the next ${TF_NAME[o.tf]} open.`, `Signal from ${o.strategyId}.`]; }
+  if (s.order) { const o = s.order; const what = o.type === "exit" ? "close its trade" : /_short(_adx)?$/.test(o.strategyId) ? "sell short" : "buy"; return [`The paper bot will ${what} at the next ${TF_NAME[o.tf]} open.`, `Signal from ${o.strategyId}.`]; }
   if (!t || t.action === "no-data") return ["No prices yet.", ""];
   if (t.action === "enter") {
     const p = t.plan; const verb = t.side === "short" ? "Sell short" : "Buy";
@@ -191,7 +191,7 @@ let FILTER = "all";
 
 /* ---------- Strategies: the map and the cards ---------- */
 const SHORT = { donchian_trend: "Breakout", ema_pullback: "Pullback", ma_cross: "MA cross", rsi2_dip: "Dip", bollinger_dip: "BB bounce", supertrend: "Supertrend", macd_cross: "MACD", squeeze_break: "Squeeze" };
-const shortName = id => id ? `${SHORT[id.replace(/_short$/, "")] ?? id} ${id.endsWith("_short") ? "▼" : "▲"}` : "";
+const shortName = id => id ? `${SHORT[id.replace(/_adx$/, "").replace(/_short$/, "")] ?? id}${id.endsWith("_adx") ? " ⓐ" : ""} ${/_short(_adx)?$/.test(id) ? "▼" : "▲"}` : "";
 /** Shades of one hue by profit factor: light at 1.2, dark at 3 and above (a sequential scale, not a rainbow). */
 const pfShade = v => v >= 3 ? ["#0F6E6E", "#fff"] : v >= 2 ? ["#3E9A94", "#fff"] : v >= 1.5 ? ["#9CD2CD", "#16202B"] : ["#D4ECEA", "#16202B"];
 function strategyMap(today, bt, board) {
@@ -321,6 +321,36 @@ const screens = {
     ${VIEW === "market" ? `<div id="lighter"></div>` : ""}
     <h2>What the bot did</h2>${dailyView(b)}
     <details class="detail"${b.daily?.length ? "" : " open"}><summary>Every action, one by one (${b.log.length})</summary>${b.log.length ? `<table class="compact"><tbody>${b.log.map(l => `<tr><td style="white-space:nowrap">${esc(bar(l.d))}</td><td>${esc(l.msg)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nothing yet.</p>`}</details>`;
+  },
+  async accountant() {
+    await loadBots(); const o = await api("/api/office");
+    if (!o) return `<h1>Accountant</h1><p class="empty">The accountant's reports appear after the bots' first check.</p>`;
+    const nameOf = id => BOTS.find(b => b.id === id)?.name ?? id;
+    const who = id => `<span class="who"><i class="swatch" style="background:${botColor(id)}"></i>${esc(nameOf(id))}</span>`;
+    const dayName = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+    const R = o.rules; const k = o.desk; const today = o.days[0]; const open = o.approvals.filter(a => a.status === "pending");
+    const ask = a => `<article class="panel approval" data-approval="${esc(a.id)}"><p style="margin:0 0 4px"><strong>${esc(a.title)}</strong> ${a.status === "pending" ? `<span class="tag hungry">waiting for you</span>` : `<span class="tag ${a.status === "yes" ? "in" : ""}">you said ${esc(a.status)}${a.answeredAt ? ` on ${esc(when(a.answeredAt + ":00Z"))}` : ""}</span>`}</p>
+      <p class="small" style="margin:0 0 8px">${esc(a.detail)} <span>Asked ${esc(when(a.at + ":00Z"))}.</span></p>
+      <p style="margin:0"><button type="button" class="approve" data-yes="1">${a.status === "yes" ? "Yes (chosen)" : "Yes"}</button> <button type="button" class="approve" data-yes="0">${a.status === "no" ? "No (chosen)" : "No"}</button></p></article>`;
+    const guard = !k ? "" : k.stoppedDay ? `<span class="loss">Stopped for today</span>: the desk fell ${num(-(k.last?.dayPct ?? 0), 2)}% (limit ${R.dailyLossPct}%). No new trades until tomorrow.`
+      : k.halved ? `<span class="warn">Half risk</span>: the desk is ${num(-(k.last?.fromHighPct ?? 0), 2)}% under its best (rule at ${R.drawdownPct}%). Full risk again within ${R.recoverPct}% of the best.`
+      : `<span class="gain">Normal</span>: today ${pct(k.last?.dayPct ?? 0, 2)} (stop at −${R.dailyLossPct}%), ${num(Math.abs(k.last?.fromHighPct ?? 0), 2)}% under the desk's best (half risk at ${R.drawdownPct}%).`;
+    const dayRows = o.days.map(d => `<tr><td>${esc(dayName(d.day))}${d.live ? ` <span class="small">(today)</span>` : ""}</td><td class="num">${d.deskPct == null ? "–" : pct(d.deskPct, 2)}</td><td class="num">${d.trades} <span class="small">(${d.wins})</span></td><td class="num">${signed(d.pnl, 2)}</td>${d.bots.map(b => `<td class="num" title="${esc(b.name)}: ${b.trades} trades, ${b.pnl.toFixed(2)} USD">${pct(b.pct, 2)}</td>`).join("")}<td class="small">${esc(d.text)}</td></tr>`).join("");
+    const weekRows = o.weekly.map(w => `<tr><td>${esc(dayName(w.week))}${w.live ? ` <span class="small">(this week)</span>` : ""}</td><td class="num">${w.trades}</td><td class="num">${signed(w.pnl, 2)}</td><td class="num">${w.badges}</td><td class="num">${w.saves}</td><td class="num">${w.strikes}</td><td>${w.best ? esc(w.best) : "–"}</td></tr>`).join("");
+    const botWeeks = BOTS.map(b => { const ws = o.weeks[b.id] ?? []; return `<details class="detail"${ws[0]?.live ? " open" : ""}><summary>${who(b.id)} <span class="small">${ws[0] ? `${ws[0].trades} trades this week, ${ws[0].returnPct > 0 ? "+" : ""}${num(ws[0].returnPct, 2)}%` : "no report yet"}</span></summary>
+      ${ws.map(w => `<div class="report"><p class="small" style="margin:8px 0 2px"><strong>Week of ${esc(dayName(w.week))}</strong>${w.live ? " (so far)" : ""}</p><p style="margin:0"><strong>${esc(nameOf(b.id))}:</strong> ${esc(w.bot)}</p><p style="margin:2px 0 0"><strong>Accountant:</strong> <span class="${w.strike ? "loss" : w.badges ? "gain" : ""}">${esc(w.accountant)}</span></p></div>`).join("") || `<p class="empty">No week to report yet.</p>`}</details>`; }).join("");
+    const riskRows = o.risk.map(r => `<tr class="click" data-gobot="${esc(r.id)}"><td>${who(r.id)}${r.stopped ? ` <span class="tag hungry">stopped</span>` : ""}</td><td>${esc(r.tier)} <span class="small">(${r.streak} in a row)</span></td><td class="num">${money(r.equity, 2)}</td><td class="num ${r.cushion < r.bustLine * 0.4 ? "loss" : ""}">${money(r.cushion, 2)}</td><td class="num">${money(r.award, 2)}</td><td class="num">${r.debt > 0.005 ? money(r.debt, 2) : `<span class="gain">0</span>`}</td><td class="num">${money(r.accountantAtRisk, 2)}</td><td class="num">${r.strikes}</td></tr>`).join("");
+    return `<div class="head"><div><h1>Accountant</h1><p class="sub">The bots report to the accountant every week and the accountant reports to you every day. Big decisions wait here for your yes or no.</p></div></div>
+    <h2>Waiting for your decision</h2>${open.length ? open.map(ask).join("") : `<p class="empty">Nothing to decide right now. When a bot is stopped, hiring its recruit waits here for your yes; a bot that becomes an Experienced trader asks here before any talk of real money.</p>`}
+    <h2>Today's report</h2><div class="panel"><p style="margin:0 0 6px"><strong>${today ? esc(today.text) : "No report yet."}</strong></p>
+      <p class="small" style="margin:0 0 6px">Desk guard: ${guard}</p>
+      <p class="small" style="margin:0">Bank: ${money(o.bank.available, 2)} available of ${money(o.bank.start, 0)}; ${money(o.bank.owed, 2)} still lent out; the most the accountant can still lose is ${money(o.bank.atRisk, 2)}; profit so far ${signed(o.bank.profit, 2)}.</p></div>
+    <h2>Money at risk, bot by bot</h2><table><thead><tr><th>Bot</th><th>Tier</th><th class="num">Account</th><th class="num" title="Account value above the stop line (half the grant)">Above the stop line</th><th class="num">Award</th><th class="num">Owes</th><th class="num" title="What the accountant itself could still lose on this bot">Accountant at risk</th><th class="num">Strikes</th></tr></thead><tbody>${riskRows}</tbody></table>
+    <h2>Daily reports</h2><table class="compact"><thead><tr><th>Day</th><th class="num">Desk</th><th class="num">Trades (won)</th><th class="num">Profit</th>${(o.days[0]?.bots ?? []).map(b => `<th class="num">${esc(b.name)}</th>`).join("")}<th>Accountant</th></tr></thead><tbody>${dayRows}</tbody></table>
+    <h2>Weekly reports</h2><table class="compact"><thead><tr><th>Week of</th><th class="num">Trades</th><th class="num">Profit</th><th class="num">Badges</th><th class="num">Saves</th><th class="num">Strikes</th><th>Best bot</th></tr></thead><tbody>${weekRows}</tbody></table>
+    <h2>The bots' weekly reports to the accountant</h2>${botWeeks}
+    <h2>Desk rules</h2><p class="small">Daily loss limit ${R.dailyLossPct}% (everything closed, no trades until the next Madrid day). Drawdown rule: ${R.drawdownPct}% under the desk's best halves the risk per trade until it is back within ${R.recoverPct}%. Correlation cap: no two bots in the same direction on the same market, or on markets whose hourly moves correlate above ${R.maxCorrelation} (last ${R.corrDays} days). Costs per side by open interest on Lighter: ${R.costTiers.map(t => `${t.bps} bps from $${t.minOiUsd >= 1e6 ? num(t.minOiUsd / 1e6, 0) + "M" : num(t.minOiUsd / 1e3, 0) + "k"}`).join(", ")}. An entry is cancelled when the open is more than ${R.maxSlipAtr} ATR from the signal close.</p>
+    ${k?.log?.length ? `<details class="detail"><summary>Desk guard log</summary><ul class="small">${k.log.map(l => `<li>${esc(when(l.d + ":00Z"))}: ${esc(l.msg)}</li>`).join("")}</ul></details>` : ""}`;
   },
   async competition() {
     await loadBots(); const c = await api("/api/competition"); CHECKING = c?.checkingSince ?? null;
@@ -457,6 +487,7 @@ $main.addEventListener("click", async e => {
   const ans = t.closest("button.ans"); if (ans) { const tr = ans.closest("tr[data-check]"); try { await api("/api/feedback", { method: "POST", body: JSON.stringify({ id: tr.dataset.check, status: ans.dataset.status, note: tr.querySelector("textarea").value }) }); } catch (err) { alertMsg(err.message); return; } render(); return; }
   if (t.closest("#sendnote")) { const v = document.getElementById("free").value; if (v.trim()) { try { await api("/api/feedback", { method: "POST", body: JSON.stringify({ text: v }) }); } catch (err) { alertMsg(err.message); return; } render(); } return; }
   const sw = t.closest("button[data-view]"); if (sw) { VIEW = sw.dataset.view; if (location.hash.startsWith("#strategies/")) location.hash = "#strategies"; else render(); return; }
+  const ap = t.closest("button.approve"); if (ap) { const id = ap.closest("[data-approval]").dataset.approval; ap.disabled = true; try { await api("/api/approve", { method: "POST", body: JSON.stringify({ id, yes: ap.dataset.yes === "1" }) }); } catch (err) { alertMsg(err.message); } render(); return; }
   if (t.closest("#resume")) { try { await api(`/api/resume?bot=${encodeURIComponent(BOT)}`, { method: "POST" }); } catch (err) { alertMsg(err.message); } render(); return; }
   const btn = t.closest("#refresh"); if (btn) { btn.disabled = true; btn.textContent = "Checking…"; try { await api("/api/refresh", { method: "POST" }); } catch (err) { alertMsg(err.message); } render(); }
 });
@@ -465,4 +496,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
