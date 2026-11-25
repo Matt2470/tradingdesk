@@ -124,8 +124,8 @@
         "id": "stocks-bull",
         "name": "Nico",
         "view": "market",
-        "side": "long",
-        "motto": "Buys strength in stocks, gold and every other Lighter market that is not crypto.",
+        "side": "both",
+        "motto": "Free to buy or sell short, on stocks, gold and every other Lighter market that is not crypto.",
         "allLighter": true
       },
       {

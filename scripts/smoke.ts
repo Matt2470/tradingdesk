@@ -53,7 +53,8 @@ try {
   const cb = await (await fetch(base + "/api/bot?bot=crypto-bull")).json(); ok(cb && cb.view === "crypto" && cb.startEquity === 250 && cb.checked?.markets === 30, "crypto bots watch every crypto chart");
   const cbear = await (await fetch(base + "/api/bot?bot=crypto-bear")).json();
   ok(![bot, bear].some(b => b.positions.concat(b.pending).some((p: any) => CRYPTO.includes(p.symbol))) && [cb, cbear].every(b => b.positions.concat(b.pending).every((p: any) => CRYPTO.includes(p.symbol))), "each bot trades only its own world");
-  ok([bot].every(b => b.positions.every((p: any) => p.side === "long") && b.trades.every((t: any) => t.side === "long")) && [bear, cbear].every(b => b.positions.every((p: any) => p.side === "short") && b.trades.every((t: any) => t.side === "short")) && cb.side === "both", "Nico only buys, Lucas and Valeria only sell short, Catalina is free");
+  ok([bear, cbear].every(b => b.positions.every((p: any) => p.side === "short") && b.trades.every((t: any) => t.side === "short")) && cb.side === "both" && bot.side === "both", "Lucas and Valeria only sell short, Nico and Catalina are free");
+  ok(!bot.playbook.some((p: any) => bear.playbook.some((q: any) => q.key === p.key && q.id === p.id)), "Nico never copies a chart-and-strategy pair that Lucas trades");
   ok(new Set(bot.positions.map((p: any) => p.symbol)).size === bot.positions.length, "one position per symbol");
   ok([bot, bear, cb, cbear].every(b => Array.isArray(b.shortlist?.chosen) && b.shortlist.chosen.length <= 4 && b.shortlist.candidates.length === (b.side === "both" ? 16 : 8) && (b.side === "both" || b.shortlist.candidates.every((c: any) => c.side === b.side)) && b.exits?.mode === "ladder"), "each bot has its own weekly short list (of its own side, or of both for Nova), and stepped exits");
   const union = [...bot.shortlist.chosen, ...bear.shortlist.chosen];

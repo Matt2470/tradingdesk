@@ -63,7 +63,7 @@ export interface Competition {
 export const DEFAULT_COMPETITION: Competition = { startGrant: 250, riskPctPerTrade: 2, graceDays: 7, maxStrikes: 3, bankUsd: 1500, tiers: [4, 8, 12], maxCharts: 8, scalpTimeframes: ["1m", "5m"], minTradesPerWeek: 5, fundingPeriodHours: 8, monthlyPrize: 25, hungryExtraCharts: 2,
   recruitNames: ["Atlas", "Bruno", "Cleo", "Dante", "Echo", "Freya", "Gus", "Hana", "Iris", "Juno", "Kai", "Luna", "Milo", "Nina", "Otto", "Pia", "Quinn", "Rosa", "Sol", "Tara", "Uma", "Vito", "Wren", "Yara", "Zeno"],
   bots: [
-  { id: "stocks-bull", name: "Nico", view: "market", side: "long", motto: "Buys strength in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
+  { id: "stocks-bull", name: "Nico", view: "market", side: "both", motto: "Free to buy or sell short, on stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
   { id: "stocks-bear", name: "Lucas", view: "market", side: "short", motto: "Sells weakness in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
   { id: "crypto-bull", name: "Catalina", view: "crypto", side: "both", motto: "Free to buy or sell short, on any crypto Lighter trades.", lighterCrypto: true },
   { id: "crypto-bear", name: "Valeria", view: "crypto", side: "short", motto: "Sells weakness in crypto." },

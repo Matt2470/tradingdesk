@@ -12,8 +12,8 @@ Windows, opens when the PC starts, and does three things (the bots decide; the s
 
 1. Today: one list of every symbol with its live price, a plain sentence saying what to do, and the
    signal on each of five timeframes (15 min, 30 min, 1 hour, 4 hours, daily).
-2. Runs a competition of four paper bots with pretend money (owner, 2026-11-23): Nico (bullish) and Lucas
-   (bearish) on stocks and gold, Catalina (bullish) and Valeria (bearish) on crypto. Each starts with a 250 USD grant
+2. Runs a competition of four paper bots with pretend money (owner, 2026-11-23): Nico (free to buy or sell short since 2026-11-25) and Lucas
+   (bearish) on stocks and gold, Catalina (free to buy or sell short) and Valeria (bearish) on crypto. Each starts with a 250 USD grant
    from an accountant that hands out badges at milestones (invariant 8g). They trade every timeframe, around
    the clock, on the PC or on GitHub (see "Running on GitHub"). The Competition screen keeps the score.
 3. Strategies: a map of every symbol on every timeframe (the rule the bot uses there, its profit factor,
@@ -291,6 +291,8 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    `inWeekendPause`) to every backtest that picks a competition bot's strategies and charts (`BtOpts.paused` in
    `src/core/backtest.ts`: a position open when a pause starts closes at that bar's open, reason "weekend"; nothing
    opens during it). The screens' tests (`evalSymbol`) do not pause.
+8j1. **Nico is free too** (owner, 2026-11-25: "as we are in a bearish trend"): his seat (`stocks-bull`) has `side: "both"`,
+   so he picks from all 16 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
 8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all
    16 strategies, long or short, and also from every crypto in `config/lighter-crypto.json` that is liquid on Lighter and
    not in `config/universe.json` (`lighterCryptoExtras`; 1h candles from Lighter only, `loadLighterOnly`). Those symbols
