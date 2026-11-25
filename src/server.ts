@@ -1,7 +1,7 @@
 // Local dashboard server. Listens on 127.0.0.1 only: nothing here is reachable from the network.
 import { join, normalize } from "node:path";
 import { ROOT, P, settings, readJson, universe } from "./config";
-import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION } from "./pipeline";
+import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince } from "./pipeline";
 import { STRATEGIES } from "./core/strategies";
 import { readFeedback, saveFeedback } from "./feedback";
 import { lighterFile, readiness, type LighterSnapshot } from "./data/lighter";
@@ -26,10 +26,10 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   "/api/strategies": () => STRATEGIES.map(({ id, name, family, side, plain, indicators, stopAtr, targetR }) => ({ id, name, family, side, plain, indicators, stopAtr, targetR: targetR ?? null })),
   // One competition bot: ?bot=stocks-bull (or ?view=crypto for that world's first bot).
   "/api/bot": u => { const id = u.searchParams.get("bot"); const v = u.searchParams.get("view"); const cur = settings();
-    const b = id ? botById(id, cur) : competitors(cur).find(x => x.view === viewOf(v)) ?? botById(null, cur); return readJson(botFiles(b.id).view, null); },
+    const b = id ? botById(id, cur) : competitors(cur).find(x => x.view === viewOf(v)) ?? botById(null, cur); const view = readJson<Record<string, unknown> | null>(botFiles(b.id).view, null); return view && { ...view, checkingSince: checkingSince() }; },
   // Current names: a fired bot's seat shows its recruit's name.
   "/api/bots": () => competitors(settings()).map(({ id, name, view, side, motto, lighterCrypto }) => ({ id, name: readJson<{ name?: string } | null>(botFiles(id).view, null)?.name ?? name, view, side, motto: motto ?? "", lighterCrypto: !!lighterCrypto })),
-  "/api/competition": () => readJson(COMPETITION(), null),
+  "/api/competition": () => { const c = readJson<Record<string, unknown> | null>(COMPETITION(), null); return c && { ...c, checkingSince: checkingSince() }; },
   "/api/resume": (u, req) => (req.method === "POST" ? { resumed: resumeBot(botById(u.searchParams.get("bot")).id) } : { error: "use POST" }),
   "/api/lighter": () => { const snap = readJson<LighterSnapshot | null>(lighterFile(), null); const cur = settings();
     return { snapshot: snap, settings: cur.lighter, readiness: readiness(snap, universe().filter(x => x.class === "stock" || x.class === "metal"), cur) }; },

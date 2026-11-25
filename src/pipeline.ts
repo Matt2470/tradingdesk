@@ -74,8 +74,11 @@ const cache = new Map<string, { sig: string; summary: SymbolEval }>();
 
 let running: Promise<RefreshResult> | null = null;
 export interface RefreshResult { at: string; tookMs: number; fetch: FetchStatus[]; symbolsWithData: number; retested: number; error?: string; remote?: { ok: number; failed: number; at: string | null } }
+/** When the check now running started (null when none is running): the screens say "checking now" instead of "late". */
+let runningSince: string | null = null;
+export const checkingSince = () => runningSince;
 export function refresh(opts: { fetch?: boolean; force?: boolean; now?: number } = {}): Promise<RefreshResult> {
-  if (!running) running = doRefresh(opts).finally(() => { running = null; });
+  if (!running) { runningSince = new Date().toISOString(); running = doRefresh(opts).finally(() => { running = null; runningSince = null; }); }
   return running;
 }
 
@@ -128,6 +131,11 @@ function loadBot(b: CompetitionBot, st: Settings, now: number): BotState {
   }
   if (old) { const a0 = s.accountant as unknown as { index: number; daily?: Record<string, number> }; s.accountant = { ...newAccountant(g, s.startedAt, rulesOf(st)), index: a0.index, daily: a0.daily ?? {}, lastEquity: equityOf(s, () => undefined) }; }
   s.accountant ??= newAccountant(g, s.startedAt, rulesOf(st)); s.side = b.side; s.persona ??= { name: b.name, recruit: 1, slot: b.id };
+  // The first bot of each seat carries the name in settings (the owner renamed them on 2026-11-25); recruits keep theirs.
+  if (s.persona.recruit === 1 && s.persona.name !== b.name) {
+    const old = s.persona.name; s.persona.name = b.name; s.log.push({ d: stamp, msg: `${old} is now called ${b.name}.` });
+    const r = readRoster(); if (!r.used.includes(b.name)) { r.used.push(b.name); writeJson(ROSTER(), r); }
+  }
   return s;
 }
 /** Monday 00:00 Madrid after a moment (UTC "YYYY-MM-DDTHH:MM"). */
@@ -280,7 +288,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     // before real money). Other stocks stay on Today for watching; an open position on one is still managed to its exit.
     const tradable = st.lighter?.prices24h === false ? null : lighterIds(uni);
     const botTrades = (x: Sym) => tradedBy(v, x) && (v === "crypto" || !tradable || tradable[x.symbol] != null);
-    // Lighter-only crypto (1h and 4h): only for a bot with lighterCrypto (Nova). Not on Today and not tested for the screens.
+    // Lighter-only crypto (1h and 4h): only for a bot with lighterCrypto (Catalina). Not on Today and not tested for the screens.
     const wide = (b: CompetitionBot) => !!(b.lighterCrypto || b.allLighter);
     const extras = !competitors(st).some(b => b.view === v && wide(b)) ? [] : v === "crypto" ? lighterCryptoExtras(uni) : lighterOtherExtras(uni);
     const extraCharts = extras.flatMap(s => (["1h", "4h"] as Timeframe[]).filter(tf => tfs.includes(tf)).map(tf => { const c = loadLighterOnly(s.symbol, tf); return c ? { s, tf, c, ...splitComplete(c.bars, "crypto", c.meta, now, tf) } : null; }).filter(<T,>(x: T | null): x is T => !!x));

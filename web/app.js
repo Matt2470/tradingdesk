@@ -293,7 +293,7 @@ const screens = {
   },
   async bot() {
     await loadBots(); const me = BOTS.find(x => x.id === BOT) ?? BOTS[0]; BOT = me.id; VIEW = me.view === "crypto" ? "crypto" : "market";
-    const [b, comp] = await Promise.all([api(`/api/bot?bot=${encodeURIComponent(BOT)}`), api("/api/competition")]);
+    const [b, comp] = await Promise.all([api(`/api/bot?bot=${encodeURIComponent(BOT)}`), api("/api/competition")]); CHECKING = b?.checkingSince ?? null;
     if (!b) return `<h1>Paper bots</h1>${botSwitcher()}<p class="empty">This bot starts after its first price download.</p>`;
     const a = b.accountant;
     const ret = (b.equity / b.startEquity - 1) * 100; const s = b.trades; const wins = s.filter(t => t.pnl > 0).length; const c = b.checked;
@@ -323,7 +323,7 @@ const screens = {
     <details class="detail"${b.daily?.length ? "" : " open"}><summary>Every action, one by one (${b.log.length})</summary>${b.log.length ? `<table class="compact"><tbody>${b.log.map(l => `<tr><td style="white-space:nowrap">${esc(bar(l.d))}</td><td>${esc(l.msg)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nothing yet.</p>`}</details>`;
   },
   async competition() {
-    await loadBots(); const c = await api("/api/competition");
+    await loadBots(); const c = await api("/api/competition"); CHECKING = c?.checkingSince ?? null;
     if (!c) return `<h1>Competition</h1><p class="empty">The scoreboard appears after the bots' first check.</p>`;
     const by = Object.fromEntries(c.bots.map(b => [b.id, b])); const monthName = m => new Date(m + "-15T12:00:00Z").toLocaleDateString("en-GB", { month: "long", year: "numeric" });
     const cur = c.months.find(m => m.month === c.month); const lead = cur?.standings[0]; const R = c.rules;
@@ -387,7 +387,8 @@ const MIN = 60000;
 function agoText(ms) { const s = Math.max(0, Math.round(ms / 1000)); return s < 60 ? `${s} s ago` : s < 3600 ? `${Math.floor(s / 60)} min ago` : `${Math.floor(s / 3600)} h ${Math.floor(s % 3600 / 60)} min ago`; }
 function untilText(ms) { const s = Math.round(ms / 1000); return s <= 0 ? "now" : s < 60 ? `in ${s} s` : `in ${Math.floor(s / 60)} min ${String(s % 60).padStart(2, "0")} s`; }
 /** green: checked in the last 17 minutes; amber: up to 35; red: longer (the app is closed, the PC asleep or the check failing). */
-function botState(at) { const age = Date.now() - Date.parse(at); return !at ? ["down", "Not checked yet"] : age < 17 * MIN ? ["ok", "Working"] : age < 35 * MIN ? ["late", "Late: last check over 17 minutes ago"] : ["down", "Stopped: no check for over 35 minutes"]; }
+let CHECKING = null; // when this PC's check now running started
+function botState(at) { const age = Date.now() - Date.parse(at); if (CHECKING && Date.now() - Date.parse(CHECKING) < 20 * MIN) return ["late", `Checking now (started ${clock(CHECKING)})`]; return !at ? ["down", "Not checked yet"] : age < 17 * MIN ? ["ok", "Working"] : age < 35 * MIN ? ["late", "Late: last check over 17 minutes ago"] : ["down", "Stopped: no check for over 35 minutes"]; }
 function botClock(b) {
   const at = b.checked?.at; const h = b.hours; const [cls, word] = botState(at);
   const left = h?.notTraded?.length ? ` Not traded, because they cannot trade around the clock on Lighter (not listed, or too thin there): ${h.notTraded.map(esc).join(", ")}. They stay on Today to watch, and join by themselves once Lighter trades them properly.` : "";
@@ -432,7 +433,7 @@ async function lighterPanel() {
 
 /* ---------- routing ---------- */
 async function render() {
-  const parts = location.hash.slice(1).split("/"); const name = screens[parts[0]] ? parts[0] : "today"; const arg = parts.slice(1).map(decodeURIComponent).join("/") || null;
+  const parts = location.hash.slice(1).split("/"); const name = screens[parts[0]] && !["today", "feedback"].includes(parts[0]) ? parts[0] : "competition"; /* Today and Test and feedback were removed from the menu (owner, 2026-11-24) */ const arg = parts.slice(1).map(decodeURIComponent).join("/") || null;
   document.querySelectorAll(".rail a").forEach(a => a.dataset.tab === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const y = scrollY;
   let jumped = false;
@@ -464,4 +465,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "today"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);

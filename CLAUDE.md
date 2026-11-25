@@ -12,8 +12,8 @@ Windows, opens when the PC starts, and does three things (the bots decide; the s
 
 1. Today: one list of every symbol with its live price, a plain sentence saying what to do, and the
    signal on each of five timeframes (15 min, 30 min, 1 hour, 4 hours, daily).
-2. Runs a competition of four paper bots with pretend money (owner, 2026-11-23): Leo (bullish) and Ursa
-   (bearish) on stocks and gold, Nova (bullish) and Raven (bearish) on crypto. Each starts with a 250 USD grant
+2. Runs a competition of four paper bots with pretend money (owner, 2026-11-23): Nico (bullish) and Lucas
+   (bearish) on stocks and gold, Catalina (bullish) and Valeria (bearish) on crypto. Each starts with a 250 USD grant
    from an accountant that hands out badges at milestones (invariant 8g). They trade every timeframe, around
    the clock, on the PC or on GitHub (see "Running on GitHub"). The Competition screen keeps the score.
 3. Strategies: a map of every symbol on every timeframe (the rule the bot uses there, its profit factor,
@@ -93,7 +93,7 @@ see "Stop and ask".
 | `.github/workflows/bots.yml` | The GitHub workflow: every 15 minutes, restore state and prices, `bun run engine`, publish to `bot-data`. | — |
 | `scripts/doctor.ts`, `scripts/smoke.ts`, `scripts/check-claude-md.ts`, `scripts/make-fixtures.ts`, `scripts/research.ts`, `scripts/compare-exits.ts` | Checks, synthetic test data, and research scripts that only print. | src |
 | `config/settings.json`, `config/universe.json` | Everything the owner may tune: costs, gate, bot sizing, risk limits, symbol list. | — |
-| `config/lighter-crypto.json` | Crypto tickers on Lighter that Nova may trade (only while liquid there). The owner may edit it. | — |
+| `config/lighter-crypto.json` | Crypto tickers on Lighter that Catalina may trade (only while liquid there). The owner may edit it. | — |
 | `config/checklist.json` | The list of things the owner is asked to test on the Test and feedback screen. | — |
 | `docs/BRIEF_TASK.md` | The old morning brief contract. Unused since 2026-11-22. | — |
 | `setup.bat`, `start.vbs`, `remove-from-startup.bat` | Windows install, hidden launcher, uninstall from startup. | — |
@@ -291,12 +291,12 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    `inWeekendPause`) to every backtest that picks a competition bot's strategies and charts (`BtOpts.paused` in
    `src/core/backtest.ts`: a position open when a pause starts closes at that bar's open, reason "weekend"; nothing
    opens during it). The screens' tests (`evalSymbol`) do not pause.
-8j. **Nova is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all
+8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all
    16 strategies, long or short, and also from every crypto in `config/lighter-crypto.json` that is liquid on Lighter and
    not in `config/universe.json` (`lighterCryptoExtras`; 1h candles from Lighter only, `loadLighterOnly`). Those symbols
    are not on Today and not tested for the screens. A free bot chooses last and may not copy a chart-and-strategy pair
    another bot of its world already trades.
-8j2. **Leo and Ursa trade every Lighter market that is not crypto** (owner, 2026-11-24): `allLighter: true` adds every
+8j2. **Nico and Lucas trade every Lighter market that is not crypto** (owner, 2026-11-24): `allLighter: true` adds every
    ticker in `config/lighter-other.json` (stocks, ETFs, indices, commodities, currencies, a bond, pre-IPO) that is liquid
    on Lighter and not in the universe, on 1h and 4h charts from Lighter candles (`lighterOtherExtras`, class "stock").
    Lighter has no options on these (only BTC and ETH binary options), so the bots trade perps only.
@@ -505,7 +505,7 @@ click-to-approve step before live orders.
   8-hour rate; fills are at bar opens with a fixed cost, with no order book or spread beyond it.
 - An elimination contest selects the luckiest bots as well as the good ones; `recruitsTried` on the scoreboard says
   how many were tried, and each bot's random twin (8h) says whether it beats chance. Read both before trusting a title.
-- Lighter-only crypto (Nova) has only Lighter's 1h candles (about a year), so only its 1h and 4h charts exist, and its
+- Lighter-only crypto (Catalina) has only Lighter's 1h candles (about a year), so only its 1h and 4h charts exist, and its
   first download is spread over many refreshes. Their prices on screen move with the hourly candles, not every minute.
 - Paper bot fills are idealised (open price plus `costBps`); real fills are worse in fast markets.
 

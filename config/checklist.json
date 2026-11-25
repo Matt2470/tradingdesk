@@ -69,7 +69,7 @@
     "id": "comp-switch",
     "screen": "Paper bots",
     "title": "I can switch between the four bots",
-    "how": "Open Paper bots and press each name. Each bot should show its own strategies (Leo and Nova only buy rules, Ursa and Raven only short rules), its own trades and its badges."
+    "how": "Open Paper bots and press each name. Each bot should show its own strategies (Nico and Catalina only buy rules, Lucas and Valeria only short rules), its own trades and its badges."
   },
   {
     "id": "github-run",
@@ -104,14 +104,14 @@
   {
     "id": "comp-sides2",
     "screen": "Paper bots",
-    "title": "Leo only buys, Ursa and Raven only sell short, Nova chooses",
-    "how": "After a few days, check the closed trades: Leo only 'long', Ursa and Raven only 'short', Nova either."
+    "title": "Nico only buys, Lucas and Valeria only sell short, Catalina chooses",
+    "how": "After a few days, check the closed trades: Nico only 'long', Lucas and Valeria only 'short', Catalina either."
   },
   {
     "id": "nova-crypto",
     "screen": "Paper bots",
-    "title": "Nova can trade crypto beyond the six on Today",
-    "how": "After a day or two (the first Lighter download takes many checks), Nova's 'charts she chose' may include other Lighter crypto (for example HYPE or DOGE), never the same chart and strategy as Raven."
+    "title": "Catalina can trade crypto beyond the six on Today",
+    "how": "After a day or two (the first Lighter download takes many checks), Catalina's 'charts she chose' may include other Lighter crypto (for example HYPE or DOGE), never the same chart and strategy as Valeria."
   },
   {
     "id": "twin",

@@ -43,8 +43,8 @@ export interface Settings {
 
 export interface CompetitionBot { id: string; name: string; view: "market" | "crypto";
   /** "long" bullish, "short" bearish, "both" free to choose. */ side: "long" | "short" | "both"; motto?: string;
-  /** Also trades every liquid crypto on Lighter listed in config/lighter-crypto.json (owner, 2026-11-23, for Nova). */ lighterCrypto?: boolean;
-  /** Also trades every liquid non-crypto perp on Lighter listed in config/lighter-other.json: more stocks, indices, commodities, currencies, pre-IPO (owner, 2026-11-24, for Leo and Ursa). */ allLighter?: boolean }
+  /** Also trades every liquid crypto on Lighter listed in config/lighter-crypto.json (owner, 2026-11-23, for Catalina). */ lighterCrypto?: boolean;
+  /** Also trades every liquid non-crypto perp on Lighter listed in config/lighter-other.json: more stocks, indices, commodities, currencies, pre-IPO (owner, 2026-11-24, for Nico and Lucas). */ allLighter?: boolean }
 export interface Competition {
   startGrant: number; /** Risk per trade for competition bots (% of the account). */ riskPctPerTrade: number;
   /** Days after hiring before the first weekly activity check. */ graceDays: number;
@@ -63,10 +63,10 @@ export interface Competition {
 export const DEFAULT_COMPETITION: Competition = { startGrant: 250, riskPctPerTrade: 2, graceDays: 7, maxStrikes: 3, bankUsd: 1500, tiers: [4, 8, 12], maxCharts: 8, scalpTimeframes: ["1m", "5m"], minTradesPerWeek: 5, fundingPeriodHours: 8, monthlyPrize: 25, hungryExtraCharts: 2,
   recruitNames: ["Atlas", "Bruno", "Cleo", "Dante", "Echo", "Freya", "Gus", "Hana", "Iris", "Juno", "Kai", "Luna", "Milo", "Nina", "Otto", "Pia", "Quinn", "Rosa", "Sol", "Tara", "Uma", "Vito", "Wren", "Yara", "Zeno"],
   bots: [
-  { id: "stocks-bull", name: "Leo", view: "market", side: "long", motto: "Buys strength in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
-  { id: "stocks-bear", name: "Ursa", view: "market", side: "short", motto: "Sells weakness in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
-  { id: "crypto-bull", name: "Nova", view: "crypto", side: "both", motto: "Free to buy or sell short, on any crypto Lighter trades.", lighterCrypto: true },
-  { id: "crypto-bear", name: "Raven", view: "crypto", side: "short", motto: "Sells weakness in crypto." },
+  { id: "stocks-bull", name: "Nico", view: "market", side: "long", motto: "Buys strength in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
+  { id: "stocks-bear", name: "Lucas", view: "market", side: "short", motto: "Sells weakness in stocks, gold and every other Lighter market that is not crypto.", allLighter: true },
+  { id: "crypto-bull", name: "Catalina", view: "crypto", side: "both", motto: "Free to buy or sell short, on any crypto Lighter trades.", lighterCrypto: true },
+  { id: "crypto-bear", name: "Valeria", view: "crypto", side: "short", motto: "Sells weakness in crypto." },
 ] };
 
 /** Hard ceiling on the paper bot's leverage (exposure / account value). Not configurable. */

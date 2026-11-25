@@ -132,7 +132,7 @@ export function loadScalp(symbol: string, tf: "1m" | "5m"): Cached | null {
   const c = readJson<LighterCache | null>(lighterPath(symbol, tf), null); if (!c || c.bars.length < 1000) return null;
   return { ...c, source: `lighter ${tf}`, clock: "utc" };
 }
-/** Non-crypto Lighter perps (config/lighter-other.json) not in the universe, while liquid there: for Leo and Ursa. */
+/** Non-crypto Lighter perps (config/lighter-other.json) not in the universe, while liquid there: for Nico and Lucas. */
 export function lighterOtherExtras(uni: Sym[]): Sym[] {
   const snap = readJson<LighterSnapshot | null>(lighterFile(), null); if (!snap) return [];
   const have = new Set(uni.map(s => s.symbol));

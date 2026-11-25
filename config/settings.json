@@ -122,7 +122,7 @@
     "bots": [
       {
         "id": "stocks-bull",
-        "name": "Leo",
+        "name": "Nico",
         "view": "market",
         "side": "long",
         "motto": "Buys strength in stocks, gold and every other Lighter market that is not crypto.",
@@ -130,7 +130,7 @@
       },
       {
         "id": "stocks-bear",
-        "name": "Ursa",
+        "name": "Lucas",
         "view": "market",
         "side": "short",
         "motto": "Sells weakness in stocks, gold and every other Lighter market that is not crypto.",
@@ -138,7 +138,7 @@
       },
       {
         "id": "crypto-bull",
-        "name": "Nova",
+        "name": "Catalina",
         "view": "crypto",
         "side": "both",
         "motto": "Free to buy or sell short, on any crypto Lighter trades.",
@@ -146,7 +146,7 @@
       },
       {
         "id": "crypto-bear",
-        "name": "Raven",
+        "name": "Valeria",
         "view": "crypto",
         "side": "short",
         "motto": "Sells weakness in crypto."
