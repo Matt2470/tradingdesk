@@ -76,6 +76,46 @@ function progressBar(equity, grant) {
     <div class="track"><span class="startmark" style="left:${(start * 100).toFixed(1)}%"></span><span class="fill ${equity >= grant ? "up" : "down"}" style="left:${(Math.min(start, at) * 100).toFixed(1)}%;width:${(Math.abs(at - start) * 100).toFixed(1)}%"></span><span class="knob" style="left:${(at * 100).toFixed(1)}%"></span></div>
     <div class="ends small"><span>Bust ${money(lo)}</span><span>Badge ${money(hi)}</span></div></div>`;
 }
+/* ---------- game look (owner, 2026-11-26: "a more game like UX") ---------- */
+const ROMAN = ["I", "II", "III", "IV"];
+const face = (id, recruit, opts = {}) => (window.portrait ? window.portrait(id, recruit, opts) : "");
+/** A tier's emblem: a shield with the tier's numeral. */
+const emblem = (level, name) => `<svg class="emblem t${level}" viewBox="0 0 40 46" role="img" aria-label="${esc(name)}"><path d="M20 2 L37 8 L35 28 C33 37 26 42 20 44 C14 42 7 37 5 28 L3 8 Z" fill="var(--em)" stroke="#E9D08A" stroke-width="2"/><text x="20" y="29" text-anchor="middle" font-size="15" fill="#FFF8E6" font-family="Palatino Linotype,Book Antiqua,Georgia,serif" font-weight="700">${ROMAN[level] ?? "I"}</text></svg>`;
+/** Badges in a row toward the next tier, as stars (like a game's era stars). */
+function streakStars(streak, level, tiers) {
+  const goal = tiers[level] ?? tiers.at(-1); const n = Math.max(goal, streak);
+  return `<span class="stars" role="img" aria-label="${streak} of ${goal} badges in a row">${Array.from({ length: n }, (_, i) => `<svg viewBox="0 0 20 20" class="${i < streak ? "on" : ""}"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>`).join("")}</span>`;
+}
+/** The backdrop: a city at dusk whose towers are candlesticks. Drawn once. */
+let SCENE = "";
+function scene() {
+  if (SCENE) return SCENE; let x = 0, k = 0, t = ""; const rnd = i => (Math.sin(i * 12.9898) * 43758.5453) % 1;
+  while (x < 1600) { const w = 14 + Math.abs(rnd(k)) * 18, h = 60 + Math.abs(rnd(k + 7)) * 170, up = rnd(k + 3) > -0.1, wick = 10 + Math.abs(rnd(k + 5)) * 40;
+    t += `<line x1="${x + w / 2}" x2="${x + w / 2}" y1="${520 - h - wick}" y2="520" stroke="${up ? "#2F7D63" : "#8C3B3B"}" stroke-width="2" opacity=".55"/><rect x="${x}" y="${520 - h}" width="${w}" height="${h}" fill="${up ? "#24594A" : "#5E2B2E"}" opacity=".75"/>`;
+    for (let wy = 520 - h + 10; wy < 510; wy += 16) if (rnd(k * 31 + wy) > 0.35) t += `<rect x="${x + 4}" y="${wy}" width="3" height="5" fill="#F3D27A" opacity=".55"/>`;
+    x += w + 6 + Math.abs(rnd(k + 11)) * 16; k++; }
+  SCENE = `<svg class="scene" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1B2A"/><stop offset=".55" stop-color="#23364A"/><stop offset="1" stop-color="#7A5A3A"/></linearGradient></defs>
+    <rect width="1600" height="520" fill="url(#sky)"/><circle cx="1240" cy="140" r="54" fill="#F3D27A" opacity=".85"/><circle cx="1240" cy="140" r="110" fill="#F3D27A" opacity=".08"/>
+    <path d="M0 380 L120 300 L240 350 L380 250 L520 340 L660 270 L820 360 L980 280 L1120 350 L1280 260 L1440 330 L1600 290 L1600 520 L0 520Z" fill="#1A2A38" opacity=".9"/>${t}
+    <rect y="470" width="1600" height="50" fill="#0D1B2A" opacity=".6"/></svg>`;
+  return SCENE;
+}
+/** One participant in the hall: portrait, tier, stars, money, this week's thought and the evil twin. */
+function heroCard(b, c, lead) {
+  const R = c.rules; const label = `${b.name}, ${b.tierName}`;
+  return `<article class="hero click" data-gobot="${esc(b.id)}" tabindex="0" style="--c:${botColor(b.id)}">
+    <div class="frame">${face(b.id, b.recruit, { label })}${emblem(b.tier, b.tierName)}
+      ${b.evil ? `<span class="evilmini" title="Evil twin: ${esc(b.evil.name)} on ${esc(b.evil.sym)}, ${pct(b.evil.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}
+      ${b.stopped ? `<span class="ribbon">Stopped</span>` : lead ? `<span class="ribbon gold">Leads the month</span>` : ""}</div>
+    <h3 class="hname">${esc(b.name)}</h3>
+    <p class="role">${esc(b.tierName)} · ${esc(ROLE(b))}${b.recruit > 1 ? ` · ${ord(b.recruit)} in this seat` : ""}</p>
+    ${streakStars(b.streak, b.tier, R.tiers)}
+    <p class="purse"><span class="px">${money(b.equity, 2)}</span> <span class="small">${b.badges ? `${b.badges} badge${b.badges === 1 ? "" : "s"} · ` : ""}${b.strikes ? `${b.strikes} strike${b.strikes === 1 ? "" : "s"} · ` : ""}${pct(b.totalReturnPct, 1)} since hired</span></p>
+    ${progressBar(b.equity, b.grant)}
+    ${b.thought ? `<blockquote class="thought">${esc(b.thought)}</blockquote>` : ""}
+    ${b.evil ? `<p class="vs small"><span class="evilname">Evil twin</span> ${esc(b.evil.name)} on ${esc(b.evil.sym)}: ${pct(b.evil.resultPct, 1)}</p>` : ""}
+  </article>`;
+}
 const switcher = () => `<p class="switch" role="group" aria-label="Which bot">${[["market", "Stocks and gold"], ["crypto", "Crypto 24/7"]].map(([v, t]) => `<button type="button" data-view="${v}" aria-pressed="${VIEW === v}">${t}</button>`).join("")}</p>`;
 
 /* ---------- charts ---------- */
@@ -299,7 +339,7 @@ const screens = {
     const ret = (b.equity / b.startEquity - 1) * 100; const s = b.trades; const wins = s.filter(t => t.pnl > 0).length; const c = b.checked;
     const idle = !s.length && !b.positions.length && !b.pending.length;
     return `<h1>Paper bots</h1>${botSwitcher()}
-    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div><h2 style="margin:0">${esc(b.name)}</h2><p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
+    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div class="persona-face">${face(b.id, b.recruit, { label: b.name })}</div><div style="flex:1"><h2 style="margin:0">${esc(b.name)}</h2>${comp?.bots?.find(x => x.id === b.id)?.thought ? `<p class="persona-thought">“${esc(comp.bots.find(x => x.id === b.id).thought)}”</p>` : ""}<p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
       ${a ? `<div class="persona-score">${b.tier ? tierTag(b.tier.level, b.tier.name) : ""} ${badgeRow(a.badges)}<p class="small" style="margin:4px 0 0">${b.tier ? esc(streakText(a.streak, b.tier.toNext, b.tier.tiers, b.tier.names, b.tier.level)) : ""} · <a href="#competition">scoreboard</a></p></div>` : ""}</div>
     ${b.weekend ? `<div class="notice"><strong>Weekend pause.</strong> The competition stops from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday; trading starts again on Monday.</div>` : ""}
     ${b.fired ? `<div class="notice"><strong>${esc(b.name)} has stopped trading.</strong> ${esc(b.fired.reason.replace(/^.*?: /, ""))} ${b.fired.replaceAt ? `A recruit takes the seat ${esc(when(b.fired.replaceAt))}, if the accountant has ${money(a?.startGrant ?? 250)} to lend.` : ""}</div>` : ""}
@@ -352,6 +392,38 @@ const screens = {
     <h2>Desk rules</h2><p class="small">Daily loss limit ${R.dailyLossPct}% (everything closed, no trades until the next Madrid day). Drawdown rule: ${R.drawdownPct}% under the desk's best halves the risk per trade until it is back within ${R.recoverPct}%. Correlation cap: no two bots in the same direction on the same market, or on markets whose hourly moves correlate above ${R.maxCorrelation} (last ${R.corrDays} days). Costs per side by open interest on Lighter: ${R.costTiers.map(t => `${t.bps} bps from $${t.minOiUsd >= 1e6 ? num(t.minOiUsd / 1e6, 0) + "M" : num(t.minOiUsd / 1e3, 0) + "k"}`).join(", ")}. An entry is cancelled when the open is more than ${R.maxSlipAtr} ATR from the signal close.</p>
     ${k?.log?.length ? `<details class="detail"><summary>Desk guard log</summary><ul class="small">${k.log.map(l => `<li>${esc(when(l.d + ":00Z"))}: ${esc(l.msg)}</li>`).join("")}</ul></details>` : ""}`;
   },
+  async twins() {
+    await loadBots(); const [t, c] = await Promise.all([api("/api/twins"), api("/api/competition")]);
+    if (!t || !t.bots.length) return `<div class="game"><h1>The twins</h1><p class="empty">The twins appear after the bots' first check.</p></div>`;
+    const cb = id => c?.bots.find(b => b.id === id);
+    const col = (title, sub, img, r, cls = "") => `<div class="tw ${cls}"><div class="tw-face">${img}</div><h4>${title}</h4><p class="small">${sub}</p>
+      ${r ? `<dl class="mini"><div><dt>Result</dt><dd>${pct(r.resultPct, 2)}</dd></div><div><dt>Account</dt><dd>${money(r.equity, 2)}</dd></div><div><dt>Trades</dt><dd>${r.trades}${r.wins != null && r.trades ? ` <span class="small">(${Math.round(r.wins / r.trades * 100)}% won)</span>` : ""}</dd></div><div><dt>Worst drop</dt><dd>${num(r.worstDropPct ?? 0, 1)}%</dd></div><div><dt>Badges</dt><dd>${r.badges ?? 0}</dd></div><div><dt>Stopped</dt><dd>${r.stops ? `<span class="loss">${r.stops}×</span>` : "no"}</dd></div>${r.positionUsd != null ? `<div style="grid-column:1/-1"><dt>Open now</dt><dd>${Math.abs(r.positionUsd) < 0.01 ? "nothing" : `${r.positionUsd > 0 ? "long" : "short"} ${money(Math.abs(r.positionUsd), 0)} <span class="small">(in the account value, not yet in the trades)</span>`}</dd></div>` : ""}</dl>` : `<p class="empty">Not started yet.</p>`}</div>`;
+    const curves = x => { const lines = [["participant", x.name, botColor(x.id), false], ["random", "Random twin", "#9AA5B1", true], ["evil", "Evil twin", "#E5484D", false]].filter(([k]) => x[k]?.curve?.length);
+      const t0 = Date.parse((x.evil?.since ?? x.participant.curve[0]?.d ?? "").slice(0, 16) + ":00Z"); if (!lines.length || !Number.isFinite(t0)) return "";
+      const t1 = Date.now(); const stepMs = Math.max(3600_000, Math.ceil((t1 - t0) / 300 / 3600_000) * 3600_000); const xs = []; for (let u = t0; u <= t1; u += stepMs) xs.push(u);
+      if (xs.length < 2) return "";
+      const ser = lines.map(([k, n, colr, dash]) => { const pts = x[k].curve.map(p => [Date.parse(p.d.slice(0, 16) + (p.d.length === 10 ? "T00:00" : "") + ":00Z"), p.equity]).sort((a, b) => a[0] - b[0]); let j = 0, last = 250;
+        return { name: n, short: `${k === "participant" ? n : k === "random" ? "Random" : "Evil"} ${money(x[k].equity, 0)}`, color: colr, dash, values: xs.map(u => { while (j < pts.length && pts[j][0] <= u) last = pts[j++][1]; return last; }) }; });
+      return `<div class="panel">${lineChart(ser, xs.map(u => new Date(u).toISOString().slice(0, 16)), v => money(v, 0), { ref: { value: 250, label: "the 250 grant" }, minSpan: 20 })}<p class="small" style="margin:6px 0 0">Account value of all three since ${esc(x.name)} was hired. A badge at 500 sends an account back to 250; at 125 it would be stopped.</p></div>`; };
+    const duel = x => { const b = cb(x.id); const e = x.evil; const rec = x.recruit ?? 1;
+      const better = e ? x.participant.resultPct - e.resultPct : 0;
+      return `<section class="twinduel">
+      <header><h2>${esc(x.name)} <span class="small">against the twins</span></h2>${e ? `<p class="verdict ${better > 0.5 ? "gain" : better < -0.5 ? "loss" : ""}">${better > 0.5 ? `${esc(x.name)} leads the evil twin by ${num(better, 1)} points` : better < -0.5 ? `The evil twin leads ${esc(x.name)} by ${num(-better, 1)} points` : "Level with the evil twin"}</p>` : ""}</header>
+      <div class="tw-row">
+        ${col(esc(x.name), esc(b ? `${b.tierName} · ${ROLE(b)}` : ""), face(x.id, rec, { label: x.name }), x.participant, "me")}
+        ${col("Random twin", "Same charts and rules, enters at random", `<div class="ghost">${face(x.id, rec, { label: "random twin" })}<span class="dice" aria-hidden="true">⚄</span></div>`, x.random ? { ...x.random, badges: 0, stops: 0 } : null)}
+        ${col(e ? `Evil twin: ${esc(e.name)}` : "Evil twin", e ? `Pionex-style bot on ${esc(e.sym)}` : "", face(x.id, rec, { evil: true, label: "evil twin" }), e, "evil")}
+      </div>
+      ${e ? `<div class="speech"><p><strong>${esc(x.name)}:</strong> ${esc(b?.thought ?? "")}</p><p class="evilsay"><strong>Evil twin:</strong> ${esc(b?.evil?.taunt ?? "")}</p></div>
+      <p class="small">${esc(e.plain)} Same 250 grant, at most 3x, badge at 500, stop line at 125, weekend pause, funding and Lighter costs. Replayed on hourly bars since ${esc(bar(e.since))}.</p>` : ""}
+      ${curves(x)}
+      ${e?.notes?.length ? `<details class="detail"><summary>The evil twin's diary</summary><ul class="small">${e.notes.slice(0, 15).map(n => `<li>${esc(bar(n.d))}: ${esc(n.msg)}</li>`).join("")}</ul></details>` : ""}
+    </section>`; };
+    return `<div class="game"><section class="hall short">${scene()}<div class="hall-in"><div class="season"><p class="era">Our traders against the ready-made bots</p><h1>The Twins</h1>
+      <p class="goal-line">Each participant has two shadows: a <strong>random twin</strong> that trades the same charts with random entries (is it skill or luck?), and an <strong>evil twin</strong>, a copy of a popular Pionex bot with the same money and rules (is it better than a bot anyone can switch on?).</p></div></div></section>
+      ${t.bots.map(duel).join("")}
+      <p class="small">The evil twins are paper only and never send an order. Pionex's own bots may use other settings; these use common ones: 20 grid lines over the last 14 days, 2% bounce and 3% trail, 2% martingale steps with 1.5× sizes and 1.5% take-profit.</p></div>`;
+  },
   async competition() {
     await loadBots(); const c = await api("/api/competition"); CHECKING = c?.checkingSince ?? null;
     if (!c) return `<h1>Competition</h1><p class="empty">The scoreboard appears after the bots' first check.</p>`;
@@ -371,11 +443,16 @@ const screens = {
     const series = c.bots.filter(b => Object.keys(b.daily ?? {}).length).map(b => { let last = 100; return { name: b.name, short: `${b.name} ${num(b.index, 1)}`, color: botColor(b.id), values: days.map(d => (last = b.daily[d] ?? last)) }; });
     const past = c.months.filter(m => m.finished);
     const feed = c.bots.flatMap(b => (b.events ?? []).map(ev => ({ ...ev, id: b.id }))).sort((x, y) => (x.d < y.d ? 1 : -1)).slice(0, 20);
-    return `<div class="head"><div><h1>Competition</h1><p class="sub">Four paper bots compete for the title of Experienced trader. Each trades a ${money(c.startGrant)} loan from the accountant. Twice the grant earns a badge and locks the profit away; ${R.tiers[0]}, ${R.tiers[1]} and ${R.tiers[2]} badges in a row make a ${esc(R.tierNames[1])}, a ${esc(R.tierNames[2])} and an ${esc(R.tierNames[3])}. Half the grant costs the award a refill, or the bot its seat.</p></div></div>
+    const found = c.experienced; const leadId = lead && (lead.trades || lead.badges) ? lead.id : null;
+    return `<div class="game"><section class="hall">${scene()}<div class="hall-in">
+      <div class="season"><p class="era">The season of ${esc(monthName(c.month))}</p><h1>The Hall of Traders</h1>
+        <p class="goal-line">Experienced traders found <span class="stars big" role="img" aria-label="${found} of 4">${[0, 1, 2, 3].map(i => `<svg viewBox="0 0 20 20" class="${i < found ? "on" : ""}"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>`).join("")}</span> ${found} of 4 · recruits tried ${c.recruitsTried}${c.weekend ? " · weekend pause until Monday 00:00" : ""}</p></div>
+      <div class="heroes">${c.bots.map(b => heroCard(b, c, b.id === leadId)).join("")}</div>
+      <p class="hall-note">Click a trader to see their trades. <a href="#twins">Meet the evil twins</a></p></div></section>
+    <div class="head"><div><h2 style="margin-top:26px">How the game works</h2><p class="sub">Four paper bots compete for the title of Experienced trader. Each trades a ${money(c.startGrant)} loan from the accountant. Twice the grant earns a badge and locks the profit away; ${R.tiers[0]}, ${R.tiers[1]} and ${R.tiers[2]} badges in a row make a ${esc(R.tierNames[1])}, a ${esc(R.tierNames[2])} and an ${esc(R.tierNames[3])}. Half the grant costs the award a refill, or the bot its seat.</p></div></div>
     ${c.weekend ? `<div class="notice"><strong>Weekend pause.</strong> No trading from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday.</div>` : ""}
     <div class="panel goal"><strong>Experienced traders found: ${c.experienced} of 4.</strong> <span class="small">Recruits tried so far: ${c.recruitsTried}. The more recruits it takes, the more likely the winners are lucky rather than good: count this before trusting a title.</span></div>
     ${checksPanel(c)}
-    <div class="botgrid">${cards}</div>
     ${duelsPanel(c, name)}
     <h2>${esc(monthName(c.month))} so far</h2>${cur ? table(cur.standings) : ""}
     <p class="small">The month goes to the most badges, ties to the best trading result. Trading result counts only what the bot made or lost by trading, never the accountant's money.</p>
@@ -387,7 +464,7 @@ const screens = {
     ${c.books ? `<h2>The accountant's books</h2><dl class="stats">${stat("Started with", money(c.books.start, 2))}${stat("Lent", money(c.books.lent, 2))}${stat("Paid back", money(c.books.repaid, 2))}${c.books.returned ? stat("Handed back by replaced bots", money(c.books.returned, 2)) : ""}${stat("Prizes paid", money(c.books.prizes, 2))}${stat("Available to lend", `<span class="${c.books.available >= c.startGrant ? "gain" : "loss"}">${money(c.books.available, 2)}</span>`)}${stat("Most it can still lose", money(c.books.atRisk ?? 0, 2))}${stat("Accountant's profit", pct0money(c.books.profit ?? 0))}${stat("Still owed", money(c.books.owed, 2))}${stat("Lost on stopped bots", money(c.books.lost, 2))}${stat("Funding paid by bots", money(c.books.funding ?? 0, 2))}${stat("Loans check", Math.abs(c.books.difference) < 0.05 ? `<span class="gain">balanced</span>` : `<span class="loss">off by ${money(c.books.difference, 2)}</span>`)}</dl><p class="small">The accountant is not an infinite bank: it started with ${money(c.books.start)}. Every bot ever hired borrowed ${money(c.startGrant)} from it; repayments and money recovered from stopped bots come back. A recruit is hired only if the money is there, and a prize is paid only out of the accountant's profit. A bot repays its whole loan out of its first badge, so from then on it trades its own money and the accountant cannot lose on it; until then, the most it can lose on a bot is half the grant. Lent = paid back + lost + still owed. Loans have no interest.</p>` : ""}
     <h2>Locker room</h2>${c.locker?.length ? `<ul class="locker">${c.locker.map(m => `<li><span class="when small">${esc(bar(m.d))}</span> ${name(m.id)} <q>${esc(m.text)}</q></li>`).join("")}</ul>` : `<p class="empty">Quiet so far. The bots talk when something happens: a badge, a save, a big trade, a duel.</p>`}
     <h2>The accountant's book</h2>${feed.length ? `<table class="compact"><tbody>${feed.map(ev => `<tr><td style="white-space:nowrap">${esc(bar(ev.d))}</td><td>${name(ev.id)}</td><td>${kindTag(ev.kind)}</td><td>${esc(ev.msg)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nothing yet. The first bot to reach ${money(c.startGrant * 2)} gets the first badge.</p>`}
-    <p class="small">Pretend money only. ${num(c.riskPct, 1)}% of the account at risk per trade; exposure stays under the leverage limit. Loans have no interest; ${R.maxStrikes ?? 3} quiet weeks in a row (fewer than ${R.minTradesPerWeek ?? 5} closed trades) and a bot is replaced. Real money waits until a bot has proven itself.</p>`;
+    <p class="small">Pretend money only. ${num(c.riskPct, 1)}% of the account at risk per trade; exposure stays under the leverage limit. Loans have no interest; ${R.maxStrikes ?? 3} quiet weeks in a row (fewer than ${R.minTradesPerWeek ?? 5} closed trades) and a bot is replaced. Real money waits until a bot has proven itself.</p></div>`;
   },
   async strategies(arg) {
     const [want, wantTf] = (arg ?? "").split("/").map(decodeURIComponent);
@@ -496,4 +573,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);

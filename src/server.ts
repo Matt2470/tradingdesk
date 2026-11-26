@@ -1,7 +1,7 @@
 // Local dashboard server. Listens on 127.0.0.1 only: nothing here is reachable from the network.
 import { join, normalize } from "node:path";
 import { ROOT, P, settings, readJson, universe } from "./config";
-import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince, OFFICE } from "./pipeline";
+import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince, OFFICE, TWINS } from "./pipeline";
 import { answer } from "./bot/office";
 import { STRATEGIES } from "./core/strategies";
 import { readFeedback, saveFeedback } from "./feedback";
@@ -33,6 +33,7 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   "/api/competition": () => { const c = readJson<Record<string, unknown> | null>(COMPETITION(), null); return c && { ...c, checkingSince: checkingSince() }; },
   // The Accountant screen, and the owner's yes or no on a decision waiting there.
   "/api/office": () => readJson(OFFICE(), null),
+  "/api/twins": () => readJson(TWINS(), null),
   "/api/approve": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { id?: string; yes?: boolean } | null;
     if (!b || typeof b.id !== "string" || typeof b.yes !== "boolean") return { error: "send {id, yes}" }; const a = answer(b.id, b.yes); return a ? { ok: true, approval: a } : { error: "no such decision" }; },
   "/api/resume": (u, req) => (req.method === "POST" ? { resumed: resumeBot(botById(u.searchParams.get("bot")).id) } : { error: "use POST" }),

@@ -85,12 +85,15 @@ see "Stop and ask".
 | `src/bot/bot.ts` | Paper bot state machine (`step`), markets keyed `SYMBOL@tf`, state migration. | core, prices (`barEndMs`), config types, accountant |
 | `src/bot/accountant.ts` | The competition's accountant: grants, badges, busts, the performance index, monthly standings. Pure. | nothing |
 | `src/bot/desk.ts` | The desk guard: daily loss limit, drawdown rule, correlation cap, cost tiers by Lighter open interest. Pure. | accountant |
+| `src/bot/evil.ts` | The evil twins: Pionex-style bots (neutral grid, short grid, trailing buy/sell, martingale short) replayed on hourly bars with the participants' rules. Pure. | strategies (types) |
+| `src/bot/voice.ts` | The participants' characters, their thought about the week and the evil twins' taunts. Flavour only. Pure. | nothing |
 | `src/bot/office.ts` | The accountant's office: the owner's yes/no decisions (`data/bot/approvals.json`, answers in `data/owner-answers.json`), the bots' weekly reports and the accountant's daily and weekly reports. | config, accountant |
 | `src/journal/csv.ts`, `src/journal/lighter.ts`, `src/journal/tradingview.ts`, `src/journal/stats.ts` | Read the owner's exports, build round trips, summaries and rule checks. Not shown on any screen since 2026-11-15. | config |
 | `src/brief.ts` | Reads and validates the old morning brief file. Unused since 2026-11-22. | config |
 | `src/pipeline.ts` | `refresh()` when a 15-minute bar closes, `tick()` every minute, `writeBoard()` for Today. | everything above |
 | `src/server.ts` | HTTP server: JSON routes, static files in `web/`, and the minute loop. | pipeline, feedback |
 | `web/index.html`, `web/app.js`, `web/app.css` | The dashboard. Plain JS, no libraries, works offline. | the API only |
+| `web/portraits.js` | The participants' portraits, original characters drawn as SVG in code (recruit variations, evil-twin versions). | nothing |
 | `scripts/engine.ts` | Headless run for GitHub Actions: one tick and one refresh, then copies the bots' public files for the bot-data branch. | pipeline |
 | `.github/workflows/bots.yml` | The GitHub workflow: every 15 minutes, restore state and prices, `bun run engine`, publish to `bot-data`. | — |
 | `scripts/doctor.ts`, `scripts/smoke.ts`, `scripts/check-claude-md.ts`, `scripts/make-fixtures.ts`, `scripts/research.ts`, `scripts/compare-exits.ts` | Checks, synthetic test data, and research scripts that only print. | src |
@@ -106,7 +109,7 @@ only as the `now` argument in `src/pipeline.ts` and `splitComplete` in `src/data
 Data folders (created at run time, never edited by hand except `imports`):
 `data/cache/bars` price cache (`SYMBOL.json` daily, `SYMBOL.15m.json`, `SYMBOL.30m.json`, `SYMBOL.1h.json`),
 `data/derived` what the dashboard reads (`board.json`, `today*.json`, `indicators*.json`, `bot-<id>.json`,
-`competition.json`, `office.json`, `live.json`, `status.json`, `shortlist-<id>.json`, `lighter.json`, `remote.json`, `evals/<view>/SYMBOL@tf.json`),
+`competition.json`, `office.json`, `twins.json`, `live.json`, `status.json`, `shortlist-<id>.json`, `lighter.json`, `remote.json`, `evals/<view>/SYMBOL@tf.json`),
 `data/bot/desk.json` the desk guard, `data/bot/approvals.json` decisions asked of the owner (both shared through bot-data),
 `data/owner-answers.json` the owner's answers (this PC only, never published), `data/bot/state-<id>.json` the competition bots' ledgers (ids in `settings.competition.bots`); `data/bot/state.json`,
 `state-crypto.json` and `data/derived/bot.json`, `bot-crypto.json`, `shortlist.json`, `shortlist-crypto.json` belong to the two retired
@@ -114,7 +117,7 @@ bots (kept, never stepped, never deleted), `data/briefs/YYYY-MM-DD.json` morning
 `data/feedback.json` the owner's test answers, `data/imports` the owner's CSV exports.
 
 API routes: `/api/ping`, `/api/board`, `/api/today`, `/api/eval`, `/api/indicators`, `/api/strategies`,
-`/api/bot`, `/api/bots`, `/api/competition`, `/api/office`, `/api/approve` (POST `{id, yes}`), `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
+`/api/bot`, `/api/bots`, `/api/competition`, `/api/office`, `/api/twins`, `/api/approve` (POST `{id, yes}`), `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
 `/api/today`, `/api/eval` and `/api/indicators` take `?view=market` (default) or `?view=crypto`; `/api/eval` also takes `key=SYMBOL@tf`.
 `/api/bot` and `/api/resume` take `?bot=<id>` (`/api/bot?view=crypto` gives that world's first bot).
 
@@ -311,6 +314,16 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    `data/owner-answers.json` on the PC and are merged into `data/bot/approvals.json` at every check, so a pull from bot-data
    never loses one. The bots' weekly reports, the accountant's answers and its daily and weekly reports to the owner are
    made from the ledgers (`src/bot/office.ts`); they never change how a bot trades.
+8n. **The evil twins** (owner, 2026-11-26, `src/bot/evil.ts`). Each seat faces a Pionex-style bot (`EVIL_FOR`): Nico a
+   neutral futures grid, Lucas a short grid (Pionex's reverse grid on futures), Catalina trailing buy/sell, Valeria a
+   martingale (DCA) short. Same 250 grant, at most 3x, badge at 500 (back to 250), stop line at 125 (counted, then a fresh
+   250 so the comparison goes on), weekend pause, hourly funding, Lighter costs. The market is the one the participant
+   traded most when the twin was first set (kept in `state.evil`; a recruit gets a new one). Replayed from the hire on
+   hourly bars at every refresh, so the PC and GitHub agree and watching works too. Paper only, never an order; it never
+   changes how a participant trades. TWAP was left out on purpose: it is a way to fill big orders, not a strategy.
+8o. **The game look** (owner, 2026-11-26: "we will change it later"). Competition and Twins use a dark strategy-game style
+   (`.game` in `web/app.css`), original code-drawn portraits (`web/portraits.js`) and each participant's thought about the
+   week (`src/bot/voice.ts`, made only from its own numbers, fixed for the week). No game's art, names or logos are copied.
 8j1. **Nico is free too** (owner, 2026-11-25: "as we are in a bearish trend"): his seat (`stocks-bull`) has `side: "both"`,
    so he picks from all 30 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
 8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all

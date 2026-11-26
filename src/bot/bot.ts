@@ -43,6 +43,7 @@ export interface BotState {
   /** The random twin: same charts, side, sizing, exits and weekends as its bot, but it enters at random as often as the
    *  bot's strategy did. If the bot cannot beat it, its results are luck. Reset when the bot is replaced. */
   twin?: BotState;
+  /** The evil twin it faces (src/bot/evil.ts): a Pionex-style bot replayed on one market from the hire. */ evil?: import("./evil").EvilSpec;
 }
 export interface MarketView { cls: AssetClass; group?: string; tf?: Timeframe; complete: Bar[]; partial: Bar | null; /** "utc": around-the-clock bars (Lighter): daily bars close at midnight UTC. */ clock?: "utc" }
 export interface BotOpts { costBps?: number | ((key: string) => number); now?: number;

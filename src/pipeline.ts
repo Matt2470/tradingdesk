@@ -16,16 +16,18 @@ import { refreshPrices, loadCached, splitComplete, tickPrices, loadLive, TIMEFRA
 import { evalSymbol, rankToday, aggregate, slim, type SymbolEval, type SlimRow } from "./core/rank";
 import { step, newState, equityOf, exposureOf, resume, migrate, underlying, tfOf, type BotState, type MarketView } from "./bot/bot";
 import { pickShortlist, type Shortlist } from "./core/select";
-import { STRATEGIES } from "./core/strategies";
+import { STRATEGIES, type Bar } from "./core/strategies";
 import { barsPerYear } from "./core/rank";
 import { DEFAULT_EXITS } from "./core/exits";
 import { refreshLighter } from "./data/lighter";
-import { lighterIds, lighterCryptoExtras, lighterOtherExtras, loadLighterOnly, barEndMs, lighterScalpable, loadScalp } from "./data/prices";
+import { lighterIds, lighterCryptoExtras, lighterOtherExtras, loadLighterOnly, barEndMs, lighterScalpable, loadScalp, normKey } from "./data/prices";
 import { twinStrategy, twinId, unitHash } from "./bot/bot";
 import { syncPull, syncPush } from "./data/sync";
 import { newDesk, deskCheck, correlation, correlationBlock, tierBps, type DeskState } from "./bot/desk";
-import { readApprovals, mergeAnswers, ask, weeklyReports, dailyReports, APPROVALS, type Approval, type ReportBot } from "./bot/office";
+import { readApprovals, mergeAnswers, ask, weeklyReports, dailyReports, mondayOf, APPROVALS, type Approval, type ReportBot } from "./bot/office";
 import { lighterFile, type LighterSnapshot } from "./data/lighter";
+import { runEvil, evilMarket, EVIL_FOR, type EvilSpec, type EvilResult } from "./bot/evil";
+import { thoughtOf, tauntOf, CHARACTER, CHARACTER_TEXT } from "./bot/voice";
 
 export type View = "market" | "crypto";
 export const viewOf = (v: string | null): View => (v === "crypto" ? "crypto" : "market");
@@ -78,6 +80,7 @@ const botCost = (st: Settings, s: Sym, tf: Timeframe) => tierBps(OI[s.symbol], s
 /** The desk guard's state (src/bot/desk.ts), shared through bot-data. */
 export const DESK = () => join(P.bot, "desk.json");
 export const OFFICE = () => join(P.derived, "office.json");
+export const TWINS = () => join(P.derived, "twins.json");
 
 // Evaluations are re-run only when a new bar has closed (or the settings changed): the full set takes seconds.
 const cache = new Map<string, { sig: string; summary: SymbolEval }>();
@@ -298,9 +301,18 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   const allSyms = Object.fromEntries([...uni, ...lighterCryptoExtras(uni), ...lighterOtherExtras(uni)].map(x => [x.symbol, x]));
   const holdings = new Map<string, { name: string; sym: string; side: "long" | "short" }[]>(competitors(st).map(b => { const s = readJson<BotState | null>(botFiles(b.id).state, null);
     return [b.id, s && !s.fired ? Object.entries(s.positions).map(([k, p]) => ({ name: s.persona?.name ?? b.name, sym: underlying(k), side: p.side })) : []]; }));
+  const hours = new Map<string, Bar[]>();
+  const hourBars = (sym: string): Bar[] => { let b = hours.get(sym); if (b) return b; const x = allSyms[sym]; const c = x ? (x.lighterOnly ? loadLighterOnly(sym, "1h") : loadCached(sym, "1h", x.class) ?? loadLighterOnly(sym, "1h")) : null;
+    b = (c?.bars ?? []).map(bar => ({ ...bar, d: normKey(bar.d) })); hours.set(sym, b); return b; };
   const closes = new Map<string, Map<string, number>>();
-  const closesOf = (sym: string) => { let m = closes.get(sym); if (m) return m; const x = allSyms[sym]; const c = x ? (x.lighterOnly ? loadLighterOnly(sym, "1h") : loadCached(sym, "1h", x.class) ?? loadLighterOnly(sym, "1h")) : null;
-    m = new Map((c?.bars ?? []).slice(-st.competition.desk.corrDays * 24).map(bar => [bar.d, bar.c] as [string, number])); closes.set(sym, m); return m; };
+  const closesOf = (sym: string) => { let m = closes.get(sym); if (m) return m; m = new Map(hourBars(sym).slice(-st.competition.desk.corrDays * 24).map(bar => [bar.d, bar.c] as [string, number])); closes.set(sym, m); return m; };
+  // The evil twin's market and start (fixed once chosen; a recruit gets a new one).
+  const evilSpec = (b: CompetitionBot, s: BotState): EvilSpec | null => {
+    const kind = EVIL_FOR[b.id]; if (!kind || !s.accountant) return null; const recruit = s.persona?.recruit ?? 1;
+    if (s.evil && s.evil.recruit === recruit && s.evil.kind === kind) return s.evil;
+    let sym = evilMarket(s.trades, (s.playbook ?? []).map(p => p.key), b.view === "crypto" ? "BTC" : "NVDA"); if (hourBars(sym).length < 48) sym = b.view === "crypto" ? "BTC" : "NVDA";
+    return { kind, sym, since: s.accountant.hiredAt.slice(0, 16), recruit };
+  };
   const corrs = new Map<string, number | null>();
   const corrOf = (a: string, b: string) => { const k = a < b ? `${a}|${b}` : `${b}|${a}`; if (!corrs.has(k)) corrs.set(k, correlation(closesOf(a), closesOf(b))); return corrs.get(k)!; };
   // Lighter funding, charged every hour on open positions (rate read as per fundingPeriodHours).
@@ -392,6 +404,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       for (const p of state.playbook ?? []) taken.add(`${p.key}|${p.id}`);
       holdings.set(b.id, state.fired ? [] : Object.entries(state.positions).map(([k, p]) => ({ name: state.persona?.name ?? b.name, sym: underlying(k), side: p.side })));
       if (state.checked) state.checked.by = process.env.TD_ENGINE === "1" ? "GitHub" : "PC";
+      const es = evilSpec(b, state); if (es) state.evil = es;
       writeJson(botFiles(b.id).state, state);
     }
     const px = (k: string) => live.prices[underlying(k)]?.price ?? fullMarket[k]?.partial?.c ?? fullMarket[k]?.complete.at(-1)?.c;
@@ -401,6 +414,19 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     for (const { b, state, shortlist } of bots) writeJson(botFiles(b.id).view, botView(b, state, st, px, at, shortlist, hours));
   }
   if (approvalsChanged && trading) writeJson(APPROVALS(), approvals);
+  // The Twins screen: every participant against its random twin and its evil twin (replayed, so watching works too).
+  writeJson(TWINS(), { at: new Date(now).toISOString(), bots: competitors(st).map(b => {
+    const s = readJson<BotState | null>(botFiles(b.id).state, null); const v = readJson<any>(botFiles(b.id).view, null); if (!s || !v) return null;
+    const spec = evilSpec(b, s); let evil: EvilResult | null = null;
+    if (spec) { const sy = allSyms[spec.sym]; evil = runEvil(hourBars(spec.sym), spec, { grant: st.competition.startGrant, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
+      fundingPerHour: () => (fundingRates[spec.sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1) }); }
+    const drop = (c: { equity: number }[]) => { let pk = -Infinity, w = 0; for (const p of c) { pk = Math.max(pk, p.equity); if (pk > 0) w = Math.min(w, (p.equity / pk - 1) * 100); } return +w.toFixed(2); };
+    const tw = s.twin; const twCurve = (tw?.equityCurve ?? []).slice(-600);
+    return { id: b.id, name: v.name, recruit: v.recruit, side: b.side, view: b.view, fired: v.fired ?? null,
+      participant: { equity: +v.equity.toFixed(2), resultPct: +v.resultPct.toFixed(2), trades: new Set(s.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: wholeTrades(v.trades).filter((t: { pnl: number }) => t.pnl > 0).length, badges: s.accountant?.badges ?? 0, stops: s.fired ? 1 : 0, worstDropPct: drop(v.equityCurve ?? []), curve: (v.equityCurve ?? []).slice(-600) },
+      random: tw ? { equity: +v.twin.equity.toFixed(2), resultPct: +v.twin.indexPct.toFixed(2), trades: v.twin.trades, wins: wholeTrades(tw.trades).filter(t => t.pnl > 0).length, worstDropPct: drop(twCurve), curve: twCurve } : null,
+      evil };
+  }).filter(Boolean) });
   const res: RefreshResult = { at: new Date().toISOString(), tookMs: Date.now() - t0, fetch: fetchStatus, symbolsWithData: new Set(fetchStatus.filter(f => f.bars).map(f => f.symbol)).size, retested, ...(remote ? { remote: { ok: remote.ok, failed: remote.failed.length, at: remote.at } } : {}) };
   writeJson(STATUS(), res);
   writeCompetition(now);
@@ -549,11 +575,26 @@ export function writeCompetition(now = Date.now()) {
   const ladder = [...bots].sort((a, b) => b.tier - a.tier || b.streak - a.streak || b.badges - a.badges || b.index - a.index).map((b, i) => ({ id: b.id, rank: i + 1 }));
   const duels = duelsOf(bots, now);
   const locker = lockerRoom(bots, duels, roster);
+  // Each participant's thought about this week, and its evil twin's taunt (flavour, src/bot/voice.ts).
+  const twins = readJson<{ bots: { id: string; evil: EvilResult | null }[] } | null>(TWINS(), null);
+  const weeks = bots.map(b => weeklyReports(b.report, now, st.competition.minTradesPerWeek, 1)[0]);
+  const order = bots.map((b, i) => ({ b, w: weeks[i] })).filter(x => !x.b.stopped).sort((x, y) => (y.w?.returnPct ?? 0) - (x.w?.returnPct ?? 0));
+  const mon = mondayOf(now);
+  const voices = Object.fromEntries(bots.map((b, i) => {
+    const w = weeks[i]; const ev = twins?.bots.find(x => x.id === b.id)?.evil ?? null;
+    const wk = b.report.trades.filter(t => madridDay(t.exitDate.length === 10 ? t.exitDate + "T12:00" : t.exitDate.slice(0, 16)) >= mon).sort((x, y) => y.pnl - x.pnl);
+    const thought = thoughtOf({ id: b.id, name: b.name, week: mon, trades: w?.trades ?? 0, wins: w?.wins ?? 0, pnl: w?.pnl ?? 0, returnPct: w?.returnPct ?? 0,
+      rank: order.findIndex(x => x.b.id === b.id) + 1, of: order.length, leader: order[0]?.b.name, equity: b.equity, grant: b.grant, minTrades: st.competition.minTradesPerWeek, badges: b.badges, streak: b.streak,
+      best: wk[0] ? { sym: underlying(wk[0].key), pnl: wk[0].pnl } : null, worst: wk.at(-1) ? { sym: underlying(wk.at(-1)!.key), pnl: wk.at(-1)!.pnl } : null,
+      evil: ev ? { name: ev.name, resultPct: ev.resultPct, kind: ev.kind } : null, resultPct: b.totalReturnPct, stopped: !!b.stopped, weekend: inWeekendPause(now) });
+    return [b.id, { thought, character: CHARACTER[b.id] ?? "bold", characterText: CHARACTER_TEXT[CHARACTER[b.id] ?? "bold"],
+      evil: ev ? { name: ev.name, kind: ev.kind, sym: ev.sym, resultPct: ev.resultPct, taunt: tauntOf(ev, { name: b.name, resultPct: b.totalReturnPct }, `${b.id}|${mon}`) } : null }];
+  }));
   const runs = readJson<{ at: string; by: string; tookMs: number; failed: number }[]>(RUNS(), []);
   const day = runs.filter(r => now - Date.parse(r.at) < 864e5); const remoteNote = readJson<Record<string, unknown> | null>(join(P.derived, "remote.json"), null);
   const checks = { last: runs.slice(-12).reverse(), last24h: Object.fromEntries([...new Set(day.map(r => r.by))].map(b => [b, day.filter(r => r.by === b).length])), shared: !!st.remote?.repo, sync: remoteNote };
   writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, checks, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
-    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => b), months, ladder,
+    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => ({ ...b, ...voices[b.id] })), months, ladder,
     // The accountant's own books: loans (lent = repaid + lost + still owed) and the bank (start - lent + repaid - prizes = available).
     books: (() => { const k = bankOf(st); return { ...k, funding: +bots.reduce((t, b) => t + b.fundingPaid, 0).toFixed(2),
       difference: +(k.lent - k.repaid - k.lost - k.owed).toFixed(2) }; })(),
