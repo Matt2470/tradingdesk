@@ -86,6 +86,7 @@ see "Stop and ask".
 | `src/bot/accountant.ts` | The competition's accountant: grants, badges, busts, the performance index, monthly standings. Pure. | nothing |
 | `src/bot/desk.ts` | The desk guard: daily loss limit, drawdown rule, correlation cap, cost tiers by Lighter open interest. Pure. | accountant |
 | `src/bot/evil.ts` | The evil twins: Pionex-style bots (neutral grid, short grid, trailing buy/sell, martingale short) replayed on hourly bars with the participants' rules. Pure. | strategies (types) |
+| `src/bot/fame.ts` | Era stars (7 medallions x 3 stars per tier-era), fame and the desk's competitive deeds. A game layer counted from the ledgers. Pure. | nothing |
 | `src/bot/voice.ts` | The participants' characters, their thought about the week and the evil twins' taunts. Flavour only. Pure. | nothing |
 | `src/bot/office.ts` | The accountant's office: the owner's yes/no decisions (`data/bot/approvals.json`, answers in `data/owner-answers.json`), the bots' weekly reports and the accountant's daily and weekly reports. | config, accountant |
 | `src/journal/csv.ts`, `src/journal/lighter.ts`, `src/journal/tradingview.ts`, `src/journal/stats.ts` | Read the owner's exports, build round trips, summaries and rule checks. Not shown on any screen since 2026-11-15. | config |
@@ -93,7 +94,7 @@ see "Stop and ask".
 | `src/pipeline.ts` | `refresh()` when a 15-minute bar closes, `tick()` every minute, `writeBoard()` for Today. | everything above |
 | `src/server.ts` | HTTP server: JSON routes, static files in `web/`, and the minute loop. | pipeline, feedback |
 | `web/index.html`, `web/app.js`, `web/app.css` | The dashboard. Plain JS, no libraries, works offline. | the API only |
-| `web/portraits.js` | The participants' portraits, original characters drawn as SVG in code (recruit variations, evil-twin versions). | nothing |
+| `web/portraits.js` | The participants' portraits, original characters painted as SVG in code (recruit variations, evil-twin versions); a picture the owner puts in `web/portraits/` (named `stocks-bull.jpg`, `crypto-bear-evil.png`, `stocks-bull-2.webp`, ...) replaces the drawing. | nothing |
 | `scripts/engine.ts` | Headless run for GitHub Actions: one tick and one refresh, then copies the bots' public files for the bot-data branch. | pipeline |
 | `.github/workflows/bots.yml` | The GitHub workflow: every 15 minutes, restore state and prices, `bun run engine`, publish to `bot-data`. | — |
 | `scripts/doctor.ts`, `scripts/smoke.ts`, `scripts/check-claude-md.ts`, `scripts/make-fixtures.ts`, `scripts/research.ts`, `scripts/compare-exits.ts` | Checks, synthetic test data, and research scripts that only print. | src |
@@ -117,7 +118,7 @@ bots (kept, never stepped, never deleted), `data/briefs/YYYY-MM-DD.json` morning
 `data/feedback.json` the owner's test answers, `data/imports` the owner's CSV exports.
 
 API routes: `/api/ping`, `/api/board`, `/api/today`, `/api/eval`, `/api/indicators`, `/api/strategies`,
-`/api/bot`, `/api/bots`, `/api/competition`, `/api/office`, `/api/twins`, `/api/approve` (POST `{id, yes}`), `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
+`/api/bot`, `/api/bots`, `/api/competition`, `/api/office`, `/api/twins`, `/api/portraits`, `/api/hire` (POST `{key, yes}`), `/api/approve` (POST `{id, yes}`), `/api/lighter`, `/api/resume` (POST), `/api/feedback` (GET and POST), `/api/status`, `/api/refresh` (POST).
 `/api/today`, `/api/eval` and `/api/indicators` take `?view=market` (default) or `?view=crypto`; `/api/eval` also takes `key=SYMBOL@tf`.
 `/api/bot` and `/api/resume` take `?bot=<id>` (`/api/bot?view=crypto` gives that world's first bot).
 
@@ -324,6 +325,21 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
 8o. **The game look** (owner, 2026-11-26: "we will change it later"). Competition and Twins use a dark strategy-game style
    (`.game` in `web/app.css`), original code-drawn portraits (`web/portraits.js`) and each participant's thought about the
    week (`src/bot/voice.ts`, made only from its own numbers, fixed for the week). No game's art, names or logos are copied.
+8p. **Hiring an evil twin** (owner, 2026-11-26: "they should have their own accounts too so I can hire them"; answer: an
+   extra player). "Hire the evil twin" on the Twins screen stores the owner's order with the other answers
+   (`data/owner-answers.json`, key `hire-evil-<seat>-<recruit>`, PC only). At the next trading check, if the bank has a
+   grant to lend, the twin joins `roster.evil` and `competitors()` (participants first, then hires): its own 250 USD loan,
+   replayed from its hire on hourly bars with the real accountant running its books (badge locks the profit and repays
+   the loan, the award refills it at the stop line or it is fired, weekly strikes), its own state and view files, the
+   bank, the desk guard, the scoreboard and the Accountant screen. It is a guest: no monthly prize, never "hungry",
+   no recruit after it is fired (it goes to `roster.fired`). `participants()` is the four seats only.
+8q. **Era stars, fame and deeds** (owner, 2026-11-26, `src/bot/fame.ts`). Eras are the tiers (I Rookie to IV Experienced
+   trader); each has 7 medallions (badges in a row, trades closed, winning trades, green days, green weeks, best single
+   trade, duels won) with 3 stars each. An era's stars count once the trader has reached that tier. Fame: stars, 200 per
+   badge, 300 per deed held (firsts and records on the whole desk; a record can change hands). Shown in each profile
+   (`#profile/<id>`). They never change badges, tiers, loans, strikes or the monthly winner.
+8r. **Dark everywhere** (owner, 2026-11-26): every screen uses the dark scheme (`:root` in `web/app.css`); the owner will
+   choose the final scheme later.
 8j1. **Nico is free too** (owner, 2026-11-25: "as we are in a bearish trend"): his seat (`stocks-bull`) has `side: "both"`,
    so he picks from all 30 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
 8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all

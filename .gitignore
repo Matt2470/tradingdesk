@@ -27,3 +27,6 @@
 node_modules/
 *.log
 *.tmp
+# The owner's portrait pictures stay on the PC (only the note is published):
+/web/portraits/*
+!/web/portraits/README.txt

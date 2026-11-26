@@ -24,10 +24,11 @@ import { lighterIds, lighterCryptoExtras, lighterOtherExtras, loadLighterOnly, b
 import { twinStrategy, twinId, unitHash } from "./bot/bot";
 import { syncPull, syncPush } from "./data/sync";
 import { newDesk, deskCheck, correlation, correlationBlock, tierBps, type DeskState } from "./bot/desk";
-import { readApprovals, mergeAnswers, ask, weeklyReports, dailyReports, mondayOf, APPROVALS, type Approval, type ReportBot } from "./bot/office";
+import { readApprovals, mergeAnswers, ask, weeklyReports, dailyReports, mondayOf, APPROVALS, ANSWERS, type Approval, type ReportBot } from "./bot/office";
 import { lighterFile, type LighterSnapshot } from "./data/lighter";
-import { runEvil, evilMarket, EVIL_FOR, type EvilSpec, type EvilResult } from "./bot/evil";
-import { thoughtOf, tauntOf, CHARACTER, CHARACTER_TEXT } from "./bot/voice";
+import { runEvil, evilMarket, EVIL_FOR, EVIL_PLAIN, type EvilSpec, type EvilResult, type EvilKind } from "./bot/evil";
+import { thoughtOf, tauntOf, characterOf, CHARACTER_TEXT } from "./bot/voice";
+import { erasOf, deedsOf, DEED_FAME } from "./bot/fame";
 
 export type View = "market" | "crypto";
 export const viewOf = (v: string | null): View => (v === "crypto" ? "crypto" : "market");
@@ -42,7 +43,14 @@ export const files = (v: View) => ({
 /** Files of one competition bot. */
 export const botFiles = (id: string) => ({ state: join(P.bot, `state-${id}.json`), view: join(P.derived, `bot-${id}.json`), shortlist: join(P.derived, `shortlist-${id}.json`) });
 export const COMPETITION = () => join(P.derived, "competition.json");
-export const competitors = (st: Settings = settings()) => st.competition.bots;
+/** The four seats from config/settings.json (each with its recruits). */
+export const participants = (st: Settings = settings()) => st.competition.bots;
+/** Evil twins the owner hired (owner, 2026-11-26): extra players with their own loan, kept in data/bot/roster.json. */
+export const activeHires = () => (readRoster().evil ?? []).filter(h => !h.firedAt);
+const evilBot = (h: EvilHire, st: Settings): CompetitionBot => { const of = st.competition.bots.find(b => b.id === h.of);
+  return { id: h.id, name: h.name, view: of?.view ?? "crypto", side: h.kind === "short-grid" || h.kind === "dca-short" ? "short" : "both", motto: EVIL_PLAIN[h.kind], evil: { kind: h.kind, sym: h.sym, of: h.of } }; };
+/** Everyone with a loan: the participants, then the hired evil twins. */
+export const competitors = (st: Settings = settings()) => [...participants(st), ...activeHires().map(h => evilBot(h, st))];
 export const botById = (id: string | null, st: Settings = settings()) => competitors(st).find(b => b.id === id) ?? competitors(st)[0];
 /** Files the GitHub run publishes on its data branch, by path on that branch -> local path. */
 export function publishedFiles(st: Settings = settings()): [string, string][] {
@@ -104,7 +112,7 @@ function monthTable(states: { b: CompetitionBot; s: BotState }[], month: string)
 }
 /** Before the bots trade: pay any finished month's prize, and find who is last this month (hungry: more charts to catch up). */
 function leagueDuties(st: Settings, now: number): Set<string> {
-  const states = competitors(st).map(b => ({ b, s: loadBot(b, st, now) }));
+  const states = participants(st).map(b => ({ b, s: loadBot(b, st, now) })); // monthly prizes and "hungry": the participants (hired evil twins are guests)
   const league = readJson<{ prizes: Record<string, string | null> }>(LEAGUE(), { prizes: {} }); const month = madridMonth(new Date(now).toISOString().slice(0, 16)); let changed = false;
   const past = [...new Set(states.flatMap(x => Object.keys(x.s.accountant?.months ?? {})))].filter(m => m < month && !(m in league.prizes)).sort();
   for (const m of past) {
@@ -122,7 +130,8 @@ function leagueDuties(st: Settings, now: number): Set<string> {
   return hungry;
 }
 /** Everyone who has worked in the competition: names used, bots fired, and chart-strategy pairs each seat has already tried. */
-export interface Roster { used: string[]; fired: FiredRecord[]; banned: Record<string, string[]> }
+export interface EvilHire { id: string; key: string; of: string; kind: EvilKind; sym: string; name: string; hiredAt: string; firedAt?: string }
+export interface Roster { used: string[]; fired: FiredRecord[]; banned: Record<string, string[]>; /** Hired evil twins. */ evil?: EvilHire[] }
 export interface FiredRecord { slot: string; name: string; recruit: number; hiredAt: string; firedAt: string; badges: number; bestStreak: number; tier: string; trades: number; returnPct: number;
   /** Paid back over its whole time (including what was recovered when it was fired). */ repaid: number; /** Loan the accountant lost. */ debtLeft: number; recovered?: number; interestCharged?: number; prizes?: number; /** Money above the loan handed back when replaced. */ returned?: number; file: string }
 export const ROSTER = () => join(P.bot, "roster.json");
@@ -243,7 +252,7 @@ function liveCurve(s: BotState, now: number) {
 function botView(b: CompetitionBot, s: BotState, st: Settings, px: (k: string) => number | undefined, at: string, shortlist?: Shortlist, hours?: Hours | null) {
   const sg = (p: { side: string }) => (p.side === "short" ? -1 : 1); const v = b.view;
   return {
-    id: b.id, name: s.persona?.name ?? b.name, recruit: s.persona?.recruit ?? 1, side: b.side, motto: b.motto ?? "", accountant: s.accountant ?? null,
+    id: b.id, name: s.persona?.name ?? b.name, recruit: s.persona?.recruit ?? 1, side: b.side, motto: b.motto ?? "", accountant: s.accountant ?? null, evil: b.evil ?? null,
     tier: s.accountant ? { level: tierOf(s.accountant, rulesOf(st)), name: tierName(s.accountant, rulesOf(st)), toNext: toNextTier(s.accountant, rulesOf(st)), tiers: st.competition.tiers, names: TIER_NAMES } : null,
     playbook: s.playbook ?? [], weekend: inWeekendPause(Date.parse(at)), lighterCrypto: !!b.lighterCrypto, allLighter: !!b.allLighter,
     twin: s.twin ? { equity: equityOf(s.twin, px), indexPct: (equityOf(s.twin, px) / s.twin.startEquity - 1) * 100, trades: new Set(s.twin.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: s.twin.trades.filter(t => t.pnl > 0).length, positions: Object.keys(s.twin.positions).length } : null,
@@ -330,11 +339,11 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     const botTrades = (x: Sym) => tradedBy(v, x) && (v === "crypto" || !tradable || tradable[x.symbol] != null);
     // Lighter-only crypto (1h and 4h): only for a bot with lighterCrypto (Catalina). Not on Today and not tested for the screens.
     const wide = (b: CompetitionBot) => !!(b.lighterCrypto || b.allLighter);
-    const extras = !competitors(st).some(b => b.view === v && wide(b)) ? [] : v === "crypto" ? lighterCryptoExtras(uni) : lighterOtherExtras(uni);
+    const extras = !participants(st).some(b => b.view === v && wide(b)) ? [] : v === "crypto" ? lighterCryptoExtras(uni) : lighterOtherExtras(uni);
     const extraCharts = extras.flatMap(s => (["1h", "4h"] as Timeframe[]).filter(tf => tfs.includes(tf)).map(tf => { const c = loadLighterOnly(s.symbol, tf); return c ? { s, tf, c, ...splitComplete(c.bars, "crypto", c.meta, now, tf) } : null; }).filter(<T,>(x: T | null): x is T => !!x));
     // Scalping charts (1m, 5m from Lighter): for the competition bots only, never on the screens.
     const scalpCharts = lighterScalpable(uni.filter(x => inView(v, x) && botTrades(x))).flatMap(s => st.competition.scalpTimeframes.map(tf => { const c = loadScalp(s.symbol, tf); return c ? { s, tf: tf as Timeframe, c, ...splitComplete(c.bars, "crypto", c.meta, now, tf) } : null; }).filter(<T,>(x: T | null): x is T => !!x));
-    const bots = competitors(st).filter(b => b.view === v).map(b => ({ b, state: loadBot(b, st, now), shortlist: shortlistFor(b, st, [...charts.filter(m => botTrades(m.s)), ...scalpCharts, ...(wide(b) ? extraCharts : [])], now) }));
+    const bots = participants(st).filter(b => b.view === v).map(b => ({ b, state: loadBot(b, st, now), shortlist: shortlistFor(b, st, [...charts.filter(m => botTrades(m.s)), ...scalpCharts, ...(wide(b) ? extraCharts : [])], now) }));
     const held = new Set(bots.flatMap(({ state }) => [...Object.keys(state.positions), ...Object.keys(state.pending)].map(underlying)));
     // Charts are judged once for both bots of this world: only strategies on one of their short lists can make a signal.
     const chosen = [...new Set(bots.flatMap(x => x.shortlist.chosen))];
@@ -415,14 +424,45 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   }
   if (approvalsChanged && trading) writeJson(APPROVALS(), approvals);
   // The Twins screen: every participant against its random twin and its evil twin (replayed, so watching works too).
-  writeJson(TWINS(), { at: new Date(now).toISOString(), bots: competitors(st).map(b => {
+  // Hiring an evil twin: the owner's "Hire" (kept on this PC with the other answers) becomes an extra player with its own loan.
+  if (trading) {
+    const roster = readRoster(); roster.evil ??= []; const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); let changed = false;
+    for (const b of participants(st)) {
+      const s = readJson<BotState | null>(botFiles(b.id).state, null); const spec = s && evilSpec(b, s); if (!spec) continue;
+      const key = `hire-evil-${b.id}-${spec.recruit}`;
+      if (answers[key]?.answer === "yes" && !roster.evil.some(h => h.key === key) && bankOf(st).available >= st.competition.startGrant) {
+        roster.evil.push({ id: `evil-${b.id}-${spec.recruit}`, key, of: b.id, kind: spec.kind, sym: spec.sym, name: `Evil ${s.persona?.name ?? b.name}`, hiredAt: stamp }); changed = true;
+        writeJson(ROSTER(), roster); // the bank counts the new loan from here on
+      }
+    }
+    // Each hired twin: replayed from its hire with the accountant running its books; fired twins leave like fired recruits.
+    for (const h of roster.evil.filter(x => !x.firedAt)) {
+      const b = evilBot(h, st); const g = st.competition.startGrant; const a = newAccountant(g, h.hiredAt, rulesOf(st));
+      a.events.push({ d: h.hiredAt, kind: "hired", badges: 0, msg: `${h.name} hired with a ${g} USD loan.` });
+      const sy = allSyms[h.sym]; const r = runEvil(hourBars(h.sym), { kind: h.kind, sym: h.sym, since: h.hiredAt, recruit: 1 }, { grant: g, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
+        fundingPerHour: () => (fundingRates[h.sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1), accountant: { a, rules: rulesOf(st) } });
+      const key = `${h.sym}@1h`; const s: BotState = { ...newState(g, h.hiredAt), cash: r.cash + r.position * r.avgEntry, accountant: a, side: b.side, persona: { name: h.name, recruit: 1, slot: h.id }, playbook: [],
+        positions: Math.abs(r.position) > 1e-12 ? { [key]: { side: r.position > 0 ? "long" : "short", qty: Math.abs(r.position), entry: r.avgEntry, entryDate: r.closed.at(-1)?.exitDate ?? h.hiredAt, stop: 0, strategyId: h.kind, held: 0 } } : {},
+        trades: r.closed.map(t => ({ ...t, strategyId: h.kind, retPct: t.entry > 0 ? ((t.exit / t.entry - 1) * 100 * (t.side === "short" ? -1 : 1)) : 0 })), equityCurve: r.curve, log: r.notes.map(n => ({ d: n.d, msg: n.msg })).reverse(),
+        fundingPaid: r.fundingPaid, fired: r.fired, checked: { at: stamp, markets: 1, withStrategy: 1, newBars: 0, by: process.env.TD_ENGINE === "1" ? "GitHub" : "PC" }, evil: { kind: h.kind, sym: h.sym, since: h.hiredAt, recruit: 1 } };
+      writeJson(botFiles(h.id).state, s);
+      const px = (k: string) => live.prices[underlying(k)]?.price ?? hourBars(h.sym).at(-1)?.c;
+      writeJson(botFiles(h.id).view, botView(b, s, st, px, new Date(now).toISOString()));
+      if (r.fired) { h.firedAt = r.fired.at; changed = true;
+        roster.fired.push({ slot: h.id, name: h.name, recruit: 1, hiredAt: h.hiredAt, firedAt: r.fired.at, badges: a.badges, bestStreak: a.bestStreak, tier: tierName(a, rulesOf(st)), trades: r.closed.length, returnPct: +(a.index - 100).toFixed(2), repaid: +a.repaid.toFixed(2), debtLeft: +(a.writtenOff ?? a.debt).toFixed(2), recovered: +(a.recovered ?? 0).toFixed(2), prizes: 0, returned: +(a.returned ?? 0).toFixed(2) } as FiredRecord); }
+    }
+    if (changed) writeJson(ROSTER(), roster);
+  }
+  writeJson(TWINS(), { at: new Date(now).toISOString(), bots: participants(st).map(b => {
     const s = readJson<BotState | null>(botFiles(b.id).state, null); const v = readJson<any>(botFiles(b.id).view, null); if (!s || !v) return null;
     const spec = evilSpec(b, s); let evil: EvilResult | null = null;
     if (spec) { const sy = allSyms[spec.sym]; evil = runEvil(hourBars(spec.sym), spec, { grant: st.competition.startGrant, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
       fundingPerHour: () => (fundingRates[spec.sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1) }); }
     const drop = (c: { equity: number }[]) => { let pk = -Infinity, w = 0; for (const p of c) { pk = Math.max(pk, p.equity); if (pk > 0) w = Math.min(w, (p.equity / pk - 1) * 100); } return +w.toFixed(2); };
     const tw = s.twin; const twCurve = (tw?.equityCurve ?? []).slice(-600);
+    const hkey = spec ? `hire-evil-${b.id}-${spec.recruit}` : null; const hire = hkey ? (readRoster().evil ?? []).find(h => h.key === hkey) : undefined;
     return { id: b.id, name: v.name, recruit: v.recruit, side: b.side, view: b.view, fired: v.fired ?? null,
+      hire: hkey ? { key: hkey, hiredId: hire?.id ?? null, hiredAt: hire?.hiredAt ?? null, firedAt: hire?.firedAt ?? null, ordered: readJson<Record<string, { answer: string }>>(ANSWERS(), {})[hkey]?.answer === "yes", bank: bankOf(st).available, grant: st.competition.startGrant } : null,
       participant: { equity: +v.equity.toFixed(2), resultPct: +v.resultPct.toFixed(2), trades: new Set(s.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: wholeTrades(v.trades).filter((t: { pnl: number }) => t.pnl > 0).length, badges: s.accountant?.badges ?? 0, stops: s.fired ? 1 : 0, worstDropPct: drop(v.equityCurve ?? []), curve: (v.equityCurve ?? []).slice(-600) },
       random: tw ? { equity: +v.twin.equity.toFixed(2), resultPct: +v.twin.indexPct.toFixed(2), trades: v.twin.trades, wins: wholeTrades(tw.trades).filter(t => t.pnl > 0).length, worstDropPct: drop(twCurve), curve: twCurve } : null,
       evil };
@@ -556,7 +596,7 @@ export function writeCompetition(now = Date.now()) {
     const v = readJson<ReturnType<typeof botView> | null>(botFiles(c.id).view, null);
     const a: Accountant = v?.accountant && "debt" in v.accountant ? v.accountant : newAccountant(st.competition.startGrant, new Date(now).toISOString().slice(0, 16), rules);
     const equity = v?.equity ?? a.grant; const live = a.lastEquity > 0 ? a.index * equity / a.lastEquity : a.index; const m = a.months[month];
-    return { id: c.id, name: v?.name ?? c.name, recruit: v?.recruit ?? 1, view: c.view, side: c.side, motto: c.motto ?? "", started: !!v, hiredAt: a.hiredAt, checkedAt: v?.checked?.at ?? null,
+    return { id: c.id, name: v?.name ?? c.name, recruit: v?.recruit ?? 1, view: c.view, side: c.side, motto: c.motto ?? "", started: !!v, evilHire: c.evil ?? null, hiredAt: a.hiredAt, checkedAt: v?.checked?.at ?? null,
       tier: tierOf(a, rules), tierName: tierName(a, rules), streak: a.streak, bestStreak: a.bestStreak, toNext: toNextTier(a, rules),
       grant: a.grant, badges: a.badges, saves: a.saves, award: +a.award.toFixed(2), debt: +a.debt.toFixed(2), repaid: +a.repaid.toFixed(2), interestPaid: +a.interestPaid.toFixed(2), nextInterestAt: a.nextInterestAt,
       equity, bustLine: a.grant / 2, target: 2 * a.grant, index: +live.toFixed(3), totalReturnPct: +(live - 100).toFixed(2),
@@ -580,21 +620,27 @@ export function writeCompetition(now = Date.now()) {
   const weeks = bots.map(b => weeklyReports(b.report, now, st.competition.minTradesPerWeek, 1)[0]);
   const order = bots.map((b, i) => ({ b, w: weeks[i] })).filter(x => !x.b.stopped).sort((x, y) => (y.w?.returnPct ?? 0) - (x.w?.returnPct ?? 0));
   const mon = mondayOf(now);
+  // Era stars, fame and the desk's deeds (src/bot/fame.ts): a game layer counted from the ledgers.
+  const allWeeks = bots.map(b => weeklyReports(b.report, now, st.competition.minTradesPerWeek, 104));
+  const deeds = deedsOf(bots.map((b, i) => ({ id: b.id, name: b.name, trades: b.report.trades, events: b.allEvents, bestStreak: b.bestStreak, tiers: rules.tiers, weeks: allWeeks[i].filter(w => !w.live).map(w => ({ week: w.week, pct: w.returnPct })) })));
+  const fameOf = Object.fromEntries(bots.map((b, i) => { const e = erasOf({ id: b.id, name: b.name, badges: b.badges, streak: b.streak, bestStreak: b.bestStreak, tiers: rules.tiers, trades: b.report.trades, daily: b.daily,
+    duelsWon: duels.table.find((r: { id: string; won: number }) => r.id === b.id)?.won ?? 0, weekly: allWeeks[i].filter(w => !w.live).map(w => w.returnPct) });
+    const mine = deeds.filter(d => d.holder === b.id); return [b.id, { fame: e.fame + mine.length * DEED_FAME, stars: e.stars, eras: e.eras, deeds: mine.map(d => d.id) }]; }));
   const voices = Object.fromEntries(bots.map((b, i) => {
     const w = weeks[i]; const ev = twins?.bots.find(x => x.id === b.id)?.evil ?? null;
     const wk = b.report.trades.filter(t => madridDay(t.exitDate.length === 10 ? t.exitDate + "T12:00" : t.exitDate.slice(0, 16)) >= mon).sort((x, y) => y.pnl - x.pnl);
     const thought = thoughtOf({ id: b.id, name: b.name, week: mon, trades: w?.trades ?? 0, wins: w?.wins ?? 0, pnl: w?.pnl ?? 0, returnPct: w?.returnPct ?? 0,
       rank: order.findIndex(x => x.b.id === b.id) + 1, of: order.length, leader: order[0]?.b.name, equity: b.equity, grant: b.grant, minTrades: st.competition.minTradesPerWeek, badges: b.badges, streak: b.streak,
       best: wk[0] ? { sym: underlying(wk[0].key), pnl: wk[0].pnl } : null, worst: wk.at(-1) ? { sym: underlying(wk.at(-1)!.key), pnl: wk.at(-1)!.pnl } : null,
-      evil: ev ? { name: ev.name, resultPct: ev.resultPct, kind: ev.kind } : null, resultPct: b.totalReturnPct, stopped: !!b.stopped, weekend: inWeekendPause(now) });
-    return [b.id, { thought, character: CHARACTER[b.id] ?? "bold", characterText: CHARACTER_TEXT[CHARACTER[b.id] ?? "bold"],
+      evil: ev ? { name: ev.name, resultPct: ev.resultPct, kind: ev.kind } : null, resultPct: b.totalReturnPct, stopped: !!b.stopped, weekend: inWeekendPause(now), graced: now - Date.parse(b.hiredAt + ":00Z") < st.competition.graceDays * 864e5 });
+    return [b.id, { thought, character: characterOf(b.id), characterText: CHARACTER_TEXT[characterOf(b.id)],
       evil: ev ? { name: ev.name, kind: ev.kind, sym: ev.sym, resultPct: ev.resultPct, taunt: tauntOf(ev, { name: b.name, resultPct: b.totalReturnPct }, `${b.id}|${mon}`) } : null }];
   }));
   const runs = readJson<{ at: string; by: string; tookMs: number; failed: number }[]>(RUNS(), []);
   const day = runs.filter(r => now - Date.parse(r.at) < 864e5); const remoteNote = readJson<Record<string, unknown> | null>(join(P.derived, "remote.json"), null);
   const checks = { last: runs.slice(-12).reverse(), last24h: Object.fromEntries([...new Set(day.map(r => r.by))].map(b => [b, day.filter(r => r.by === b).length])), shared: !!st.remote?.repo, sync: remoteNote };
   writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, checks, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
-    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => ({ ...b, ...voices[b.id] })), months, ladder,
+    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => ({ ...b, ...voices[b.id], ...fameOf[b.id], evilHire: b.evilHire })), months, ladder, deeds,
     // The accountant's own books: loans (lent = repaid + lost + still owed) and the bank (start - lent + repaid - prizes = available).
     books: (() => { const k = bankOf(st); return { ...k, funding: +bots.reduce((t, b) => t + b.fundingPaid, 0).toFixed(2),
       difference: +(k.lent - k.repaid - k.lost - k.owed).toFixed(2) }; })(),

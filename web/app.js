@@ -26,12 +26,12 @@ const q = p => p + (p.includes("?") ? "&" : "?") + "view=" + VIEW;
 /** The four competition bots (from /api/bots) and the one shown on the Paper bots screen. */
 let BOTS = []; let BOT = "stocks-bull";
 const BOT_COLOR = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]; // validated categorical slots 1-4 (dataviz palette), fixed order by bot
-const botColor = id => BOT_COLOR[Math.max(0, BOTS.findIndex(b => b.id === id))] ?? BOT_COLOR[0];
+const botColor = id => (String(id).startsWith("evil-") ? "#E5484D" : BOT_COLOR[Math.max(0, BOTS.findIndex(b => b.id === id))] ?? BOT_COLOR[0]);
 const WORLD = b => (b.view === "crypto" ? "crypto" : "stocks and gold");
 const ROLE = b => b.side === "both" ? `free on ${b.lighterCrypto ? "any Lighter crypto" : WORLD(b)}` : `${b.side === "short" ? "bearish" : "bullish"} on ${WORLD(b)}`;
 /** Bot against its random twin: did it do better than chance on the same charts? */
 const twinLine = (botPct, twin) => !twin ? "" : `${signed(botPct - twin.returnPct, 1, "%")} vs its random twin`;
-async function loadBots() { BOTS = await api("/api/bots"); return BOTS; }
+async function loadBots() { const [b, pics] = await Promise.all([api("/api/bots"), window.PORTRAIT_FILES ? Promise.resolve(window.PORTRAIT_FILES) : api("/api/portraits").catch(() => [])]); BOTS = b; window.PORTRAIT_FILES = pics ?? []; return BOTS; }
 const botSwitcher = () => `<p class="switch" role="group" aria-label="Which bot">${BOTS.map(b => `<button type="button" data-bot="${esc(b.id)}" aria-pressed="${BOT === b.id}"><i class="swatch" style="background:${botColor(b.id)}"></i>${esc(b.name)} <span class="small">${esc(ROLE(b))}</span></button>`).join("")}</p>`;
 const badgeRow = (n, size = 18) => n > 0 ? `<span class="badges" aria-label="${n} badge${n === 1 ? "" : "s"}">${Array.from({ length: Math.min(n, 12) }, () => `<svg width="${size}" height="${size}" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z" fill="#C9962B" stroke="#8A6514" stroke-width="1"/></svg>`).join("")}${n > 12 ? ` ×${n}` : ""}</span>` : `<span class="small">no badges yet</span>`;
 const KIND = { milestone: ["gain", "Badge"], save: ["warn", "Saved by award"], fired: ["loss", "Stopped"], interest: ["loss", "Interest"], repay: ["gain", "Repaid"], hired: ["", "Hired"], strike: ["warn", "Strike"], active: ["gain", "Busy week"], bonus: ["gain", "Prize"] };
@@ -100,14 +100,51 @@ function scene() {
     <rect y="470" width="1600" height="50" fill="#0D1B2A" opacity=".6"/></svg>`;
   return SCENE;
 }
+/* ---------- profile: eras, medallions, deeds (src/bot/fame.ts) ---------- */
+let PROFILE = null, PROFILE_ERA = null;
+const ICONS = {
+  badge: `<path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/>`,
+  candle: `<path d="M7 3v3M7 17v4M17 6v3M17 15v6" stroke="currentColor" stroke-width="1.8"/><rect x="5" y="6" width="4" height="11" rx="1"/><rect x="15" y="9" width="4" height="6" rx="1"/>`,
+  laurel: `<path d="M12 21c-5-2-7-6-7-11 2 2 3 3 3 6 0-3 1-5 3-7-1 3 0 6 1 8 1-2 2-5 1-8 2 2 3 4 3 7 0-3 1-4 3-6 0 5-2 9-7 11z"/>`,
+  sun: `<circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="1.8"/>`,
+  calendar: `<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="#0E1923" stroke-width="1.6"/>`,
+  gem: `<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l-1 5 4 11 4-11-1-5" stroke="#0E1923" stroke-width="1.1" fill="none"/>`,
+  swords: `<path d="M4 4l9 9M20 4l-9 9M6 16l-2 4 4-2M18 16l2 4-4-2M8 14l2 2M16 14l-2 2" stroke="currentColor" stroke-width="2" fill="none"/>`,
+};
+/** A medallion: an engraved shield with its icon, its three stars, the progress and the fame it pays. */
+function medallion(m, big, locked) {
+  const next = m.goals.find(g => m.value < g) ?? m.goals[2]; const val = m.unit === "USD" ? `$${num(m.value, 0)}` : num(m.value, 0);
+  return `<div class="med${big ? " big" : ""}${locked ? " locked" : ""}" title="${esc(m.name)}: stars at ${m.goals.map(g => m.unit === "USD" ? "$" + g : g).join(", ")}">
+    <span class="medstars">${[0, 1, 2].map(i => `<svg viewBox="0 0 20 20" class="${i < m.stars ? "on" : ""}"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>`).join("")}</span>
+    <svg class="shield" viewBox="0 0 64 70" aria-hidden="true">${big ? `<g fill="#B8913F" opacity=".9"><path d="M6 46c-4-10-2-22 6-30-1 9 0 16 4 22-5-2-8 2-10 8z"/><path d="M58 46c4-10 2-22-6-30 1 9 0 16-4 22 5-2 8 2 10 8z"/></g>` : ""}
+      <path d="M32 3l24 9v22c0 16-11 27-24 33C19 61 8 50 8 34V12z" fill="url(#medg)" stroke="#2A3A48" stroke-width="2"/><path d="M32 8l19 7v19c0 13-9 22-19 27-10-5-19-14-19-27V15z" fill="none" stroke="rgba(255,255,255,.35)"/>
+      <g transform="translate(20 21)" fill="#22313E" color="#22313E">${ICONS[m.icon] ?? ""}</g></svg>
+    <p class="medval">${locked ? "locked" : `${val}/${m.unit === "USD" ? "$" + num(next, 0) : num(next, 0)}`}</p><p class="medname">${esc(m.name)}</p><p class="medrew">Reward ${num(m.reward, 0)} fame</p></div>`;
+}
+function eraPanel(p, era) {
+  const e = p.eras[era]; const main = e.medallions.find(m => m.main); const rest = e.medallions.filter(m => !m.main);
+  return `<section class="pf-era" id="pf-era"><h3>Era stars</h3><p class="pf-sub">${esc(e.name)} era · Stars ${e.stars}/21</p>
+    ${!e.unlocked ? `<p class="pf-lock">Reach ${esc(e.name)} (${p.tiers[era - 1]} badges in a row) to open this era's stars.</p>` : ""}
+    <div class="medmain">${medallion(main, true, !e.unlocked)}</div><div class="medgrid">${rest.map(m => medallion(m, false, !e.unlocked)).join("")}</div></section>`;
+}
+/** A scene for a seat's card: an exchange at dawn for stocks, a mountain of glowing nodes for crypto; darker for evil twins. */
+function seatScene(b) {
+  const crypto = b.view === "crypto", evil = !!b.evilHire; const sky = evil ? ["#3A0A10", "#0B0405"] : crypto ? ["#1E4A44", "#0B1A1C"] : ["#3B5A7E", "#1A2534"]; const glow = evil ? "#FF4A4A" : "#F3D27A";
+  const temple = `<g fill="${evil ? "#2A1A1C" : "#C9C0AE"}" opacity=".95"><path d="M60 150 L160 112 L260 150Z"/><rect x="66" y="150" width="188" height="10"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${76 + i * 31}" y="162" width="14" height="70"/>`).join("")}<rect x="58" y="232" width="204" height="10"/><rect x="50" y="242" width="220" height="10"/></g>`;
+  const nodes = `<g stroke="${glow}" stroke-width="1.4" opacity=".7">${[[60, 200, 120, 150], [120, 150, 190, 170], [190, 170, 250, 120], [120, 150, 160, 100], [160, 100, 250, 120], [60, 200, 160, 220], [160, 220, 250, 190], [190, 170, 160, 220]].map(([a, b2, c, d]) => `<line x1="${a}" y1="${b2}" x2="${c}" y2="${d}"/>`).join("")}</g><g fill="${glow}">${[[60, 200], [120, 150], [190, 170], [250, 120], [160, 100], [160, 220], [250, 190]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4"/>`).join("")}</g>`;
+  return `<svg viewBox="0 0 320 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sc${b.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs>
+    <rect width="320" height="260" fill="url(#sc${b.id})"/><circle cx="240" cy="70" r="34" fill="${glow}" opacity=".8"/><circle cx="240" cy="70" r="80" fill="${glow}" opacity=".08"/>
+    <path d="M0 200 L60 160 L120 190 L180 140 L240 180 L320 150 L320 260 L0 260Z" fill="${evil ? "#1A0A0C" : crypto ? "#12302C" : "#2A3A4E"}"/>${crypto ? nodes : temple}</svg>`;
+}
 /** One participant in the hall: portrait, tier, stars, money, this week's thought and the evil twin. */
 function heroCard(b, c, lead) {
   const R = c.rules; const label = `${b.name}, ${b.tierName}`;
-  return `<article class="hero click" data-gobot="${esc(b.id)}" tabindex="0" style="--c:${botColor(b.id)}">
-    <div class="frame">${face(b.id, b.recruit, { label })}${emblem(b.tier, b.tierName)}
+  return `<article class="hero click" data-goprofile="${esc(b.id)}" tabindex="0" style="--c:${botColor(b.id)}">
+    <div class="frame">${face(b.evilHire ? b.evilHire.of : b.id, b.evilHire ? 1 : b.recruit, { label, evil: !!b.evilHire })}${emblem(b.tier, b.tierName)}
       ${b.evil ? `<span class="evilmini" title="Evil twin: ${esc(b.evil.name)} on ${esc(b.evil.sym)}, ${pct(b.evil.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}
       ${b.stopped ? `<span class="ribbon">Stopped</span>` : lead ? `<span class="ribbon gold">Leads the month</span>` : ""}</div>
-    <h3 class="hname">${esc(b.name)}</h3>
+    <h3 class="hname">${esc(b.name)}${b.evilHire ? ` <span class="evilname">hired evil twin</span>` : ""}</h3>
+    <p class="fameline"><span class="fame-ico" aria-hidden="true">♛</span> ${num(b.fame ?? 0, 0)} fame · ${b.stars ?? 0} era stars${(b.deeds ?? []).length ? ` · ${b.deeds.length} deed${b.deeds.length === 1 ? "" : "s"}` : ""}</p>
     <p class="role">${esc(b.tierName)} · ${esc(ROLE(b))}${b.recruit > 1 ? ` · ${ord(b.recruit)} in this seat` : ""}</p>
     ${streakStars(b.streak, b.tier, R.tiers)}
     <p class="purse"><span class="px">${money(b.equity, 2)}</span> <span class="small">${b.badges ? `${b.badges} badge${b.badges === 1 ? "" : "s"} · ` : ""}${b.strikes ? `${b.strikes} strike${b.strikes === 1 ? "" : "s"} · ` : ""}${pct(b.totalReturnPct, 1)} since hired</span></p>
@@ -339,7 +376,7 @@ const screens = {
     const ret = (b.equity / b.startEquity - 1) * 100; const s = b.trades; const wins = s.filter(t => t.pnl > 0).length; const c = b.checked;
     const idle = !s.length && !b.positions.length && !b.pending.length;
     return `<h1>Paper bots</h1>${botSwitcher()}
-    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div class="persona-face">${face(b.id, b.recruit, { label: b.name })}</div><div style="flex:1"><h2 style="margin:0">${esc(b.name)}</h2>${comp?.bots?.find(x => x.id === b.id)?.thought ? `<p class="persona-thought">“${esc(comp.bots.find(x => x.id === b.id).thought)}”</p>` : ""}<p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
+    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div class="persona-face">${face(b.evil ? b.evil.of : b.id, b.evil ? 1 : b.recruit, { label: b.name, evil: !!b.evil })}</div><div style="flex:1"><h2 style="margin:0">${esc(b.name)}</h2>${comp?.bots?.find(x => x.id === b.id)?.thought ? `<p class="persona-thought">“${esc(comp.bots.find(x => x.id === b.id).thought)}”</p>` : ""}<p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
       ${a ? `<div class="persona-score">${b.tier ? tierTag(b.tier.level, b.tier.name) : ""} ${badgeRow(a.badges)}<p class="small" style="margin:4px 0 0">${b.tier ? esc(streakText(a.streak, b.tier.toNext, b.tier.tiers, b.tier.names, b.tier.level)) : ""} · <a href="#competition">scoreboard</a></p></div>` : ""}</div>
     ${b.weekend ? `<div class="notice"><strong>Weekend pause.</strong> The competition stops from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday; trading starts again on Monday.</div>` : ""}
     ${b.fired ? `<div class="notice"><strong>${esc(b.name)} has stopped trading.</strong> ${esc(b.fired.reason.replace(/^.*?: /, ""))} ${b.fired.replaceAt ? `A recruit takes the seat ${esc(when(b.fired.replaceAt))}, if the accountant has ${money(a?.startGrant ?? 250)} to lend.` : ""}</div>` : ""}
@@ -392,6 +429,35 @@ const screens = {
     <h2>Desk rules</h2><p class="small">Daily loss limit ${R.dailyLossPct}% (everything closed, no trades until the next Madrid day). Drawdown rule: ${R.drawdownPct}% under the desk's best halves the risk per trade until it is back within ${R.recoverPct}%. Correlation cap: no two bots in the same direction on the same market, or on markets whose hourly moves correlate above ${R.maxCorrelation} (last ${R.corrDays} days). Costs per side by open interest on Lighter: ${R.costTiers.map(t => `${t.bps} bps from $${t.minOiUsd >= 1e6 ? num(t.minOiUsd / 1e6, 0) + "M" : num(t.minOiUsd / 1e3, 0) + "k"}`).join(", ")}. An entry is cancelled when the open is more than ${R.maxSlipAtr} ATR from the signal close.</p>
     ${k?.log?.length ? `<details class="detail"><summary>Desk guard log</summary><ul class="small">${k.log.map(l => `<li>${esc(when(l.d + ":00Z"))}: ${esc(l.msg)}</li>`).join("")}</ul></details>` : ""}`;
   },
+  async profile(arg) {
+    await loadBots(); const c = await api("/api/competition"); const b = c?.bots.find(x => x.id === arg) ?? c?.bots[0];
+    if (!b) return `<div class="game"><h1>Profile</h1><p class="empty">The profiles appear after the bots' first check.</p></div>`;
+    PROFILE = { ...b, tiers: c.rules.tiers }; const reached = b.eras ? b.eras.filter(e => e.unlocked).length - 1 : 0; if (PROFILE_ERA == null || PROFILE_ERA > 3 || PROFILE.id !== PROFILE.lastId) PROFILE_ERA = reached; PROFILE.lastId = b.id;
+    const goal = c.rules.tiers[b.tier] ?? null; const deeds = (c.deeds ?? []).filter(d => d.holder === b.id); const nameOf = id => c.bots.find(x => x.id === id)?.name ?? id;
+    const others = c.bots.filter(x => x.id !== b.id);
+    return `<div class="game"><section class="pf">
+      <aside class="pf-left">
+        <div class="pf-banner">${emblem(b.tier, b.tierName)}<div><p class="pf-name">${esc(b.name)}</p><p class="pf-era-name">${esc(b.tierName)} era</p>${streakStars(b.streak, b.tier, c.rules.tiers)}</div></div>
+        <div class="pf-portrait">${face(b.evilHire ? b.evilHire.of : b.id, b.evilHire ? 1 : b.recruit, { evil: !!b.evilHire, label: b.name })}</div>
+        <h3 class="pf-fame-t">Fame points</h3><p class="pf-fame-s">Leave your mark on the desk: stars, badges and deeds.</p>
+        <p class="pf-fame"><span aria-hidden="true">♛</span> ${num(b.fame ?? 0, 0)}</p>
+      </aside>
+      <div class="pf-card">${seatScene(b)}<div class="pf-card-in"><h2>${esc(b.name)}</h2><p class="pf-quote">${esc(b.thought ?? b.motto ?? "")}</p>
+        <p class="pf-char small">${esc(b.characterText ?? "")}</p>
+        <div class="pf-icons"><span title="${esc(b.tierName)}">${emblem(b.tier, b.tierName)}</span><span class="pf-badges" title="Badges">${badgeRow(Math.max(1, b.badges), 18).replace(/<svg/g, b.badges ? "<svg" : '<svg style="opacity:.25"')}<b>${b.badges}</b></span>${b.evil ? `<span class="evilmini-s" title="Evil twin: ${esc(b.evil.name)}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}</div></div></div>
+      <nav class="pf-tabs" aria-label="Eras">${[0, 1, 2, 3].map(i => `<button type="button" data-era="${i}" aria-pressed="${i === PROFILE_ERA}" class="${b.eras?.[i]?.unlocked ? "" : "locked"}" title="${esc(c.rules.tierNames[i])}">${b.eras?.[i]?.unlocked ? `<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>` : `<svg viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6a3 3 0 016 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>`}<span>${ROMAN[i]}</span></button>`).join("")}</nav>
+      ${b.eras ? eraPanel(PROFILE, PROFILE_ERA) : `<section class="pf-era" id="pf-era"><p class="empty">Stars appear after the next check.</p></section>`}
+      <aside class="pf-right">
+        <h3>Era goal</h3>${goal ? `${streakStars(b.streak, b.tier, c.rules.tiers)}<p class="pf-sub">Earn ${goal} badges in a row to enter the ${esc(c.rules.tierNames[b.tier + 1])} era. A refill from the award starts the run again.</p>` : `<p class="pf-sub">The top era: an Experienced trader.</p>`}
+        <h3>Competitive deeds</h3><p class="pf-big">${deeds.length}</p><p class="pf-sub">deeds held</p>
+        <button type="button" id="showdeeds" class="ghostbtn">Show deeds</button>
+        <ul id="deedlist" class="deeds" hidden>${(c.deeds ?? []).map(d => `<li class="${d.holder === b.id ? "mine" : ""}"><strong>${esc(d.name)}</strong> <span class="small">${esc(nameOf(d.holder))}</span><br><span class="small">${esc(d.text)}</span></li>`).join("") || `<li class="small">No deeds yet: the first winning trade on the desk is one.</li>`}</ul>
+        <h3>Account</h3><p class="pf-sub"><span class="px">${money(b.equity, 2)}</span> · award ${money(b.award, 0)} · ${b.debt > 0.005 ? `owes ${money(b.debt, 0)}` : "its own money"}${b.strikes ? ` · ${b.strikes} strike${b.strikes === 1 ? "" : "s"}` : ""}</p>${progressBar(b.equity, b.grant)}
+        <p style="margin:14px 0 0"><a href="#bot" data-gobot="${esc(b.id)}">Trades and charts</a> · <a href="#twins">The twins</a></p>
+      </aside></section>
+      <nav class="pf-nav" aria-label="Other traders">${others.map(o => `<button type="button" class="pf-other" data-goprofile="${esc(o.id)}">${face(o.evilHire ? o.evilHire.of : o.id, o.evilHire ? 1 : o.recruit, { evil: !!o.evilHire, label: o.name })}<span>${esc(o.name)}</span></button>`).join("")}</nav>
+      <p class="small" style="max-width:90ch">Era stars, fame and deeds are a game layer counted from the ledgers. They never change the money rules: badges, tiers, loans, strikes and the monthly winner work as before. Eras follow the tiers; an era's stars count once the trader has reached it.</p></div>`;
+  },
   async twins() {
     await loadBots(); const [t, c] = await Promise.all([api("/api/twins"), api("/api/competition")]);
     if (!t || !t.bots.length) return `<div class="game"><h1>The twins</h1><p class="empty">The twins appear after the bots' first check.</p></div>`;
@@ -414,6 +480,10 @@ const screens = {
         ${col("Random twin", "Same charts and rules, enters at random", `<div class="ghost">${face(x.id, rec, { label: "random twin" })}<span class="dice" aria-hidden="true">⚄</span></div>`, x.random ? { ...x.random, badges: 0, stops: 0 } : null)}
         ${col(e ? `Evil twin: ${esc(e.name)}` : "Evil twin", e ? `Pionex-style bot on ${esc(e.sym)}` : "", face(x.id, rec, { evil: true, label: "evil twin" }), e, "evil")}
       </div>
+      ${x.hire ? `<div class="hirebar">${x.hire.hiredId && !x.hire.firedAt ? `<span>Hired on ${esc(bar(x.hire.hiredAt))}: plays with its own ${money(x.hire.grant, 0)} loan. <a href="#profile/${esc(x.hire.hiredId)}">See its profile</a></span>`
+        : x.hire.firedAt ? `<span class="small">The hired evil twin was stopped on ${esc(bar(x.hire.firedAt))}.</span>`
+        : x.hire.ordered ? `<span>Hiring at the next check (needs ${money(x.hire.grant, 0)} in the bank: ${money(x.hire.bank, 0)} available).</span> <button type="button" class="ghostbtn" data-hire="${esc(x.hire.key)}" data-yes="0">Cancel</button>`
+        : `<span class="small">Like what you see? Hire this evil twin as an extra player: a ${money(x.hire.grant, 0)} loan from the bank (${money(x.hire.bank, 0)} available), all the rules, its own account.</span> <button type="button" data-hire="${esc(x.hire.key)}" data-yes="1" ${x.hire.bank < x.hire.grant ? "disabled" : ""}>Hire the evil twin</button>`}</div>` : ""}
       ${e ? `<div class="speech"><p><strong>${esc(x.name)}:</strong> ${esc(b?.thought ?? "")}</p><p class="evilsay"><strong>Evil twin:</strong> ${esc(b?.evil?.taunt ?? "")}</p></div>
       <p class="small">${esc(e.plain)} Same 250 grant, at most 3x, badge at 500, stop line at 125, weekend pause, funding and Lighter costs. Replayed on hourly bars since ${esc(bar(e.since))}.</p>` : ""}
       ${curves(x)}
@@ -448,7 +518,7 @@ const screens = {
       <div class="season"><p class="era">The season of ${esc(monthName(c.month))}</p><h1>The Hall of Traders</h1>
         <p class="goal-line">Experienced traders found <span class="stars big" role="img" aria-label="${found} of 4">${[0, 1, 2, 3].map(i => `<svg viewBox="0 0 20 20" class="${i < found ? "on" : ""}"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>`).join("")}</span> ${found} of 4 · recruits tried ${c.recruitsTried}${c.weekend ? " · weekend pause until Monday 00:00" : ""}</p></div>
       <div class="heroes">${c.bots.map(b => heroCard(b, c, b.id === leadId)).join("")}</div>
-      <p class="hall-note">Click a trader to see their trades. <a href="#twins">Meet the evil twins</a></p></div></section>
+      <p class="hall-note">Click a trader to open their profile: era stars, deeds and fame. <a href="#twins">Meet the evil twins</a></p></div></section>
     <div class="head"><div><h2 style="margin-top:26px">How the game works</h2><p class="sub">Four paper bots compete for the title of Experienced trader. Each trades a ${money(c.startGrant)} loan from the accountant. Twice the grant earns a badge and locks the profit away; ${R.tiers[0]}, ${R.tiers[1]} and ${R.tiers[2]} badges in a row make a ${esc(R.tierNames[1])}, a ${esc(R.tierNames[2])} and an ${esc(R.tierNames[3])}. Half the grant costs the award a refill, or the bot its seat.</p></div></div>
     ${c.weekend ? `<div class="notice"><strong>Weekend pause.</strong> No trading from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday.</div>` : ""}
     <div class="panel goal"><strong>Experienced traders found: ${c.experienced} of 4.</strong> <span class="small">Recruits tried so far: ${c.recruitsTried}. The more recruits it takes, the more likely the winners are lucky rather than good: count this before trusting a title.</span></div>
@@ -541,10 +611,10 @@ async function lighterPanel() {
 /* ---------- routing ---------- */
 async function render() {
   const parts = location.hash.slice(1).split("/"); const name = screens[parts[0]] && !["today", "feedback"].includes(parts[0]) ? parts[0] : "competition"; /* Today and Test and feedback were removed from the menu (owner, 2026-11-24) */ const arg = parts.slice(1).map(decodeURIComponent).join("/") || null;
-  document.querySelectorAll(".rail a").forEach(a => a.dataset.tab === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  document.querySelectorAll(".rail a").forEach(a => a.dataset.tab === (name === "profile" ? "competition" : name) ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const y = scrollY;
   let jumped = false;
-  try { $main.innerHTML = await screens[name](arg); if (name === "bot") lighterPanel().catch(() => undefined); if (name === "strategies" && arg && JUMP) { document.getElementById("detail")?.scrollIntoView({ block: "start" }); jumped = true; } } catch (e) { $main.innerHTML = `<h1>Something went wrong</h1><div class="notice"><strong>This screen could not load.</strong> ${esc(e.message)}. If it keeps happening, run restart.bat.</div>`; }
+  try { const html = await screens[name](arg); $main.innerHTML = html.trimStart().startsWith('<div class="game') ? html : `<div class="game plain">${html}</div>`; if (name === "bot") lighterPanel().catch(() => undefined); if (name === "strategies" && arg && JUMP) { document.getElementById("detail")?.scrollIntoView({ block: "start" }); jumped = true; } } catch (e) { $main.innerHTML = `<h1>Something went wrong</h1><div class="notice"><strong>This screen could not load.</strong> ${esc(e.message)}. If it keeps happening, run restart.bat.</div>`; }
   JUMP = false; if (!jumped) scrollTo(0, y);
 }
 /** Set when a map cell or chip opens a chart, so the page scrolls down to it once (not on later refreshes). */
@@ -554,6 +624,10 @@ $main.addEventListener("click", async e => {
   const t = e.target;
   if (t.closest("#showfail")) { e.preventDefault(); const f = document.getElementById("fails"); f.hidden = !f.hidden; return; }
   const gv = t.closest("a[data-goview]"); if (gv) { VIEW = gv.dataset.goview; return; }
+  const gp = t.closest("[data-goprofile]"); if (gp) { location.hash = `#profile/${gp.dataset.goprofile}`; return; }
+  const et = t.closest("button[data-era]"); if (et) { PROFILE_ERA = +et.dataset.era; const box = document.getElementById("pf-era"); if (box && PROFILE) { box.outerHTML = eraPanel(PROFILE, PROFILE_ERA); document.querySelectorAll("button[data-era]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.era === PROFILE_ERA))); } return; }
+  const hb = t.closest("button[data-hire]"); if (hb) { hb.disabled = true; try { await api("/api/hire", { method: "POST", body: JSON.stringify({ key: hb.dataset.hire, yes: hb.dataset.yes === "1" }) }); } catch (err) { alertMsg(err.message); } render(); return; }
+  const dd = t.closest("#showdeeds"); if (dd) { const l = document.getElementById("deedlist"); if (l) l.hidden = !l.hidden; return; }
   const gb = t.closest("[data-gobot]"); if (gb) { BOT = gb.dataset.gobot; if (gb.tagName !== "A") location.hash = "#bot"; return; }
   const bb = t.closest("button[data-bot]"); if (bb) { BOT = bb.dataset.bot; render(); return; }
   const fb = t.closest("button[data-filter]"); if (fb) { FILTER = fb.dataset.filter; render(); return; }
@@ -573,4 +647,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins" || name === "profile") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);

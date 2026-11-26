@@ -71,3 +71,44 @@ describe("voices", () => {
     expect(tauntOf({ kind: "dca-short", resultPct: -20, trades: 9, stops: 1, badges: 0 }, { name: "Valeria", resultPct: 2 }, "s")).toMatch(/stop line|Stopped/);
   });
 });
+
+import { newAccountant, DEFAULT_RULES } from "../src/bot/accountant";
+import { erasOf, deedsOf } from "../src/bot/fame";
+describe("a hired evil twin: the accountant runs its books", () => {
+  test("a badge locks the profit in the award and repays the loan; back to 250", () => {
+    const R0 = { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 }; const a = newAccountant(250, "2026-11-15T04:00", R0);
+    const r = runEvil(hours(1500, i => (i < 340 ? wave(i) : 100 * 1.006 ** (i - 340))), spec("trailing"), { ...O, accountant: { a, rules: R0 } });
+    expect(a.badges).toBeGreaterThanOrEqual(1); expect(a.repaid + a.award).toBeGreaterThan(0); expect(r.fired).toBeNull(); expect(r.closed.length).toBe(r.trades);
+    expect(Object.values(a.months).reduce((t, m) => t + m.trades, 0)).toBe(r.trades);
+  });
+  test("too few trades a week: strikes, then replaced like any player", () => {
+    const a = newAccountant(250, "2026-11-15T04:00", DEFAULT_RULES);
+    const r = runEvil(hours(1500, i => (i < 340 ? wave(i) : 100 * 1.006 ** (i - 340))), spec("trailing"), { ...O, accountant: { a, rules: DEFAULT_RULES } });
+    expect(a.events.some(e => e.kind === "strike")).toBe(true); if (r.fired) expect(r.fired.reason).toMatch(/quiet weeks/);
+  });
+  test("at the stop line with an empty award it is fired, and nothing trades after", () => {
+    const a = newAccountant(250, "2026-11-15T04:00", DEFAULT_RULES);
+    const r = runEvil(hours(900, up), spec("dca-short"), { ...O, accountant: { a, rules: DEFAULT_RULES } });
+    expect(r.fired).not.toBeNull(); expect(a.events.at(-1)!.kind).toBe("fired"); expect(r.closed.every(t => t.exitDate <= r.fired!.at)).toBe(true);
+  });
+});
+describe("era stars, fame and deeds", () => {
+  const base = { id: "a", name: "A", badges: 0, streak: 0, bestStreak: 0, tiers: [4, 8, 12], trades: [] as { pnl: number; exitDate: string }[], daily: {} as Record<string, number>, duelsWon: 0, weekly: [] as number[] };
+  test("7 medallions with 3 stars in each of 4 eras; only reached eras count", () => {
+    const e = erasOf({ ...base, trades: Array.from({ length: 12 }, (_, i) => ({ pnl: i % 2 ? 6 : -2, exitDate: `2026-11-${10 + i}` })) });
+    expect(e.eras).toHaveLength(4); expect(e.eras.every(x => x.medallions.length === 7)).toBe(true);
+    expect(e.eras[0].unlocked).toBe(true); expect(e.eras[1].unlocked).toBe(false); expect(e.eras[1].stars).toBe(0);
+    expect(e.eras[0].medallions.find(m => m.id === "trades")!.stars).toBe(1); expect(e.eras[0].medallions.find(m => m.id === "bestTrade")!.stars).toBe(1);
+    expect(e.fame).toBe(e.eras[0].fame);
+  });
+  test("reaching Pro opens era II; badges add fame", () => {
+    const e = erasOf({ ...base, badges: 4, streak: 4, bestStreak: 4 }); expect(e.eras[1].unlocked).toBe(true); expect(e.eras[0].medallions[0].stars).toBe(3); expect(e.fame).toBeGreaterThan(800);
+  });
+  test("deeds: firsts go to whoever did it first, records to the best", () => {
+    const d = deedsOf([
+      { id: "a", name: "A", trades: [{ pnl: 3, exitDate: "2026-11-20T10:00" }], events: [], bestStreak: 0, tiers: [4, 8, 12], weeks: [{ week: "2026-11-16", pct: 2 }] },
+      { id: "b", name: "B", trades: [{ pnl: 9, exitDate: "2026-11-21T10:00" }, { pnl: 1, exitDate: "2026-11-22T10:00" }], events: [{ d: "2026-11-22T10:00", kind: "milestone", badges: 1 }], bestStreak: 1, tiers: [4, 8, 12], weeks: [{ week: "2026-11-16", pct: 5 }] }]);
+    const by = Object.fromEntries(d.map(x => [x.id, x.holder]));
+    expect(by["first-win"]).toBe("a"); expect(by["biggest-trade"]).toBe("b"); expect(by["first-badge"]).toBe("b"); expect(by["best-week"]).toBe("b"); expect(by["win-run"]).toBe("b");
+  });
+});

@@ -44,7 +44,7 @@ export interface Settings {
 export interface CompetitionBot { id: string; name: string; view: "market" | "crypto";
   /** "long" bullish, "short" bearish, "both" free to choose. */ side: "long" | "short" | "both"; motto?: string;
   /** Also trades every liquid crypto on Lighter listed in config/lighter-crypto.json (owner, 2026-11-23, for Catalina). */ lighterCrypto?: boolean;
-  /** Also trades every liquid non-crypto perp on Lighter listed in config/lighter-other.json: more stocks, indices, commodities, currencies, pre-IPO (owner, 2026-11-24, for Nico and Lucas). */ allLighter?: boolean }
+  /** Also trades every liquid non-crypto perp on Lighter listed in config/lighter-other.json: more stocks, indices, commodities, currencies, pre-IPO (owner, 2026-11-24, for Nico and Lucas). */ allLighter?: boolean ; /** A hired evil twin (src/bot/evil.ts): replayed, not stepped. */ evil?: { kind: string; sym: string; of: string }}
 export interface Competition {
   startGrant: number; /** Risk per trade for competition bots (% of the account). */ riskPctPerTrade: number;
   /** Days after hiring before the first weekly activity check. */ graceDays: number;

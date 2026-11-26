@@ -65,7 +65,7 @@ export function weeklyReports(b: ReportBot, now: number, minTrades: number, week
     let acc: string;
     if (fired) acc = "Stopped this week. The seat goes to a recruit when the owner says yes and the bank has the money.";
     else if (strike) acc = `Strike: fewer than ${minTrades} trades closed. Trade more next week; three strikes in a row and you are replaced.`;
-    else if (live && ts.length < minTrades) acc = `${minTrades - ts.length} more closed trade${minTrades - ts.length === 1 ? "" : "s"} needed before Friday 22:00 to avoid a strike.`;
+    else if (live && ts.length < minTrades) acc = `${minTrades - ts.length} more closed trade${minTrades - ts.length === 1 ? "" : "s"} needed before the weekly check to avoid a strike.`;
     else if (badges) acc = "Well done. The badge is locked in the award; the streak goes on.";
     else if (saves) acc = "Noted. The streak starts again; keep the losses small.";
     else if (ret < 0) acc = "A losing week. Keep the risk per trade as it is and stick to your charts.";

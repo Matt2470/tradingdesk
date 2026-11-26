@@ -69,6 +69,11 @@ try {
   const tw = await (await fetch(base + "/api/twins")).json();
   ok(tw && tw.bots.length === 4 && tw.bots.map((b: any) => b.evil?.kind).join() === "neutral-grid,short-grid,trailing,dca-short" && tw.bots.every((b: any) => b.participant && Number.isFinite(b.evil.resultPct) && b.evil.trades >= 0 && b.evil.stops >= 0 && Array.isArray(b.evil.curve)), "the Twins screen: every participant against its random twin and its Pionex-style evil twin");
   ok(comp.bots.every((b: any) => typeof b.thought === "string" && b.thought.length > 10 && b.character && b.evil?.taunt), "every participant has a thought about the week and an evil twin with a taunt");
+  ok(comp.bots.every((b: any) => Number.isFinite(b.fame) && b.eras?.length === 4 && b.eras.every((e: any) => e.medallions.length === 7) && b.eras[0].unlocked) && Array.isArray(comp.deeds), "every participant has era stars, fame and deeds");
+  const hire = (b: unknown) => fetch(base + "/api/hire", { method: "POST", body: JSON.stringify(b) }).then(r => r.json());
+  ok((await hire({ key: "nope", yes: true })).error && (await hire({ key: "hire-evil-crypto-bull-1", yes: true })).answer === "yes" && (await hire({ key: "hire-evil-crypto-bull-1", yes: false })).answer === "no", "hiring an evil twin: the owner's order is kept and can be taken back");
+  ok(tw.bots.every((b: any) => b.hire?.key?.startsWith("hire-evil-") && b.hire.grant === 250), "each evil twin can be hired from the Twins screen");
+  ok(Array.isArray(await (await fetch(base + "/api/portraits")).json()), "the list of the owner's portrait pictures answers");
   for (const p of ["/portraits.js"]) ok((await fetch(base + p)).status === 200, `GET ${p} is 200`);
   const off = await (await fetch(base + "/api/office")).json();
   ok(off && off.days.length >= 1 && off.days[0].bots.length === 4 && off.weekly.length >= 1 && Object.keys(off.weeks).length === 4 && off.risk.length === 4 && off.risk.every((r: any) => r.cushion === 125 && r.accountantAtRisk === 125) && off.bank.available === 500 && off.desk && off.desk.stoppedDay === null && off.desk.halved === false && Array.isArray(off.approvals) && off.rules.dailyLossPct === 3 && off.rules.costTiers.length === 6, "the Accountant screen: daily and weekly reports, every bot's weekly report, money at risk, the desk guard, decisions");

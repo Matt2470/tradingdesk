@@ -1,8 +1,9 @@
+import { readdirSync } from "node:fs";
 // Local dashboard server. Listens on 127.0.0.1 only: nothing here is reachable from the network.
 import { join, normalize } from "node:path";
-import { ROOT, P, settings, readJson, universe } from "./config";
+import { ROOT, P, settings, readJson, writeJson, universe } from "./config";
 import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince, OFFICE, TWINS } from "./pipeline";
-import { answer } from "./bot/office";
+import { answer, ANSWERS } from "./bot/office";
 import { STRATEGIES } from "./core/strategies";
 import { readFeedback, saveFeedback } from "./feedback";
 import { lighterFile, readiness, type LighterSnapshot } from "./data/lighter";
@@ -10,7 +11,7 @@ import { lighterFile, readiness, type LighterSnapshot } from "./data/lighter";
 const offline = process.argv.includes("--offline");
 const st = settings(); const port = Number(process.env.TD_PORT ?? st.port); const url = `http://127.0.0.1:${port}`;
 const json = (v: unknown, status = 200) => new Response(JSON.stringify(v), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
-const TYPES: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml" };
+const TYPES: Record<string, string> = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp" };
 
 function openWindow() {
   if (process.platform !== "win32") return console.log(`Open ${url}`);
@@ -29,11 +30,17 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   "/api/bot": u => { const id = u.searchParams.get("bot"); const v = u.searchParams.get("view"); const cur = settings();
     const b = id ? botById(id, cur) : competitors(cur).find(x => x.view === viewOf(v)) ?? botById(null, cur); const view = readJson<Record<string, unknown> | null>(botFiles(b.id).view, null); return view && { ...view, checkingSince: checkingSince() }; },
   // Current names: a fired bot's seat shows its recruit's name.
-  "/api/bots": () => competitors(settings()).map(({ id, name, view, side, motto, lighterCrypto }) => ({ id, name: readJson<{ name?: string } | null>(botFiles(id).view, null)?.name ?? name, view, side, motto: motto ?? "", lighterCrypto: !!lighterCrypto })),
+  "/api/bots": () => competitors(settings()).map(({ id, name, view, side, motto, lighterCrypto, evil }) => ({ id, name: readJson<{ name?: string } | null>(botFiles(id).view, null)?.name ?? name, view, side, motto: motto ?? "", lighterCrypto: !!lighterCrypto, evil: evil ?? null })),
   "/api/competition": () => { const c = readJson<Record<string, unknown> | null>(COMPETITION(), null); return c && { ...c, checkingSince: checkingSince() }; },
   // The Accountant screen, and the owner's yes or no on a decision waiting there.
   "/api/office": () => readJson(OFFICE(), null),
   "/api/twins": () => readJson(TWINS(), null),
+  // Pictures the owner put in web/portraits/ to replace the drawn portraits.
+  "/api/portraits": () => { try { return readdirSync(join(ROOT, "web", "portraits")).filter(f => /\.(png|jpe?g|webp)$/i.test(f)); } catch { return []; } },
+  // The owner hires an evil twin (or takes the order back before the next check). Kept with the owner's answers on this PC.
+  "/api/hire": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { key?: string; yes?: boolean } | null;
+    if (!b || typeof b.key !== "string" || !/^hire-evil-[a-z-]+-\d+$/.test(b.key) || typeof b.yes !== "boolean") return { error: "send {key, yes}" };
+    const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); answers[b.key] = { answer: b.yes ? "yes" : "no", at: new Date().toISOString().slice(0, 16) }; writeJson(ANSWERS(), answers); return { ok: true, key: b.key, answer: answers[b.key].answer }; },
   "/api/approve": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { id?: string; yes?: boolean } | null;
     if (!b || typeof b.id !== "string" || typeof b.yes !== "boolean") return { error: "send {id, yes}" }; const a = answer(b.id, b.yes); return a ? { ok: true, approval: a } : { error: "no such decision" }; },
   "/api/resume": (u, req) => (req.method === "POST" ? { resumed: resumeBot(botById(u.searchParams.get("bot")).id) } : { error: "use POST" }),
