@@ -112,3 +112,36 @@ describe("era stars, fame and deeds", () => {
     expect(by["first-win"]).toBe("a"); expect(by["biggest-trade"]).toBe("b"); expect(by["first-badge"]).toBe("b"); expect(by["best-week"]).toBe("b"); expect(by["win-run"]).toBe("b");
   });
 });
+
+import { evilName, hireKey } from "../src/bot/evil";
+describe("a new twin after a hire", () => {
+  test("names and hire keys by generation (the first twin keeps the old key)", () => {
+    expect(evilName("Catalina")).toBe("Evil Catalina"); expect(evilName("Catalina", 2)).toBe("Evil Catalina II"); expect(evilName("Catalina", 3)).toBe("Evil Catalina III");
+    expect(hireKey("crypto-bull", { kind: "trailing", sym: "MON", since: "x", recruit: 1 })).toBe("hire-evil-crypto-bull-1");
+    expect(hireKey("crypto-bull", { kind: "trailing", sym: "MON", since: "x", recruit: 1, gen: 2 })).toBe("hire-evil-crypto-bull-1-g2");
+  });
+  test("a hired twin keeps the account it built: replaying from its start gives the same trades as the twin", () => {
+    const bars = hours(900, wave); const a = newAccountant(250, "2026-11-15T04:00", { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 });
+    const twin = runEvil(bars, spec("neutral-grid"), O); const hired = runEvil(bars, spec("neutral-grid"), { ...O, accountant: { a, rules: { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 } } });
+    expect(hired.trades).toBe(twin.trades); expect(hired.equity).toBeCloseTo(twin.equity, 6);
+  });
+});
+
+import { runAngel, angelName } from "../src/bot/evil";
+describe("angel twins", () => {
+  test("the angel copies the evil bot, adds its filters and learns every week from past data only", () => {
+    const bars = hours(1200, up); const sp = { kind: "short-grid" as const, sym: "T", since: "2026-11-15T04:00", recruit: 1 };
+    const evil = runEvil(bars, sp, O); const angel = runAngel(bars, sp, O, "Evil Lucas");
+    expect(angel.lessons.length).toBeGreaterThanOrEqual(2); expect(angel.lessons.at(-1)!.text).toContain("Evil Lucas");
+    expect(angel.resultPct).toBeGreaterThan(evil.resultPct); // a short grid in a rising market: the trend filter keeps the angel out
+    expect(angelName("Evil Catalina II")).toBe("Angel Catalina II");
+  });
+  test("a martingale angel has a stop: it is never wiped out the way the evil one is", () => {
+    const bars = hours(900, up); const sp = { kind: "dca-short" as const, sym: "T", since: "2026-11-15T04:00", recruit: 1 };
+    expect(runAngel(bars, sp, O).stops).toBeLessThanOrEqual(runEvil(bars, sp, O).stops);
+  });
+  test("the same bars give the same angel (PC and GitHub agree)", () => {
+    const bars = hours(900, wave); const sp = { kind: "trailing" as const, sym: "T", since: "2026-11-15T04:00", recruit: 1 };
+    expect(runAngel(bars, sp, O)).toEqual(runAngel(bars, sp, O));
+  });
+});

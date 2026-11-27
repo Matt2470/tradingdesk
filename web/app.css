@@ -180,7 +180,7 @@ main:has(.game){max-width:none;background:#0E1923;padding:0}
 .game .sub,.game .small,.game .legend{color:var(--g-mut)}
 .game a{color:var(--g-gold2)}
 .game .panel,.game .empty,.game table,.game .notice,.game dl.stats{background:var(--g-panel);border-color:var(--g-line);color:var(--g-ink)}
-.game dl.stats{background:var(--g-line)}.game dl.stats>div{background:#132331}
+.game dl.stats{background:#132331;gap:1px;box-shadow:inset 0 0 0 1px var(--g-line)}.game dl.stats>div{background:#132331}
 .game .notice{border-left-color:var(--g-gold)}
 .game th{background:rgba(216,183,106,.08);color:var(--g-gold);border-color:var(--g-line)}
 .game td{border-color:rgba(216,183,106,.14)}
@@ -311,3 +311,10 @@ main>.game.plain{padding-top:28px}
 @media (max-width:1300px){.pf{grid-template-columns:220px 1fr 54px 1fr}.pf-right{grid-column:1/-1}}
 @media (max-width:900px){.pf{grid-template-columns:1fr}.pf-tabs{flex-direction:row}}
 .hname .evilname{display:block;font-size:13px;letter-spacing:.06em}
+.pf-trades{margin-top:22px}.pf-trades h3{font-size:17px;margin:14px 0 8px}.pf-trades table{width:100%}
+/* angel twins */
+.angelname{color:#F2C94C;font-variant:small-caps;font-family:var(--serif);letter-spacing:.04em}
+.evilmini.angelmini{right:60px;border-color:#F2C94C}.evilmini-s.angelmini{border-color:#F2C94C}
+.tw.angel{border-color:#B8913F;background:rgba(242,201,76,.06)}.tw.angel .tw-face{border-color:#F2C94C}
+.tw-row.two{grid-template-columns:repeat(2,1fr)}
+.speech .angelsay{background:rgba(242,201,76,.1)}

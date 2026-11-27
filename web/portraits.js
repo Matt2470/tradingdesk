@@ -21,7 +21,7 @@
   const shade = (hex, f) => { const n = parseInt(hex.slice(1), 16); const c = [n >> 16, (n >> 8) & 255, n & 255].map(v => Math.max(0, Math.min(255, Math.round(f < 0 ? v * (1 + f) : v + (255 - v) * f)))); return "#" + c.map(v => v.toString(16).padStart(2, "0")).join(""); };
   const ol = (w = 5) => `stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 
-  function look(id, recruit, evil) {
+  function look(id, recruit, evil, angel) {
     let L = { ...(SEATS[id] ?? SEATS["stocks-bull"]) };
     if (recruit > 1) {
       const h = hash(`${id}#${recruit}`);
@@ -29,8 +29,17 @@
         extra: ["none", "glasses", "headphones", "goggles", "cap"][(h >> 9) % 5], mouth: ["grin", "smile", "flat", "frown"][(h >> 12) % 4], brows: ["bold", "soft", "sharp", "grumpy"][(h >> 14) % 4], freckles: (h >> 16) % 3 === 0 };
     }
     if (evil) L = { ...L, top: "hood", main: "#18171C", accent: "#D6283A", legs: "#24232A", shoe: "#18171C", stripe: "#D6283A", eyes: "#FF3344", mouth: "smirk", brows: "evil", bg: ["#5A1018", "#0B0507"], evil: true, extra: L.extra === "glasses" ? "glasses" : "none" };
+    // The angel twin (owner, 2026-11-27): the same kid in white and gold, with a halo and little wings.
+    if (angel) L = { ...L, top: "hoodie", main: "#EEF1F5", accent: "#E3B341", legs: "#C9D6E3", shoe: "#FFFFFF", stripe: "#E3B341", eyes: "#2F6FD0", mouth: "smile", brows: "soft", bg: ["#8DB4E2", "#1D2E4A"], angel: true, extra: L.extra === "glasses" ? "glasses" : "none" };
     return L;
   }
+  function wings(L) {
+    if (!L.angel) return "";
+    const w = (dir) => `<path d="M${150 + dir * 34} 246 C${150 + dir * 70} 212 ${150 + dir * 112} 220 ${150 + dir * 118} 252 C${150 + dir * 100} 250 ${150 + dir * 104} 268 ${150 + dir * 86} 270 C${150 + dir * 82} 286 ${150 + dir * 60} 288 ${150 + dir * 40} 280Z" fill="#FFFFFF" ${ol(4)}/>
+      <path d="M${150 + dir * 58} 258 C${150 + dir * 74} 250 ${150 + dir * 88} 252 ${150 + dir * 98} 258" stroke="#C9D6E3" stroke-width="3" fill="none"/>`;
+    return w(-1) + w(1);
+  }
+  function halo(L) { return L.angel ? `<ellipse cx="150" cy="48" rx="42" ry="10" fill="none" stroke="${INK}" stroke-width="11"/><ellipse cx="150" cy="48" rx="42" ry="10" fill="none" stroke="#F2C94C" stroke-width="5"/>` : ""; }
 
   // ---- the gadget beside each kid (left side, like the weapons on a character sheet) ----
   function item(L) {
@@ -124,13 +133,13 @@
 
   /** The portrait as an SVG string (or an <img> when the owner supplied a picture). */
   window.portrait = function (id, recruit = 1, opts = {}) {
-    const pic = custom(id, recruit, !!opts.evil); if (pic) return `<img class="portrait-img" src="portraits/${encodeURIComponent(pic)}" alt="${opts.label ?? "portrait"}">`;
-    const L = look(id, recruit, !!opts.evil); const u = `p${hash(`${id}|${recruit}|${!!opts.evil}`).toString(36)}`;
+    const pic = opts.angel ? null : custom(id, recruit, !!opts.evil); if (pic) return `<img class="portrait-img" src="portraits/${encodeURIComponent(pic)}" alt="${opts.label ?? "portrait"}">`;
+    const L = look(id, recruit, !!opts.evil, !!opts.angel); const u = `p${hash(`${id}|${recruit}|${!!opts.evil}|${!!opts.angel}`).toString(36)}`;
     return `<svg viewBox="0 20 300 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${opts.label ?? "portrait"}" preserveAspectRatio="xMidYMid slice"><defs>
       <radialGradient id="${u}bg" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="${L.bg[0]}"/><stop offset="1" stop-color="${L.bg[1]}"/></radialGradient></defs>
       <rect y="20" width="300" height="380" fill="url(#${u}bg)"/>
       <g fill="#fff" opacity=".06">${[[40, 60, 3], [250, 90, 2], [230, 300, 3], [60, 330, 2], [270, 200, 2]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}"/>`).join("")}</g>
       <ellipse cx="150" cy="366" rx="70" ry="10" fill="#000" opacity=".3"/>
-      <g transform="translate(${L.item === "drone" ? 18 : 46} ${L.item === "drone" ? 124 : 262}) scale(1.4) translate(-${L.item === "drone" ? 18 : 46} -${L.item === "drone" ? 124 : 262})">${item(L)}</g>${hairBack(L)}${body(L)}${head(L, u)}${hairFront(L)}${extras(L)}</svg>`;
+      <g transform="translate(${L.item === "drone" ? 18 : 46} ${L.item === "drone" ? 124 : 262}) scale(1.4) translate(-${L.item === "drone" ? 18 : 46} -${L.item === "drone" ? 124 : 262})">${item(L)}</g>${wings(L)}${hairBack(L)}${body(L)}${head(L, u)}${hairFront(L)}${extras(L)}${halo(L)}</svg>`;
   };
 })();

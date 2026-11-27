@@ -333,6 +333,14 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    the loan, the award refills it at the stop line or it is fired, weekly strikes), its own state and view files, the
    bank, the desk guard, the scoreboard and the Accountant screen. It is a guest: no monthly prize, never "hungry",
    no recruit after it is fired (it goes to `roster.fired`). `participants()` is the four seats only.
+   A hired twin keeps the account it built (owner, 2026-11-27): its replay and its loan run from when it started
+   (`since`: its participant's hire, or the previous hire), not from the click. The participant then gets a new twin
+   (`gen` + 1, named "Evil Catalina II", ...; `evilName`, `hireKey` in `src/bot/evil.ts`), starting at the hire.
+8p1. **Angel twins** (owner, 2026-11-27, `runAngel` in `src/bot/evil.ts`). Each hired evil twin has an angel twin: the same
+   Pionex-style bot on the same market from the same start, improved (trend filter on hourly EMA 50, a neutral grid
+   pauses when ADX 14 is above its limit, the martingale adds at most 4 times and has a 12% stop) and re-tuned every
+   week by testing a few settings on the last 14 days only (no peeking). Paper only. A hired evil twin duels its angel
+   every week (`duelsOf(..., angels)`, names in `duels.names`); the four participants keep their rotation.
 8q. **Era stars, fame and deeds** (owner, 2026-11-26, `src/bot/fame.ts`). Eras are the tiers (I Rookie to IV Experienced
    trader); each has 7 medallions (badges in a row, trades closed, winning trades, green days, green weeks, best single
    trade, duels won) with 3 stars each. An era's stars count once the trader has reached that tier. Fame: stars, 200 per

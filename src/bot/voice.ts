@@ -55,6 +55,9 @@ export function thoughtOf(t: ThoughtInput): string {
   if (cushion < t.grant * 0.15) out.push(`Only ${usd(cushion)} above the stop line. Careful now.`);
   else if (!t.weekend && !t.graced && t.trades < t.minTrades) out.push(`I need ${t.minTrades - t.trades} more closed trade${t.minTrades - t.trades === 1 ? "" : "s"} before the weekly check or it's a strike.`);
   else if (toBadge < t.grant * 0.25) out.push(`${usd(toBadge)} to my next badge.`);
+  else if (c === "evil" && t.evil && Math.abs(t.evil.resultPct - t.resultPct) >= 1) out.push(t.evil.resultPct > t.resultPct
+    ? pickOne([`${t.evil.name} copied my rules and is ahead. Copycat.`, `That goody-goody ${t.evil.name} is beating me with my own tricks.`], seed + "a")
+    : pickOne([`${t.evil.name} keeps "improving" my rules and is still behind me.`, `Ahead of ${t.evil.name}. Halos don't trade.`], seed + "a"));
   else if (t.evil && Math.abs(t.evil.resultPct - t.resultPct) >= 1) out.push(t.evil.resultPct > t.resultPct
     ? pickOne([`My evil twin (${t.evil.name}) is beating me. That can't last.`, `Losing to a ready-made ${t.evil.name} from a shop window? Not for long.`], seed + "e")
     : pickOne([`My evil twin (${t.evil.name}) is behind me. Thinking beats copying.`, `Ahead of my evil twin. A ready-made bot can't read the market.`], seed + "e"));

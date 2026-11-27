@@ -39,7 +39,7 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   "/api/portraits": () => { try { return readdirSync(join(ROOT, "web", "portraits")).filter(f => /\.(png|jpe?g|webp)$/i.test(f)); } catch { return []; } },
   // The owner hires an evil twin (or takes the order back before the next check). Kept with the owner's answers on this PC.
   "/api/hire": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { key?: string; yes?: boolean } | null;
-    if (!b || typeof b.key !== "string" || !/^hire-evil-[a-z-]+-\d+$/.test(b.key) || typeof b.yes !== "boolean") return { error: "send {key, yes}" };
+    if (!b || typeof b.key !== "string" || !/^hire-evil-[a-z-]+-\d+(-g\d+)?$/.test(b.key) || typeof b.yes !== "boolean") return { error: "send {key, yes}" };
     const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); answers[b.key] = { answer: b.yes ? "yes" : "no", at: new Date().toISOString().slice(0, 16) }; writeJson(ANSWERS(), answers); return { ok: true, key: b.key, answer: answers[b.key].answer }; },
   "/api/approve": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { id?: string; yes?: boolean } | null;
     if (!b || typeof b.id !== "string" || typeof b.yes !== "boolean") return { error: "send {id, yes}" }; const a = answer(b.id, b.yes); return a ? { ok: true, approval: a } : { error: "no such decision" }; },
