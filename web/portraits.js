@@ -22,11 +22,13 @@
   const ol = (w = 5) => `stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 
   function look(id, recruit, evil, angel) {
-    let L = { ...(SEATS[id] ?? SEATS["stocks-bull"]) };
+    // A guild trader (or any other new face): the colours of one seat and a face of its own.
+    if (!SEATS[id]) { const k = Object.keys(SEATS)[hash(id) % 4]; const L0 = look(k, 2 + (hash(id + "#") % 997), evil, angel); return L0; }
+    let L = { ...SEATS[id] };
     if (recruit > 1) {
       const h = hash(`${id}#${recruit}`);
-      L = { ...L, skin: SKINS[h % SKINS.length], hair: HAIRS[(h >> 3) % HAIRS.length], style: ["spiky", "long", "bun", "curly", "short", "beanie"][(h >> 6) % 6],
-        extra: ["none", "glasses", "headphones", "goggles", "cap"][(h >> 9) % 5], mouth: ["grin", "smile", "flat", "frown"][(h >> 12) % 4], brows: ["bold", "soft", "sharp", "grumpy"][(h >> 14) % 4], freckles: (h >> 16) % 3 === 0 };
+      L = { ...L, skin: SKINS[h % SKINS.length], hair: HAIRS[(h >>> 3) % HAIRS.length], style: ["spiky", "long", "bun", "curly", "short", "beanie"][(h >>> 6) % 6],
+        extra: ["none", "glasses", "headphones", "goggles", "cap"][(h >>> 9) % 5], mouth: ["grin", "smile", "flat", "frown"][(h >>> 12) % 4], brows: ["bold", "soft", "sharp", "grumpy"][(h >>> 14) % 4], freckles: (h >>> 16) % 3 === 0 };
     }
     if (evil) L = { ...L, top: "hood", main: "#18171C", accent: "#D6283A", legs: "#24232A", shoe: "#18171C", stripe: "#D6283A", eyes: "#FF3344", mouth: "smirk", brows: "evil", bg: ["#5A1018", "#0B0507"], evil: true, extra: L.extra === "glasses" ? "glasses" : "none" };
     // The angel twin (owner, 2026-11-27): the same kid in white and gold, with a halo and little wings.

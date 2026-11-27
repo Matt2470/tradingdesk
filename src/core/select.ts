@@ -25,10 +25,10 @@ export interface Shortlist { pickedAt: string; testShare: number; maxStrategies:
 
 const median = (v: number[]) => { if (!v.length) return 0; const s = [...v].sort((a, b) => a - b); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
-export function pickShortlist(markets: SelectMarket[], gate: { minTrades: number; minProfitFactor: number }, o: { testShare: number; maxStrategies: number; now?: number; /** Only strategies of this side (a bullish or bearish competition bot). */ side?: "long" | "short" }): Shortlist {
+export function pickShortlist(markets: SelectMarket[], gate: { minTrades: number; minProfitFactor: number }, o: { testShare: number; maxStrategies: number; now?: number; /** Only strategies of this side (a bullish or bearish competition bot). */ side?: "long" | "short"; /** Only strategies this accepts (a guild trader's genes). */ only?: (id: string) => boolean }): Shortlist {
   const cands: Candidate[] = [];
   const usable = markets.filter(m => m.bars.length >= 400);
-  for (const s of STRATEGIES.filter(x => !o.side || x.side === o.side)) {
+  for (const s of STRATEGIES.filter(x => (!o.side || x.side === o.side) && (!o.only || o.only(x.id)))) {
     const pf: number[] = []; let pass = 0; let gw = 0, gl = 0, tn = 0, tsum = 0; const per: NonNullable<Candidate["charts"]> = [];
     for (const m of usable) {
       const cut = Math.floor(m.bars.length * (1 - o.testShare)); const cutDate = m.bars[cut].d;

@@ -72,6 +72,9 @@ try {
   ok(comp.bots.every((b: any) => Number.isFinite(b.fame) && b.eras?.length === 4 && b.eras.every((e: any) => e.medallions.length === 7) && b.eras[0].unlocked) && Array.isArray(comp.deeds), "every participant has era stars, fame and deeds");
   const hire = (b: unknown) => fetch(base + "/api/hire", { method: "POST", body: JSON.stringify(b) }).then(r => r.json());
   ok((await hire({ key: "nope", yes: true })).error && (await hire({ key: "hire-evil-crypto-bull-1", yes: true })).answer === "yes" && (await hire({ key: "hire-evil-crypto-bull-1", yes: false })).answer === "no", "hiring an evil twin: the owner's order is kept and can be taken back");
+  const gd = await (await fetch(base + "/api/guild")).json();
+  ok(gd && gd.bank && gd.grant === 250 && Array.isArray(gd.ordered) && Array.isArray(gd.hired), "the Players Guild answers (candidates, bank, orders, hires)");
+  ok((await hire({ key: "hire-guild-g1-2", yes: true })).answer === "yes" && (await hire({ key: "hire-guild-g1-2", yes: false })).answer === "no", "a guild candidate can be ordered and the order taken back");
   ok(Array.isArray(tw.hires) && comp.duels && typeof comp.duels.names === "object", "hired evil twins and their angel twins (none yet) and the duels' names list");
   ok(tw.bots.every((b: any) => b.hire?.key?.startsWith("hire-evil-") && b.hire.grant === 250), "each evil twin can be hired from the Twins screen");
   ok(Array.isArray(await (await fetch(base + "/api/portraits")).json()), "the list of the owner's portrait pictures answers");

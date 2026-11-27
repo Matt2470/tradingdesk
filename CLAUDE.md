@@ -341,6 +341,17 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    pauses when ADX 14 is above its limit, the martingale adds at most 4 times and has a 12% stop) and re-tuned every
    week by testing a few settings on the last 14 days only (no peeking). Paper only. A hired evil twin duels its angel
    every week (`duelsOf(..., angels)`, names in `duels.names`); the four participants keep their rotation.
+8p2. **All players** (owner, 2026-11-27, `#players`): one screen with everyone who trades (participants, hired evil twins,
+   every participant's evil twin, every hired twin's angel; not the random twins) and each one's open and closed trades.
+8p3. **The Players Guild** (owner, 2026-11-27, `src/bot/guild.ts`, `data/bot/guild.json`, `#guild`). Every Monday (first
+   check after it) a new generation of candidates: 6 strategists (genes: side, strategy family, ADX filter, chart speed,
+   world; try-out = the playbook those genes pick from the seats' short lists, scored on the newer data) and 3 bot
+   builders (an improved Pionex-style bot on one Lighter market, `runAngel`; try-out = the last 21 days). It keeps the
+   best (3 strategists, 1 builder) re-scored on the newest data, breeds mutants of the best two and adds a newcomer;
+   seeded by the generation so the PC and GitHub agree. The owner's "Hire" (`hire-guild-<id>` in owner-answers) needs a
+   grant in the bank: a strategist gets its own seat in `participants()` (`roster.guild`, gene-filtered short list via
+   `pickShortlist(..., { only })`, no recruit when stopped); a builder plays like a hired evil twin (`roster.evil`,
+   `style: "angel"`).
 8q. **Era stars, fame and deeds** (owner, 2026-11-26, `src/bot/fame.ts`). Eras are the tiers (I Rookie to IV Experienced
    trader); each has 7 medallions (badges in a row, trades closed, winning trades, green days, green weeks, best single
    trade, duels won) with 3 stars each. An era's stars count once the trader has reached that tier. Fame: stars, 200 per

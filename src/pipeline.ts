@@ -29,6 +29,7 @@ import { lighterFile, type LighterSnapshot } from "./data/lighter";
 import { runEvil, runAngel, angelName, evilMarket, evilName, hireKey, EVIL_FOR, EVIL_PLAIN, type EvilSpec, type EvilResult, type EvilKind } from "./bot/evil";
 import { thoughtOf, tauntOf, characterOf, CHARACTER_TEXT } from "./bot/voice";
 import { erasOf, deedsOf, DEED_FAME } from "./bot/fame";
+import { breed, strategyFits, chartFits, describeStrategist, type Guild, type StrategistGenes, type BuilderGenes, type Tryout } from "./bot/guild";
 
 export type View = "market" | "crypto";
 export const viewOf = (v: string | null): View => (v === "crypto" ? "crypto" : "market");
@@ -43,19 +44,23 @@ export const files = (v: View) => ({
 /** Files of one competition bot. */
 export const botFiles = (id: string) => ({ state: join(P.bot, `state-${id}.json`), view: join(P.derived, `bot-${id}.json`), shortlist: join(P.derived, `shortlist-${id}.json`) });
 export const COMPETITION = () => join(P.derived, "competition.json");
-/** The four seats from config/settings.json (each with its recruits). */
-export const participants = (st: Settings = settings()) => st.competition.bots;
+/** Traders hired from the Players Guild with their own seat (owner, 2026-11-27), kept in data/bot/roster.json. */
+export interface GuildHire { id: string; key: string; cand: string; name: string; genes: StrategistGenes; hiredAt: string; firedAt?: string }
+const guildBot = (h: GuildHire): CompetitionBot => ({ id: h.id, name: h.name, view: h.genes.world, side: h.genes.side, motto: describeStrategist(h.genes), ...(h.genes.world === "crypto" ? { lighterCrypto: true } : { allLighter: true }), guild: h.genes });
+/** The seats that trade with our strategy library: the four from config/settings.json (each with its recruits), then the guild's. */
+export const participants = (st: Settings = settings()) => [...st.competition.bots, ...(readRoster().guild ?? []).filter(h => !h.firedAt).map(guildBot)];
+export const GUILD = () => join(P.bot, "guild.json");
 /** Evil twins the owner hired (owner, 2026-11-26): extra players with their own loan, kept in data/bot/roster.json. */
 export const activeHires = () => (readRoster().evil ?? []).filter(h => !h.firedAt);
 const evilBot = (h: EvilHire, st: Settings): CompetitionBot => { const of = st.competition.bots.find(b => b.id === h.of);
-  return { id: h.id, name: h.name, view: of?.view ?? "crypto", side: h.kind === "short-grid" || h.kind === "dca-short" ? "short" : "both", motto: EVIL_PLAIN[h.kind], evil: { kind: h.kind, sym: h.sym, of: h.of } }; };
+  return { id: h.id, name: h.name, view: h.view ?? of?.view ?? "crypto", side: h.kind === "short-grid" || h.kind === "dca-short" ? "short" : "both", motto: EVIL_PLAIN[h.kind], evil: { kind: h.kind, sym: h.sym, of: h.of } }; };
 /** Everyone with a loan: the participants, then the hired evil twins. */
 export const competitors = (st: Settings = settings()) => [...participants(st), ...activeHires().map(h => evilBot(h, st))];
 export const botById = (id: string | null, st: Settings = settings()) => competitors(st).find(b => b.id === id) ?? competitors(st)[0];
 /** Files the GitHub run publishes on its data branch, by path on that branch -> local path. */
 export function publishedFiles(st: Settings = settings()): [string, string][] {
   return [...competitors(st).flatMap(b => [[`bot/state-${b.id}.json`, botFiles(b.id).state], [`derived/bot-${b.id}.json`, botFiles(b.id).view], [`derived/shortlist-${b.id}.json`, botFiles(b.id).shortlist]] as [string, string][]),
-    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()], ["bot/desk.json", DESK()], ["bot/approvals.json", APPROVALS()]];
+    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()], ["bot/desk.json", DESK()], ["bot/approvals.json", APPROVALS()], ["bot/guild.json", GUILD()]];
 }
 /** Who checked the bots, when: the newest 200 checks (GitHub's runs and the PC's), shared through bot-data. */
 export const RUNS = () => join(P.bot, "runs.json");
@@ -130,8 +135,8 @@ function leagueDuties(st: Settings, now: number): Set<string> {
   return hungry;
 }
 /** Everyone who has worked in the competition: names used, bots fired, and chart-strategy pairs each seat has already tried. */
-export interface EvilHire { id: string; key: string; of: string; kind: EvilKind; sym: string; name: string; hiredAt: string; firedAt?: string; /** When its account started (with its participant, or after the previous twin was hired): a hired twin keeps its account. */ since?: string; gen?: number }
-export interface Roster { used: string[]; fired: FiredRecord[]; banned: Record<string, string[]>; /** Hired evil twins. */ evil?: EvilHire[] }
+export interface EvilHire { id: string; key: string; of: string; kind: EvilKind; sym: string; name: string; hiredAt: string; firedAt?: string; /** "angel": a guild bot builder (the improved, weekly re-tuned bot). */ style?: "angel"; view?: View; /** When its account started (with its participant, or after the previous twin was hired): a hired twin keeps its account. */ since?: string; gen?: number }
+export interface Roster { used: string[]; fired: FiredRecord[]; banned: Record<string, string[]>; /** Hired evil twins and guild bot builders. */ evil?: EvilHire[]; /** Traders hired from the guild with their own seat. */ guild?: GuildHire[] }
 export interface FiredRecord { slot: string; name: string; recruit: number; hiredAt: string; firedAt: string; badges: number; bestStreak: number; tier: string; trades: number; returnPct: number;
   /** Paid back over its whole time (including what was recovered when it was fired). */ repaid: number; /** Loan the accountant lost. */ debtLeft: number; recovered?: number; interestCharged?: number; prizes?: number; /** Money above the loan handed back when replaced. */ returned?: number; file: string }
 export const ROSTER = () => join(P.bot, "roster.json");
@@ -202,13 +207,15 @@ function replaceFired(b: CompetitionBot, s: BotState, st: Settings, now: number)
 const pausedBars = (bars: { d: string }[], tf: Timeframe, cls: Sym["class"], clock?: "utc") => bars.map(x => inWeekendPause(barEndMs(x.d, tf, clock === "utc" ? "crypto" : cls)));
 let readOnly = false;
 function shortlistFor(b: CompetitionBot, st: Settings, markets: { s: Sym; tf: Timeframe; complete: { d: string }[]; c?: { clock?: "utc" } | null }[], now: number): Shortlist & { sig?: string } {
-  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, b.allLighter ?? false, st.competition.costTiers, "weekend-v3"]);
+  const sig = JSON.stringify([st.exits ?? DEFAULT_EXITS, st.backtest, st.selection, st.costBps, st.intraday, st.timeframes, STRATEGIES.map(x => x.id), b.side, b.lighterCrypto ?? false, b.allLighter ?? false, st.competition.costTiers, b.guild ?? null, "weekend-v3"]);
   const old = readJson<(Shortlist & { sig?: string }) | null>(botFiles(b.id).shortlist, null);
   if (old && readOnly) return old; // watching only: whoever trades picks it
   // Re-pick weekly, when the rules change, or when clearly more charts exist than at the last pick (new downloads). Not
   // when there are fewer: the PC and GitHub may hold different amounts of data and must not undo each other's pick.
   if (old && old.sig === sig && now - Date.parse(old.pickedAt) < st.selection.refreshDays * 864e5 && markets.length <= ((old as { seen?: number }).seen ?? 0) * 1.2) return old;
-  const picked = { ...pickShortlist(markets.map(m => ({ key: `${m.s.symbol}@${m.tf}`, bars: m.complete as never, opt: { costBps: botCost(st, m.s, m.tf), maxLosingBars: st.backtest.maxLosingBars, barsPerYear: barsPerYear(m.complete as never, m.s.class === "crypto" ? 365 : 252), exits: st.exits ?? DEFAULT_EXITS, paused: pausedBars(m.complete, m.tf, m.s.class, m.c?.clock) } })), st.backtest, { ...st.selection, now, side: b.side === "both" ? undefined : b.side }), sig };
+  // A guild trader picks only from the charts and strategies its genes allow.
+  if (b.guild) markets = markets.filter(m => chartFits(`${m.s.symbol}@${m.tf}`, b.guild!));
+  const picked = { ...pickShortlist(markets.map(m => ({ key: `${m.s.symbol}@${m.tf}`, bars: m.complete as never, opt: { costBps: botCost(st, m.s, m.tf), maxLosingBars: st.backtest.maxLosingBars, barsPerYear: barsPerYear(m.complete as never, m.s.class === "crypto" ? 365 : 252), exits: st.exits ?? DEFAULT_EXITS, paused: pausedBars(m.complete, m.tf, m.s.class, m.c?.clock) } })), st.backtest, { ...st.selection, now, side: b.side === "both" ? undefined : b.side, ...(b.guild ? { only: (id: string) => strategyFits(id, b.guild!) } : {}) }), sig };
   (picked as { seen?: number }).seen = markets.length;
   writeJson(botFiles(b.id).shortlist, picked);
   return picked;
@@ -332,6 +339,30 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
   // Lighter funding, charged every hour on open positions (rate read as per fundingPeriodHours).
   const fundingRates = readJson<{ funding?: Record<string, number> } | null>(join(P.derived, "lighter.json"), null)?.funding ?? {};
   const fundingOf = (key: string) => (fundingRates[underlying(key)] ?? 0) / st.competition.fundingPeriodHours;
+  const replayOpts = (sym: string) => { const sy = allSyms[sym]; return { grant: st.competition.startGrant, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
+    fundingPerHour: () => (fundingRates[sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1) }; };
+  // The Players Guild (src/bot/guild.ts): a new generation of candidates every week, and the owner's hires from it.
+  if (trading) {
+    let guild = readJson<Guild | null>(GUILD(), null); const roster0 = readRoster(); const answers0 = readJson<Record<string, { answer: string }>>(ANSWERS(), {});
+    const ordered = Object.entries(answers0).filter(([k, x]) => k.startsWith("hire-guild-") && x.answer === "yes").map(([k]) => k.replace("hire-guild-", ""));
+    if (!guild || now >= Date.parse(nextMondayMadrid(guild.at) + ":00Z")) {
+      const sls = (w: View) => participants(st).filter(b => b.view === w).map(b => readJson<Shortlist | null>(botFiles(b.id).shortlist, null)).filter((x): x is Shortlist => !!x);
+      const markets = Object.entries(OI).filter(([sym, oi]) => (oi ?? 0) > 0 && hourBars(sym).length >= 600).sort((a, b) => (b[1] ?? 0) - (a[1] ?? 0)).slice(0, 12).map(([sym]) => sym);
+      const builderTryout = (g: BuilderGenes): Tryout => { const r = runAngel(hourBars(g.sym), { kind: g.kind, sym: g.sym, since: new Date(now - 21 * 864e5).toISOString().slice(0, 16), recruit: 1 }, replayOpts(g.sym), "the evil twin");
+        return { fitness: +(r.resultPct + 0.5 * r.worstDropPct - 20 * r.stops).toFixed(3), trades: r.trades, avgPct: r.trades ? +(r.pnl / r.trades / st.competition.startGrant * 100).toFixed(3) : 0, pf: 0, charts: 1, resultPct: r.resultPct, worstDropPct: r.worstDropPct, stops: r.stops }; };
+      guild = breed({ gen: (guild?.gen ?? 0) + 1, at: stamp, shortlists: { crypto: sls("crypto"), market: sls("market") }, markets, builderTryout, usedNames: roster0.used, prev: guild, keep: ordered });
+      writeJson(GUILD(), guild);
+    }
+    // Hires: a strategist gets its own seat; a bot builder plays with its own loan like a hired evil twin.
+    let rch = false;
+    for (const c of guild.candidates) { const key = `hire-guild-${c.id}`;
+      if (!ordered.includes(c.id) || (roster0.guild ?? []).some(h => h.key === key) || (roster0.evil ?? []).some(h => h.key === key) || bankOf(st).available < st.competition.startGrant) continue;
+      if (c.type === "strategist") (roster0.guild ??= []).push({ id: `guild-${c.id}`, key, cand: c.id, name: c.name, genes: c.genes as StrategistGenes, hiredAt: stamp });
+      else { const g = c.genes as BuilderGenes; (roster0.evil ??= []).push({ id: `guild-${c.id}`, key, of: "guild", kind: g.kind, sym: g.sym, name: c.name, hiredAt: stamp, since: stamp, gen: 1, style: "angel", view: allSyms[g.sym]?.class === "crypto" ? "crypto" : "market" }); }
+      if (!roster0.used.includes(c.name)) roster0.used.push(c.name); rch = true; writeJson(ROSTER(), roster0);
+    }
+    if (rch) writeJson(ROSTER(), roster0);
+  }
   for (const v of ["market", "crypto"] as View[]) {
     const rows: SymbolEval[] = []; const market: Record<string, MarketView> = {};
     const charts = uni.filter(x => inView(v, x)).flatMap(s => tfs.filter(tf => s.class !== "index" || tf === "1d").map(tf => {
@@ -397,7 +428,12 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       run(stDesk, state, mk, allowedFor(state), b);
       // A stopped bot (bust line, no award to rescue it) waits for the end of the week; one replaced for quiet weeks goes at
       // once. Either way a recruit is hired only if the accountant has a grant's worth of money left.
-      if (state.fired) {
+      if (state.fired && b.guild) { // a guild trader has no recruit: it leaves the desk, its record stays
+        const r = readRoster(); const h = (r.guild ?? []).find(x => x.id === b.id);
+        if (h && !h.firedAt) { const a = state.accountant!; h.firedAt = state.fired.at; writeJson(join(P.bot, "fired", `${b.id}-${h.name}.json`.replace(/[^A-Za-z0-9.@_-]/g, "_")), state);
+          r.fired.push({ slot: b.id, name: h.name, recruit: 1, hiredAt: state.startedAt, firedAt: state.fired.at, badges: a.badges, bestStreak: a.bestStreak, tier: tierName(a, rulesOf(st)), trades: new Set(state.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, returnPct: +(a.index - 100).toFixed(2), repaid: +a.repaid.toFixed(2), debtLeft: +(a.writtenOff ?? a.debt).toFixed(2), recovered: +(a.recovered ?? 0).toFixed(2), interestCharged: +a.interestPaid.toFixed(2), prizes: +(a.bonuses ?? 0).toFixed(2), returned: +(a.returned ?? 0).toFixed(2) } as FiredRecord);
+          writeJson(ROSTER(), r); }
+      } else if (state.fired) {
         state.fired.replaceAt ??= /quiet weeks/.test(state.fired.reason) ? new Date(now).toISOString().slice(0, 16) : nextMondayMadrid(state.fired.at);
         // Hiring waits for the owner's yes on the Accountant screen (competition.approvals.hire).
         const who = state.persona ?? { name: b.name, recruit: 1, slot: b.id }; const hireId = `hire-${b.id}-${who.recruit + 1}`;
@@ -447,7 +483,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       // The account runs from when the twin started (it keeps what it built before the hire), on a 250 loan from the bank.
       const since = h.since ?? h.hiredAt; const b = evilBot(h, st); const g = st.competition.startGrant; const a = newAccountant(g, since, rulesOf(st));
       a.events.push({ d: since, kind: "hired", badges: 0, msg: since === h.hiredAt ? `${h.name} hired with a ${g} USD loan.` : `${h.name}'s account, started on ${since.replace("T", " ")} with a ${g} USD loan; hired by the owner on ${h.hiredAt.replace("T", " ")}.` });
-      const sy = allSyms[h.sym]; const r = runEvil(hourBars(h.sym), { kind: h.kind, sym: h.sym, since, recruit: 1 }, { grant: g, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
+      const sy = allSyms[h.sym]; const r = (h.style === "angel" ? runAngel : runEvil)(hourBars(h.sym), { kind: h.kind, sym: h.sym, since, recruit: 1 }, { grant: g, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
         fundingPerHour: () => (fundingRates[h.sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1), accountant: { a, rules: rulesOf(st) } });
       const key = `${h.sym}@1h`; const s: BotState = { ...newState(g, since), cash: r.cash + r.position * r.avgEntry, accountant: a, side: b.side, persona: { name: h.name, recruit: 1, slot: h.id }, playbook: [],
         positions: Math.abs(r.position) > 1e-12 ? { [key]: { side: r.position > 0 ? "long" : "short", qty: Math.abs(r.position), entry: r.avgEntry, entryDate: r.closed.at(-1)?.exitDate ?? h.hiredAt, stop: 0, strategyId: h.kind, held: 0 } } : {},
@@ -477,7 +513,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
       evil };
   }).filter(Boolean),
     // Each hired evil twin against its angel twin: the same bot on the same market, improved and re-tuned every week.
-    hires: activeHires().map(h => {
+    hires: activeHires().filter(h => h.style !== "angel").map(h => {
       const s = readJson<BotState | null>(botFiles(h.id).state, null); const v = readJson<any>(botFiles(h.id).view, null); if (!s || !v) return null;
       const sy = allSyms[h.sym]; const since = h.since ?? h.hiredAt;
       const angel = runAngel(hourBars(h.sym), { kind: h.kind, sym: h.sym, since, recruit: 1 }, { grant: st.competition.startGrant, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,

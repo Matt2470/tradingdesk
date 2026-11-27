@@ -79,10 +79,20 @@ function progressBar(equity, grant) {
 /** A trader's open trades and closed trades (the Paper bots screen and the profile use the same tables). */
 const openTrades = b => b.positions.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th class="num">Entry</th><th class="num">Now</th><th class="num">Next stop</th><th class="num">Next take-profit</th><th class="num">Still open</th><th class="num">Profit</th></tr></thead><tbody>${b.positions.map(p => `<tr><td class="sym">${esc(p.symbol)}</td><td>${esc(TF_NAME[p.tf])}</td><td>${esc(p.side)}</td><td>${esc(bar(p.entryDate))}</td><td class="num">${price(p.entry)}</td><td class="num">${price(p.price)}</td><td class="num">${p.nextStop ? `${price(p.nextStop.px)}<br><span class="small${p.legs?.hits ? " gain" : ""}">${esc(p.nextStop.name)}${p.legs?.hits ? ", profit protected" : ""}</span>` : price(p.stop)}</td><td class="num">${p.target ? price(p.target) : `<span class="small" title="Both take-profits filled. The last part has no fixed target: it closes when the price falls back to the rising stop.">none, rides the stop</span>`}</td><td class="num">${p.qty0 ? num(p.qty / p.qty0 * 100, 0) + "%" : "100%"}</td><td class="num">${signed(p.pnl, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No open trades.</p>`;
 const closedTrades = s => s.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th>Closed</th><th>Why</th><th class="num">Return</th><th class="num">Profit</th></tr></thead><tbody>${[...s].reverse().slice(0, 100).map(t => `<tr><td class="sym">${esc(t.symbol)}</td><td>${esc(TF_NAME[t.tf])}</td><td>${esc(t.side)}</td><td>${esc(bar(t.entryDate))}</td><td>${esc(bar(t.exitDate))}</td><td>${esc(REASON[t.reason] ?? t.reason)}</td><td class="num">${pct(t.retPct, 2)}</td><td class="num">${signed(t.pnl, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No closed trades yet.</p>`;
+/** Closed trades counted whole (a trade closed in parts by its take-profits counts once), with how many were won. */
+const wholeCount = ts => { const m = new Map(); for (const t of ts) { const k = `${t.symbol}|${t.entryDate}`; m.set(k, (m.get(k) ?? 0) + t.pnl); } return `${m.size} (${[...m.values()].filter(v => v > 0).length} won)`; };
+/** A ready-made bot's open position in words: which way, how big against the account, and why it is not a trade yet. */
+const openLine = r => Math.abs(r.positionUsd ?? 0) < 0.01 ? "nothing" : `${r.positionUsd > 0 ? "a long" : "a short"} position worth ${money(Math.abs(r.positionUsd), 0)} <span class="small">(${num(Math.abs(r.positionUsd) / Math.max(1, r.equity), 1)}× the account; its profit or loss is already in the account value, and it counts as a trade when it closes)</span>`;
+/** The closed trades of a ready-made bot (evil or angel twin) in the shape of the bots' trade table. */
+const replayTrades = r => (r.closed ?? []).map(t => ({ ...t, symbol: t.symbol.split("@")[0], tf: "1h", retPct: t.entry > 0 ? (t.exit / t.entry - 1) * 100 * (t.side === "short" ? -1 : 1) : 0 }));
+const replayOpen = (r, sym) => Math.abs(r.position ?? 0) < 1e-12 ? `<p class="empty">No open trades.</p>`
+  : `<table><thead><tr><th>Symbol</th><th>Direction</th><th class="num">Size</th><th class="num">Average entry</th><th class="num">Worth now</th></tr></thead><tbody><tr><td class="sym">${esc(sym)}</td><td>${r.position > 0 ? "long" : "short"}</td><td class="num">${num(Math.abs(r.position), 4)}</td><td class="num">${price(r.avgEntry)}</td><td class="num">${money(Math.abs(r.positionUsd), 2)}</td></tr></tbody></table><p class="small">${openLine(r)}</p>`;
 /* ---------- game look (owner, 2026-11-26: "a more game like UX") ---------- */
 const ROMAN = ["I", "II", "III", "IV"];
 const EVIL_LABEL = { "neutral-grid": "Neutral grid", "short-grid": "Short grid", trailing: "Trailing buy / trailing sell", "dca-short": "Martingale short" };
 const face = (id, recruit, opts = {}) => (window.portrait ? window.portrait(id, recruit, opts) : "");
+/** Any player's own face: a participant (with its recruit), a hired evil twin (its participant gone bad) or a guild trader. */
+const faceOf = (b, opts = {}) => b.evilHire && b.evilHire.of !== "guild" ? face(b.evilHire.of, 1, { evil: true, ...opts }) : face(b.id, b.evilHire ? 1 : b.recruit, opts);
 /** A tier's emblem: a shield with the tier's numeral. */
 const emblem = (level, name) => `<svg class="emblem t${level}" viewBox="0 0 40 46" role="img" aria-label="${esc(name)}"><path d="M20 2 L37 8 L35 28 C33 37 26 42 20 44 C14 42 7 37 5 28 L3 8 Z" fill="var(--em)" stroke="#E9D08A" stroke-width="2"/><text x="20" y="29" text-anchor="middle" font-size="15" fill="#FFF8E6" font-family="Palatino Linotype,Book Antiqua,Georgia,serif" font-weight="700">${ROMAN[level] ?? "I"}</text></svg>`;
 /** Badges in a row toward the next tier, as stars (like a game's era stars). */
@@ -144,8 +154,8 @@ function seatScene(b) {
 function heroCard(b, c, lead) {
   const R = c.rules; const label = `${b.name}, ${b.tierName}`;
   return `<article class="hero click" data-goprofile="${esc(b.id)}" tabindex="0" style="--c:${botColor(b.id)}">
-    <div class="frame">${face(b.evilHire ? b.evilHire.of : b.id, b.evilHire ? 1 : b.recruit, { label, evil: !!b.evilHire })}${emblem(b.tier, b.tierName)}
-      ${b.angel ? `<span class="evilmini angelmini" title="Angel twin: ${esc(b.angel.name)}, ${pct(b.angel.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.evilHire.of, 1, { angel: true, label: "angel twin" })}</span>` : ""}
+    <div class="frame">${faceOf(b, { label })}${emblem(b.tier, b.tierName)}
+      ${b.angel && b.evilHire?.of !== "guild" ? `<span class="evilmini angelmini" title="Angel twin: ${esc(b.angel.name)}, ${pct(b.angel.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.evilHire.of, 1, { angel: true, label: "angel twin" })}</span>` : ""}
       ${b.evil ? `<span class="evilmini" title="Evil twin: ${esc(b.evil.name)} on ${esc(b.evil.sym)}, ${pct(b.evil.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}
       ${b.stopped ? `<span class="ribbon">Stopped</span>` : lead ? `<span class="ribbon gold">Leads the month</span>` : ""}</div>
     <h3 class="hname">${esc(b.name)}${b.evilHire ? ` <span class="evilname">hired evil twin</span>` : ""}</h3>
@@ -382,7 +392,7 @@ const screens = {
     const ret = (b.equity / b.startEquity - 1) * 100; const s = b.trades; const wins = s.filter(t => t.pnl > 0).length; const c = b.checked;
     const idle = !s.length && !b.positions.length && !b.pending.length;
     return `<h1>Paper bots</h1>${botSwitcher()}
-    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div class="persona-face">${face(b.evil ? b.evil.of : b.id, b.evil ? 1 : b.recruit, { label: b.name, evil: !!b.evil })}</div><div style="flex:1"><h2 style="margin:0">${esc(b.name)}</h2>${comp?.bots?.find(x => x.id === b.id)?.thought ? `<p class="persona-thought">“${esc(comp.bots.find(x => x.id === b.id).thought)}”</p>` : ""}<p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
+    <div class="panel persona" style="border-left:5px solid ${botColor(b.id)}"><div class="persona-face">${b.evil && b.evil.of !== "guild" ? face(b.evil.of, 1, { label: b.name, evil: true }) : face(b.id, b.evil ? 1 : b.recruit, { label: b.name })}</div><div style="flex:1"><h2 style="margin:0">${esc(b.name)}</h2>${comp?.bots?.find(x => x.id === b.id)?.thought ? `<p class="persona-thought">“${esc(comp.bots.find(x => x.id === b.id).thought)}”</p>` : ""}<p class="small" style="margin:2px 0 0">${esc(b.motto || ROLE(b))} ${b.side === "both" ? `Free to buy or sell short${b.lighterCrypto ? ", on any crypto that trades well on Lighter (not only the six on Today)" : ""}. It never copies a chart-and-strategy pair another bot already trades.` : `Trades only ${b.side === "short" ? "short sales (it earns when prices fall)" : "buys (it earns when prices rise)"} on ${esc(WORLD(b))}.`}</p></div>
       ${a ? `<div class="persona-score">${b.tier ? tierTag(b.tier.level, b.tier.name) : ""} ${badgeRow(a.badges)}<p class="small" style="margin:4px 0 0">${b.tier ? esc(streakText(a.streak, b.tier.toNext, b.tier.tiers, b.tier.names, b.tier.level)) : ""} · <a href="#competition">scoreboard</a></p></div>` : ""}</div>
     ${b.weekend ? `<div class="notice"><strong>Weekend pause.</strong> The competition stops from Friday 22:00 to Monday 00:00 (Madrid time). Everything was closed on Friday; trading starts again on Monday.</div>` : ""}
     ${b.fired ? `<div class="notice"><strong>${esc(b.name)} has stopped trading.</strong> ${esc(b.fired.reason.replace(/^.*?: /, ""))} ${b.fired.replaceAt ? `A recruit takes the seat ${esc(when(b.fired.replaceAt))}, if the accountant has ${money(a?.startGrant ?? 250)} to lend.` : ""}</div>` : ""}
@@ -445,13 +455,13 @@ const screens = {
     return `<div class="game"><section class="pf">
       <aside class="pf-left">
         <div class="pf-banner">${emblem(b.tier, b.tierName)}<div><p class="pf-name">${esc(b.name)}</p><p class="pf-era-name">${esc(b.tierName)} era</p>${streakStars(b.streak, b.tier, c.rules.tiers)}</div></div>
-        <div class="pf-portrait">${face(b.evilHire ? b.evilHire.of : b.id, b.evilHire ? 1 : b.recruit, { evil: !!b.evilHire, label: b.name })}</div>
+        <div class="pf-portrait">${faceOf(b, { label: b.name })}</div>
         <h3 class="pf-fame-t">Fame points</h3><p class="pf-fame-s">Leave your mark on the desk: stars, badges and deeds.</p>
         <p class="pf-fame"><span aria-hidden="true">♛</span> ${num(b.fame ?? 0, 0)}</p>
       </aside>
       <div class="pf-card">${seatScene(b)}<div class="pf-card-in"><h2>${esc(b.name)}</h2><p class="pf-quote">${esc(b.thought ?? b.motto ?? "")}</p>
         <p class="pf-char small">${esc(b.characterText ?? "")}</p>
-        <div class="pf-icons"><span title="${esc(b.tierName)}">${emblem(b.tier, b.tierName)}</span><span class="pf-badges" title="Badges">${badgeRow(Math.max(1, b.badges), 18).replace(/<svg/g, b.badges ? "<svg" : '<svg style="opacity:.25"')}<b>${b.badges}</b></span>${b.evil ? `<span class="evilmini-s" title="Evil twin: ${esc(b.evil.name)}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}${b.angel ? `<span class="evilmini-s angelmini" title="Angel twin: ${esc(b.angel.name)}">${face(b.evilHire.of, 1, { angel: true, label: "angel twin" })}</span>` : ""}</div></div></div>
+        <div class="pf-icons"><span title="${esc(b.tierName)}">${emblem(b.tier, b.tierName)}</span><span class="pf-badges" title="Badges">${badgeRow(Math.max(1, b.badges), 18).replace(/<svg/g, b.badges ? "<svg" : '<svg style="opacity:.25"')}<b>${b.badges}</b></span>${b.evil ? `<span class="evilmini-s" title="Evil twin: ${esc(b.evil.name)}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}${b.angel && b.evilHire?.of !== "guild" ? `<span class="evilmini-s angelmini" title="Angel twin: ${esc(b.angel.name)}">${face(b.evilHire.of, 1, { angel: true, label: "angel twin" })}</span>` : ""}</div></div></div>
       <nav class="pf-tabs" aria-label="Eras">${[0, 1, 2, 3].map(i => `<button type="button" data-era="${i}" aria-pressed="${i === PROFILE_ERA}" class="${b.eras?.[i]?.unlocked ? "" : "locked"}" title="${esc(c.rules.tierNames[i])}">${b.eras?.[i]?.unlocked ? `<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.6 6 .7-4.5 4.1 1.2 6L10 15l-5.3 2.9 1.2-6L1.4 7.8l6-.7z"/></svg>` : `<svg viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6a3 3 0 016 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>`}<span>${ROMAN[i]}</span></button>`).join("")}</nav>
       ${b.eras ? eraPanel(PROFILE, PROFILE_ERA) : `<section class="pf-era" id="pf-era"><p class="empty">Stars appear after the next check.</p></section>`}
       <aside class="pf-right">
@@ -463,15 +473,62 @@ const screens = {
         <p style="margin:14px 0 0"><a href="#bot" data-gobot="${esc(b.id)}">Trades and charts</a> · <a href="#twins">The twins</a></p>
       </aside></section>
       <section class="pf-trades"><h2>${esc(b.name)}'s trades</h2>${v ? `<h3>Open now</h3>${openTrades(v)}<h3>Closed trades <span class="small">(newest first, ${v.trades.length} in all)</span></h3>${closedTrades(v.trades)}` : `<p class="empty">The trades appear after the next check.</p>`}</section>
-      <nav class="pf-nav" aria-label="Other traders">${others.map(o => `<button type="button" class="pf-other" data-goprofile="${esc(o.id)}">${face(o.evilHire ? o.evilHire.of : o.id, o.evilHire ? 1 : o.recruit, { evil: !!o.evilHire, label: o.name })}<span>${esc(o.name)}</span></button>`).join("")}</nav>
+      <nav class="pf-nav" aria-label="Other traders">${others.map(o => `<button type="button" class="pf-other" data-goprofile="${esc(o.id)}">${faceOf(o, { label: o.name })}<span>${esc(o.name)}</span></button>`).join("")}</nav>
       <p class="small" style="max-width:90ch">Era stars, fame and deeds are a game layer counted from the ledgers. They never change the money rules: badges, tiers, loans, strikes and the monthly winner work as before. Eras follow the tiers; an era's stars count once the trader has reached it.</p></div>`;
+  },
+  async guild() {
+    await loadBots(); const g = await api("/api/guild");
+    if (!g?.guild) return `<div class="game"><h1>The Players Guild</h1><p class="empty">The first generation of candidates is trained at the next check.</p></div>`;
+    const G = g.guild; const hiredBy = Object.fromEntries(g.hired.map(h => [h.cand, h]));
+    const stats = c => c.type === "strategist"
+      ? `<dl class="mini"><div><dt>Charts</dt><dd>${c.tryout.charts}</dd></div><div><dt>Trades</dt><dd>${c.tryout.trades}</dd></div><div><dt>Avg trade</dt><dd>${pct(c.tryout.avgPct, 2)}</dd></div><div><dt>Profit factor</dt><dd>${num(c.tryout.pf, 2)}</dd></div><div><dt>Score</dt><dd>${num(c.tryout.fitness, 1)}</dd></div></dl>`
+      : `<dl class="mini"><div><dt>Last 21 days</dt><dd>${pct(c.tryout.resultPct ?? 0, 2)}</dd></div><div><dt>Trades</dt><dd>${c.tryout.trades}</dd></div><div><dt>Worst drop</dt><dd>${num(c.tryout.worstDropPct ?? 0, 1)}%</dd></div><div><dt>Stopped</dt><dd>${c.tryout.stops ? `${c.tryout.stops}×` : "no"}</dd></div><div><dt>Score</dt><dd>${num(c.tryout.fitness, 1)}</dd></div></dl>`;
+    const action = c => { const h = hiredBy[c.id];
+      if (h) return h.firedAt ? `<p class="small">Hired on ${esc(bar(h.hiredAt))}, stopped on ${esc(bar(h.firedAt))}.</p>` : `<p><span class="tag in">Hired</span> <a href="#profile/${esc(h.id)}">See ${esc(c.name)}'s profile</a></p>`;
+      if (g.ordered.includes(c.id)) return `<p class="small">Joins at the next check (needs ${money(g.grant, 0)} in the bank: ${money(g.bank.available, 0)} available). <button type="button" class="ghostbtn" data-hire="hire-guild-${esc(c.id)}" data-yes="0">Cancel</button></p>`;
+      return `<button type="button" data-hire="hire-guild-${esc(c.id)}" data-yes="1" ${g.bank.available < g.grant ? `disabled title="The bank has ${money(g.bank.available, 0)}; a hire needs ${money(g.grant, 0)}"` : ""}>Hire ${esc(c.name)}</button>`; };
+    const card = c => `<article class="gd-card ${c.type}"><div class="gd-face">${face(`guild-${c.id}`, 1, { label: c.name })}</div><div class="gd-body">
+      <p class="gd-type">${c.type === "strategist" ? "Strategist" : "Bot builder"} · generation ${c.gen}${c.parent ? ` · learned from ${esc(c.parent)}` : ""}</p><h3>${esc(c.name)}</h3><p class="small">${esc(c.text)}</p>${stats(c)}
+      ${c.tryout.playbook?.length ? `<p class="small">Would trade: ${c.tryout.playbook.slice(0, 4).map(p => `${esc(p.key.replace("@", " "))} (${esc(p.name)})`).join(", ")}${c.tryout.playbook.length > 4 ? "…" : ""}</p>` : ""}${action(c)}</div></article>`;
+    const hist = G.history;
+    return `<div class="game"><section class="hall short">${scene()}<div class="hall-in"><div class="season"><p class="era">Generation ${G.gen} · trained ${esc(bar(G.at))}</p><h1>The Players Guild</h1>
+      <p class="goal-line">New traders for the company, trained every Monday from the theories the desk is testing. Each generation keeps the best candidates, learns from them and tries something new, so the candidates get better as we learn.</p></div></div></section>
+      ${hist.length > 1 ? `<div class="panel"><p style="margin:0">Best strategist score by generation: ${hist.map(h => `<strong>${h.gen}</strong> ${num(h.best, 1)} <span class="small">(${esc(h.bestName)})</span>`).join(" → ")}</p></div>` : ""}
+      <h2>Strategists <span class="small">our strategy library, with genes for side, strategy family, the ADX filter and chart speed</span></h2><div class="gd-grid">${G.candidates.filter(c => c.type === "strategist").map(card).join("")}</div>
+      <h2>Bot builders <span class="small">the Pionex-style bots, improved the angel way</span></h2><div class="gd-grid">${G.candidates.filter(c => c.type === "builder").map(card).join("")}</div>
+      <p class="small">Hiring is paper, like everything here. A hired strategist gets its own seat and a ${money(g.grant, 0)} loan, picks its charts from its genes every week and plays under all the rules (badges, strikes, stopping); it has no recruit after it is stopped. A hired bot builder plays with its own loan like a hired evil twin. The bank has ${money(g.bank.available, 0)} to lend. A strategist's score is its playbook's result on the newer data the short lists test on (trades × average trade, weighted by profit factor); a bot builder's is its replay of the last 21 days, less half its worst drop.</p></div>`;
+  },
+  async players(arg) {
+    await loadBots(); const [c, t] = await Promise.all([api("/api/competition"), api("/api/twins")]);
+    if (!c) return `<div class="game"><h1>All players</h1><p class="empty">The players appear after the bots' first check.</p></div>`;
+    // Everyone who trades: the participants, the hired evil twins, every participant's evil twin and every hired twin's angel.
+    const list = [
+      ...c.bots.filter(b => !b.evilHire).map(b => ({ id: b.id, kind: b.id.startsWith("guild-") ? "Guild trader" : "Participant", name: b.name, img: faceOf(b, { label: b.name }), equity: b.equity, result: b.totalReturnPct, sub: `${b.tierName} · ${ROLE(b)}`, live: b.id })),
+      ...c.bots.filter(b => b.evilHire).map(b => ({ id: b.id, kind: b.evilHire.of === "guild" ? "Guild bot builder" : "Hired evil twin", name: b.name, img: faceOf(b, { label: b.name }), equity: b.equity, result: b.totalReturnPct, sub: `${EVIL_LABEL[b.evilHire.kind]} on ${b.evilHire.sym} · a player`, live: b.id })),
+      ...(t?.bots ?? []).filter(x => x.evil).map(x => ({ id: `twin-${x.id}`, kind: "Evil twin", name: x.evilName ?? "Evil twin", img: face(x.id, x.recruit, { evil: true, label: x.evilName }), equity: x.evil.equity, result: x.evil.resultPct, sub: `${x.evil.name} on ${x.evil.sym} · ${x.name}'s shadow`, replay: x.evil, sym: x.evil.sym })),
+      ...(t?.hires ?? []).map(h => ({ id: h.angelId, kind: "Angel twin", name: h.angelName, img: face(h.of, 1, { angel: true, label: h.angelName }), equity: h.angel.equity, result: h.angel.resultPct, sub: `${h.angel.name} on ${h.sym} · ${h.name}'s angel`, replay: h.angel, sym: h.sym })),
+    ];
+    const sel = list.find(x => x.id === arg) ?? list[0];
+    const card = x => `<button type="button" class="pl-card${x.id === sel.id ? " on" : ""} k-${x.kind.split(" ")[0].toLowerCase()}" data-goplayer="${esc(x.id)}" aria-pressed="${x.id === sel.id}">${x.img}<span class="pl-kind">${esc(x.kind)}</span><span class="pl-name">${esc(x.name)}</span><span class="pl-num">${money(x.equity, 0)} · ${pct(x.result, 1)}</span></button>`;
+    let detail = "";
+    if (sel.live) { const v = await api(`/api/bot?bot=${encodeURIComponent(sel.live)}`).catch(() => null);
+      detail = v ? `<dl class="stats">${stat("Account value", money(v.equity, 2))}${stat("Result since hired", pct(v.resultPct, 2))}${stat("Closed trades", wholeCount(v.trades))}${stat("Open trades", v.positions.length)}</dl>
+        <h3>Open now</h3>${openTrades(v)}<h3>Closed trades <span class="small">(newest first)</span></h3>${closedTrades(v.trades)}
+        <p><a href="#profile/${esc(sel.live)}">Profile</a> · <a href="#bot" data-gobot="${esc(sel.live)}">Charts and details</a></p>` : `<p class="empty">No data yet.</p>`; }
+    else { const r = sel.replay; const tr = replayTrades(r);
+      detail = `<dl class="stats">${stat("Account value", money(r.equity, 2))}${stat("Result", pct(r.resultPct, 2))}${stat("Closed trades", `${r.trades} (${r.wins} won)`)}${stat("Badges", r.badges)}${stat("Would have been stopped", r.stops ? `${r.stops}×` : "no")}${stat("Worst drop", `${num(r.worstDropPct, 1)}%`)}</dl>
+        <p class="small">${esc(r.plain ?? "")} Paper only: replayed on hourly bars since ${esc(bar(r.since))}.</p>
+        <h3>Open now</h3>${replayOpen(r, sel.sym)}<h3>Closed trades <span class="small">(newest first)</span></h3>${closedTrades(tr)}`; }
+    return `<div class="game"><div class="head"><div><h1>All players</h1><p class="sub">Everyone who trades on the desk: the participants, the hired evil twins, each participant's evil twin and each hired twin's angel. Choose one to see its trades.</p></div></div>
+      <div class="pl-grid">${list.map(card).join("")}</div>
+      <section class="pl-detail"><h2>${esc(sel.name)} <span class="small">${esc(sel.kind)} · ${esc(sel.sub)}</span></h2>${detail}</section></div>`;
   },
   async twins() {
     await loadBots(); const [t, c] = await Promise.all([api("/api/twins"), api("/api/competition")]);
     if (!t || !t.bots.length) return `<div class="game"><h1>The twins</h1><p class="empty">The twins appear after the bots' first check.</p></div>`;
     const cb = id => c?.bots.find(b => b.id === id);
     const col = (title, sub, img, r, cls = "") => `<div class="tw ${cls}"><div class="tw-face">${img}</div><h4>${title}</h4><p class="small">${sub}</p>
-      ${r ? `<dl class="mini"><div><dt>Result</dt><dd>${pct(r.resultPct, 2)}</dd></div><div><dt>Account</dt><dd>${money(r.equity, 2)}</dd></div><div><dt>Trades</dt><dd>${r.trades}${r.wins != null && r.trades ? ` <span class="small">(${Math.round(r.wins / r.trades * 100)}% won)</span>` : ""}</dd></div><div><dt>Worst drop</dt><dd>${num(r.worstDropPct ?? 0, 1)}%</dd></div><div><dt>Badges</dt><dd>${r.badges ?? 0}</dd></div><div><dt>Stopped</dt><dd>${r.stops ? `<span class="loss">${r.stops}×</span>` : "no"}</dd></div>${r.positionUsd != null ? `<div style="grid-column:1/-1"><dt>Open now</dt><dd>${Math.abs(r.positionUsd) < 0.01 ? "nothing" : `${r.positionUsd > 0 ? "long" : "short"} ${money(Math.abs(r.positionUsd), 0)} <span class="small">(in the account value, not yet in the trades)</span>`}</dd></div>` : ""}</dl>` : `<p class="empty">Not started yet.</p>`}</div>`;
+      ${r ? `<dl class="mini"><div><dt>Result</dt><dd>${pct(r.resultPct, 2)}</dd></div><div><dt>Account</dt><dd>${money(r.equity, 2)}</dd></div><div><dt>Trades</dt><dd>${r.trades}${r.wins != null && r.trades ? ` <span class="small">(${Math.round(r.wins / r.trades * 100)}% won)</span>` : ""}</dd></div><div><dt>Worst drop</dt><dd>${num(r.worstDropPct ?? 0, 1)}%</dd></div><div><dt>Badges</dt><dd>${r.badges ?? 0}</dd></div><div><dt>Stopped</dt><dd>${r.stops ? `<span class="loss">${r.stops}×</span>` : "no"}</dd></div>${r.positionUsd != null ? `<div style="grid-column:1/-1"><dt>Open now</dt><dd>${openLine(r)}</dd></div>` : ""}</dl>` : `<p class="empty">Not started yet.</p>`}</div>`;
     const curves = x => { const lines = [["participant", x.name, botColor(x.id), false], ["random", "Random twin", "#9AA5B1", true], ["evil", x.evil?.lessons ? "Angel twin" : "Evil twin", x.evil?.lessons ? "#F2C94C" : "#E5484D", false]].filter(([k]) => x[k]?.curve?.length);
       const t0 = Date.parse((x.evil?.since ?? x.participant.curve[0]?.d ?? "").slice(0, 16) + ":00Z"); if (!lines.length || !Number.isFinite(t0)) return "";
       const t1 = Date.now(); const stepMs = Math.max(3600_000, Math.ceil((t1 - t0) / 300 / 3600_000) * 3600_000); const xs = []; for (let u = t0; u <= t1; u += stepMs) xs.push(u);
@@ -647,6 +704,7 @@ $main.addEventListener("click", async e => {
   const t = e.target;
   if (t.closest("#showfail")) { e.preventDefault(); const f = document.getElementById("fails"); f.hidden = !f.hidden; return; }
   const gv = t.closest("a[data-goview]"); if (gv) { VIEW = gv.dataset.goview; return; }
+  const pl = t.closest("[data-goplayer]"); if (pl) { location.hash = `#players/${pl.dataset.goplayer}`; return; }
   const gp = t.closest("[data-goprofile]"); if (gp) { location.hash = `#profile/${gp.dataset.goprofile}`; return; }
   const et = t.closest("button[data-era]"); if (et) { PROFILE_ERA = +et.dataset.era; const box = document.getElementById("pf-era"); if (box && PROFILE) { box.outerHTML = eraPanel(PROFILE, PROFILE_ERA); document.querySelectorAll("button[data-era]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.era === PROFILE_ERA))); } return; }
   const hb = t.closest("button[data-hire]"); if (hb) { hb.disabled = true; try { await api("/api/hire", { method: "POST", body: JSON.stringify({ key: hb.dataset.hire, yes: hb.dataset.yes === "1" }) }); } catch (err) { alertMsg(err.message); } render(); return; }
@@ -670,4 +728,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins" || name === "profile") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins" || name === "profile" || name === "players" || name === "guild") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);

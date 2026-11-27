@@ -84,10 +84,11 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
     let left = Math.abs(du);
     if (u !== 0 && Math.sign(du) !== Math.sign(u)) {
       let p = 0; const closing = Math.min(left, Math.abs(u));
+      const opened = (closing >= Math.abs(u) - 1e-12 ? lots[0]?.d : lots[lots.length - 1]?.d) ?? curD; // all of it: since the first lot; part: the newest lot it closes
       while (left > 1e-12 && lots.length) { const lot = lots[lots.length - 1]; const k = Math.min(lot.n, left); const share = k / lot.n;
         p += (x - lot.x) * k * Math.sign(u) - lot.fee * share; lot.fee -= lot.fee * share; lot.n -= k; left -= k; if (lot.n <= 1e-12) lots.pop(); }
       p -= fee * (closing / Math.abs(du)); trades++; pnl += p; if (p > 0) wins++;
-      closed.push({ symbol: `${spec.sym}@1h`, side: u > 0 ? "long" : "short", entryDate: lots[0]?.d ?? curD, exitDate: curD, entry: +avg.toFixed(6), exit: x, qty: closing, pnl: +p.toFixed(4), reason: why });
+      closed.push({ symbol: `${spec.sym}@1h`, side: u > 0 ? "long" : "short", entryDate: opened, exitDate: curD, entry: +avg.toFixed(6), exit: x, qty: closing, pnl: +p.toFixed(4), reason: why });
       if (closed.length > 600) closed.shift();
       if (A) countTrade(A.a, curD, p, true, p);
     }

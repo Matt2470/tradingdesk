@@ -318,3 +318,19 @@ main>.game.plain{padding-top:28px}
 .tw.angel{border-color:#B8913F;background:rgba(242,201,76,.06)}.tw.angel .tw-face{border-color:#F2C94C}
 .tw-row.two{grid-template-columns:repeat(2,1fr)}
 .speech .angelsay{background:rgba(242,201,76,.1)}
+/* all players */
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin:8px 0 18px}
+.pl-card{display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:6px;background:rgba(18,32,44,.85);border:1px solid rgba(216,183,106,.28);border-radius:6px;color:var(--ink);text-align:left}
+.pl-card svg,.pl-card img{display:block;width:100%;aspect-ratio:3/4;height:auto;border-radius:4px}
+.pl-card.on{outline:2px solid #F1DCA0;outline-offset:1px}
+.pl-kind{font:600 11px/1.2 var(--text);letter-spacing:.05em;color:var(--muted)}.k-evil .pl-kind,.k-hired .pl-kind{color:#FF7B72}.k-angel .pl-kind{color:#F2C94C}.k-participant .pl-kind{color:#8CC2FF}
+.pl-name{font:600 15px/1.2 var(--serif);font-variant:small-caps;color:#F1DCA0}.pl-num{font-size:12.5px}
+.pl-detail h3{font-size:17px;margin:16px 0 8px}
+/* the players guild */
+.gd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+.gd-card{display:flex;gap:12px;background:rgba(18,32,44,.85);border:1px solid rgba(216,183,106,.28);border-radius:8px;padding:12px}
+.gd-card.builder{border-color:rgba(242,201,76,.45)}
+.gd-face{flex:none;width:96px;aspect-ratio:3/4;border-radius:6px;overflow:hidden;border:2px solid #B8913F}.gd-face svg{display:block;width:100%;height:100%}
+.gd-body{flex:1;min-width:0}.gd-body h3{margin:2px 0 4px;font-size:20px}.gd-type{margin:0;font-size:12px;color:var(--muted)}
+.gd-body .mini{grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.gd-face{align-self:flex-start}
