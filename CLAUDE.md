@@ -94,7 +94,7 @@ see "Stop and ask".
 | `src/pipeline.ts` | `refresh()` when a 15-minute bar closes, `tick()` every minute, `writeBoard()` for Today. | everything above |
 | `src/server.ts` | HTTP server: JSON routes, static files in `web/`, and the minute loop. | pipeline, feedback |
 | `web/index.html`, `web/app.js`, `web/app.css` | The dashboard. Plain JS, no libraries, works offline. | the API only |
-| `web/portraits.js` | The participants' portraits, original characters painted as SVG in code (recruit variations, evil-twin versions); a picture the owner puts in `web/portraits/` (named `stocks-bull.jpg`, `crypto-bear-evil.png`, `stocks-bull-2.webp`, ...) replaces the drawing. | nothing |
+| `web/portraits.js` | The participants' portraits: original chibi "Silicon Valley tech kids" (owner, 2026-11-27) drawn as SVG in code, each with a gadget (recruit variations, evil twins in a black hood with horns); a picture the owner puts in `web/portraits/` (named `stocks-bull.jpg`, `crypto-bear-evil.png`, `stocks-bull-2.webp`, ...) replaces the drawing. | nothing |
 | `scripts/engine.ts` | Headless run for GitHub Actions: one tick and one refresh, then copies the bots' public files for the bot-data branch. | pipeline |
 | `.github/workflows/bots.yml` | The GitHub workflow: every 15 minutes, restore state and prices, `bun run engine`, publish to `bot-data`. | — |
 | `scripts/doctor.ts`, `scripts/smoke.ts`, `scripts/check-claude-md.ts`, `scripts/make-fixtures.ts`, `scripts/research.ts`, `scripts/compare-exits.ts` | Checks, synthetic test data, and research scripts that only print. | src |
