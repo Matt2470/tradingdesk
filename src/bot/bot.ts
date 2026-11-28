@@ -11,13 +11,13 @@
 import { buildCtx, I, strategyById, type Bar, type Strategy } from "../core/strategies";
 import { barEndMs, type Timeframe } from "../data/prices";
 import type { Settings, AssetClass } from "../config";
-import { decide, settle, track, countTrade, accrue, inWeekendPause, DEFAULT_RULES, type Accountant } from "./accountant";
+import { decide, settle, track, countTrade, accrue, inWeekendPause, madridDay, DEFAULT_RULES, type Accountant } from "./accountant";
 import { DEFAULT_EXITS, openLegs, onBar, onClose, nextTarget, nextStop, type Legs } from "../core/exits";
 
 export interface BotPosition { side: "long" | "short"; qty: number; entry: number; entryDate: string; stop: number; target?: number | null; strategyId: string; held: number;
   /** Size at entry; qty shrinks as take-profits fill. */ qty0?: number; /** Profit of the parts already closed. */ realized?: number; /** Funding paid (+) or received (-) so far, and when it was last charged (ms). */ funding?: number; fundingAt?: number; /** Next price where part of it closes at a loss, and its name (SL1, SL2, SL3, rising stop). */ nextStop?: { px: number; name: string }; /** Exit engine state (stop, take-profits filled, trailing). */ legs?: Legs }
 export interface BotPending { type: "entry" | "exit"; signalDate: string; strategyId: string; stopDist?: number; stopPrice?: number; reason?: string; /** Entry signals: the signal bar's close and ATR (14), for the slippage cap. */ signalPx?: number; atr?: number }
-export interface BotTrade { symbol: string; side: "long" | "short"; strategyId: string; entryDate: string; exitDate: string; entry: number; exit: number; qty: number; pnl: number; retPct: number; reason: string; /** Funding paid over the whole trade (on its last part only); already in cash, not in pnl. */ funding?: number }
+export interface BotTrade { symbol: string; side: "long" | "short"; strategyId: string; entryDate: string; exitDate: string; entry: number; exit: number; qty: number; pnl: number; retPct: number; reason: string; /** Funding paid over the whole trade (on its last part only); already in cash, not in pnl. */ funding?: number; /** In words: why it closed (ready-made bots write their own). */ explain?: string }
 export interface BotState {
   startedAt: string; startEquity: number; cash: number; peak?: number; halted?: { at: string; reason: string } | null;
   positions: Record<string, BotPosition>; pending: Record<string, BotPending>; last: Record<string, string>;
@@ -43,6 +43,14 @@ export interface BotState {
   /** The random twin: same charts, side, sizing, exits and weekends as its bot, but it enters at random as often as the
    *  bot's strategy did. If the bot cannot beat it, its results are luck. Reset when the bot is replaced. */
   twin?: BotState;
+  /** The evil and angel clones (src/bot/genes.ts): grown from this bot, the same charts and strategies, with its dark or
+   *  light genes switched on. Paper previews of what the genes would do; reset when the bot is replaced. */
+  clones?: { evil?: BotState; angel?: BotState };
+  /** Its devils and angels (src/bot/genes.ts): the one alive now and the ones before (liquidated or hired). */
+  lineage?: { recruit: number; gen: number; cur?: { kind: "devil" | "angel"; gen: number; name: string; genes: string[]; born: string; why: string; s: BotState; lessons: { d: string; text: string }[]; tuned?: string };
+    past: { kind: "devil" | "angel"; gen: number; name: string; genes: string[]; born: string; ended: string; how: "liquidated" | "hired"; resultPct: number; trades: number; id?: string }[] };
+  /** The Madrid day of the last moment looked at (the day-end rule on borrowed money). */
+  day?: string;
   /** The evil twin it faces (src/bot/evil.ts): a Pionex-style bot replayed on one market from the hire. */ evil?: import("./evil").EvilSpec;
 }
 export interface MarketView { cls: AssetClass; group?: string; tf?: Timeframe; complete: Bar[]; partial: Bar | null; /** "utc": around-the-clock bars (Lighter): daily bars close at midnight UTC. */ clock?: "utc" }
@@ -185,6 +193,20 @@ export function step(s: BotState, market: Record<string, MarketView>, allowed: R
     seen(k, events[e].end, x.c[i]); s.last[k] = d;
     if (e + 1 < events.length && events[e + 1].end === events[e].end) continue; // finish every bar that closed at this moment first
     payFunding(events[e].end);
+    // Day-end rule (owner, 2026-11-27): a bot holding more than the money it has (exposure above its account) does not
+    // carry it into another day. At the first close of a new Madrid day it takes the profit on its winners (biggest first),
+    // then cuts its losers (biggest loss first; "they should cut back the loss too or they will be liquidated"), until what
+    // it holds is no more than its account. It may trade again that day.
+    const dayNow = madridDay(new Date(events[e].end).toISOString().slice(0, 16));
+    if (s.day && dayNow > s.day && Object.keys(s.positions).length && exposureOf(s, px) > 1.02 * equityOf(s, px)) {
+      const held = exposureOf(s, px), had = equityOf(s, px);
+      const all = Object.entries(s.positions).map(([q, p]) => { const now = px(q) ?? p.entry; return { q, gain: sign(p) * p.qty * (now - p.entry) - p.qty * now * (market[q] ? costOf(q) : 0) }; });
+      const order = [...all.filter(w => w.gain > 0).sort((a, b) => b.gain - a.gain), ...all.filter(w => w.gain <= 0).sort((a, b) => a.gain - b.gain)];
+      const took: string[] = [];
+      for (const w of order) { if (exposureOf(s, px) <= equityOf(s, px)) break; took.push(`${label(w.q)} ${w.gain >= 0 ? "+" : "-"}${Math.abs(w.gain).toFixed(2)}`); closePos(w.q, d, px(w.q) ?? s.positions[w.q].entry, "day-end", market[w.q] ? costOf(w.q) : 0); }
+      if (took.length) note(d, `Day-end rule: held ${held.toFixed(0)} USD with an account of ${had.toFixed(0)} USD, more than its own money, so it closed ${took.join(", ")}. It may trade again today.`);
+    }
+    s.day = dayNow;
     let eq = equityOf(s, px); s.peak = Math.max(s.peak ?? s.startEquity, eq);
     // Competition bots: the accountant checks the milestone (twice the grant) and the bust line (half the grant).
     if (s.accountant) {

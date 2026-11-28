@@ -29,6 +29,7 @@ import { lighterFile, type LighterSnapshot } from "./data/lighter";
 import { runEvil, runAngel, angelName, evilMarket, evilName, hireKey, EVIL_FOR, EVIL_PLAIN, type EvilSpec, type EvilResult, type EvilKind } from "./bot/evil";
 import { thoughtOf, tauntOf, characterOf, CHARACTER_TEXT } from "./bot/voice";
 import { erasOf, deedsOf, DEED_FAME } from "./bot/fame";
+import { DEVIL_TEXT, ANGEL_TEXT, BRANCHES, builtGene, mutate, neighbours, expression, evolve, pointsOf, spentOf, preference, canTake, GENES, type Genome, type GeneStats, type GeneStore } from "./bot/genes";
 import { breed, strategyFits, chartFits, describeStrategist, type Guild, type StrategistGenes, type BuilderGenes, type Tryout } from "./bot/guild";
 
 export type View = "market" | "crypto";
@@ -45,11 +46,13 @@ export const files = (v: View) => ({
 export const botFiles = (id: string) => ({ state: join(P.bot, `state-${id}.json`), view: join(P.derived, `bot-${id}.json`), shortlist: join(P.derived, `shortlist-${id}.json`) });
 export const COMPETITION = () => join(P.derived, "competition.json");
 /** Traders hired from the Players Guild with their own seat (owner, 2026-11-27), kept in data/bot/roster.json. */
-export interface GuildHire { id: string; key: string; cand: string; name: string; genes: StrategistGenes; hiredAt: string; firedAt?: string }
-const guildBot = (h: GuildHire): CompetitionBot => ({ id: h.id, name: h.name, view: h.genes.world, side: h.genes.side, motto: describeStrategist(h.genes), ...(h.genes.world === "crypto" ? { lighterCrypto: true } : { allLighter: true }), guild: h.genes });
+export interface GuildHire { id: string; key: string; cand: string; name: string; genes: StrategistGenes; hiredAt: string; firedAt?: string; /** A hired devil or angel (src/bot/genes.ts): it trades with its genome; `of` is its participant. */ kin?: "devil" | "angel"; of?: string }
+const guildBot = (h: GuildHire): CompetitionBot => ({ id: h.id, name: h.name, view: h.genes.world, side: h.genes.side, motto: h.kin ? `A ${h.kin} grown from a participant's genes, hired by the owner: it trades with its own genes.` : describeStrategist(h.genes), ...(h.genes.world === "crypto" ? { lighterCrypto: true } : { allLighter: true }), guild: h.genes, ...(h.kin ? { kin: h.kin, kinOf: h.of } : {}) });
 /** The seats that trade with our strategy library: the four from config/settings.json (each with its recruits), then the guild's. */
 export const participants = (st: Settings = settings()) => [...st.competition.bots, ...(readRoster().guild ?? []).filter(h => !h.firedAt).map(guildBot)];
 export const GUILD = () => join(P.bot, "guild.json");
+/** Every player's genome (src/bot/genes.ts): the genes it chose, when and why. Shared through bot-data. */
+export const GENOMES = () => join(P.bot, "genes.json");
 /** Evil twins the owner hired (owner, 2026-11-26): extra players with their own loan, kept in data/bot/roster.json. */
 export const activeHires = () => (readRoster().evil ?? []).filter(h => !h.firedAt);
 const evilBot = (h: EvilHire, st: Settings): CompetitionBot => { const of = st.competition.bots.find(b => b.id === h.of);
@@ -60,7 +63,7 @@ export const botById = (id: string | null, st: Settings = settings()) => competi
 /** Files the GitHub run publishes on its data branch, by path on that branch -> local path. */
 export function publishedFiles(st: Settings = settings()): [string, string][] {
   return [...competitors(st).flatMap(b => [[`bot/state-${b.id}.json`, botFiles(b.id).state], [`derived/bot-${b.id}.json`, botFiles(b.id).view], [`derived/shortlist-${b.id}.json`, botFiles(b.id).shortlist]] as [string, string][]),
-    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()], ["bot/desk.json", DESK()], ["bot/approvals.json", APPROVALS()], ["bot/guild.json", GUILD()]];
+    ["derived/competition.json", COMPETITION()], ["bot/roster.json", ROSTER()], ["bot/league.json", LEAGUE()], ["bot/runs.json", RUNS()], ["bot/desk.json", DESK()], ["bot/approvals.json", APPROVALS()], ["bot/guild.json", GUILD()], ["bot/genes.json", GENOMES()]];
 }
 /** Who checked the bots, when: the newest 200 checks (GitHub's runs and the PC's), shared through bot-data. */
 export const RUNS = () => join(P.bot, "runs.json");
@@ -256,6 +259,24 @@ function liveCurve(s: BotState, now: number) {
   const t = new Date().toISOString().slice(0, 16); if (c.length && c.at(-1)!.d >= t) c.pop();
   c.push({ d: t, equity: +now.toFixed(2) }); return c;
 }
+/** A closed trade in words: which strategy opened it and why it closed, with the prices (owner, 2026-11-27: "I want every bot to give me an explanation"). */
+export function explainTrade(t: { strategyId: string; reason: string; side: string; entry: number; exit: number; retPct?: number; explain?: string }): string {
+  if (t.explain) return t.explain;
+  const f = (v: number) => v.toFixed(Math.abs(v) < 10 ? 4 : 2); const rid = t.strategyId.startsWith("random|") ? t.strategyId.split("|")[2] : t.strategyId;
+  const name = STRATEGIES.find(x => x.id === rid)?.name ?? rid; const opened = t.strategyId.startsWith("random|") ? `Opened at random (the random twin, on the charts of ${name})` : `Opened by ${name}`;
+  const why: Record<string, string> = {
+    tp1: "take-profit 1: the price moved one R (the risk it took) its way, so a part was sold and the stop moved to the entry price",
+    tp2: "take-profit 2: the price moved two R its way, so another part was sold and the stop moved up to the first take-profit",
+    tp3: "take-profit 3: the price moved three R its way, so the rest was sold", target: "the strategy's own target was reached",
+    sl1: "stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small", sl2: "stepped stop 2: the loss reached three quarters of the risk, so another part was sold",
+    sl3: "full stop: the price reached the stop-loss set at the entry", stop: "stop: the price reached the stop-loss set at the entry",
+    trail: "rising stop: after the first take-profit the stop followed the price, and the price came back to it, keeping the profit",
+    rule: "the strategy's own exit signal fired", "time-stop": "too long at a loss: no progress after the maximum number of bars",
+    weekend: "weekend pause: everything closes from Friday 22:00 to Monday 00:00 (Madrid)", milestone: "badge: the account doubled, so everything closed and the profit was locked in the award",
+    bust: "stop line: the account fell to half the grant, so everything closed for the accountant", "desk-stop": "desk stop: the whole desk hit its daily loss limit",
+    "day-end": "day-end rule: it held more than its own money at the end of the day, so this position was closed", "circuit-breaker": "safety stop: the account fell too far from its best" };
+  return `${opened}. Why it closed: ${why[t.reason.toLowerCase()] ?? t.reason}. ${t.side === "short" ? "Sold short" : "Bought"} at ${f(t.entry)}, closed at ${f(t.exit)}${t.retPct != null ? ` (${t.retPct >= 0 ? "+" : ""}${t.retPct.toFixed(2)}%)` : ""}.`;
+}
 function botView(b: CompetitionBot, s: BotState, st: Settings, px: (k: string) => number | undefined, at: string, shortlist?: Shortlist, hours?: Hours | null) {
   const sg = (p: { side: string }) => (p.side === "short" ? -1 : 1); const v = b.view;
   return {
@@ -263,6 +284,7 @@ function botView(b: CompetitionBot, s: BotState, st: Settings, px: (k: string) =
     tier: s.accountant ? { level: tierOf(s.accountant, rulesOf(st)), name: tierName(s.accountant, rulesOf(st)), toNext: toNextTier(s.accountant, rulesOf(st)), tiers: st.competition.tiers, names: TIER_NAMES } : null,
     playbook: s.playbook ?? [], weekend: inWeekendPause(Date.parse(at)), lighterCrypto: !!b.lighterCrypto, allLighter: !!b.allLighter,
     twin: s.twin ? { equity: equityOf(s.twin, px), indexPct: (equityOf(s.twin, px) / s.twin.startEquity - 1) * 100, trades: new Set(s.twin.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: s.twin.trades.filter(t => t.pnl > 0).length, positions: Object.keys(s.twin.positions).length } : null,
+    kin: s.lineage?.cur ? { kind: s.lineage.cur.kind, name: s.lineage.cur.name, resultPct: +((equityOf(s.lineage.cur.s, px) / s.lineage.cur.s.startEquity - 1) * 100).toFixed(2), trades: wholeTrades(s.lineage.cur.s.trades).length } : null,
     // The bot's books: cash + award + paid to the accountant must equal the grant + every closed trade's profit.
     books: s.accountant ? { difference: +reconcile(s.accountant, s.cash, s.trades.reduce((t, x) => t + x.pnl, 0), s.fundingPaid ?? 0).toFixed(4) } : null,
     fundingPaid: +(s.fundingPaid ?? 0).toFixed(4), hungry: !!s.hungry, fired: s.fired ?? null, strikes: s.accountant?.strikes ?? 0,
@@ -274,7 +296,7 @@ function botView(b: CompetitionBot, s: BotState, st: Settings, px: (k: string) =
     maxLeverage: st.bot.maxLeverage, riskPct: st.competition.riskPctPerTrade, maxDrawdownPct: st.bot.maxDrawdownPct, peak: s.peak ?? s.startEquity, halted: s.halted ?? null, checked: s.checked ?? null,
     positions: Object.entries(s.positions).map(([key, p]) => ({ key, symbol: underlying(key), tf: tfOf(key), ...p, price: px(key) ?? p.entry, pnl: sg(p) * p.qty * ((px(key) ?? p.entry) - p.entry) })),
     pending: Object.entries(s.pending).map(([key, p]) => ({ key, symbol: underlying(key), tf: tfOf(key), ...p })),
-    trades: s.trades.map(t => ({ ...t, key: t.symbol, symbol: underlying(t.symbol), tf: tfOf(t.symbol) })), equityCurve: liveCurve(s, equityOf(s, px)), log: s.log.slice(-80).reverse(),
+    trades: s.trades.map(t => ({ ...t, key: t.symbol, symbol: underlying(t.symbol), tf: tfOf(t.symbol), explain: explainTrade(t) })), equityCurve: liveCurve(s, equityOf(s, px)), log: s.log.slice(-80).reverse(),
   };
 }
 /** Clear a halted bot after the owner's review (competition bots never halt: the accountant handles losses). */
@@ -414,18 +436,77 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     // Bots with a fixed side choose first; a free bot (side "both") may not copy a chart-and-strategy pair another bot of
     // its world already trades, so every bot plays its own game.
     const order = [...bots].sort((p, q) => Number(p.b.side === "both") - Number(q.b.side === "both")); const taken = new Set<string>();
+    // ---- Genes that trade (devils, angels, and the players hired from them) ----
+    const geneStore = readJson<GeneStore>(GENOMES(), { genomes: {} }); let genesChanged = false; const answersNow = readJson<Record<string, { answer: string }>>(ANSWERS(), {});
+    const genomeOf = (id: string) => (geneStore.genomes[id]?.picks ?? []).map(p => p.id);
+    /** Charts and strategies with the genes: ADX versions (Market reader), no costly charts (Spread sense), no trades the funding works against (Funding sense). */
+    const geneAllowed = (ids: string[], playbook: { key: string; id: string }[]) => { const x = expression(ids); const out: Record<string, string[]> = {};
+      for (const p of playbook) { const sy = byKey[underlying(p.key)]; if (x.spreadSense && sy && botCost(st, sy, tfOf(p.key)) > 15) continue;
+        let id = p.id; if (x.adx && !/_adx$/.test(id) && STRATEGIES.some(q => q.id === id + "_adx")) id += "_adx";
+        const f = fundingOf(p.key); if (x.fundingSense && f && (side(id) === "long" ? f > 0 : f < 0)) continue; (out[p.key] ??= []).push(id); }
+      return out; };
+    /** Sizing and exits with the genes: Hot hand, Cool head, Safe exit, Let it run, Iron nerves. Leverage never changes. */
+    const geneSettings = (ids: string[], base: Settings, s: BotState): Settings => { const x = expression(ids); const last = wholeTrades(s.trades).sort((p, q) => (p.exitDate < q.exitDate ? -1 : 1)); const plan = base.exits ?? DEFAULT_EXITS;
+      let r = base.bot.riskPctPerTrade; if (x.hotHand && last.length >= 2 && last.slice(-2).every(t => t.pnl > 0)) r *= 1.25; if (x.coolHead && last.length >= 3 && last.slice(-3).every(t => t.pnl <= 0)) r /= 2;
+      if (plan.mode !== "ladder") return { ...base, bot: { ...base.bot, riskPctPerTrade: Math.min(5, r) } };
+      const fr = x.safeExit ? [1 / 2, 1 / 4, 1 / 4] : plan.fractions; const exits = { ...plan, fractions: x.letRun ? fr.slice(0, 2) : fr, tpR: x.letRun ? plan.tpR.slice(0, 2) : plan.tpR, slR: x.ironNerves ? [0.35, 0.6] : plan.slR };
+      return { ...base, bot: { ...base.bot, riskPctPerTrade: Math.min(5, r) }, exits }; };
+    const freshLife = () => ({ ...newState(st.competition.startGrant, stamp), weekends: true });
+    const ROM = ["", "", " II", " III", " IV", " V", " VI", " VII", " VIII", " IX", " X"];
+    const kinName = (kind: "devil" | "angel", who: string, gen: number) => `${kind === "devil" ? "Evil" : "Angel"} ${who}${ROM[gen] ?? ` ${gen}`}`;
+    /** One devil or angel check: step it with its genes on its participant's charts; liquidated at half its 250, the next one is born. */
+    const lineage = (b: CompetitionBot, state: BotState, mk: Record<string, MarketView>) => {
+      delete state.clones; const who = state.persona?.name ?? b.name; const recruit = state.persona?.recruit ?? 1; const g0 = geneStore.genomes[b.id];
+      const base = genomeOf(b.id), era = g0?.era ?? 0; const total = Math.max(g0?.total ?? 2, base.reduce((t, id) => t + (GENES.find(x => x.id === id)?.cost ?? 0), 0)); const grant = st.competition.startGrant;
+      const L = (state.lineage && state.lineage.recruit === recruit ? state.lineage : (state.lineage = { recruit, gen: 0, past: [] }));
+      const taken = new Set([...(readRoster().evil ?? []).map(h => h.name), ...(readRoster().guild ?? []).map(h => h.name), ...L.past.map(p => p.name)]);
+      const freeName = (kind: "devil" | "angel", n: number) => { while (taken.has(kinName(kind, who, n))) n++; return kinName(kind, who, n); };
+      const born = (kind: "devil" | "angel", genes: string[], why: string) => { L.gen++; L.cur = { kind, gen: L.gen, name: freeName(kind, L.past.filter(p => p.kind === kind).length + 1), genes, born: stamp, why, s: freshLife(), lessons: [] }; };
+      if (!L.cur) born("devil", mutate(base, total, era, `${b.id}|${recruit}|${L.gen + 1}`), "grown from " + who + "'s genes with a few changes");
+      const c = L.cur!; const playbook = () => pickPlaybook(readJson<Shortlist | undefined>(botFiles(b.id).shortlist, undefined) ?? { chosen: [], candidates: [] } as never, st.competition.maxCharts + expression(c.genes).extraCharts, new Set())
+        .filter(p => (b.side === "both" || side(p.id) === b.side) && !!byKey[underlying(p.key)] && !!mk[p.key]);
+      // The angel's weekly lesson: replay the last 14 days with its genes and with genomes one change away; keep the best.
+      if (c.kind === "angel" && c.tuned !== mondayOf(now)) {
+        const from = now - 14 * 864e5; const pb = playbook();
+        const score = (ids: string[]) => { const t: BotState = { ...freshLife(), startedAt: new Date(from).toISOString().slice(0, 16) }; const allowed = geneAllowed(ids, pb);
+          for (const k of Object.keys(allowed)) { const m = mk[k]; if (!m) continue; const prior = m.complete.filter(x => barEndMs(x.d, tfOf(k), m.clock === "utc" ? "crypto" : m.cls) <= from).at(-1); if (prior) t.last[k] = prior.d; }
+          run(geneSettings(ids, stBot, t), t, mk, allowed); const e = equityOf(t, k => mk[k]?.partial?.c ?? mk[k]?.complete.at(-1)?.c); return (e / grant - 1) * 100 - (e <= grant / 2 ? 50 : 0); };
+        const tries = neighbours(c.genes, total, era, `${b.id}|${c.gen}|${mondayOf(now)}`).map(ids => ({ ids, pct: score(ids) })); const best = tries.reduce((p, q) => (q.pct > p.pct + 0.25 ? q : p), tries[0]);
+        const nm = (ids: string[]) => ids.map(id => GENES.find(x => x.id === id)?.name ?? id);
+        const added = nm(best.ids.filter(id => !c.genes.includes(id))), dropped = nm(c.genes.filter(id => !best.ids.includes(id)));
+        c.lessons.unshift({ d: stamp, text: added.length || dropped.length ? `Tested ${tries.length} gene sets on the last 14 days: ${added.length ? `took ${added.join(" and ")}` : ""}${added.length && dropped.length ? ", " : ""}${dropped.length ? `dropped ${dropped.join(" and ")}` : ""} (${best.pct.toFixed(1)}% against ${tries[0].pct.toFixed(1)}% with my genes).` : `Tested ${tries.length} gene sets on the last 14 days: my genes were still the best (${tries[0].pct.toFixed(1)}%).` });
+        c.lessons = c.lessons.slice(0, 12); c.genes = best.ids; c.tuned = mondayOf(now);
+      }
+      run(geneSettings(c.genes, stBot, c.s), c.s, mk, geneAllowed(c.genes, playbook()));
+      const eq = equityOf(c.s, k => live.prices[underlying(k)]?.price ?? mk[k]?.partial?.c ?? mk[k]?.complete.at(-1)?.c);
+      if (eq <= grant / 2) { // liquidated: the next devil is born with new changes
+        L.past.unshift({ kind: c.kind, gen: c.gen, name: c.name, genes: c.genes, born: c.born, ended: stamp, how: "liquidated", resultPct: +((eq / grant - 1) * 100).toFixed(2), trades: wholeTrades(c.s.trades).length });
+        L.past = L.past.slice(0, 20); born("devil", mutate(base, total, era, `${b.id}|${recruit}|${L.gen + 1}`), `${c.name} was liquidated; a new devil grown from ${who}'s genes with new changes`); return;
+      }
+      // The owner hired it: it becomes a player with its account and genes; the participant gets an angel (or, after an angel, a new devil).
+      const key = `hire-${c.kind}-${b.id}-${recruit}-${c.gen}`; const r = readRoster(); r.guild ??= [];
+      if (answersNow[key]?.answer === "yes" && !r.guild.some(h => h.key === key) && bankOf(st).available >= grant) {
+        const id = `${c.kind}-${b.id}-${recruit}-${c.gen}`;
+        r.guild.push({ id, key, cand: "", name: c.name, genes: { side: b.side, family: "any", adx: "any", speed: "any", world: b.view }, hiredAt: stamp, kin: c.kind, of: b.id }); writeJson(ROSTER(), r);
+        writeJson(botFiles(id).state, { ...c.s, accountant: newAccountant(grant, stamp, rulesOf(st)), side: b.side, persona: { name: c.name, recruit: 1, slot: id } } as BotState);
+        geneStore.genomes[id] = { who: `${id}|1`, picks: c.genes.map(gid => ({ id: gid, at: c.born, why: `born with it (${c.why})`, by: "bot" as const })), total, era }; genesChanged = true;
+        L.past.unshift({ kind: c.kind, gen: c.gen, name: c.name, genes: c.genes, born: c.born, ended: stamp, how: "hired", resultPct: +((eq / grant - 1) * 100).toFixed(2), trades: wholeTrades(c.s.trades).length, id });
+        if (c.kind === "devil") born("angel", c.genes, `grown from the genes of ${c.name}, hired on ${stamp.replace("T", " ")}`);
+        else born("devil", mutate(base, total, era, `${b.id}|${recruit}|${L.gen + 1}`), `${c.name} was hired; a new devil grown from ${who}'s genes`);
+      }
+    };
     for (const x of order) {
       if (!trading) continue; // watching only
       const { b, shortlist } = x; let state = x.state; const mk = wide(b) ? fullMarket : baseMarket;
       const tradable = (key: string) => { const sy = byKey[underlying(key)]; return !!sy && (sy.lighterOnly ? wide(b) : botTrades(sy)); };
       // The bot's own choice: up to maxCharts charts, each with the strategy that did best there on data it had not seen.
-      const pick = (s: BotState) => { s.hungry = hungry.has(b.id); s.playbook = pickPlaybook(shortlist, st.competition.maxCharts + (hungry.has(b.id) ? st.competition.hungryExtraCharts : 0), new Set([...(readRoster().banned[b.id] ?? []), ...(b.side === "both" ? taken : [])])).filter(p => (b.side === "both" || side(p.id) === b.side) && tradable(p.key)); };
-      const allowedFor = (s: BotState) => Object.fromEntries((s.playbook ?? []).map(p => [p.key, [p.id]]));
+      const pick = (s: BotState) => { s.hungry = hungry.has(b.id); s.playbook = pickPlaybook(shortlist, st.competition.maxCharts + (hungry.has(b.id) ? st.competition.hungryExtraCharts : 0) + (b.kin ? expression(genomeOf(b.id)).extraCharts : 0), new Set([...(readRoster().banned[b.id] ?? []), ...(b.side === "both" ? taken : [])])).filter(p => (b.side === "both" || side(p.id) === b.side) && tradable(p.key)); };
+      const allowedFor = (s: BotState) => b.kin ? geneAllowed(genomeOf(b.id), s.playbook ?? []) : Object.fromEntries((s.playbook ?? []).map(p => [p.key, [p.id]]));
       // The random twin trades the same charts with the same rules, entering at random as often as the real strategy did.
       const twinAllowed = (s: BotState) => Object.fromEntries((s.playbook ?? []).map(p => [p.key, [twinId(p.key, p.id, (p as PlaybookPair).rate ?? 0)]]));
       const newTwin = (s: BotState) => ({ ...newState(st.competition.startGrant, s.startedAt), weekends: true });
       pick(state);
-      run(stDesk, state, mk, allowedFor(state), b);
+      run(b.kin ? geneSettings(genomeOf(b.id), stDesk, state) : stDesk, state, mk, allowedFor(state), b);
       // A stopped bot (bust line, no award to rescue it) waits for the end of the week; one replaced for quiet weeks goes at
       // once. Either way a recruit is hired only if the accountant has a grant's worth of money left.
       if (state.fired && b.guild) { // a guild trader has no recruit: it leaves the desk, its record stays
@@ -450,13 +531,17 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
         const who = state.persona ?? { name: b.name, recruit: 1, slot: b.id }; const id = `real-${b.id}-${who.recruit}`;
         if (!approvals.some(a => a.id === id)) { ask(approvals, { id, kind: "real-money", slot: b.id, at: stamp, title: `${who.name} is an Experienced trader: move to real money?`, detail: `${who.name} has ${state.accountant.streak} badges in a row. A yes is recorded only: real orders on Lighter are not built yet, and before any real money the stops and take-profits must sit on Lighter as real orders. You will be asked again before anything real happens.` }); approvalsChanged = true; }
       }
-      if (!state.fired) { state.twin ??= newTwin(state); delete state.twin.twin; run(stBot, state.twin, mk, twinAllowed(state)); }
+      if (!state.fired) { state.twin ??= newTwin(state); delete state.twin.twin; run(stBot, state.twin, mk, twinAllowed(state));
+        // The devil or the angel (src/bot/genes.ts): grown from this participant's genes, trading its charts with its own genes.
+        if (!b.kin) lineage(b, state, mk);
+      }
       for (const p of state.playbook ?? []) taken.add(`${p.key}|${p.id}`);
       holdings.set(b.id, state.fired ? [] : Object.entries(state.positions).map(([k, p]) => ({ name: state.persona?.name ?? b.name, sym: underlying(k), side: p.side })));
       if (state.checked) state.checked.by = process.env.TD_ENGINE === "1" ? "GitHub" : "PC";
       const es = evilSpec(b, state); if (es) state.evil = es;
       writeJson(botFiles(b.id).state, state);
     }
+    if (genesChanged) writeJson(GENOMES(), geneStore);
     const px = (k: string) => live.prices[underlying(k)]?.price ?? fullMarket[k]?.partial?.c ?? fullMarket[k]?.complete.at(-1)?.c;
     const traded = Object.entries(market).filter(([k]) => botTrades(byKey[underlying(k)])); const hours: Hours = { total: traded.length, allDay: traded.filter(([, m]) => m.cls === "crypto" || m.clock === "utc").length,
       marketHoursOnly: [...new Set(traded.filter(([, m]) => m.cls !== "crypto" && m.clock !== "utc").map(([k]) => k.split("@")[0]))].sort(),
@@ -470,14 +555,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     const roster = readRoster(); roster.evil ??= [];
     // A twin hired before 27 Nov started again from 250; it keeps the account it had built since its participant's hire.
     for (const h of roster.evil) if (!h.since) { const ps = readJson<BotState | null>(botFiles(h.of).state, null); h.since = ps?.accountant?.hiredAt.slice(0, 16) ?? h.hiredAt; writeJson(ROSTER(), roster); } const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); let changed = false;
-    for (const b of participants(st)) {
-      const s = readJson<BotState | null>(botFiles(b.id).state, null); const spec = s && evilSpec(b, s); if (!spec) continue;
-      const key = hireKey(b.id, spec);
-      if (answers[key]?.answer === "yes" && !roster.evil.some(h => h.key === key) && bankOf(st).available >= st.competition.startGrant) {
-        roster.evil.push({ id: key.replace(/^hire-/, ""), key, of: b.id, kind: spec.kind, sym: spec.sym, name: evilName(s.persona?.name ?? b.name, spec.gen), hiredAt: stamp, since: spec.since, gen: spec.gen ?? 1 }); changed = true;
-        writeJson(ROSTER(), roster); // the bank counts the new loan from here on
-      }
-    }
+    // (Participants' Pionex-style evil twins were replaced by devils grown from genes on 27 Nov; earlier hires keep playing.)
     // Each hired twin: replayed from its hire with the accountant running its books; fired twins leave like fired recruits.
     for (const h of roster.evil.filter(x => !x.firedAt)) {
       // The account runs from when the twin started (it keeps what it built before the hire), on a 250 loan from the bank.
@@ -497,20 +575,19 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     }
     if (changed) writeJson(ROSTER(), roster);
   }
-  writeJson(TWINS(), { at: new Date(now).toISOString(), bots: participants(st).map(b => {
+  writeJson(TWINS(), { at: new Date(now).toISOString(), bots: participants(st).filter(b => !b.kin).map(b => {
     const s = readJson<BotState | null>(botFiles(b.id).state, null); const v = readJson<any>(botFiles(b.id).view, null); if (!s || !v) return null;
-    const spec = evilSpec(b, s); let evil: EvilResult | null = null;
-    if (spec) { const sy = allSyms[spec.sym]; evil = runEvil(hourBars(spec.sym), spec, { grant: st.competition.startGrant, leverage: Math.min(st.bot.maxLeverage ?? 3, 3), costBps: sy ? botCost(st, sy, "1h") : 5,
-      fundingPerHour: () => (fundingRates[spec.sym] ?? 0) / st.competition.fundingPeriodHours, paused: (end: number) => inWeekendPause(end - 1) }); }
     const drop = (c: { equity: number }[]) => { let pk = -Infinity, w = 0; for (const p of c) { pk = Math.max(pk, p.equity); if (pk > 0) w = Math.min(w, (p.equity / pk - 1) * 100); } return +w.toFixed(2); };
-    const tw = s.twin; const twCurve = (tw?.equityCurve ?? []).slice(-600);
-    const hkey = spec ? hireKey(b.id, spec) : null; const hire = hkey ? hires().find(h => h.key === hkey) : undefined;
-    return { id: b.id, name: v.name, recruit: v.recruit, side: b.side, view: b.view, fired: v.fired ?? null, evilName: spec ? evilName(v.name, spec.gen) : null,
-      hired: hires().filter(h => h.of === b.id && h.key !== hkey).map(h => ({ id: h.id, name: h.name, hiredAt: h.hiredAt, firedAt: h.firedAt ?? null })),
-      hire: hkey ? { key: hkey, hiredId: hire?.id ?? null, hiredAt: hire?.hiredAt ?? null, firedAt: hire?.firedAt ?? null, ordered: readJson<Record<string, { answer: string }>>(ANSWERS(), {})[hkey]?.answer === "yes", bank: bankOf(st).available, grant: st.competition.startGrant } : null,
+    const tw = s.twin; const twCurve = (tw?.equityCurve ?? []).slice(-600); const L = s.lineage; const c = L?.cur; const ans = readJson<Record<string, { answer: string }>>(ANSWERS(), {});
+    const kin = c ? (() => { const cpx = (key: string) => live.prices[underlying(key)]?.price; const eq = equityOf(c.s, cpx); const w = wholeTrades(c.s.trades); const curve = c.s.equityCurve.slice(-600); const key = `hire-${c.kind}-${b.id}-${L!.recruit}-${c.gen}`;
+      return { kind: c.kind, gen: c.gen, name: c.name, plain: c.kind === "devil" ? DEVIL_TEXT : ANGEL_TEXT, why: c.why, genes: c.genes, since: c.born, equity: +eq.toFixed(2), resultPct: +((eq / c.s.startEquity - 1) * 100).toFixed(2), trades: w.length, wins: w.filter(t => t.pnl > 0).length, badges: 0, stops: 0, worstDropPct: drop(curve), curve,
+        lessons: c.lessons, log: c.s.log.slice(-15).reverse(),
+        closedList: c.s.trades.slice(-150).map(t => ({ ...t, key: t.symbol, symbol: underlying(t.symbol), tf: tfOf(t.symbol), explain: explainTrade(t) })), open: Object.entries(c.s.positions).map(([k, p]) => ({ symbol: underlying(k), tf: tfOf(k), side: p.side, entry: p.entry, entryDate: p.entryDate, stop: p.stop, qty: p.qty, now: cpx(k) ?? null })),
+        hire: { key, ordered: ans[key]?.answer === "yes", bank: bankOf(st).available, grant: st.competition.startGrant } }; })() : null;
+    return { id: b.id, name: v.name, recruit: v.recruit, side: b.side, view: b.view, fired: v.fired ?? null,
       participant: { equity: +v.equity.toFixed(2), resultPct: +v.resultPct.toFixed(2), trades: new Set(s.trades.map(t => `${t.symbol}|${t.entryDate}`)).size, wins: wholeTrades(v.trades).filter((t: { pnl: number }) => t.pnl > 0).length, badges: s.accountant?.badges ?? 0, stops: s.fired ? 1 : 0, worstDropPct: drop(v.equityCurve ?? []), curve: (v.equityCurve ?? []).slice(-600) },
       random: tw ? { equity: +v.twin.equity.toFixed(2), resultPct: +v.twin.indexPct.toFixed(2), trades: v.twin.trades, wins: wholeTrades(tw.trades).filter(t => t.pnl > 0).length, worstDropPct: drop(twCurve), curve: twCurve } : null,
-      evil };
+      kin, past: L?.past ?? [] };
   }).filter(Boolean),
     // Each hired evil twin against its angel twin: the same bot on the same market, improved and re-tuned every week.
     hires: activeHires().filter(h => h.style !== "angel").map(h => {
@@ -525,7 +602,7 @@ async function doRefresh(opts: { fetch?: boolean; force?: boolean; now?: number 
     }).filter(Boolean) });
   const res: RefreshResult = { at: new Date().toISOString(), tookMs: Date.now() - t0, fetch: fetchStatus, symbolsWithData: new Set(fetchStatus.filter(f => f.bars).map(f => f.symbol)).size, retested, ...(remote ? { remote: { ok: remote.ok, failed: remote.failed.length, at: remote.at } } : {}) };
   writeJson(STATUS(), res);
-  writeCompetition(now);
+  writeCompetition(now, trading);
   logRun(process.env.TD_ENGINE === "1" ? "GitHub" : st.remote?.repo ? (trading ? "PC" : "PC (watching)") : "PC (alone)", Date.now() - t0, res.symbolsWithData, fetchStatus.filter(f => !f.ok && !f.skipped).length);
   if (lease && st.remote) {
     const pushed = syncPush(st.remote.repo, st.remote.branch, lease, publishedFiles(st), { "heartbeat.json": JSON.stringify({ at: new Date().toISOString(), by: "PC", tookMs: Date.now() - t0 }, null, 1), "README.md": "# TradingDesk bot data\n\nThe four paper bots' state and the competition scoreboard, written by whoever checked the bots last (GitHub's workflow or the owner's PC). Pretend money only.\n" });
@@ -649,13 +726,13 @@ function lockerRoom(bots: { id: string; name: string; allEvents: { d: string; ki
   return out.sort((x, y) => (x.d < y.d ? 1 : -1)).slice(0, 40);
 }
 /** The scoreboard: every bot's tier, streak, badges, award and loan, this month's standings, the fired bots, the index chart. */
-export function writeCompetition(now = Date.now()) {
+export function writeCompetition(now = Date.now(), evolveGenes = false) {
   const st = settings(); const rules = rulesOf(st); const month = madridMonth(new Date(now).toISOString().slice(0, 16)); const roster = readRoster();
   const bots = competitors(st).map(c => {
     const v = readJson<ReturnType<typeof botView> | null>(botFiles(c.id).view, null);
     const a: Accountant = v?.accountant && "debt" in v.accountant ? v.accountant : newAccountant(st.competition.startGrant, new Date(now).toISOString().slice(0, 16), rules);
     const equity = v?.equity ?? a.grant; const live = a.lastEquity > 0 ? a.index * equity / a.lastEquity : a.index; const m = a.months[month];
-    return { id: c.id, name: v?.name ?? c.name, recruit: v?.recruit ?? 1, view: c.view, side: c.side, motto: c.motto ?? "", started: !!v, evilHire: c.evil ?? null, hiredAt: a.hiredAt, checkedAt: v?.checked?.at ?? null,
+    return { id: c.id, name: v?.name ?? c.name, recruit: v?.recruit ?? 1, view: c.view, side: c.side, motto: c.motto ?? "", started: !!v, evilHire: c.evil ?? null, kin: c.kin ?? null, kinOf: c.kinOf ?? null, hiredAt: a.hiredAt, checkedAt: v?.checked?.at ?? null,
       tier: tierOf(a, rules), tierName: tierName(a, rules), streak: a.streak, bestStreak: a.bestStreak, toNext: toNextTier(a, rules),
       grant: a.grant, badges: a.badges, saves: a.saves, award: +a.award.toFixed(2), debt: +a.debt.toFixed(2), repaid: +a.repaid.toFixed(2), interestPaid: +a.interestPaid.toFixed(2), nextInterestAt: a.nextInterestAt,
       equity, bustLine: a.grant / 2, target: 2 * a.grant, index: +live.toFixed(3), totalReturnPct: +(live - 100).toFixed(2),
@@ -676,7 +753,7 @@ export function writeCompetition(now = Date.now()) {
   const duels = duelsOf(bots, now, (tw0?.hires ?? []).map(h => ({ evil: h.id, id: h.angelId, name: h.angelName, index: h.angel.index, daily: h.angel.daily, hiredAt: h.since })));
   const locker = lockerRoom(bots, duels, roster);
   // Each participant's thought about this week, and its evil twin's taunt (flavour, src/bot/voice.ts).
-  const twins = readJson<{ bots: { id: string; evil: EvilResult | null }[] } | null>(TWINS(), null);
+  const twins = readJson<{ bots: { id: string; kin: { kind: string; name: string; resultPct: number; trades: number; stops: number; badges: number; genes: string[] } | null }[] } | null>(TWINS(), null);
   const weeks = bots.map(b => weeklyReports(b.report, now, st.competition.minTradesPerWeek, 1)[0]);
   const order = bots.map((b, i) => ({ b, w: weeks[i] })).filter(x => !x.b.stopped).sort((x, y) => (y.w?.returnPct ?? 0) - (x.w?.returnPct ?? 0));
   const mon = mondayOf(now);
@@ -687,21 +764,40 @@ export function writeCompetition(now = Date.now()) {
     duelsWon: duels.table.find((r: { id: string; won: number }) => r.id === b.id)?.won ?? 0, weekly: allWeeks[i].filter(w => !w.live).map(w => w.returnPct) });
     const mine = deeds.filter(d => d.holder === b.id); return [b.id, { fame: e.fame + mine.length * DEED_FAME, stars: e.stars, eras: e.eras, deeds: mine.map(d => d.id) }]; }));
   const voices = Object.fromEntries(bots.map((b, i) => {
-    const w = weeks[i]; const ev = twins?.bots.find(x => x.id === b.id)?.evil ?? null;
+    const w = weeks[i]; const ev = twins?.bots.find(x => x.id === b.id)?.kin ?? null;
     const wk = b.report.trades.filter(t => madridDay(t.exitDate.length === 10 ? t.exitDate + "T12:00" : t.exitDate.slice(0, 16)) >= mon).sort((x, y) => y.pnl - x.pnl);
     const thought = thoughtOf({ id: b.id, name: b.name, week: mon, trades: w?.trades ?? 0, wins: w?.wins ?? 0, pnl: w?.pnl ?? 0, returnPct: w?.returnPct ?? 0,
       rank: order.findIndex(x => x.b.id === b.id) + 1, of: order.length, leader: order[0]?.b.name, equity: b.equity, grant: b.grant, minTrades: st.competition.minTradesPerWeek, badges: b.badges, streak: b.streak,
       best: wk[0] ? { sym: underlying(wk[0].key), pnl: wk[0].pnl } : null, worst: wk.at(-1) ? { sym: underlying(wk.at(-1)!.key), pnl: wk.at(-1)!.pnl } : null,
       evil: ev ? { name: ev.name, resultPct: ev.resultPct, kind: ev.kind } : (() => { const h = tw0?.hires?.find(x => x.id === b.id); return h ? { name: h.angelName, resultPct: h.angel.resultPct, kind: "angel" } : null; })(), resultPct: b.totalReturnPct, stopped: !!b.stopped, weekend: inWeekendPause(now), graced: now - Date.parse(b.hiredAt + ":00Z") < st.competition.graceDays * 864e5 });
     return [b.id, { thought, character: characterOf(b.id), characterText: CHARACTER_TEXT[characterOf(b.id)],
-      evil: ev ? { name: ev.name, kind: ev.kind, sym: ev.sym, resultPct: ev.resultPct, taunt: tauntOf(ev, { name: b.name, resultPct: b.totalReturnPct }, `${b.id}|${mon}`) } : null,
+      evil: ev ? { name: ev.name, kind: ev.kind, genes: ev.genes.length, resultPct: ev.resultPct, taunt: tauntOf(ev, { name: b.name, resultPct: b.totalReturnPct }, `${b.id}|${mon}`) } : null,
       angel: (() => { const h = tw0?.hires?.find(x => x.id === b.id); return h ? { name: h.angelName, resultPct: h.angel.resultPct, lesson: h.angel.lessons[0]?.text ?? null } : null; })() }];
   }));
+  // The gene tree (src/bot/genes.ts): DNA points from the record; the bot spends them on what its results need, or on the
+  // genes the owner planned for it (kept with the owner's answers as gene-<bot>-<gene>). Saved only by the trading check.
+  const store = readJson<GeneStore>(GENOMES(), { genomes: {} }); const answers = readJson<Record<string, { answer: string; at: string }> | null>(ANSWERS(), null);
+  if (answers) { store.plans = {}; for (const [k, a] of Object.entries(answers)) { if (!k.startsWith("gene-") || a.answer !== "yes") continue; const gene = GENES.find(x => k.endsWith(`-${x.id}`)); if (!gene) continue;
+    const bot = k.slice(5, k.length - gene.id.length - 1); if (bot) (store.plans[bot] ??= []).push(gene.id); } }
+  const genes = Object.fromEntries(bots.filter(b => !b.evilHire).map(b => { const i = bots.indexOf(b); const done = allWeeks[i].filter(w => !w.live); const recent = done.slice(0, 4);
+    const whole = b.report.trades; let pk = 100, worst = 0; for (const d of Object.keys(b.daily).sort()) { const x = b.daily[d]; pk = Math.max(pk, x); worst = Math.min(worst, (x / pk - 1) * 100); }
+    const stats: GeneStats = { badges: b.badges, tiersReached: b.tier, deeds: fameOf[b.id].deeds.length, greenWeeks: done.filter(w => w.returnPct > 0).length,
+      tradesPerWeek: recent.length ? recent.reduce((t, w) => t + w.trades, 0) / recent.length : allWeeks[i][0]?.trades ?? 0, winRate: whole.length ? whole.filter(t => t.pnl > 0).length / whole.length : 0.5, worstDropPct: worst, minTrades: st.competition.minTradesPerWeek };
+    const era = Math.max(0, fameOf[b.id].eras.filter((e: { unlocked: boolean }) => e.unlocked).length - 1);
+    // A recruit in the seat starts with a new genome; the old one stays in the file under its own name.
+    const who = `${b.id}|${b.recruit}`; const old = store.genomes[b.id]?.who === who ? store.genomes[b.id] : { who, picks: [] };
+    const planned = store.plans?.[b.id] ?? [];
+    const g = { ...evolve(old, stats, era, new Date(now).toISOString().slice(0, 16), planned), total: pointsOf(stats).total, era }; if (evolveGenes) store.genomes[b.id] = g;
+    const pts = pointsOf(stats); const spare = pts.total - spentOf(g);
+    return [b.id, { points: pts, spent: spentOf(g), spare, era, picks: g.picks, wants: preference(stats).why, planned: planned.filter(id => !g.picks.some(p => p.id === id)),
+      state: Object.fromEntries(GENES.map(x => [x.id, g.picks.some(p => p.id === x.id) ? "owned" : canTake(x.id, g, era, Infinity).ok ? "open" : "locked"])),
+      why: Object.fromEntries(GENES.map(x => [x.id, canTake(x.id, g, era, spare).why])) }]; }));
+  if (evolveGenes) writeJson(GENOMES(), { ...store, at: new Date(now).toISOString() });
   const runs = readJson<{ at: string; by: string; tookMs: number; failed: number }[]>(RUNS(), []);
   const day = runs.filter(r => now - Date.parse(r.at) < 864e5); const remoteNote = readJson<Record<string, unknown> | null>(join(P.derived, "remote.json"), null);
   const checks = { last: runs.slice(-12).reverse(), last24h: Object.fromEntries([...new Set(day.map(r => r.by))].map(b => [b, day.filter(r => r.by === b).length])), shared: !!st.remote?.repo, sync: remoteNote };
   writeJson(COMPETITION(), { at: new Date(now).toISOString(), month, duels, locker, checks, weekend: inWeekendPause(now), startGrant: st.competition.startGrant, riskPct: st.competition.riskPctPerTrade,
-    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => ({ ...b, ...voices[b.id], ...fameOf[b.id], evilHire: b.evilHire })), months, ladder, deeds,
+    rules: { ...rules, maxCharts: st.competition.maxCharts, tierNames: TIER_NAMES }, bots: bots.map(({ months: _m, allEvents: _e, bigTrades: _t, report: _r, ...b }) => ({ ...b, ...voices[b.id], ...fameOf[b.id], evilHire: b.evilHire })), months, ladder, deeds, genes, geneTree: { branches: BRANCHES, genes: GENES, devil: DEVIL_TEXT, angel: ANGEL_TEXT },
     // The accountant's own books: loans (lent = repaid + lost + still owed) and the bank (start - lent + repaid - prizes = available).
     books: (() => { const k = bankOf(st); return { ...k, funding: +bots.reduce((t, b) => t + b.fundingPaid, 0).toFixed(2),
       difference: +(k.lent - k.repaid - k.lost - k.owed).toFixed(2) }; })(),

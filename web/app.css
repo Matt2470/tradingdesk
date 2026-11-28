@@ -334,3 +334,32 @@ main>.game.plain{padding-top:28px}
 .gd-body{flex:1;min-width:0}.gd-body h3{margin:2px 0 4px;font-size:20px}.gd-type{margin:0;font-size:12px;color:var(--muted)}
 .gd-body .mini{grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
 .gd-face{align-self:flex-start}
+/* Evolution: the gene tree (owner, 2026-11-27: "a tree of technological growth ... like Civilization"). One column per
+   branch, eras top to bottom, a spine joining each gene to the one it needs; capstones join two branches in era IV. */
+.ev-picks{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.ev-pick{display:grid;grid-template-columns:44px auto;grid-template-rows:auto auto;column-gap:8px;align-items:center;text-align:left;background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:6px 12px 6px 6px}
+.ev-pick svg,.ev-pick img{grid-row:1/3;width:44px;height:44px}.ev-pick.on{border-color:#D8B76A;box-shadow:0 0 0 1px #D8B76A inset}.ev-pick .small{grid-column:2}
+.ev-top{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:start;margin:8px 0 20px}.ev-face svg,.ev-face img{width:120px;height:120px}
+.ev-top h2{margin:0 0 6px}.ev-dna{font:600 17px/1.4 var(--display);margin:0}.ev-dna strong{color:#F1DCA0;font-size:22px}.ev-note{margin:12px 0 0}
+.gtree{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;background:radial-gradient(ellipse at top,rgba(216,183,106,.08),transparent 70%),#0B1620;border:1px solid var(--line);border-radius:10px;padding:18px}
+.gt-col{--br:#5FC7C0;display:flex;flex-direction:column}.gt-col:nth-child(2){--br:#8CC2FF}.gt-col:nth-child(3){--br:#5FD39A}.gt-col:nth-child(4){--br:#D8B76A}
+.gt-col h3{font:600 17px/1.2 var(--serif);font-variant:small-caps;letter-spacing:.04em;color:var(--br);margin:0 0 2px}.gt-col>.small{margin:0 0 6px;min-height:3.2em}
+.gt-era{font:600 11.5px/1 var(--text);letter-spacing:.06em;color:var(--muted);margin:10px 0 6px;border-top:1px solid var(--line);padding-top:8px}
+.gn{--br:inherit;position:relative;background:#132331;border:1px solid var(--line);border-radius:8px;padding:10px 11px;margin:0 0 14px}
+.gt-col .gn+.gn::before,.gt-col .gn+.gt-era+.gn::before{content:"";position:absolute;left:50%;top:-15px;height:14px;border-left:2px solid var(--line)}
+.gt-col .gn+.gt-era+.gn::before{top:-40px;height:39px}
+.gn header{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:center}.gn h4{margin:0;font:600 14.5px/1.2 var(--text)}
+.gn-ico{color:var(--br);font-size:16px;text-align:center}.gn-cost{font:600 11.5px/1 var(--display);color:#F1DCA0;border:1px solid rgba(216,183,106,.4);border-radius:10px;padding:3px 7px}
+.gn p{margin:6px 0;font-size:13px;color:#C9D3DC}.gn footer{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px}.gn footer .ghostbtn{padding:3px 9px;font-size:12.5px}
+.gn.owned{border-color:var(--br);box-shadow:0 0 14px -4px var(--br),inset 0 0 0 1px var(--br);background:linear-gradient(180deg,rgba(255,255,255,.05),transparent),#152a3a}
+.gt-col .gn.owned+.gn::before,.gt-col .gn.owned+.gt-era+.gn::before{border-left-color:var(--br)}
+.gn.open{border-style:dashed;border-color:var(--br)}.gn.locked{opacity:.55}.gn.locked .gn-ico{filter:grayscale(1)}
+.gn.planned{outline:2px solid #F1DCA0;outline-offset:2px}
+.gn-tag{font-weight:600;border-radius:3px;padding:1px 6px}.gn-tag.own{background:var(--br);color:#0B1620}.gn-tag.plan{background:#F1DCA0;color:#0B1620}
+.gn-clone{font-size:11px;border-radius:10px;padding:1px 7px}.gn-clone.dark{background:#3A1418;color:#FF9A92}.gn-clone.light{background:#3A3214;color:#F2D77A}
+.gt-caps{grid-column:1/-1;--br:#C3A6FF}.gt-caprow{display:grid;grid-template-columns:1fr 1fr;gap:16px}.gt-caprow .gn{margin:0;--br:#C3A6FF}
+.ev-hist ol{padding-left:20px}.ev-hist li{margin:4px 0}
+.tw-clones{font:600 16px/1.2 var(--serif);font-variant:small-caps;color:#F1DCA0;margin:14px 0 6px}
+@media (max-width:900px){.gtree{grid-template-columns:1fr 1fr}.gt-caprow{grid-template-columns:1fr}.ev-top{grid-template-columns:1fr}}
+td.why{max-width:46ch}td.why .small{color:var(--muted);line-height:1.35}
+.gn-clone.soon{background:#24303B;color:#A3AFB9}.genes-cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}.genes-cmp h4{margin:0 0 6px;font:600 14px/1.2 var(--text)}.genechips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}.gchip{font-size:12.5px;border:1px solid rgba(216,183,106,.45);border-radius:12px;padding:2px 9px;color:#F1DCA0}

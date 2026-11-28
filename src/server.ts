@@ -2,9 +2,10 @@ import { readdirSync } from "node:fs";
 // Local dashboard server. Listens on 127.0.0.1 only: nothing here is reachable from the network.
 import { join, normalize } from "node:path";
 import { ROOT, P, settings, readJson, writeJson, universe } from "./config";
-import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince, OFFICE, TWINS, GUILD, bankOf, readRoster } from "./pipeline";
+import { refresh, tick, resumeBot, files, viewOf, evalFile, writeBoard, botFiles, botById, competitors, COMPETITION, checkingSince, OFFICE, TWINS, GUILD, bankOf, readRoster, participants, writeCompetition } from "./pipeline";
 import { answer, ANSWERS } from "./bot/office";
 import { STRATEGIES } from "./core/strategies";
+import { GENES } from "./bot/genes";
 import { readFeedback, saveFeedback } from "./feedback";
 import { lighterFile, readiness, type LighterSnapshot } from "./data/lighter";
 
@@ -30,7 +31,7 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   "/api/bot": u => { const id = u.searchParams.get("bot"); const v = u.searchParams.get("view"); const cur = settings();
     const b = id ? botById(id, cur) : competitors(cur).find(x => x.view === viewOf(v)) ?? botById(null, cur); const view = readJson<Record<string, unknown> | null>(botFiles(b.id).view, null); return view && { ...view, checkingSince: checkingSince() }; },
   // Current names: a fired bot's seat shows its recruit's name.
-  "/api/bots": () => competitors(settings()).map(({ id, name, view, side, motto, lighterCrypto, evil }) => ({ id, name: readJson<{ name?: string } | null>(botFiles(id).view, null)?.name ?? name, view, side, motto: motto ?? "", lighterCrypto: !!lighterCrypto, evil: evil ?? null })),
+  "/api/bots": () => competitors(settings()).map(({ id, name, view, side, motto, lighterCrypto, evil, kin, kinOf }) => ({ id, name: readJson<{ name?: string } | null>(botFiles(id).view, null)?.name ?? name, view, side, motto: motto ?? "", lighterCrypto: !!lighterCrypto, evil: evil ?? null, kin: kin ?? null, kinOf: kinOf ?? null })),
   "/api/competition": () => { const c = readJson<Record<string, unknown> | null>(COMPETITION(), null); return c && { ...c, checkingSince: checkingSince() }; },
   // The Accountant screen, and the owner's yes or no on a decision waiting there.
   "/api/office": () => readJson(OFFICE(), null),
@@ -38,13 +39,19 @@ const routes: Record<string, (u: URL, req: Request) => unknown | Promise<unknown
   // The Players Guild: this generation's candidates, the bank, the owner's orders and the guild's hires.
   "/api/guild": () => { const g = readJson(GUILD(), null); const answers = readJson<Record<string, { answer: string }>>(ANSWERS(), {}); const r = readRoster();
     return { guild: g, bank: bankOf(), grant: settings().competition.startGrant, ordered: Object.keys(answers).filter(k => k.startsWith("hire-guild-") && answers[k].answer === "yes").map(k => k.slice(11)),
-      hired: [...(r.guild ?? []).map(h => ({ id: h.id, cand: h.cand, name: h.name, hiredAt: h.hiredAt, firedAt: h.firedAt ?? null, type: "strategist" })), ...(r.evil ?? []).filter(h => h.style === "angel").map(h => ({ id: h.id, cand: h.key.slice(11), name: h.name, hiredAt: h.hiredAt, firedAt: h.firedAt ?? null, type: "builder" }))] }; },
+      hired: [...(r.guild ?? []).filter(h => !h.kin).map(h => ({ id: h.id, cand: h.cand, name: h.name, hiredAt: h.hiredAt, firedAt: h.firedAt ?? null, type: "strategist" })), ...(r.evil ?? []).filter(h => h.style === "angel").map(h => ({ id: h.id, cand: h.key.slice(11), name: h.name, hiredAt: h.hiredAt, firedAt: h.firedAt ?? null, type: "builder" }))] }; },
   // Pictures the owner put in web/portraits/ to replace the drawn portraits.
   "/api/portraits": () => { try { return readdirSync(join(ROOT, "web", "portraits")).filter(f => /\.(png|jpe?g|webp)$/i.test(f)); } catch { return []; } },
   // The owner hires an evil twin (or takes the order back before the next check). Kept with the owner's answers on this PC.
   "/api/hire": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { key?: string; yes?: boolean } | null;
-    if (!b || typeof b.key !== "string" || !/^hire-(evil-[a-z-]+-\d+(-g\d+)?|guild-g\d+-\d+)$/.test(b.key) || typeof b.yes !== "boolean") return { error: "send {key, yes}" };
+    if (!b || typeof b.key !== "string" || !/^hire-(evil-[a-z-]+-\d+(-g\d+)?|guild-g\d+-\d+|(devil|angel)-[a-z0-9-]+-\d+-\d+)$/.test(b.key) || typeof b.yes !== "boolean") return { error: "send {key, yes}" };
     const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); answers[b.key] = { answer: b.yes ? "yes" : "no", at: new Date().toISOString().slice(0, 16) }; writeJson(ANSWERS(), answers); return { ok: true, key: b.key, answer: answers[b.key].answer }; },
+  // The owner plans a gene for a player (or takes the plan back). Kept with the owner's answers on this PC; the next trading
+  // check copies the plans into bot/genes.json, and the player saves its DNA for it (src/bot/genes.ts).
+  "/api/gene": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { bot?: string; gene?: string; yes?: boolean } | null;
+    if (!b || typeof b.bot !== "string" || !participants(settings()).some(p => p.id === b.bot) || typeof b.gene !== "string" || !GENES.some(g => g.id === b.gene) || typeof b.yes !== "boolean") return { error: "send {bot, gene, yes}" };
+    const key = `gene-${b.bot}-${b.gene}`; const answers = readJson<Record<string, { answer: string; at: string }>>(ANSWERS(), {}); if (b.yes) answers[key] = { answer: "yes", at: new Date().toISOString().slice(0, 16) }; else delete answers[key];
+    writeJson(ANSWERS(), answers); writeCompetition(); return { ok: true, key, planned: b.yes }; },
   "/api/approve": async (_u, req) => { if (req.method !== "POST") return { error: "use POST" }; const b = await req.json().catch(() => null) as { id?: string; yes?: boolean } | null;
     if (!b || typeof b.id !== "string" || typeof b.yes !== "boolean") return { error: "send {id, yes}" }; const a = answer(b.id, b.yes); return a ? { ok: true, approval: a } : { error: "no such decision" }; },
   "/api/resume": (u, req) => (req.method === "POST" ? { resumed: resumeBot(botById(u.searchParams.get("bot")).id) } : { error: "use POST" }),

@@ -59,8 +59,8 @@ export function thoughtOf(t: ThoughtInput): string {
     ? pickOne([`${t.evil.name} copied my rules and is ahead. Copycat.`, `That goody-goody ${t.evil.name} is beating me with my own tricks.`], seed + "a")
     : pickOne([`${t.evil.name} keeps "improving" my rules and is still behind me.`, `Ahead of ${t.evil.name}. Halos don't trade.`], seed + "a"));
   else if (t.evil && Math.abs(t.evil.resultPct - t.resultPct) >= 1) out.push(t.evil.resultPct > t.resultPct
-    ? pickOne([`My evil twin (${t.evil.name}) is beating me. That can't last.`, `Losing to a ready-made ${t.evil.name} from a shop window? Not for long.`], seed + "e")
-    : pickOne([`My evil twin (${t.evil.name}) is behind me. Thinking beats copying.`, `Ahead of my evil twin. A ready-made bot can't read the market.`], seed + "e"));
+    ? pickOne([`${t.evil.name} is beating me with my own genes. That can't last.`, `${t.evil.name} changed a few of my genes and it's ahead. Noted.`], seed + "e")
+    : pickOne([`${t.evil.name} is behind me. My genes work better as they are.`, `Ahead of ${t.evil.name}. Mutations aren't always improvements.`], seed + "e"));
   else if (t.rank === 1 && t.of > 1) out.push(pickOne(["Top of the desk this week.", "Leading the desk this week. Catch me if you can."], seed + "r"));
   else if (t.leader && t.rank > 1) out.push(`${t.leader} leads this week; I'm number ${t.rank}.`);
   return out.join(" ");
@@ -68,11 +68,12 @@ export function thoughtOf(t: ThoughtInput): string {
 
 /** The evil twin's taunt, from its own numbers. */
 export function tauntOf(twin: { kind: string; resultPct: number; trades: number; stops: number; badges: number }, rival: { name: string; resultPct: number }, seed: string): string {
-  if (!twin.trades && !twin.stops && !twin.badges && Math.abs(twin.resultPct) < 0.01) return pickOne([`Just switched on. Enjoy your lead while it lasts, ${rival.name}.`, `Warming up. ${rival.name}, I'm coming for you.`], seed);
-  if (twin.stops) return pickOne([`Stopped ${twin.stops} time${twin.stops === 1 ? "" : "s"}, but the shop gave me a fresh 250. I'm still here.`, "I hit the stop line once. A ready-made bot never learns, and never gives up."], seed);
-  if (twin.badges) return `${twin.badges} badge${twin.badges === 1 ? "" : "s"} already. No brain needed, ${rival.name}.`;
+  const angel = twin.kind === "angel";
+  if (!twin.trades && !twin.stops && !twin.badges && Math.abs(twin.resultPct) < 0.01) return angel ? pickOne([`New genes, fresh start. Watch and learn, ${rival.name}.`, `Born from a winner's genes. ${rival.name}, I'll show you how it's done.`], seed) : pickOne([`Just born from your genes, ${rival.name}. A few changes and I'll do better.`, `Your genes, my changes. Let's see who uses them better, ${rival.name}.`], seed);
+  if (twin.stops) return pickOne([`Stopped ${twin.stops} time${twin.stops === 1 ? "" : "s"}, but I'm still here.`, "I hit the stop line once. I won't again."], seed);
+  if (twin.badges) return `${twin.badges} badge${twin.badges === 1 ? "" : "s"} already with these genes, ${rival.name}.`;
   const d = twin.resultPct - rival.resultPct;
-  if (d > 1) return pickOne([`Ahead of ${rival.name} by ${d.toFixed(1)} points. All that thinking for nothing.`, `${twin.trades} trades without a single thought, and I'm ahead of ${rival.name}.`], seed);
-  if (d < -1) return pickOne([`${rival.name} is ahead, for now. The market always comes back to my rules.`, `Behind ${rival.name} by ${(-d).toFixed(1)} points. Wait until the market goes sideways.`], seed);
-  return pickOne([`Neck and neck with ${rival.name}.`, `Level with ${rival.name}. Let's see who blinks.`], seed);
+  if (d > 1) return angel ? pickOne([`Ahead of ${rival.name} by ${d.toFixed(1)} points. Better genes, better decisions.`, `${twin.trades} trades and I'm ahead of ${rival.name}. Every Monday I get better.`], seed) : pickOne([`Ahead of ${rival.name} by ${d.toFixed(1)} points with your own genes, a little changed.`, `${twin.trades} trades and I'm ahead of ${rival.name}. Hire me.`], seed);
+  if (d < -1) return pickOne([`${rival.name} is ahead, for now. My genes need time.`, `Behind ${rival.name} by ${(-d).toFixed(1)} points. Not done yet.`], seed);
+  return pickOne([`Neck and neck with ${rival.name}.`, `Level with ${rival.name}. Let's see whose genes win.`], seed);
 }

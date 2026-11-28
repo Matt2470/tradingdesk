@@ -359,6 +359,39 @@ Each of these has a test. A change that breaks one is wrong even if the screen l
    (`#profile/<id>`). They never change badges, tiers, loans, strikes or the monthly winner.
 8r. **Dark everywhere** (owner, 2026-11-26): every screen uses the dark scheme (`:root` in `web/app.css`); the owner will
    choose the final scheme later.
+8s. **The gene tree, devils and angels** (owner, 2026-11-27, `src/bot/genes.ts`, `data/bot/genes.json`, `#evolution/<id>`).
+   Every participant (seat or guild trader) has a genome. DNA points: 2 at birth, 1 per badge, 2 per era (tier) reached,
+   1 per deed held, 1 per green week. Four branches (Gadgets, Techniques, Skills, Fortune) of four genes, each needing the
+   one before, later ones only in later eras; two era-IV capstones need the top of two branches. The bot spends its own
+   points on the branch its results need (owner's choice): too few trades, Gadgets; a drop over 8%, Skills; under 45% won,
+   Techniques; otherwise Fortune. The owner can plan a gene (`POST /api/gene {bot, gene, yes}`, kept in the owner's answers
+   as `gene-<bot>-<gene>`); the trading check copies plans into `genes.json` (`plans`) so GitHub follows them, takes the
+   genes it needs first, and the bot saves its points for the plan. Picks are saved only by the trading check; a recruit
+   starts a new genome. **Visual first** (owner's choice): genes do NOT change how a participant trades yet.
+   **Devils and angels** (owner, 2026-11-27: "strategist, devil and angel are the evolutions of the trader that take
+   better decisions about trading. They are not suggestions of more risk or less risk ... it is all about genes"; answers:
+   participant + mutations, the owner presses Hire, weekly gene tests, Pionex bots removed for participants).
+   `state.lineage` (stepped in the bot loop by `lineage()` in `src/pipeline.ts`): each participant (not a hired devil or
+   angel) has one devil or angel alive, 250 to start, trading its participant's charts (its short list, +2/+4 charts for
+   Second screen/Satellite feed) with its own genes (`expression`, `geneAllowed`, `geneSettings`: Market reader = ADX
+   versions, Spread sense = no chart over 15 bps, Funding sense = no trade the funding works against, Cool head, Hot hand,
+   Safe exit, Let it run = no TP3, Iron nerves). Genes marked `built: false` are drawn but do nothing yet. A devil's genes
+   = `mutate(participant's genes)` (seeded by seat, recruit and generation, same DNA). Liquidated at half its 250, the next
+   devil is born with new changes. The owner's Hire (`hire-devil-<seat>-<recruit>-<gen>`, `/api/hire`) makes it a player
+   (`roster.guild` with `kin`, `of`; it keeps its account and genome in `genes.json` and trades with its genome), and the
+   seat gets an angel with the hired devil's genes; every Monday (`tuned`) the angel replays the last 14 days with its
+   genes and with genomes one change away (`neighbours`) and keeps the best (`lessons`). A hired angel brings a new devil.
+   Earlier devils and angels are in `lineage.past`. The participants' own genes stay visual. Already-hired Pionex evil
+   twins (Evil Catalina) and their angels keep playing as before.
+   **Explanations** (owner, 2026-11-27: "I want every bot to give me an explanation"): every closed trade has `explain`
+   (`explainTrade` for stepped bots: the strategy that opened it and why it closed, with prices; `runEvil` writes its own).
+8t. **Day-end rule** (owner, 2026-11-27: "the rules are for all the same ... if they are in a position that is greater than
+   the money they own ... no hold another day if they are in profit", then: "if they are in losses they should cut back
+   the loss too or will be liquidated"). Every player (participants, clones, random twins in `step`; evil and angel twins,
+   hired or not, in `runEvil`): holding more than 1.02x its account at the end of a Madrid day, it closes positions with
+   reason `day-end`, winners first (biggest profit), then losers (biggest loss), until it holds no more than its account;
+   the ready-made bots (one position each) close everything. It may trade again. The replays are recomputed from their
+   start, so past results changed; grids built at 3x suffer most.
 8j1. **Nico is free too** (owner, 2026-11-25: "as we are in a bearish trend"): his seat (`stocks-bull`) has `side: "both"`,
    so he picks from all 30 strategies and, as a free bot, chooses after Lucas and never copies one of Lucas's pairs.
 8j. **Catalina is free** (owner, 2026-11-23). Her seat (`crypto-bull`, `side: "both"`, `lighterCrypto: true`) picks from all

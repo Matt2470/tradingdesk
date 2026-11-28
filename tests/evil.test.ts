@@ -15,7 +15,7 @@ const spec = (kind: EvilKind) => ({ kind, sym: "TEST", since: "2026-11-15T04:00"
 describe("evil twins", () => {
   test("each seat has its Pionex bot", () => { expect(EVIL_FOR).toEqual({ "stocks-bull": "neutral-grid", "stocks-bear": "short-grid", "crypto-bull": "trailing", "crypto-bear": "dca-short" }); });
   test("a neutral grid earns in a sideways market and stays within 3x", () => {
-    const bars = hours(700, wave); const r = runEvil(bars, spec("neutral-grid"), O);
+    const bars = hours(700, wave); const r = runEvil(bars, spec("neutral-grid"), { ...O, leverage: 1 }); // 1x: the day-end rule stays out of the way
     expect(r.trades).toBeGreaterThan(20); expect(r.resultPct).toBeGreaterThan(0); expect(r.stops).toBe(0);
     expect(Math.abs(r.positionUsd)).toBeLessThanOrEqual(r.equity * 3 + 1);
   });
@@ -83,7 +83,7 @@ describe("a hired evil twin: the accountant runs its books", () => {
   });
   test("too few trades a week: strikes, then replaced like any player", () => {
     const a = newAccountant(250, "2026-11-15T04:00", DEFAULT_RULES);
-    const r = runEvil(hours(1500, i => (i < 340 ? wave(i) : 100 * 1.006 ** (i - 340))), spec("trailing"), { ...O, accountant: { a, rules: DEFAULT_RULES } });
+    const r = runEvil(hours(1500, i => (i < 340 ? wave(i) : 100 * 1.006 ** (i - 340))), spec("trailing"), { ...O, leverage: 1, accountant: { a, rules: DEFAULT_RULES } }); // 1x: the day-end rule never closes it
     expect(a.events.some(e => e.kind === "strike")).toBe(true); if (r.fired) expect(r.fired.reason).toMatch(/quiet weeks/);
   });
   test("at the stop line with an empty award it is fired, and nothing trades after", () => {
@@ -122,7 +122,7 @@ describe("a new twin after a hire", () => {
   });
   test("a hired twin keeps the account it built: replaying from its start gives the same trades as the twin", () => {
     const bars = hours(900, wave); const a = newAccountant(250, "2026-11-15T04:00", { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 });
-    const twin = runEvil(bars, spec("neutral-grid"), O); const hired = runEvil(bars, spec("neutral-grid"), { ...O, accountant: { a, rules: { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 } } });
+    const twin = runEvil(bars, spec("neutral-grid"), { ...O, leverage: 1 }); const hired = runEvil(bars, spec("neutral-grid"), { ...O, leverage: 1, accountant: { a, rules: { ...DEFAULT_RULES, minTradesPerWeek: 0, maxStrikes: 0 } } });
     expect(hired.trades).toBe(twin.trades); expect(hired.equity).toBeCloseTo(twin.equity, 6);
   });
 });
@@ -145,3 +145,15 @@ describe("angel twins", () => {
     expect(runAngel(bars, sp, O)).toEqual(runAngel(bars, sp, O));
   });
 });
+
+test("day-end rule: over its own money at the end of a Madrid day, it closes everything, winning or losing", () => {
+  const r = runEvil(hours(400, i => 100 * 1.002 ** i), spec("trailing"), O);
+  const dayEnd = r.closed.filter(t => t.reason === "day-end");
+  expect(dayEnd.length).toBeGreaterThan(0);
+  expect(dayEnd.some(t => t.pnl > 0)).toBe(true);
+  const dca = runEvil(hours(800, i => 100 * 1.001 ** i), spec("dca-short"), O); // shorts against a rising price
+  expect(dca.closed.some(t => t.reason === "day-end" && t.pnl < 0)).toBe(true);
+  const one = runEvil(hours(400, i => 100 * 1.002 ** i), spec("trailing"), { ...O, leverage: 1 });
+  expect(one.closed.some(t => t.reason === "day-end")).toBe(false);
+});
+

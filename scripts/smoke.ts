@@ -67,16 +67,19 @@ try {
   ok([bot, bear, cb, cbear].every(b => Array.isArray(b.playbook) && b.playbook.length <= 6 && b.playbook.every((p: any) => b.shortlist.chosen.includes(p.id) && new Set(b.playbook.map((q: any) => q.key.split("@")[0])).size === b.playbook.length)), "each bot chose at most 6 charts, one per symbol, each with a strategy from its own short list");
 
   const tw = await (await fetch(base + "/api/twins")).json();
-  ok(tw && tw.bots.length === 4 && tw.bots.map((b: any) => b.evil?.kind).join() === "neutral-grid,short-grid,trailing,dca-short" && tw.bots.every((b: any) => b.participant && Number.isFinite(b.evil.resultPct) && b.evil.trades >= 0 && b.evil.stops >= 0 && Array.isArray(b.evil.curve)), "the Twins screen: every participant against its random twin and its Pionex-style evil twin");
-  ok(comp.bots.every((b: any) => typeof b.thought === "string" && b.thought.length > 10 && b.character && b.evil?.taunt), "every participant has a thought about the week and an evil twin with a taunt");
+  ok(tw && tw.bots.length === 4 && tw.bots.every((b: any) => b.participant && b.kin?.kind === "devil" && b.kin.gen === 1 && Array.isArray(b.kin.genes) && b.kin.genes.length > 0 && Number.isFinite(b.kin.resultPct) && Array.isArray(b.kin.curve) && b.kin.hire.key === `hire-devil-${b.id}-1-1`), "the Twins screen: every participant against its random twin and its devil, grown from its genes");
+  ok(comp.bots.every((b: any) => typeof b.thought === "string" && b.thought.length > 10 && b.character), "every participant has a thought about the week");
   ok(comp.bots.every((b: any) => Number.isFinite(b.fame) && b.eras?.length === 4 && b.eras.every((e: any) => e.medallions.length === 7) && b.eras[0].unlocked) && Array.isArray(comp.deeds), "every participant has era stars, fame and deeds");
   const hire = (b: unknown) => fetch(base + "/api/hire", { method: "POST", body: JSON.stringify(b) }).then(r => r.json());
-  ok((await hire({ key: "nope", yes: true })).error && (await hire({ key: "hire-evil-crypto-bull-1", yes: true })).answer === "yes" && (await hire({ key: "hire-evil-crypto-bull-1", yes: false })).answer === "no", "hiring an evil twin: the owner's order is kept and can be taken back");
+  ok((await hire({ key: "nope", yes: true })).error && (await hire({ key: "hire-devil-crypto-bull-1-1", yes: true })).answer === "yes" && (await hire({ key: "hire-devil-crypto-bull-1-1", yes: false })).answer === "no", "hiring a devil: the owner's order is kept and can be taken back");
   const gd = await (await fetch(base + "/api/guild")).json();
   ok(gd && gd.bank && gd.grant === 250 && Array.isArray(gd.ordered) && Array.isArray(gd.hired), "the Players Guild answers (candidates, bank, orders, hires)");
   ok((await hire({ key: "hire-guild-g1-2", yes: true })).answer === "yes" && (await hire({ key: "hire-guild-g1-2", yes: false })).answer === "no", "a guild candidate can be ordered and the order taken back");
   ok(Array.isArray(tw.hires) && comp.duels && typeof comp.duels.names === "object", "hired evil twins and their angel twins (none yet) and the duels' names list");
-  ok(tw.bots.every((b: any) => b.hire?.key?.startsWith("hire-evil-") && b.hire.grant === 250), "each evil twin can be hired from the Twins screen");
+  ok(tw.bots.every((b: any) => b.kin.hire.grant === 250 && b.kin.closedList.every((t: any) => typeof t.explain === "string")), "each devil can be hired from the Twins screen, and its trades are explained");
+  ok(comp.genes && Object.keys(comp.genes).length === 4 && Object.values(comp.genes).every((g: any) => g.points.total >= 2 && g.spent <= g.points.total && Array.isArray(g.picks) && typeof g.wants === "string") && comp.geneTree?.genes.length === 18, "every participant has a genome on the Evolution page");
+  const gene = (b: unknown) => fetch(base + "/api/gene", { method: "POST", body: JSON.stringify(b) }).then(r => r.json());
+  ok((await gene({ bot: "nope", gene: "pyramid", yes: true })).error && (await gene({ bot: "crypto-bull", gene: "pyramid", yes: true })).planned === true && (await (await fetch(base + "/api/competition")).json()).genes["crypto-bull"].planned.includes("pyramid") && (await gene({ bot: "crypto-bull", gene: "pyramid", yes: false })).planned === false, "the owner can plan a gene and take the plan back");
   ok(Array.isArray(await (await fetch(base + "/api/portraits")).json()), "the list of the owner's portrait pictures answers");
   for (const p of ["/portraits.js"]) ok((await fetch(base + p)).status === 200, `GET ${p} is 200`);
   const off = await (await fetch(base + "/api/office")).json();

@@ -78,7 +78,7 @@ function progressBar(equity, grant) {
 }
 /** A trader's open trades and closed trades (the Paper bots screen and the profile use the same tables). */
 const openTrades = b => b.positions.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th class="num">Entry</th><th class="num">Now</th><th class="num">Next stop</th><th class="num">Next take-profit</th><th class="num">Still open</th><th class="num">Profit</th></tr></thead><tbody>${b.positions.map(p => `<tr><td class="sym">${esc(p.symbol)}</td><td>${esc(TF_NAME[p.tf])}</td><td>${esc(p.side)}</td><td>${esc(bar(p.entryDate))}</td><td class="num">${price(p.entry)}</td><td class="num">${price(p.price)}</td><td class="num">${p.nextStop ? `${price(p.nextStop.px)}<br><span class="small${p.legs?.hits ? " gain" : ""}">${esc(p.nextStop.name)}${p.legs?.hits ? ", profit protected" : ""}</span>` : price(p.stop)}</td><td class="num">${p.target ? price(p.target) : `<span class="small" title="Both take-profits filled. The last part has no fixed target: it closes when the price falls back to the rising stop.">none, rides the stop</span>`}</td><td class="num">${p.qty0 ? num(p.qty / p.qty0 * 100, 0) + "%" : "100%"}</td><td class="num">${signed(p.pnl, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No open trades.</p>`;
-const closedTrades = s => s.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th>Closed</th><th>Why</th><th class="num">Return</th><th class="num">Profit</th></tr></thead><tbody>${[...s].reverse().slice(0, 100).map(t => `<tr><td class="sym">${esc(t.symbol)}</td><td>${esc(TF_NAME[t.tf])}</td><td>${esc(t.side)}</td><td>${esc(bar(t.entryDate))}</td><td>${esc(bar(t.exitDate))}</td><td>${esc(REASON[t.reason] ?? t.reason)}</td><td class="num">${pct(t.retPct, 2)}</td><td class="num">${signed(t.pnl, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No closed trades yet.</p>`;
+const closedTrades = s => s.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th>Closed</th><th>Why</th><th class="num">Return</th><th class="num">Profit</th></tr></thead><tbody>${[...s].reverse().slice(0, 100).map(t => `<tr><td class="sym">${esc(t.symbol)}</td><td>${esc(TF_NAME[t.tf])}</td><td>${esc(t.side)}</td><td>${esc(bar(t.entryDate))}</td><td>${esc(bar(t.exitDate))}</td><td class="why"><strong>${esc(REASON[t.reason] ?? t.reason)}</strong>${t.explain ? `<br><span class="small">${esc(t.explain)}</span>` : ""}</td><td class="num">${pct(t.retPct, 2)}</td><td class="num">${signed(t.pnl, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No closed trades yet.</p>`;
 /** Closed trades counted whole (a trade closed in parts by its take-profits counts once), with how many were won. */
 const wholeCount = ts => { const m = new Map(); for (const t of ts) { const k = `${t.symbol}|${t.entryDate}`; m.set(k, (m.get(k) ?? 0) + t.pnl); } return `${m.size} (${[...m.values()].filter(v => v > 0).length} won)`; };
 /** A ready-made bot's open position in words: which way, how big against the account, and why it is not a trade yet. */
@@ -92,7 +92,7 @@ const ROMAN = ["I", "II", "III", "IV"];
 const EVIL_LABEL = { "neutral-grid": "Neutral grid", "short-grid": "Short grid", trailing: "Trailing buy / trailing sell", "dca-short": "Martingale short" };
 const face = (id, recruit, opts = {}) => (window.portrait ? window.portrait(id, recruit, opts) : "");
 /** Any player's own face: a participant (with its recruit), a hired evil twin (its participant gone bad) or a guild trader. */
-const faceOf = (b, opts = {}) => b.evilHire && b.evilHire.of !== "guild" ? face(b.evilHire.of, 1, { evil: true, ...opts }) : face(b.id, b.evilHire ? 1 : b.recruit, opts);
+const faceOf = (b, opts = {}) => b.kin && b.kinOf ? face(b.kinOf, 1, { [b.kin === "angel" ? "angel" : "evil"]: true, ...opts }) : b.evilHire && b.evilHire.of !== "guild" ? face(b.evilHire.of, 1, { evil: true, ...opts }) : face(b.id, b.evilHire ? 1 : b.recruit, opts);
 /** A tier's emblem: a shield with the tier's numeral. */
 const emblem = (level, name) => `<svg class="emblem t${level}" viewBox="0 0 40 46" role="img" aria-label="${esc(name)}"><path d="M20 2 L37 8 L35 28 C33 37 26 42 20 44 C14 42 7 37 5 28 L3 8 Z" fill="var(--em)" stroke="#E9D08A" stroke-width="2"/><text x="20" y="29" text-anchor="middle" font-size="15" fill="#FFF8E6" font-family="Palatino Linotype,Book Antiqua,Georgia,serif" font-weight="700">${ROMAN[level] ?? "I"}</text></svg>`;
 /** Badges in a row toward the next tier, as stars (like a game's era stars). */
@@ -156,7 +156,7 @@ function heroCard(b, c, lead) {
   return `<article class="hero click" data-goprofile="${esc(b.id)}" tabindex="0" style="--c:${botColor(b.id)}">
     <div class="frame">${faceOf(b, { label })}${emblem(b.tier, b.tierName)}
       ${b.angel && b.evilHire?.of !== "guild" ? `<span class="evilmini angelmini" title="Angel twin: ${esc(b.angel.name)}, ${pct(b.angel.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.evilHire.of, 1, { angel: true, label: "angel twin" })}</span>` : ""}
-      ${b.evil ? `<span class="evilmini" title="Evil twin: ${esc(b.evil.name)} on ${esc(b.evil.sym)}, ${pct(b.evil.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.id, b.recruit, { evil: true, label: "evil twin" })}</span>` : ""}
+      ${b.evil ? `<span class="evilmini" title="${b.evil.kind === "angel" ? "Angel" : "Devil"}: ${esc(b.evil.name)}, ${pct(b.evil.resultPct, 1).replace(/<[^>]+>/g, "")}">${face(b.id, b.recruit, { [b.evil.kind === "angel" ? "angel" : "evil"]: true, label: b.evil.name })}</span>` : ""}
       ${b.stopped ? `<span class="ribbon">Stopped</span>` : lead ? `<span class="ribbon gold">Leads the month</span>` : ""}</div>
     <h3 class="hname">${esc(b.name)}${b.evilHire ? ` <span class="evilname">hired evil twin</span>` : ""}</h3>
     <p class="fameline"><span class="fame-ico" aria-hidden="true">♛</span> ${num(b.fame ?? 0, 0)} fame · ${b.stars ?? 0} era stars${(b.deeds ?? []).length ? ` · ${b.deeds.length} deed${b.deeds.length === 1 ? "" : "s"}` : ""}</p>
@@ -166,7 +166,7 @@ function heroCard(b, c, lead) {
     ${progressBar(b.equity, b.grant)}
     ${b.thought ? `<blockquote class="thought">${esc(b.thought)}</blockquote>` : ""}
     ${b.angel ? `<p class="vs small"><span class="angelname">Angel twin</span> ${esc(b.angel.name)}: ${pct(b.angel.resultPct, 1)}</p>` : ""}
-    ${b.evil ? `<p class="vs small"><span class="evilname">Evil twin</span> ${esc(b.evil.name)} on ${esc(b.evil.sym)}: ${pct(b.evil.resultPct, 1)}</p>` : ""}
+    ${b.evil ? `<p class="vs small"><span class="evilname">${b.evil.kind === "angel" ? "Angel" : "Devil"}</span> ${esc(b.evil.name)}: ${pct(b.evil.resultPct, 1)}</p>` : ""}
   </article>`;
 }
 const switcher = () => `<p class="switch" role="group" aria-label="Which bot">${[["market", "Stocks and gold"], ["crypto", "Crypto 24/7"]].map(([v, t]) => `<button type="button" data-view="${v}" aria-pressed="${VIEW === v}">${t}</button>`).join("")}</p>`;
@@ -247,7 +247,7 @@ function record(r) {
   return `${r.trades} past trades, ${num(r.winRate, 0)}% won${rr}.${r.evidence === "thin" ? " Few trades, so the record is thin." : ""}${checks}`;
 }
 /** One sentence that says what to do with this symbol now, and a second line with the evidence. */
-const REASON = { "desk-stop": "Desk stop: the desk hit its daily loss limit", grid: "Its own rules (ready-made bot)", bust: "Stop line: closed for the accountant", weekend: "Weekend pause", milestone: "Milestone: closed for the accountant", bust: "Bust line: closed for the accountant", weekend: "Weekend pause", tp1: "Take-profit 1", tp2: "Take-profit 2", tp3: "Take-profit 3", sl1: "Stop 1", sl2: "Stop 2", sl3: "Stop 3", trail: "Rising stop (profit kept)", stop: "Stop", target: "Target", rule: "Strategy exit", "time-stop": "Too long at a loss", "circuit-breaker": "Safety stop" };
+const REASON = { "day-end": "Day-end rule: it held more than its own money", filter: "Angel filter: paused in a trend", "desk-stop": "Desk stop: the desk hit its daily loss limit", grid: "Grid step", bust: "Stop line: closed for the accountant", weekend: "Weekend pause", milestone: "Milestone: closed for the accountant", bust: "Bust line: closed for the accountant", weekend: "Weekend pause", tp1: "Take-profit 1", tp2: "Take-profit 2", tp3: "Take-profit 3", sl1: "Stop 1", sl2: "Stop 2", sl3: "Stop 3", trail: "Rising stop (profit kept)", stop: "Stop", target: "Target", rule: "Strategy exit", "time-stop": "Too long at a loss", "circuit-breaker": "Safety stop" };
 const soldPart = p => (p.qty0 && p.qty < p.qty0 * 0.999 ? ` ${num((1 - p.qty / p.qty0) * 100, 0)}% already sold for profit.` : "");
 /** "take profit at A and B, the last third rides a rising stop" */
 function tpText(tps, stop) {
@@ -470,11 +470,42 @@ const screens = {
         <button type="button" id="showdeeds" class="ghostbtn">Show deeds</button>
         <ul id="deedlist" class="deeds" hidden>${(c.deeds ?? []).map(d => `<li class="${d.holder === b.id ? "mine" : ""}"><strong>${esc(d.name)}</strong> <span class="small">${esc(nameOf(d.holder))}</span><br><span class="small">${esc(d.text)}</span></li>`).join("") || `<li class="small">No deeds yet: the first winning trade on the desk is one.</li>`}</ul>
         <h3>Account</h3><p class="pf-sub"><span class="px">${money(b.equity, 2)}</span> · award ${money(b.award, 0)} · ${b.debt > 0.005 ? `owes ${money(b.debt, 0)}` : "its own money"}${b.strikes ? ` · ${b.strikes} strike${b.strikes === 1 ? "" : "s"}` : ""}</p>${progressBar(b.equity, b.grant)}
-        <p style="margin:14px 0 0"><a href="#bot" data-gobot="${esc(b.id)}">Trades and charts</a> · <a href="#twins">The twins</a></p>
+        <p style="margin:14px 0 0"><a href="#bot" data-gobot="${esc(b.id)}">Trades and charts</a> · <a href="#twins">The twins</a>${c.genes?.[b.id] ? ` · <a href="#evolution/${esc(b.id)}">Genes (${c.genes[b.id].picks.length})</a>` : ""}</p>
       </aside></section>
       <section class="pf-trades"><h2>${esc(b.name)}'s trades</h2>${v ? `<h3>Open now</h3>${openTrades(v)}<h3>Closed trades <span class="small">(newest first, ${v.trades.length} in all)</span></h3>${closedTrades(v.trades)}` : `<p class="empty">The trades appear after the next check.</p>`}</section>
       <nav class="pf-nav" aria-label="Other traders">${others.map(o => `<button type="button" class="pf-other" data-goprofile="${esc(o.id)}">${faceOf(o, { label: o.name })}<span>${esc(o.name)}</span></button>`).join("")}</nav>
       <p class="small" style="max-width:90ch">Era stars, fame and deeds are a game layer counted from the ledgers. They never change the money rules: badges, tiers, loans, strikes and the monthly winner work as before. Eras follow the tiers; an era's stars count once the trader has reached it.</p></div>`;
+  },
+  async evolution(arg) {
+    await loadBots(); const [c, TW] = await Promise.all([api("/api/competition"), api("/api/twins").catch(() => null)]);
+    if (!c?.genes || !c.geneTree) return `<div class="game"><h1>Evolution</h1><p class="empty">The gene tree appears after the bots' next check.</p></div>`;
+    const ids = Object.keys(c.genes); const id = ids.includes(arg) ? arg : ids[0]; const b = c.bots.find(x => x.id === id); const g = c.genes[id]; const T = c.geneTree;
+    const ROMAN_ERA = ["I", "II", "III", "IV"]; const ICON = { gadgets: "⌨", techniques: "⌖", skills: "☯", fortune: "♛", capstone: "✺" };
+    const pickOf = gid => g.picks.find(p => p.id === gid);
+    const kin = TW?.bots?.find(y => y.id === id)?.kin; const node = x => { const st = g.state[x.id]; const p = pickOf(x.id); const planned = g.planned.includes(x.id); const inKin = kin?.genes.includes(x.id);
+      return `<article class="gn ${st}${planned ? " planned" : ""}${x.branch === "capstone" ? " cap" : ""}" aria-label="${esc(x.name)}: ${st === "owned" ? "has it" : st === "open" ? "can be taken" : "locked"}">
+        <header><span class="gn-ico" aria-hidden="true">${ICON[x.branch]}</span><h4>${esc(x.name)}</h4><span class="gn-cost" title="DNA points">${x.cost} DNA</span></header>
+        <p>${esc(x.text)}</p>
+        <footer>${st === "owned" ? `<span class="gn-tag own">${p.by === "owner" ? "Taken on your plan" : "Chosen by " + esc(b?.name ?? "the bot")}</span> <span class="small">${esc(bar(p.at))}</span>`
+          : planned ? `<span class="gn-tag plan">Planned</span> <span class="small">${esc(g.why[x.id] || "taken at the next check")}</span> <button type="button" class="ghostbtn" data-gene="${esc(x.id)}" data-yes="0">Cancel</button>`
+          : `<span class="small">${esc(st === "locked" ? g.why[x.id] : g.why[x.id] ? `${g.why[x.id]}, ${g.spare} spare` : "affordable now")}</span> <button type="button" class="ghostbtn" data-gene="${esc(x.id)}" data-yes="1">Plan it</button>`}
+          ${inKin ? `<span class="gn-clone ${kin.kind === "angel" ? "light" : "dark"}" title="${esc(kin.name)} trades with this gene">${esc(kin.name)}</span>` : ""}${x.built === false ? `<span class="gn-clone soon" title="Drawn in the tree; not traded with yet">not built yet</span>` : ""}</footer></article>`; };
+    const col = br => { const list = T.genes.filter(x => x.branch === br.id); return `<div class="gt-col"><h3>${ICON[br.id]} ${esc(br.name)}</h3><p class="small">${esc(br.text)}</p>${list.map((x, i) => `${i && list[i - 1].era !== x.era ? `<p class="gt-era">Era ${ROMAN_ERA[x.era]} · ${esc(c.rules.tierNames[x.era] ?? "")}</p>` : i === 0 ? `<p class="gt-era">Era I · ${esc(c.rules.tierNames[0] ?? "")}</p>` : ""}${node(x)}`).join("")}</div>`; };
+    const caps = T.genes.filter(x => x.branch === "capstone");
+    const pts = g.points; const pick = x => `<button type="button" class="ev-pick${x === id ? " on" : ""}" data-goevo="${esc(x)}" aria-pressed="${x === id}">${faceOf(c.bots.find(y => y.id === x) ?? { id: x, recruit: 1 }, { label: c.bots.find(y => y.id === x)?.name })}<span>${esc(c.bots.find(y => y.id === x)?.name ?? x)}</span><span class="small">${c.genes[x].picks.length} genes</span></button>`;
+    return `<div class="game"><section class="hall short">${scene()}<div class="hall-in"><div class="season"><p class="era">Era ${ROMAN_ERA[g.era]} reached · ${esc(b?.tierName ?? "")}</p><h1>Evolution</h1>
+      <p class="goal-line">Every trader carries genes, and its devil and angel are grown from them. Badges, eras, deeds and green weeks give DNA; the trader spends it on the branch its own results say it needs. You can plan a gene for it instead.</p></div></div></section>
+      <div class="ev-picks">${ids.map(pick).join("")}</div>
+      <section class="ev-top"><div class="ev-face">${b ? faceOf(b, { label: b.name }) : ""}</div><div>
+        <h2>${esc(b?.name ?? id)}'s genome</h2>
+        <p class="ev-dna"><strong>${pts.total}</strong> DNA earned · <strong>${g.spent}</strong> spent · <strong>${Math.max(0, g.spare)}</strong> to spend${g.spare < 0 ? ` <span class="small">(it lost ${-g.spare} DNA, a deed changed hands; it keeps its genes)</span>` : ""}</p>
+        <p class="small">2 at birth${pts.badges ? ` + ${pts.badges} for badges` : ""}${pts.eras ? ` + ${pts.eras} for eras` : ""}${pts.deeds ? ` + ${pts.deeds} for deeds` : ""}${pts.greenWeeks ? ` + ${pts.greenWeeks} for green weeks` : ""}.</p>
+        <p>What it wants next: <em>${esc(g.wants)}</em>.</p>
+        <div class="notice ev-note"><strong>Visual first.</strong> These genes don't change how ${esc(b?.name ?? "this trader")} trades yet. ${kin ? `Its ${kin.kind}, <strong>${esc(kin.name)}</strong>, already trades with its own genes (marked in the tree): compare them on <a href="#twins">the Twins</a>.` : "Its devil is born at the next check."} Hired devils and angels trade with their genes.</div>
+      </div></section>
+      <section class="gtree">${T.branches.map(col).join("")}<div class="gt-caps"><p class="gt-era">Era IV · ${esc(c.rules.tierNames[3] ?? "")}: two branches together</p><div class="gt-caprow">${caps.map(node).join("")}</div></div></section>
+      <section class="ev-hist"><h2>How the genome grew</h2>${g.picks.length ? `<ol>${[...g.picks].reverse().map(p => { const x = T.genes.find(y => y.id === p.id); return `<li><strong>${esc(x?.name ?? p.id)}</strong> <span class="small">${esc(bar(p.at))} · ${p.by === "owner" ? "your plan" : "its own choice"}: ${esc(p.why)}</span></li>`; }).join("")}</ol>` : `<p class="empty">No genes yet: they are chosen at the next trading check.</p>`}
+      <p class="small"><strong>Devil:</strong> ${esc(T.devil)} <strong>Angel:</strong> ${esc(T.angel)} Leverage never goes over 3x for anyone.</p></section></div>`;
   },
   async guild() {
     await loadBots(); const g = await api("/api/guild");
@@ -499,13 +530,13 @@ const screens = {
       <p class="small">Hiring is paper, like everything here. A hired strategist gets its own seat and a ${money(g.grant, 0)} loan, picks its charts from its genes every week and plays under all the rules (badges, strikes, stopping); it has no recruit after it is stopped. A hired bot builder plays with its own loan like a hired evil twin. The bank has ${money(g.bank.available, 0)} to lend. A strategist's score is its playbook's result on the newer data the short lists test on (trades × average trade, weighted by profit factor); a bot builder's is its replay of the last 21 days, less half its worst drop.</p></div>`;
   },
   async players(arg) {
-    await loadBots(); const [c, t] = await Promise.all([api("/api/competition"), api("/api/twins")]);
+    await loadBots(); const [c, t] = await Promise.all([api("/api/competition"), api("/api/twins")]); const comp0 = c;
     if (!c) return `<div class="game"><h1>All players</h1><p class="empty">The players appear after the bots' first check.</p></div>`;
     // Everyone who trades: the participants, the hired evil twins, every participant's evil twin and every hired twin's angel.
     const list = [
-      ...c.bots.filter(b => !b.evilHire).map(b => ({ id: b.id, kind: b.id.startsWith("guild-") ? "Guild trader" : "Participant", name: b.name, img: faceOf(b, { label: b.name }), equity: b.equity, result: b.totalReturnPct, sub: `${b.tierName} · ${ROLE(b)}`, live: b.id })),
+      ...c.bots.filter(b => !b.evilHire).map(b => ({ id: b.id, kind: b.id.startsWith("guild-") ? "Guild trader" : b.id.startsWith("devil-") ? "Hired devil" : b.id.startsWith("angel-") ? "Hired angel" : "Participant", name: b.name, img: faceOf(b, { label: b.name }), equity: b.equity, result: b.totalReturnPct, sub: `${b.tierName} · ${ROLE(b)}`, live: b.id })),
       ...c.bots.filter(b => b.evilHire).map(b => ({ id: b.id, kind: b.evilHire.of === "guild" ? "Guild bot builder" : "Hired evil twin", name: b.name, img: faceOf(b, { label: b.name }), equity: b.equity, result: b.totalReturnPct, sub: `${EVIL_LABEL[b.evilHire.kind]} on ${b.evilHire.sym} · a player`, live: b.id })),
-      ...(t?.bots ?? []).filter(x => x.evil).map(x => ({ id: `twin-${x.id}`, kind: "Evil twin", name: x.evilName ?? "Evil twin", img: face(x.id, x.recruit, { evil: true, label: x.evilName }), equity: x.evil.equity, result: x.evil.resultPct, sub: `${x.evil.name} on ${x.evil.sym} · ${x.name}'s shadow`, replay: x.evil, sym: x.evil.sym })),
+      ...(t?.bots ?? []).filter(x => x.kin).map(x => { const r = x.kin; const ang = r.kind === "angel"; return { id: `kin-${x.id}`, kind: ang ? "Angel" : "Devil", name: r.name, img: face(x.id, x.recruit, { [ang ? "angel" : "evil"]: true, label: r.name }), equity: r.equity, result: r.resultPct, sub: `${x.name}'s ${ang ? "angel" : "devil"}, generation ${r.gen}`, clone: r }; }),
       ...(t?.hires ?? []).map(h => ({ id: h.angelId, kind: "Angel twin", name: h.angelName, img: face(h.of, 1, { angel: true, label: h.angelName }), equity: h.angel.equity, result: h.angel.resultPct, sub: `${h.angel.name} on ${h.sym} · ${h.name}'s angel`, replay: h.angel, sym: h.sym })),
     ];
     const sel = list.find(x => x.id === arg) ?? list[0];
@@ -515,11 +546,16 @@ const screens = {
       detail = v ? `<dl class="stats">${stat("Account value", money(v.equity, 2))}${stat("Result since hired", pct(v.resultPct, 2))}${stat("Closed trades", wholeCount(v.trades))}${stat("Open trades", v.positions.length)}</dl>
         <h3>Open now</h3>${openTrades(v)}<h3>Closed trades <span class="small">(newest first)</span></h3>${closedTrades(v.trades)}
         <p><a href="#profile/${esc(sel.live)}">Profile</a> · <a href="#bot" data-gobot="${esc(sel.live)}">Charts and details</a></p>` : `<p class="empty">No data yet.</p>`; }
+    else if (sel.clone) { const r = sel.clone;
+      detail = `<dl class="stats">${stat("Account value", money(r.equity, 2))}${stat("Result", pct(r.resultPct, 2))}${stat("Closed trades", `${r.trades} (${r.wins} won)`)}${stat("Worst drop", `${num(r.worstDropPct, 1)}%`)}</dl>
+        <p class="small">${esc(r.plain)} Paper only, since ${esc(bar(r.since))}. Genes: ${r.genes?.length ? r.genes.map(id => esc(comp0?.geneTree?.genes.find(g => g.id === id)?.name ?? id)).join(", ") : "none"}.</p>${r.lessons?.length ? `<p class="small"><strong>Latest lesson:</strong> ${esc(r.lessons[0].text)}</p>` : ""}
+        <h3>Open now</h3>${r.open.length ? `<table><thead><tr><th>Symbol</th><th>Chart</th><th>Direction</th><th>Opened</th><th class="num">Entry</th><th class="num">Now</th><th class="num">Stop</th></tr></thead><tbody>${r.open.map(p => `<tr><td>${esc(p.symbol)}</td><td>${esc(p.tf)}</td><td>${p.side === "short" ? "short" : "long"}</td><td>${esc(bar(p.entryDate))}</td><td class="num">${num(p.entry, 2)}</td><td class="num">${num(p.now, 2)}</td><td class="num">${num(p.stop, 2)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">No open trades.</p>`}
+        <h3>Closed trades <span class="small">(newest first)</span></h3>${closedTrades(r.closedList)}`; }
     else { const r = sel.replay; const tr = replayTrades(r);
       detail = `<dl class="stats">${stat("Account value", money(r.equity, 2))}${stat("Result", pct(r.resultPct, 2))}${stat("Closed trades", `${r.trades} (${r.wins} won)`)}${stat("Badges", r.badges)}${stat("Would have been stopped", r.stops ? `${r.stops}×` : "no")}${stat("Worst drop", `${num(r.worstDropPct, 1)}%`)}</dl>
         <p class="small">${esc(r.plain ?? "")} Paper only: replayed on hourly bars since ${esc(bar(r.since))}.</p>
         <h3>Open now</h3>${replayOpen(r, sel.sym)}<h3>Closed trades <span class="small">(newest first)</span></h3>${closedTrades(tr)}`; }
-    return `<div class="game"><div class="head"><div><h1>All players</h1><p class="sub">Everyone who trades on the desk: the participants, the hired evil twins, each participant's evil twin and each hired twin's angel. Choose one to see its trades.</p></div></div>
+    return `<div class="game"><div class="head"><div><h1>All players</h1><p class="sub">Everyone who trades on the desk: the participants, the guild traders, the hired players, each participant's devil or angel, and each hired evil twin's angel. Choose one to see its trades.</p></div></div>
       <div class="pl-grid">${list.map(card).join("")}</div>
       <section class="pl-detail"><h2>${esc(sel.name)} <span class="small">${esc(sel.kind)} · ${esc(sel.sub)}</span></h2>${detail}</section></div>`;
   },
@@ -529,13 +565,13 @@ const screens = {
     const cb = id => c?.bots.find(b => b.id === id);
     const col = (title, sub, img, r, cls = "") => `<div class="tw ${cls}"><div class="tw-face">${img}</div><h4>${title}</h4><p class="small">${sub}</p>
       ${r ? `<dl class="mini"><div><dt>Result</dt><dd>${pct(r.resultPct, 2)}</dd></div><div><dt>Account</dt><dd>${money(r.equity, 2)}</dd></div><div><dt>Trades</dt><dd>${r.trades}${r.wins != null && r.trades ? ` <span class="small">(${Math.round(r.wins / r.trades * 100)}% won)</span>` : ""}</dd></div><div><dt>Worst drop</dt><dd>${num(r.worstDropPct ?? 0, 1)}%</dd></div><div><dt>Badges</dt><dd>${r.badges ?? 0}</dd></div><div><dt>Stopped</dt><dd>${r.stops ? `<span class="loss">${r.stops}×</span>` : "no"}</dd></div>${r.positionUsd != null ? `<div style="grid-column:1/-1"><dt>Open now</dt><dd>${openLine(r)}</dd></div>` : ""}</dl>` : `<p class="empty">Not started yet.</p>`}</div>`;
-    const curves = x => { const lines = [["participant", x.name, botColor(x.id), false], ["random", "Random twin", "#9AA5B1", true], ["evil", x.evil?.lessons ? "Angel twin" : "Evil twin", x.evil?.lessons ? "#F2C94C" : "#E5484D", false]].filter(([k]) => x[k]?.curve?.length);
-      const t0 = Date.parse((x.evil?.since ?? x.participant.curve[0]?.d ?? "").slice(0, 16) + ":00Z"); if (!lines.length || !Number.isFinite(t0)) return "";
+    const curves = x => { const lines = [["participant", x.name, botColor(x.id), false], ["random", "Random twin", "#9AA5B1", true], ["evil", x.evil?.name ?? (x.evil?.lessons ? "Angel twin" : "Evil twin"), x.evil?.lessons ? "#F2C94C" : "#E5484D", false]].filter(([k]) => x[k]?.curve?.length);
+      const t0 = Date.parse((x.participant.curve[0]?.d ?? x.evil?.since ?? "").slice(0, 16) + ":00Z"); if (!lines.length || !Number.isFinite(t0)) return "";
       const t1 = Date.now(); const stepMs = Math.max(3600_000, Math.ceil((t1 - t0) / 300 / 3600_000) * 3600_000); const xs = []; for (let u = t0; u <= t1; u += stepMs) xs.push(u);
       if (xs.length < 2) return "";
       const ser = lines.map(([k, n, colr, dash]) => { const pts = x[k].curve.map(p => [Date.parse(p.d.slice(0, 16) + (p.d.length === 10 ? "T00:00" : "") + ":00Z"), p.equity]).sort((a, b) => a[0] - b[0]); let j = 0, last = 250;
-        return { name: n, short: `${k === "participant" ? n : k === "random" ? "Random" : x.evil?.lessons ? "Angel" : "Evil"} ${money(x[k].equity, 0)}`, color: colr, dash, values: xs.map(u => { while (j < pts.length && pts[j][0] <= u) last = pts[j++][1]; return last; }) }; });
-      return `<div class="panel">${lineChart(ser, xs.map(u => new Date(u).toISOString().slice(0, 16)), v => money(v, 0), { ref: { value: 250, label: "the 250 grant" }, minSpan: 20 })}<p class="small" style="margin:6px 0 0">Account value of all three since ${esc(x.name)} was hired. A badge at 500 sends an account back to 250; at 125 it would be stopped.</p></div>`; };
+        return { name: n, short: `${k === "participant" ? n : k === "random" ? "Random" : (x.evil?.name ?? (x.evil?.lessons ? "Angel" : "Evil"))} ${money(x[k].equity, 0)}`, color: colr, dash, values: xs.map(u => { while (j < pts.length && pts[j][0] <= u) last = pts[j++][1]; return last; }) }; });
+      return `<div class="panel">${lineChart(ser, xs.map(u => new Date(u).toISOString().slice(0, 16)), v => money(v, 0), { ref: { value: 250, label: "the 250 grant" }, minSpan: 20 })}<p class="small" style="margin:6px 0 0">Account value since ${esc(x.name)} was hired (a devil or angel from its birth). A badge at 500 sends an account back to 250; at 125 it would be stopped.</p></div>`; };
     const angelDuel = h => { const e = h.evil, a = h.angel; const better = a.resultPct - e.resultPct; const of = h.of;
       const asCurve = { name: h.name, id: h.id, evil: { since: h.since }, participant: { ...e }, random: null };
       return `<section class="twinduel angel">
@@ -549,30 +585,32 @@ const screens = {
       ${curves({ ...asCurve, id: h.id, participant: { ...e, curve: e.curve }, evil: { ...a, since: h.since } })}
       ${a.notes?.length ? `<details class="detail"><summary>${esc(h.angelName)}'s diary</summary><ul class="small">${a.notes.slice(0, 15).map(n => `<li>${esc(bar(n.d))}: ${esc(n.msg)}</li>`).join("")}</ul></details>` : ""}
     </section>`; };
-    const duel = x => { const b = cb(x.id); const e = x.evil; const rec = x.recruit ?? 1;
-      const better = e ? x.participant.resultPct - e.resultPct : 0;
+    const GN = id => c?.geneTree?.genes.find(g => g.id === id)?.name ?? id;
+    const geneChips = ids => ids.length ? `<p class="genechips">${ids.map(id => `<span class="gchip">${esc(GN(id))}</span>`).join("")}</p>` : `<p class="small">No genes yet.</p>`;
+    const duel = x => { const b = cb(x.id); const k = x.kin; const rec = x.recruit ?? 1; const isAngel = k?.kind === "angel";
+      const better = k ? x.participant.resultPct - k.resultPct : 0; const mine = c?.genes?.[x.id]?.picks?.map(p => p.id) ?? [];
+      const added = k ? k.genes.filter(id => !mine.includes(id)) : [], dropped = k ? mine.filter(id => !k.genes.includes(id)) : [];
       return `<section class="twinduel">
-      <header><h2>${esc(x.name)} <span class="small">against the twins</span></h2>${e ? `<p class="verdict ${better > 0.5 ? "gain" : better < -0.5 ? "loss" : ""}">${better > 0.5 ? `${esc(x.name)} leads the evil twin by ${num(better, 1)} points` : better < -0.5 ? `The evil twin leads ${esc(x.name)} by ${num(-better, 1)} points` : "Level with the evil twin"}</p>` : ""}</header>
+      <header><h2>${esc(x.name)} <span class="small">against the twins</span></h2>${k ? `<p class="verdict ${better > 0.5 ? "gain" : better < -0.5 ? "loss" : ""}">${better > 0.5 ? `${esc(x.name)} leads ${esc(k.name)} by ${num(better, 1)} points` : better < -0.5 ? `${esc(k.name)} leads ${esc(x.name)} by ${num(-better, 1)} points` : `Level with ${esc(k.name)}`}</p>` : ""}</header>
       <div class="tw-row">
         ${col(esc(x.name), esc(b ? `${b.tierName} · ${ROLE(b)}` : ""), face(x.id, rec, { label: x.name }), x.participant, "me")}
         ${col("Random twin", "Same charts and rules, enters at random", `<div class="ghost">${face(x.id, rec, { label: "random twin" })}<span class="dice" aria-hidden="true">⚄</span></div>`, x.random ? { ...x.random, badges: 0, stops: 0 } : null)}
-        ${col(esc(x.evilName ?? "Evil twin"), e ? `${esc(e.name)}, Pionex-style, on ${esc(e.sym)}${e.since ? ` · since ${esc(bar(e.since))}` : ""}` : "", face(x.id, rec, { evil: true, label: x.evilName ?? "evil twin" }), e, "evil")}
+        ${k ? col(`${esc(k.name)} <span class="small">${isAngel ? "angel" : "devil"}, generation ${k.gen}</span>`, esc(k.why), face(x.id, rec, { [isAngel ? "angel" : "evil"]: true, label: k.name }), k, isAngel ? "angel" : "evil") : col("Devil", "Born at the next check", face(x.id, rec, { evil: true, label: "devil" }), null, "evil")}
       </div>
-      ${x.hire ? `<div class="hirebar">${x.hire.hiredId && !x.hire.firedAt ? `<span>Hired on ${esc(bar(x.hire.hiredAt))}: plays with its own ${money(x.hire.grant, 0)} loan. <a href="#profile/${esc(x.hire.hiredId)}">See its profile</a></span>`
-        : x.hire.firedAt ? `<span class="small">The hired evil twin was stopped on ${esc(bar(x.hire.firedAt))}.</span>`
-        : x.hire.ordered ? `<span>Hiring at the next check (needs ${money(x.hire.grant, 0)} in the bank: ${money(x.hire.bank, 0)} available).</span> <button type="button" class="ghostbtn" data-hire="${esc(x.hire.key)}" data-yes="0">Cancel</button>`
-        : `<span class="small">Like what you see? Hire ${esc(x.evilName ?? "this evil twin")} as an extra player: it keeps the account it has built, on a ${money(x.hire.grant, 0)} loan from the bank (${money(x.hire.bank, 0)} available), under all the rules. ${esc(x.name)} then gets a new evil twin.</span> <button type="button" data-hire="${esc(x.hire.key)}" data-yes="1" ${x.hire.bank < x.hire.grant ? "disabled" : ""}>Hire ${esc(x.evilName ?? "the evil twin")}</button>`}</div>` : ""}
-      ${(x.hired ?? []).length ? `<p class="small">${x.hired.map(h => `<a href="#profile/${esc(h.id)}">${esc(h.name)}</a> ${h.firedAt ? `was hired on ${esc(bar(h.hiredAt))} and stopped on ${esc(bar(h.firedAt))}` : `was hired on ${esc(bar(h.hiredAt))} and now plays with its own account`}.`).join(" ")}</p>` : ""}
-      ${e ? `<div class="speech"><p><strong>${esc(x.name)}:</strong> ${esc(b?.thought ?? "")}</p><p class="evilsay"><strong>${esc(x.evilName ?? "Evil twin")}:</strong> ${esc(b?.evil?.taunt ?? "")}</p></div>
-      <p class="small">${esc(e.plain)} Same 250 grant, at most 3x, badge at 500, stop line at 125, weekend pause, funding and Lighter costs. Replayed on hourly bars since ${esc(bar(e.since))}.</p>` : ""}
-      ${curves(x)}
-      ${e?.notes?.length ? `<details class="detail"><summary>The evil twin's diary</summary><ul class="small">${e.notes.slice(0, 15).map(n => `<li>${esc(bar(n.d))}: ${esc(n.msg)}</li>`).join("")}</ul></details>` : ""}
+      ${k ? `<div class="genes-cmp"><div><h4>${esc(x.name)}'s genes <a class="small" href="#evolution/${esc(x.id)}">tree</a></h4>${geneChips(mine)}</div><div><h4>${esc(k.name)}'s genes</h4>${geneChips(k.genes)}<p class="small">${added.length ? `Has ${added.map(GN).map(esc).join(", ")}` : ""}${added.length && dropped.length ? "; " : ""}${dropped.length ? `lacks ${dropped.map(GN).map(esc).join(", ")}` : ""}${!added.length && !dropped.length ? `The same genes as ${esc(x.name)}` : ""}.</p></div></div>
+      <p class="small">${esc(k.plain)} Paper only, 250 to start, the same rules (the day-end rule, the weekend pause, at most 3x).</p>
+      <div class="hirebar">${k.hire.ordered ? `<span>Hiring at the next check (needs ${money(k.hire.grant, 0)} in the bank: ${money(k.hire.bank, 0)} available).</span> <button type="button" class="ghostbtn" data-hire="${esc(k.hire.key)}" data-yes="0">Cancel</button>`
+        : `<span class="small">Hire ${esc(k.name)} as a player: it keeps its account and its genes, on a ${money(k.hire.grant, 0)} loan from the bank (${money(k.hire.bank, 0)} available), under all the rules. ${isAngel ? `${esc(x.name)} then gets a new devil.` : `${esc(x.name)} then gets an angel grown from its genes.`}</span> <button type="button" data-hire="${esc(k.hire.key)}" data-yes="1" ${k.hire.bank < k.hire.grant ? "disabled" : ""}>Hire ${esc(k.name)}</button>`}</div>
+      <div class="speech"><p><strong>${esc(x.name)}:</strong> ${esc(b?.thought ?? "")}</p><p class="${isAngel ? "angelsay" : "evilsay"}"><strong>${esc(k.name)}:</strong> ${esc(b?.evil?.taunt ?? "")}</p></div>
+      ${k.lessons?.length ? `<div class="speech"><p class="angelsay"><strong>${esc(k.name)}'s lesson:</strong> ${esc(k.lessons[0].text)}</p></div>` : ""}` : ""}
+      ${curves({ ...x, evil: k ? { ...k, lessons: isAngel ? [1] : null } : null })}
+      ${(x.past ?? []).length ? `<details class="detail"><summary>Earlier devils and angels (${x.past.length})</summary><ul class="small">${x.past.map(p => `<li><strong>${esc(p.name)}</strong> ${p.how === "hired" ? `was hired on ${esc(bar(p.ended))}${p.id ? ` (<a href="#profile/${esc(p.id)}">profile</a>)` : ""}` : `was liquidated on ${esc(bar(p.ended))}`}: ${pct(p.resultPct, 1)}, ${p.trades} trades. Genes: ${p.genes.map(GN).map(esc).join(", ") || "none"}.</li>`).join("")}</ul></details>` : ""}
     </section>`; };
-    return `<div class="game"><section class="hall short">${scene()}<div class="hall-in"><div class="season"><p class="era">Our traders against the ready-made bots</p><h1>The Twins</h1>
-      <p class="goal-line">Each participant has two shadows: a <strong>random twin</strong> that trades the same charts with random entries (is it skill or luck?), and an <strong>evil twin</strong>, a copy of a popular Pionex bot with the same money and rules (is it better than a bot anyone can switch on?).</p></div></div></section>
+    return `<div class="game"><section class="hall short">${scene()}<div class="hall-in"><div class="season"><p class="era">Our traders and their evolutions</p><h1>The Twins</h1>
+      <p class="goal-line">Each participant has a <strong>random twin</strong> (same charts, random entries: is it skill or luck?) and an evolution of itself: a <strong>devil</strong>, grown from its genes with a few changes. A devil that is liquidated is replaced by a new one with new changes. Hire a devil that does well, and the participant gets an <strong>angel</strong> that starts from those genes and tests better ones every Monday.</p></div></div></section>
       ${t.bots.map(duel).join("")}
       ${(t.hires ?? []).length ? `<h2>The hired evil twins and their angels</h2><p class="small">Every hired evil twin has an angel twin: it copies the evil twin's bot on the same market and tries to do it better (trend filters, a stop, fewer risky additions), and every week it tests a few settings on the last 14 days and keeps the best. They also duel each other every week.</p>${t.hires.map(angelDuel).join("")}` : ""}
-      <p class="small">The evil twins are paper only and never send an order. Pionex's own bots may use other settings; these use common ones: 20 grid lines over the last 14 days, 2% bounce and 3% trail, 2% martingale steps with 1.5× sizes and 1.5% take-profit.</p></div>`;
+      <p class="small">Devils and angels are paper only and never send an order.</p></div>`;
   },
   async competition() {
     await loadBots(); const c = await api("/api/competition"); CHECKING = c?.checkingSince ?? null;
@@ -705,6 +743,8 @@ $main.addEventListener("click", async e => {
   if (t.closest("#showfail")) { e.preventDefault(); const f = document.getElementById("fails"); f.hidden = !f.hidden; return; }
   const gv = t.closest("a[data-goview]"); if (gv) { VIEW = gv.dataset.goview; return; }
   const pl = t.closest("[data-goplayer]"); if (pl) { location.hash = `#players/${pl.dataset.goplayer}`; return; }
+  const ge = t.closest("[data-goevo]"); if (ge) { location.hash = `#evolution/${ge.dataset.goevo}`; return; }
+  const gn = t.closest("button[data-gene]"); if (gn) { gn.disabled = true; const bot = location.hash.split("/")[1] ? decodeURIComponent(location.hash.split("/")[1]) : document.querySelector(".ev-pick.on")?.dataset.goevo; try { await api("/api/gene", { method: "POST", body: JSON.stringify({ bot: bot ?? document.querySelector(".ev-pick.on")?.dataset.goevo, gene: gn.dataset.gene, yes: gn.dataset.yes === "1" }) }); } catch (err) { alertMsg(err.message); } render(); return; }
   const gp = t.closest("[data-goprofile]"); if (gp) { location.hash = `#profile/${gp.dataset.goprofile}`; return; }
   const et = t.closest("button[data-era]"); if (et) { PROFILE_ERA = +et.dataset.era; const box = document.getElementById("pf-era"); if (box && PROFILE) { box.outerHTML = eraPanel(PROFILE, PROFILE_ERA); document.querySelectorAll("button[data-era]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.era === PROFILE_ERA))); } return; }
   const hb = t.closest("button[data-hire]"); if (hb) { hb.disabled = true; try { await api("/api/hire", { method: "POST", body: JSON.stringify({ key: hb.dataset.hire, yes: hb.dataset.yes === "1" }) }); } catch (err) { alertMsg(err.message); } render(); return; }
@@ -728,4 +768,4 @@ $main.addEventListener("change", e => { if (e.target.id === "pick") location.has
 function alertMsg(m) { const d = document.createElement("div"); d.className = "notice"; d.textContent = "That did not work: " + m; $main.prepend(d); }
 render();
 // Today and the bots refresh themselves every 30 seconds; screens where you type or choose are left alone.
-setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins" || name === "profile" || name === "players" || name === "guild") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);
+setInterval(() => { const name = location.hash.slice(1).split("/")[0] || "competition"; if (document.visibilityState === "visible" && (name === "today" || name === "bot" || name === "competition" || name === "accountant" || name === "twins" || name === "profile" || name === "players" || name === "guild" || name === "evolution") && !document.querySelector("#refresh:disabled") && !(document.getElementById("fails") && !document.getElementById("fails").hidden)) render(); }, 30000);

@@ -52,7 +52,7 @@ export interface EvilResult {
   kind: EvilKind; name: string; sym: string; since: string; bars: number; equity: number; resultPct: number; index: number;
   trades: number; wins: number; pnl: number; fundingPaid: number; badges: number; stops: number; worstDropPct: number;
   position: number; positionUsd: number; avgEntry: number; cash: number;
-  /** Closed trades (hired twins keep them for their profile and the accountant's reports). */ closed: { symbol: string; side: "long" | "short"; entryDate: string; exitDate: string; entry: number; exit: number; qty: number; pnl: number; reason: string }[];
+  /** Closed trades (hired twins keep them for their profile and the accountant's reports). */ closed: { symbol: string; side: "long" | "short"; entryDate: string; exitDate: string; entry: number; exit: number; qty: number; pnl: number; reason: string; /** In words: why it closed. */ explain?: string }[];
   /** A hired twin the accountant fired. */ fired: { at: string; reason: string } | null;
   /** Performance index at the end of each Madrid day (for duels). */ daily: Record<string, number>; curve: { d: string; equity: number }[]; notes: { d: string; msg: string }[]; plain: string;
 }
@@ -75,7 +75,7 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
   const eq = (p: number) => cash + u * p;
   // Open lots, newest last. A closing fill is matched against the newest lots first, so a grid's sell is matched with the
   // buy one line below it (one grid profit), and a martingale's take-profit closes all its lots as one trade.
-  let lots: { n: number; x: number; fee: number; d: string }[] = []; let curD = spec.since; let why = "grid";
+  let lots: { n: number; x: number; fee: number; d: string }[] = []; let curD = spec.since; let why = "grid"; let explain = "";
   const closed: EvilResult["closed"] = []; const A = o.accountant;
   /** Move the position to `target` units at price x. Each fill that closes something counts as one trade. */
   const fill = (target: number, x: number) => {
@@ -88,7 +88,10 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
       while (left > 1e-12 && lots.length) { const lot = lots[lots.length - 1]; const k = Math.min(lot.n, left); const share = k / lot.n;
         p += (x - lot.x) * k * Math.sign(u) - lot.fee * share; lot.fee -= lot.fee * share; lot.n -= k; left -= k; if (lot.n <= 1e-12) lots.pop(); }
       p -= fee * (closing / Math.abs(du)); trades++; pnl += p; if (p > 0) wins++;
-      closed.push({ symbol: `${spec.sym}@1h`, side: u > 0 ? "long" : "short", entryDate: opened, exitDate: curD, entry: +avg.toFixed(6), exit: x, qty: closing, pnl: +p.toFixed(4), reason: why });
+      const f2 = (v: number) => v.toFixed(v < 10 ? 4 : 2); const wasLong = u > 0;
+      const said = explain || (why === "grid" && (spec.kind === "neutral-grid" || spec.kind === "short-grid") ? `Grid: the price ${wasLong ? "rose" : "fell"} to the next line (${f2(x)}), so it ${wasLong ? "sold" : "bought back"} one step it had ${wasLong ? "bought" : "sold"} at ${f2(avg)}: one grid profit${p < 0 ? " (less than the costs this time)" : ""}.`
+        : why === "weekend" ? "Weekend pause: everything is closed from Friday 22:00 to Monday 00:00 (Madrid)." : why === "filter" ? "Angel filter: the trend went against the bot, so it paused and closed." : `Closed (${why}).`);
+      closed.push({ symbol: `${spec.sym}@1h`, side: u > 0 ? "long" : "short", entryDate: opened, exitDate: curD, entry: +avg.toFixed(6), exit: x, qty: closing, pnl: +p.toFixed(4), reason: why, explain: said });
       if (closed.length > 600) closed.shift();
       if (A) countTrade(A.a, curD, p, true, p);
     }
@@ -113,7 +116,7 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
   };
   const startDca = (p: number) => { dcaBase = eq(p) * lev / Array.from({ length: orders + 1 }, (_, k) => scale ** k).reduce((t, x) => t + x, 0); dcaFirst = p; dcaNext = 1; fill(-dcaBase / p, p); };
   const reset = (d: string, p: number, why: "badge" | "stop") => {
-    fill(0, p); built = false; lo = hi = best = p; dcaBase = 0;
+    explain = why === "badge" ? `Badge: the account reached ${eq(p).toFixed(0)} USD, twice the grant; everything closed and it started again at ${o.grant}.` : `Stop line: the account fell to ${eq(p).toFixed(0)} USD, half the grant; everything closed (it would have been stopped).`; fill(0, p); explain = ""; built = false; lo = hi = best = p; dcaBase = 0;
     if (why === "badge") { badges++; note(d, `Badge: ${eq(p).toFixed(2)} USD, twice the grant. Back to ${o.grant}.`); }
     else { stops++; note(d, `Would have been stopped: ${eq(p).toFixed(2)} USD, under half the grant. A fresh ${o.grant} to keep comparing.`); }
     index *= eq(p) / prevEq; cash = o.grant; prevEq = o.grant;
@@ -129,13 +132,13 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
         if (allowLong && lo > 0 && p >= lo * (1 + rb)) { fill(eq(lo * (1 + rb)) * lev / (lo * (1 + rb)), lo * (1 + rb)); best = p; }
         else if (allowShort && hi > 0 && p <= hi * (1 - rb)) { fill(-eq(hi * (1 - rb)) * lev / (hi * (1 - rb)), hi * (1 - rb)); best = p; }
         else { lo = lo > 0 ? Math.min(lo, p) : p; hi = Math.max(hi, p); }
-      } else if (u > 0) { best = Math.max(best, p); if (p <= best * (1 - tr)) { fill(0, best * (1 - tr)); lo = hi = best * (1 - tr); } }
-      else { best = Math.min(best, p); if (p >= best * (1 + tr)) { fill(0, best * (1 + tr)); lo = hi = best * (1 + tr); } }
+      } else if (u > 0) { best = Math.max(best, p); if (p <= best * (1 - tr)) { explain = `Trailing sell: after buying at ${avg.toFixed(2)} the price reached ${best.toFixed(2)}, then fell ${(tr * 100).toFixed(1)}% from there, so it sold at ${(best * (1 - tr)).toFixed(2)}.`; fill(0, best * (1 - tr)); explain = ""; lo = hi = best * (1 - tr); } }
+      else { best = Math.min(best, p); if (p >= best * (1 + tr)) { explain = `Trailing buy-back: after selling short at ${avg.toFixed(2)} the price fell to ${best.toFixed(2)}, then rose ${(tr * 100).toFixed(1)}% from there, so it bought back at ${(best * (1 + tr)).toFixed(2)}.`; fill(0, best * (1 + tr)); explain = ""; lo = hi = best * (1 + tr); } }
     } else {
       if (dcaBase === 0) { if (idle) return true; startDca(p); }
-      if (dcaStop && u < 0 && p >= dcaFirst * (1 + dcaStop)) { const x = dcaFirst * (1 + dcaStop); why = "stop"; fill(0, x); why = "grid"; dcaBase = 0; note(d, `Angel stop: closed the shorts ${(dcaStop * 100).toFixed(0)}% above the first entry.`); return eq(x) > o.grant / 2 || (A ? (book(d, x), !firedAt) : (reset(d, x, "stop"), false)); }
+      if (dcaStop && u < 0 && p >= dcaFirst * (1 + dcaStop)) { const x = dcaFirst * (1 + dcaStop); why = "stop"; explain = `Angel stop: the price rose ${(dcaStop * 100).toFixed(0)}% above the first short (${dcaFirst.toFixed(4)}), so it closed all the shorts at a loss instead of adding more.`; fill(0, x); explain = ""; why = "grid"; dcaBase = 0; note(d, `Angel stop: closed the shorts ${(dcaStop * 100).toFixed(0)}% above the first entry.`); return eq(x) > o.grant / 2 || (A ? (book(d, x), !firedAt) : (reset(d, x, "stop"), false)); }
       while (dcaNext <= orders && p >= dcaFirst * (1 + step * dcaNext)) { const x = dcaFirst * (1 + step * dcaNext); fill(u - dcaBase * scale ** dcaNext / x, x); dcaNext++; }
-      if (u < 0 && p <= avg * (1 - tp)) { const x = avg * (1 - tp); fill(0, x); dcaBase = 0; startDca(x); }
+      if (u < 0 && p <= avg * (1 - tp)) { const x = avg * (1 - tp); explain = `Martingale take-profit: the price fell ${(tp * 100).toFixed(1)}% under the average short price (${avg.toFixed(4)}) of its ${dcaNext} short${dcaNext === 1 ? "" : "s"}, so it bought them all back.`; fill(0, x); explain = ""; dcaBase = 0; startDca(x); }
     }
     if (eq(p) <= o.grant / 2) { if (A) { book(d, p); return !firedAt; } reset(d, p, "stop"); return false; }
     return true;
@@ -144,7 +147,7 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
   /** The accountant looks at the account (hired twins): nothing, a badge, a refill from the award, or the end. */
   const book = (d: string, p: number) => {
     const a = A!.a; let e = eq(p); track(a, d, e); accrue(a, d, A!.rules); const dec = decide(a, e, A!.rules); if (!dec) return;
-    why = dec.kind === "milestone" ? "milestone" : "bust"; fill(0, p); why = "grid"; built = false; lo = hi = best = p; dcaBase = 0; e = eq(p); track(a, d, e);
+    why = dec.kind === "milestone" ? "milestone" : "bust"; explain = dec.kind === "milestone" ? `Badge: the account reached ${e.toFixed(0)} USD, twice the grant; everything closed and the profit was locked in the award.` : `Stop line: the account fell to ${e.toFixed(0)} USD, half the grant; everything closed for the accountant.`; fill(0, p); explain = ""; why = "grid"; built = false; lo = hi = best = p; dcaBase = 0; e = eq(p); track(a, d, e);
     const final = dec.kind === "milestone" || dec.why === "strikes" ? dec : { kind: a.award >= a.grant - e ? "save" as const : "fired" as const };
     cash = settle(a, d, e, final); const ev = a.events.at(-1)!; note(d, ev.msg);
     if (final.kind === "milestone") badges++; if (ev.kind === "fired") firedAt = { at: d, reason: ev.msg }; else if (final.kind === "save") stops++;
@@ -171,6 +174,12 @@ export function runEvil(bars: Bar[], spec: EvilSpec, o: EvilOpts): EvilResult {
     const f = (o.fundingPerHour?.(end) ?? 0) * u * b.c; cash -= f; funding += f;
     // The ladder follows the price when it leaves the range (Pionex's Trailing Move).
     if ((spec.kind === "neutral-grid" || spec.kind === "short-grid") && built && !idle && (b.c > lines[N] || b.c < lines[0])) build(i, b.c, b.d);
+    // Day-end rule (owner, 2026-11-27), the same for every player: holding more than the account (borrowed money) at the
+    // last bar of a Madrid day, in profit or at a loss, it closes everything and starts again the next day.
+    if (u !== 0 && !idle && Math.abs(u) * b.c > 1.02 * eq(b.c) && madridDay(new Date(end).toISOString().slice(0, 16)) !== madridDay(b.d.length === 10 ? b.d + "T12:00" : b.d.slice(0, 16))) {
+      const held = Math.abs(u) * b.c, had = eq(b.c); why = "day-end"; explain = `Day-end rule: it held ${held.toFixed(0)} USD with an account of ${had.toFixed(0)} USD, more than its own money, so it closed everything at the end of the day (${u * (b.c - avg) >= 0 ? "profit taken" : "loss cut"}).`; fill(0, b.c); explain = ""; why = "grid"; built = false; dcaBase = 0; lo = hi = best = b.c;
+      note(b.d, `Day-end rule: held ${held.toFixed(0)} USD with an account of ${had.toFixed(0)} USD, more than its own money, so it closed everything (${u * (b.c - avg) >= 0 ? "profit taken" : "loss cut"}). It starts again tomorrow.`);
+    }
     const e = eq(b.c);
     if (A) { if (!firedAt) book(b.d, b.c); index = A.a.index; prevEq = A.a.lastEquity > 0 ? A.a.lastEquity : eq(b.c); }
     else if (e >= o.grant * 2) reset(b.d, b.c, "badge"); else { index *= e / prevEq; prevEq = e; }
