@@ -1,0 +1,3755 @@
+{
+ "at": "2026-11-28T19:01:08.110Z",
+ "month": "2026-11",
+ "duels": {
+  "current": {
+   "week": "2026-11-23",
+   "live": true,
+   "pairs": [
+    {
+     "a": "stocks-bull",
+     "b": "stocks-bear",
+     "aPct": -4.71,
+     "bPct": 3.75,
+     "winner": "stocks-bear"
+    },
+    {
+     "a": "crypto-bull",
+     "b": "crypto-bear",
+     "aPct": -2.38,
+     "bPct": 3.41,
+     "winner": "crypto-bear"
+    },
+    {
+     "a": "evil-crypto-bull-1",
+     "b": "angel-crypto-bull-1",
+     "aPct": 134.9,
+     "bPct": 23.82,
+     "winner": "evil-crypto-bull-1"
+    }
+   ]
+  },
+  "past": [],
+  "table": [
+   {
+    "id": "stocks-bull",
+    "points": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0
+   },
+   {
+    "id": "stocks-bear",
+    "points": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0
+   },
+   {
+    "id": "crypto-bull",
+    "points": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0
+   },
+   {
+    "id": "crypto-bear",
+    "points": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0
+   },
+   {
+    "id": "evil-crypto-bull-1",
+    "points": 0,
+    "won": 0,
+    "drawn": 0,
+    "lost": 0
+   }
+  ],
+  "names": {
+   "angel-crypto-bull-1": "Angel Catalina"
+  }
+ },
+ "locker": [
+  {
+   "d": "2026-11-27T19:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $12.37. Moving on."
+  },
+  {
+   "d": "2026-11-27T15:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$14.66."
+  },
+  {
+   "d": "2026-11-27T04:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $17.88. Moving on."
+  },
+  {
+   "d": "2026-11-26T22:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$10.84."
+  },
+  {
+   "d": "2026-11-26T06:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $14.16. Moving on."
+  },
+  {
+   "d": "2026-11-25T22:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$13.94."
+  },
+  {
+   "d": "2026-11-25T19:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $15.13. Moving on."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long closed for +$60.48."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "id": "stocks-bear",
+   "text": "AMD 1h short closed for +$7.64."
+  },
+  {
+   "d": "2026-11-25T15:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $9.83. Moving on."
+  },
+  {
+   "d": "2026-11-25T07:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long closed for +$22.83."
+  },
+  {
+   "d": "2026-11-25T02:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short cost me $15.55. Moving on."
+  },
+  {
+   "d": "2026-11-25T00:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long cost me $16.56. Moving on."
+  },
+  {
+   "d": "2026-11-24T22:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long cost me $7.98. Moving on."
+  },
+  {
+   "d": "2026-11-24T22:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$11.54."
+  },
+  {
+   "d": "2026-11-24T18:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$23.84."
+  },
+  {
+   "d": "2026-11-24T18:00",
+   "id": "stocks-bull",
+   "text": "Noted, Evil Catalina. I'm hunting the next one."
+  },
+  {
+   "d": "2026-11-24T18:00",
+   "id": "evil-crypto-bull-1",
+   "text": "Another $500 day. Badge 1 locked in."
+  },
+  {
+   "d": "2026-11-24T15:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$129.43."
+  },
+  {
+   "d": "2026-11-24T11:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$29.33."
+  },
+  {
+   "d": "2026-11-24T07:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long closed for +$50.14."
+  },
+  {
+   "d": "2026-11-24T03:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h long closed for +$21.79."
+  },
+  {
+   "d": "2026-11-23T22:00",
+   "id": "evil-crypto-bull-1",
+   "text": "MON 1h short closed for +$9.37."
+  },
+  {
+   "d": "2026-11-23T19:13",
+   "id": "evil-crypto-bull-1",
+   "text": "New on the desk. Watch me."
+  }
+ ],
+ "checks": {
+  "last": [
+   {
+    "at": "2026-11-28T18:47:36.870Z",
+    "by": "PC",
+    "tookMs": 87811,
+    "symbols": 183,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T18:42:38.596Z",
+    "by": "GitHub",
+    "tookMs": 320122,
+    "symbols": 108,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T18:33:41.378Z",
+    "by": "PC",
+    "tookMs": 91707,
+    "symbols": 181,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T18:21:44.021Z",
+    "by": "PC",
+    "tookMs": 306812,
+    "symbols": 182,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T11:03:19.830Z",
+    "by": "PC",
+    "tookMs": 84437,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T10:58:54.995Z",
+    "by": "GitHub",
+    "tookMs": 317088,
+    "symbols": 102,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T10:51:44.741Z",
+    "by": "PC",
+    "tookMs": 289121,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T10:33:13.601Z",
+    "by": "PC",
+    "tookMs": 77864,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T10:18:18.551Z",
+    "by": "PC",
+    "tookMs": 82643,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T10:03:23.086Z",
+    "by": "PC",
+    "tookMs": 87537,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T09:51:40.971Z",
+    "by": "PC",
+    "tookMs": 285430,
+    "symbols": 180,
+    "failed": 0
+   },
+   {
+    "at": "2026-11-28T09:33:13.507Z",
+    "by": "PC",
+    "tookMs": 77988,
+    "symbols": 181,
+    "failed": 0
+   }
+  ],
+  "last24h": {
+   "PC": 27,
+   "GitHub": 4
+  },
+  "shared": true,
+  "sync": {
+   "mode": "shared",
+   "trading": true,
+   "lease": "b80ad9173d35b8c575cdc9224a3e27ba3eb49757",
+   "pushed": true,
+   "note": "",
+   "at": "2026-11-28T18:47:41.420Z",
+   "repo": "Matt2470/tradingdesk",
+   "branch": "bot-data"
+  }
+ },
+ "weekend": true,
+ "startGrant": 250,
+ "riskPct": 2,
+ "rules": {
+  "graceDays": 7,
+  "tiers": [
+   4,
+   8,
+   12
+  ],
+  "minTradesPerWeek": 5,
+  "maxStrikes": 3,
+  "maxCharts": 8,
+  "tierNames": [
+   "Rookie",
+   "Pro",
+   "Master",
+   "Experienced trader"
+  ]
+ },
+ "bots": [
+  {
+   "id": "stocks-bull",
+   "name": "Nico",
+   "recruit": 1,
+   "view": "market",
+   "side": "both",
+   "motto": "Free to buy or sell short, on stocks, gold and every other Lighter market that is not crypto.",
+   "started": true,
+   "evilHire": null,
+   "kin": null,
+   "kinOf": null,
+   "hiredAt": "2026-11-23T19:13",
+   "checkedAt": "2026-11-28T19:01:08.110Z",
+   "tier": 0,
+   "tierName": "Rookie",
+   "streak": 0,
+   "bestStreak": 0,
+   "toNext": 4,
+   "grant": 250,
+   "badges": 0,
+   "saves": 0,
+   "award": 0,
+   "debt": 250,
+   "repaid": 0,
+   "interestPaid": 0,
+   "nextInterestAt": "2026-12-07T19:13",
+   "equity": 238.2151719043329,
+   "bustLine": 125,
+   "target": 500,
+   "index": 95.286,
+   "totalReturnPct": -4.71,
+   "twin": {
+    "returnPct": -6.37,
+    "trades": 16
+   },
+   "lighterCrypto": false,
+   "positions": 0,
+   "pending": 0,
+   "playbook": [
+    {
+     "key": "AMD@30m",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "NVDA@30m",
+     "id": "ema_pullback_short_adx",
+     "name": "Bounce to the 20-bar average (short), strong trend only"
+    },
+    {
+     "key": "IREN@1h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "HYUNDAIUSD@4h",
+     "id": "rsi2_dip_short",
+     "name": "Short-term spike in a downtrend (short)"
+    },
+    {
+     "key": "NBIS@1h",
+     "id": "ma_cross_short",
+     "name": "20/50 average cross down (short)"
+    },
+    {
+     "key": "XPD@4h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "MRNA@1d",
+     "id": "rsi2_dip_short",
+     "name": "Short-term spike in a downtrend (short)"
+    },
+    {
+     "key": "CRCL@1h",
+     "id": "rsi2_dip_short",
+     "name": "Short-term spike in a downtrend (short)"
+    },
+    {
+     "key": "INTC@15m",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "MSFT@1h",
+     "id": "ma_cross_short",
+     "name": "20/50 average cross down (short)"
+    }
+   ],
+   "month": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "returnPct": -4.71,
+    "trades": 6,
+    "wins": 0,
+    "pnl": -11.68
+   },
+   "events": [],
+   "daily": {
+    "2026-11-22": 100,
+    "2026-11-23": 100,
+    "2026-11-24": 98.289,
+    "2026-11-25": 95.3897,
+    "2026-11-26": 95.3929,
+    "2026-11-27": 95.2861,
+    "2026-11-28": 95.2861
+   },
+   "fundingPaid": 0.1038,
+   "hungry": true,
+   "strikes": 0,
+   "stopped": null,
+   "ownMoney": false,
+   "bonuses": 0,
+   "thought": "0 of 6 won and I'm $11.68 down. Not my best, not my last. AVGO hurt: −$3.14. Evil Nico is beating me with my own genes. That can't last.",
+   "character": "bold",
+   "characterText": "Confident, quick, likes a fight. Free to buy or sell short.",
+   "evil": {
+    "name": "Evil Nico",
+    "kind": "devil",
+    "genes": 2,
+    "resultPct": 0,
+    "taunt": "Your genes, my changes. Let's see who uses them better, Nico."
+   },
+   "angel": null,
+   "fame": 0,
+   "stars": 0,
+   "eras": [
+    {
+     "level": 0,
+     "name": "Rookie",
+     "unlocked": true,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 150,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        10,
+        25,
+        50
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 0,
+       "goals": [
+        5,
+        15,
+        30
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        3,
+        7,
+        15
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 0,
+       "goals": [
+        5,
+        15,
+        40
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        3
+       ],
+       "stars": 0,
+       "reward": 105
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 1,
+     "name": "Pro",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        5,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 300,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        75,
+        120,
+        200
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 0,
+       "goals": [
+        40,
+        60,
+        100
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        20,
+        30,
+        45
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        5,
+        7,
+        10
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 0,
+       "goals": [
+        50,
+        80,
+        125
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        4,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 210
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 2,
+     "name": "Master",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        9,
+        10,
+        12
+       ],
+       "stars": 0,
+       "reward": 450,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        250,
+        350,
+        500
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 0,
+       "goals": [
+        120,
+        170,
+        250
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        55,
+        70,
+        90
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        12,
+        15,
+        20
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 0,
+       "goals": [
+        150,
+        200,
+        300
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        10,
+        12,
+        15
+       ],
+       "stars": 0,
+       "reward": 315
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 3,
+     "name": "Experienced trader",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        13,
+        14,
+        16
+       ],
+       "stars": 0,
+       "reward": 600,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        600,
+        800,
+        1000
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 0,
+       "goals": [
+        300,
+        400,
+        500
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        100,
+        130,
+        160
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        24,
+        30,
+        40
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 0,
+       "goals": [
+        350,
+        450,
+        600
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        18,
+        22,
+        26
+       ],
+       "stars": 0,
+       "reward": 420
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    }
+   ],
+   "deeds": []
+  },
+  {
+   "id": "stocks-bear",
+   "name": "Lucas",
+   "recruit": 1,
+   "view": "market",
+   "side": "short",
+   "motto": "Sells weakness in stocks, gold and every other Lighter market that is not crypto.",
+   "started": true,
+   "evilHire": null,
+   "kin": null,
+   "kinOf": null,
+   "hiredAt": "2026-11-23T19:13",
+   "checkedAt": "2026-11-28T19:01:08.110Z",
+   "tier": 0,
+   "tierName": "Rookie",
+   "streak": 0,
+   "bestStreak": 0,
+   "toNext": 4,
+   "grant": 250,
+   "badges": 0,
+   "saves": 0,
+   "award": 0,
+   "debt": 250,
+   "repaid": 0,
+   "interestPaid": 0,
+   "nextInterestAt": "2026-12-07T19:13",
+   "equity": 259.3724399576082,
+   "bustLine": 125,
+   "target": 500,
+   "index": 103.749,
+   "totalReturnPct": 3.75,
+   "twin": {
+    "returnPct": 1.26,
+    "trades": 11
+   },
+   "lighterCrypto": false,
+   "positions": 0,
+   "pending": 0,
+   "playbook": [
+    {
+     "key": "AMD@1h",
+     "id": "ma_cross_short",
+     "name": "20/50 average cross down (short)"
+    },
+    {
+     "key": "NVDA@30m",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "SOXL@4h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "CRCL@4h",
+     "id": "rsi2_dip_short",
+     "name": "Short-term spike in a downtrend (short)"
+    },
+    {
+     "key": "LITE@1h",
+     "id": "ma_cross_short",
+     "name": "20/50 average cross down (short)"
+    },
+    {
+     "key": "INTC@15m",
+     "id": "ema_pullback_short_adx",
+     "name": "Bounce to the 20-bar average (short), strong trend only"
+    },
+    {
+     "key": "IREN@1h",
+     "id": "ema_pullback_short_adx",
+     "name": "Bounce to the 20-bar average (short), strong trend only"
+    },
+    {
+     "key": "NBIS@15m",
+     "id": "ma_cross_short",
+     "name": "20/50 average cross down (short)"
+    }
+   ],
+   "month": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "returnPct": 3.75,
+    "trades": 8,
+    "wins": 4,
+    "pnl": 9.19
+   },
+   "events": [],
+   "daily": {
+    "2026-11-22": 100,
+    "2026-11-23": 100,
+    "2026-11-24": 105.9278,
+    "2026-11-25": 103.1038,
+    "2026-11-26": 103.1156,
+    "2026-11-27": 103.749,
+    "2026-11-28": 103.749
+   },
+   "fundingPaid": -0.1832,
+   "hungry": false,
+   "strikes": 0,
+   "stopped": null,
+   "ownMoney": false,
+   "bonuses": 0,
+   "thought": "4 of 8 worked, $9.19 up. Don't get used to it. AMD paid the most: +$7.64. Ahead of Evil Lucas. Mutations aren't always improvements.",
+   "character": "grumpy",
+   "characterText": "A born pessimist who sells rallies. Trusts nobody's good news.",
+   "evil": {
+    "name": "Evil Lucas",
+    "kind": "devil",
+    "genes": 2,
+    "resultPct": 0,
+    "taunt": "Just born from your genes, Lucas. A few changes and I'll do better."
+   },
+   "angel": null,
+   "fame": 70,
+   "stars": 2,
+   "eras": [
+    {
+     "level": 0,
+     "name": "Rookie",
+     "unlocked": true,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 150,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 8,
+       "goals": [
+        10,
+        25,
+        50
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 4,
+       "goals": [
+        5,
+        15,
+        30
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 3,
+       "goals": [
+        3,
+        7,
+        15
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 7.64,
+       "goals": [
+        5,
+        15,
+        40
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        3
+       ],
+       "stars": 0,
+       "reward": 105
+      }
+     ],
+     "stars": 2,
+     "fame": 70
+    },
+    {
+     "level": 1,
+     "name": "Pro",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        5,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 300,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 8,
+       "goals": [
+        75,
+        120,
+        200
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 4,
+       "goals": [
+        40,
+        60,
+        100
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 3,
+       "goals": [
+        20,
+        30,
+        45
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        5,
+        7,
+        10
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 7.64,
+       "goals": [
+        50,
+        80,
+        125
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        4,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 210
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 2,
+     "name": "Master",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        9,
+        10,
+        12
+       ],
+       "stars": 0,
+       "reward": 450,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 8,
+       "goals": [
+        250,
+        350,
+        500
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 4,
+       "goals": [
+        120,
+        170,
+        250
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 3,
+       "goals": [
+        55,
+        70,
+        90
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        12,
+        15,
+        20
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 7.64,
+       "goals": [
+        150,
+        200,
+        300
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        10,
+        12,
+        15
+       ],
+       "stars": 0,
+       "reward": 315
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 3,
+     "name": "Experienced trader",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        13,
+        14,
+        16
+       ],
+       "stars": 0,
+       "reward": 600,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 8,
+       "goals": [
+        600,
+        800,
+        1000
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 4,
+       "goals": [
+        300,
+        400,
+        500
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 3,
+       "goals": [
+        100,
+        130,
+        160
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        24,
+        30,
+        40
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 7.64,
+       "goals": [
+        350,
+        450,
+        600
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        18,
+        22,
+        26
+       ],
+       "stars": 0,
+       "reward": 420
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    }
+   ],
+   "deeds": []
+  },
+  {
+   "id": "crypto-bull",
+   "name": "Catalina",
+   "recruit": 1,
+   "view": "crypto",
+   "side": "both",
+   "motto": "Free to buy or sell short, on any crypto Lighter trades.",
+   "started": true,
+   "evilHire": null,
+   "kin": null,
+   "kinOf": null,
+   "hiredAt": "2026-11-23T19:13",
+   "checkedAt": "2026-11-28T19:01:08.110Z",
+   "tier": 0,
+   "tierName": "Rookie",
+   "streak": 0,
+   "bestStreak": 0,
+   "toNext": 4,
+   "grant": 250,
+   "badges": 0,
+   "saves": 0,
+   "award": 0,
+   "debt": 250,
+   "repaid": 0,
+   "interestPaid": 0,
+   "nextInterestAt": "2026-12-07T19:13",
+   "equity": 244.06140712482764,
+   "bustLine": 125,
+   "target": 500,
+   "index": 97.625,
+   "totalReturnPct": -2.38,
+   "twin": {
+    "returnPct": -0.11,
+    "trades": 4
+   },
+   "lighterCrypto": true,
+   "positions": 0,
+   "pending": 0,
+   "playbook": [
+    {
+     "key": "APT@1h",
+     "id": "bollinger_dip_short_adx",
+     "name": "Upper Bollinger band fade (short), no strong trend"
+    },
+    {
+     "key": "SYRUP@4h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "MON@1h",
+     "id": "bollinger_dip_short",
+     "name": "Upper Bollinger band fade (short)"
+    },
+    {
+     "key": "AERO@4h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    },
+    {
+     "key": "SPX@4h",
+     "id": "bollinger_dip_short",
+     "name": "Upper Bollinger band fade (short)"
+    },
+    {
+     "key": "DOT@4h",
+     "id": "ema_pullback_short_adx",
+     "name": "Bounce to the 20-bar average (short), strong trend only"
+    },
+    {
+     "key": "WIF@4h",
+     "id": "bollinger_dip_short",
+     "name": "Upper Bollinger band fade (short)"
+    },
+    {
+     "key": "LDO@4h",
+     "id": "ema_pullback_short",
+     "name": "Bounce to the 20-bar average (short)"
+    }
+   ],
+   "month": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "returnPct": -2.38,
+    "trades": 6,
+    "wins": 1,
+    "pnl": -6.05
+   },
+   "events": [],
+   "daily": {
+    "2026-11-22": 100,
+    "2026-11-23": 99.0174,
+    "2026-11-24": 100.9959,
+    "2026-11-25": 99.3771,
+    "2026-11-26": 97.8552,
+    "2026-11-27": 97.6246,
+    "2026-11-28": 97.6246
+   },
+   "fundingPaid": -0.1107,
+   "hungry": false,
+   "strikes": 0,
+   "stopped": null,
+   "ownMoney": false,
+   "bonuses": 0,
+   "thought": "6 trades, $6.05 down. I'm still learning this one. Best one: ADA, +$5.62. Evil Catalina II is beating me with my own genes. That can't last.",
+   "character": "curious",
+   "characterText": "Optimistic and always testing a new coin. Long or short, whatever moves.",
+   "evil": {
+    "name": "Evil Catalina II",
+    "kind": "devil",
+    "genes": 2,
+    "resultPct": 0,
+    "taunt": "Your genes, my changes. Let's see who uses them better, Catalina."
+   },
+   "angel": null,
+   "fame": 35,
+   "stars": 1,
+   "eras": [
+    {
+     "level": 0,
+     "name": "Rookie",
+     "unlocked": true,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 150,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        10,
+        25,
+        50
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 1,
+       "goals": [
+        5,
+        15,
+        30
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        3,
+        7,
+        15
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.62,
+       "goals": [
+        5,
+        15,
+        40
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        3
+       ],
+       "stars": 0,
+       "reward": 105
+      }
+     ],
+     "stars": 1,
+     "fame": 35
+    },
+    {
+     "level": 1,
+     "name": "Pro",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        5,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 300,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        75,
+        120,
+        200
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 1,
+       "goals": [
+        40,
+        60,
+        100
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        20,
+        30,
+        45
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        5,
+        7,
+        10
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.62,
+       "goals": [
+        50,
+        80,
+        125
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        4,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 210
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 2,
+     "name": "Master",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        9,
+        10,
+        12
+       ],
+       "stars": 0,
+       "reward": 450,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        250,
+        350,
+        500
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 1,
+       "goals": [
+        120,
+        170,
+        250
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        55,
+        70,
+        90
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        12,
+        15,
+        20
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.62,
+       "goals": [
+        150,
+        200,
+        300
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        10,
+        12,
+        15
+       ],
+       "stars": 0,
+       "reward": 315
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 3,
+     "name": "Experienced trader",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        13,
+        14,
+        16
+       ],
+       "stars": 0,
+       "reward": 600,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 6,
+       "goals": [
+        600,
+        800,
+        1000
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 1,
+       "goals": [
+        300,
+        400,
+        500
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 1,
+       "goals": [
+        100,
+        130,
+        160
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        24,
+        30,
+        40
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.62,
+       "goals": [
+        350,
+        450,
+        600
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        18,
+        22,
+        26
+       ],
+       "stars": 0,
+       "reward": 420
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    }
+   ],
+   "deeds": []
+  },
+  {
+   "id": "crypto-bear",
+   "name": "Valeria",
+   "recruit": 1,
+   "view": "crypto",
+   "side": "short",
+   "motto": "Sells weakness in crypto.",
+   "started": true,
+   "evilHire": null,
+   "kin": null,
+   "kinOf": null,
+   "hiredAt": "2026-11-23T19:13",
+   "checkedAt": "2026-11-28T19:01:08.110Z",
+   "tier": 0,
+   "tierName": "Rookie",
+   "streak": 0,
+   "bestStreak": 0,
+   "toNext": 4,
+   "grant": 250,
+   "badges": 0,
+   "saves": 0,
+   "award": 0,
+   "debt": 250,
+   "repaid": 0,
+   "interestPaid": 0,
+   "nextInterestAt": "2026-12-07T19:13",
+   "equity": 258.5172934185577,
+   "bustLine": 125,
+   "target": 500,
+   "index": 103.407,
+   "totalReturnPct": 3.41,
+   "twin": {
+    "returnPct": 1.94,
+    "trades": 4
+   },
+   "lighterCrypto": false,
+   "positions": 0,
+   "pending": 0,
+   "playbook": [
+    {
+     "key": "SOL@4h",
+     "id": "bollinger_dip_short",
+     "name": "Upper Bollinger band fade (short)"
+    },
+    {
+     "key": "ADA@30m",
+     "id": "bollinger_dip_short_adx",
+     "name": "Upper Bollinger band fade (short), no strong trend"
+    },
+    {
+     "key": "ETH@4h",
+     "id": "donchian_trend_short_adx",
+     "name": "20-bar breakdown (short), strong trend only"
+    },
+    {
+     "key": "BTC@4h",
+     "id": "bollinger_dip_short",
+     "name": "Upper Bollinger band fade (short)"
+    }
+   ],
+   "month": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "returnPct": 3.41,
+    "trades": 12,
+    "wins": 5,
+    "pnl": 8.47
+   },
+   "events": [],
+   "daily": {
+    "2026-11-22": 100,
+    "2026-11-23": 101.9042,
+    "2026-11-24": 103.3561,
+    "2026-11-25": 104.094,
+    "2026-11-26": 103.3767,
+    "2026-11-27": 103.4069,
+    "2026-11-28": 103.4069
+   },
+   "fundingPaid": -0.0501,
+   "hungry": false,
+   "strikes": 0,
+   "stopped": null,
+   "ownMoney": false,
+   "bonuses": 0,
+   "thought": "5 of 12 closed in profit: $8.47. As planned. NEAR paid the most: +$5.16. Ahead of Evil Valeria. Mutations aren't always improvements.",
+   "character": "cold",
+   "characterText": "Calm, precise, never raises her voice. Sells crypto when it is too high.",
+   "evil": {
+    "name": "Evil Valeria",
+    "kind": "devil",
+    "genes": 3,
+    "resultPct": 0,
+    "taunt": "Just born from your genes, Valeria. A few changes and I'll do better."
+   },
+   "angel": null,
+   "fame": 440,
+   "stars": 4,
+   "eras": [
+    {
+     "level": 0,
+     "name": "Rookie",
+     "unlocked": true,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 150,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 12,
+       "goals": [
+        10,
+        25,
+        50
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 5,
+       "goals": [
+        5,
+        15,
+        30
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 4,
+       "goals": [
+        3,
+        7,
+        15
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.16,
+       "goals": [
+        5,
+        15,
+        40
+       ],
+       "stars": 1,
+       "reward": 105
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        3
+       ],
+       "stars": 0,
+       "reward": 105
+      }
+     ],
+     "stars": 4,
+     "fame": 140
+    },
+    {
+     "level": 1,
+     "name": "Pro",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        5,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 300,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 12,
+       "goals": [
+        75,
+        120,
+        200
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 5,
+       "goals": [
+        40,
+        60,
+        100
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 4,
+       "goals": [
+        20,
+        30,
+        45
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        5,
+        7,
+        10
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.16,
+       "goals": [
+        50,
+        80,
+        125
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        4,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 210
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 2,
+     "name": "Master",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        9,
+        10,
+        12
+       ],
+       "stars": 0,
+       "reward": 450,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 12,
+       "goals": [
+        250,
+        350,
+        500
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 5,
+       "goals": [
+        120,
+        170,
+        250
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 4,
+       "goals": [
+        55,
+        70,
+        90
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        12,
+        15,
+        20
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.16,
+       "goals": [
+        150,
+        200,
+        300
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        10,
+        12,
+        15
+       ],
+       "stars": 0,
+       "reward": 315
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 3,
+     "name": "Experienced trader",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 0,
+       "goals": [
+        13,
+        14,
+        16
+       ],
+       "stars": 0,
+       "reward": 600,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 12,
+       "goals": [
+        600,
+        800,
+        1000
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 5,
+       "goals": [
+        300,
+        400,
+        500
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 4,
+       "goals": [
+        100,
+        130,
+        160
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        24,
+        30,
+        40
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 5.16,
+       "goals": [
+        350,
+        450,
+        600
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        18,
+        22,
+        26
+       ],
+       "stars": 0,
+       "reward": 420
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    }
+   ],
+   "deeds": [
+    "first-win"
+   ]
+  },
+  {
+   "id": "evil-crypto-bull-1",
+   "name": "Evil Catalina",
+   "recruit": 1,
+   "view": "crypto",
+   "side": "both",
+   "motto": "Waits for a 2% bounce from a low to buy, or a 2% fall from a high to sell short, then closes after a 3% move back from the best price. Pionex's trailing buy and trailing sell.",
+   "started": true,
+   "evilHire": {
+    "kind": "trailing",
+    "sym": "MON",
+    "of": "crypto-bull"
+   },
+   "kin": null,
+   "kinOf": null,
+   "hiredAt": "2026-11-23T19:13",
+   "checkedAt": "2026-11-28T19:01",
+   "tier": 0,
+   "tierName": "Rookie",
+   "streak": 1,
+   "bestStreak": 1,
+   "toNext": 3,
+   "grant": 250,
+   "badges": 1,
+   "saves": 0,
+   "award": 13.96,
+   "debt": 0,
+   "repaid": 250,
+   "interestPaid": 0,
+   "nextInterestAt": "2026-11-30T19:13",
+   "equity": 285.6514575792604,
+   "bustLine": 125,
+   "target": 500,
+   "index": 234.901,
+   "totalReturnPct": 134.9,
+   "twin": null,
+   "lighterCrypto": false,
+   "positions": 0,
+   "pending": 0,
+   "playbook": [],
+   "month": {
+    "badges": 1,
+    "saves": 0,
+    "interest": 0,
+    "returnPct": 134.9,
+    "trades": 26,
+    "wins": 16,
+    "pnl": 299.43
+   },
+   "events": [
+    {
+     "d": "2026-11-24T18:00",
+     "kind": "repay",
+     "amount": 250,
+     "badges": 1,
+     "msg": "Loan repaid in full ($250.00 from the award)."
+    },
+    {
+     "d": "2026-11-24T18:00",
+     "kind": "milestone",
+     "amount": 263.96,
+     "equity": 513.96,
+     "badges": 1,
+     "msg": "Milestone: $513.96 is twice the grant. Badge 1 (1 in a row); $263.96 locked in the award; back to $250.00."
+    },
+    {
+     "d": "2026-11-23T19:13",
+     "kind": "hired",
+     "badges": 0,
+     "msg": "Evil Catalina's account, started on 2026-11-23 19:13 with a 250 USD loan; hired by the owner on 2026-11-27 18:01."
+    }
+   ],
+   "daily": {
+    "2026-11-23": 103.756,
+    "2026-11-24": 208.5187,
+    "2026-11-25": 250.4827,
+    "2026-11-26": 247.0829,
+    "2026-11-27": 238.3464
+   },
+   "fundingPaid": -0.1859,
+   "hungry": false,
+   "strikes": 0,
+   "stopped": null,
+   "ownMoney": true,
+   "bonuses": 0,
+   "thought": "26 fills, $299.43 up. No thinking required. MON paid the most: +$129.43. Ahead of Angel Catalina. Halos don't trade.",
+   "character": "evil",
+   "characterText": "A ready-made bot from the shop window, hired to prove that thinking is overrated. Follows its rules and never doubts.",
+   "evil": null,
+   "angel": {
+    "name": "Angel Catalina",
+    "resultPct": 23.82,
+    "lesson": "Lesson of the week: copied Evil Catalina's trailing buy / trailing sell and tested 9 versions on the last 14 days. Best: a 2% bounce and a 5% trail, only with the trend."
+   },
+   "fame": 1695,
+   "stars": 8,
+   "eras": [
+    {
+     "level": 0,
+     "name": "Rookie",
+     "unlocked": true,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 1,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 1,
+       "reward": 150,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 26,
+       "goals": [
+        10,
+        25,
+        50
+       ],
+       "stars": 2,
+       "reward": 105
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 16,
+       "goals": [
+        5,
+        15,
+        30
+       ],
+       "stars": 2,
+       "reward": 105
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 2,
+       "goals": [
+        3,
+        7,
+        15
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        4
+       ],
+       "stars": 0,
+       "reward": 105
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 129.43,
+       "goals": [
+        5,
+        15,
+        40
+       ],
+       "stars": 3,
+       "reward": 105
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        1,
+        2,
+        3
+       ],
+       "stars": 0,
+       "reward": 105
+      }
+     ],
+     "stars": 8,
+     "fame": 295
+    },
+    {
+     "level": 1,
+     "name": "Pro",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 1,
+       "goals": [
+        5,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 300,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 26,
+       "goals": [
+        75,
+        120,
+        200
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 16,
+       "goals": [
+        40,
+        60,
+        100
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 2,
+       "goals": [
+        20,
+        30,
+        45
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        5,
+        7,
+        10
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 129.43,
+       "goals": [
+        50,
+        80,
+        125
+       ],
+       "stars": 0,
+       "reward": 210
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        4,
+        6,
+        8
+       ],
+       "stars": 0,
+       "reward": 210
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 2,
+     "name": "Master",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 1,
+       "goals": [
+        9,
+        10,
+        12
+       ],
+       "stars": 0,
+       "reward": 450,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 26,
+       "goals": [
+        250,
+        350,
+        500
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 16,
+       "goals": [
+        120,
+        170,
+        250
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 2,
+       "goals": [
+        55,
+        70,
+        90
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        12,
+        15,
+        20
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 129.43,
+       "goals": [
+        150,
+        200,
+        300
+       ],
+       "stars": 0,
+       "reward": 315
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        10,
+        12,
+        15
+       ],
+       "stars": 0,
+       "reward": 315
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    },
+    {
+     "level": 3,
+     "name": "Experienced trader",
+     "unlocked": false,
+     "medallions": [
+      {
+       "id": "badges",
+       "name": "Badges in a row",
+       "icon": "badge",
+       "unit": "in a row",
+       "value": 1,
+       "goals": [
+        13,
+        14,
+        16
+       ],
+       "stars": 0,
+       "reward": 600,
+       "main": true
+      },
+      {
+       "id": "trades",
+       "name": "Trades closed",
+       "icon": "candle",
+       "unit": "trades",
+       "value": 26,
+       "goals": [
+        600,
+        800,
+        1000
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "wins",
+       "name": "Winning trades",
+       "icon": "laurel",
+       "unit": "won",
+       "value": 16,
+       "goals": [
+        300,
+        400,
+        500
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenDays",
+       "name": "Green days",
+       "icon": "sun",
+       "unit": "days",
+       "value": 2,
+       "goals": [
+        100,
+        130,
+        160
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "greenWeeks",
+       "name": "Green weeks",
+       "icon": "calendar",
+       "unit": "weeks",
+       "value": 0,
+       "goals": [
+        24,
+        30,
+        40
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "bestTrade",
+       "name": "Best single trade",
+       "icon": "gem",
+       "unit": "USD",
+       "value": 129.43,
+       "goals": [
+        350,
+        450,
+        600
+       ],
+       "stars": 0,
+       "reward": 420
+      },
+      {
+       "id": "duels",
+       "name": "Duels won",
+       "icon": "swords",
+       "unit": "duels",
+       "value": 0,
+       "goals": [
+        18,
+        22,
+        26
+       ],
+       "stars": 0,
+       "reward": 420
+      }
+     ],
+     "stars": 0,
+     "fame": 0
+    }
+   ],
+   "deeds": [
+    "first-badge",
+    "first-10",
+    "biggest-trade",
+    "win-run"
+   ]
+  }
+ ],
+ "months": [
+  {
+   "month": "2026-11",
+   "finished": false,
+   "standings": [
+    {
+     "id": "evil-crypto-bull-1",
+     "badges": 1,
+     "returnPct": 134.90100000000004,
+     "saves": 0,
+     "trades": 26,
+     "wins": 16,
+     "pnl": 299.42560743144014,
+     "rank": 1
+    },
+    {
+     "id": "stocks-bear",
+     "badges": 0,
+     "returnPct": 3.7490000000000023,
+     "saves": 0,
+     "trades": 8,
+     "wins": 4,
+     "pnl": 9.189217305013136,
+     "rank": 2
+    },
+    {
+     "id": "crypto-bear",
+     "badges": 0,
+     "returnPct": 3.4070000000000045,
+     "saves": 0,
+     "trades": 12,
+     "wins": 5,
+     "pnl": 8.467168074041815,
+     "rank": 3
+    },
+    {
+     "id": "crypto-bull",
+     "badges": 0,
+     "returnPct": -2.375000000000005,
+     "saves": 0,
+     "trades": 6,
+     "wins": 1,
+     "pnl": -6.049322481762397,
+     "rank": 4
+    },
+    {
+     "id": "stocks-bull",
+     "badges": 0,
+     "returnPct": -4.713999999999996,
+     "saves": 0,
+     "trades": 6,
+     "wins": 0,
+     "pnl": -11.680979261395144,
+     "rank": 5
+    }
+   ],
+   "fired": []
+  }
+ ],
+ "ladder": [
+  {
+   "id": "evil-crypto-bull-1",
+   "rank": 1
+  },
+  {
+   "id": "stocks-bear",
+   "rank": 2
+  },
+  {
+   "id": "crypto-bear",
+   "rank": 3
+  },
+  {
+   "id": "crypto-bull",
+   "rank": 4
+  },
+  {
+   "id": "stocks-bull",
+   "rank": 5
+  }
+ ],
+ "deeds": [
+  {
+   "id": "first-win",
+   "name": "First blood",
+   "text": "First winning trade on the desk.",
+   "holder": "crypto-bear",
+   "d": "2026-11-23T20:00",
+   "fame": 300
+  },
+  {
+   "id": "first-badge",
+   "name": "First badge",
+   "text": "First to double the grant.",
+   "holder": "evil-crypto-bull-1",
+   "d": "2026-11-24T18:00",
+   "fame": 300
+  },
+  {
+   "id": "first-10",
+   "name": "Busy hands",
+   "text": "First to close 10 trades.",
+   "holder": "evil-crypto-bull-1",
+   "d": "2026-11-25T02:00",
+   "fame": 300
+  },
+  {
+   "id": "biggest-trade",
+   "name": "Biggest trade",
+   "text": "The desk's biggest single trade: +$129.43.",
+   "holder": "evil-crypto-bull-1",
+   "d": "2026-11-24T15:00",
+   "value": 129.43,
+   "fame": 300
+  },
+  {
+   "id": "win-run",
+   "name": "Hot streak",
+   "text": "The longest run of winning trades: 7 in a row.",
+   "holder": "evil-crypto-bull-1",
+   "d": "2026-11-24T22:00",
+   "value": 7,
+   "fame": 300
+  }
+ ],
+ "genes": {
+  "stocks-bull": {
+   "points": {
+    "birth": 2,
+    "badges": 0,
+    "eras": 0,
+    "deeds": 0,
+    "greenWeeks": 0,
+    "total": 2
+   },
+   "spent": 2,
+   "spare": 0,
+   "era": 0,
+   "picks": [
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 0% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 0% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "wants": "wins only 0% of its trades: it wants better techniques",
+   "planned": [
+    "second-screen",
+    "scalper-keys",
+    "global-terminal",
+    "quant-lab",
+    "hedge-fund",
+    "compounding",
+    "hot-hand",
+    "pyramid",
+    "award-investor",
+    "iron-nerves",
+    "funding-sense",
+    "spread-sense",
+    "cool-head",
+    "second-opinion",
+    "regime-master",
+    "satellite-feed"
+   ],
+   "state": {
+    "second-screen": "open",
+    "scalper-keys": "locked",
+    "global-terminal": "locked",
+    "satellite-feed": "locked",
+    "market-reader": "owned",
+    "safe-exit": "owned",
+    "second-opinion": "locked",
+    "regime-master": "locked",
+    "cool-head": "open",
+    "spread-sense": "locked",
+    "funding-sense": "locked",
+    "iron-nerves": "locked",
+    "compounding": "open",
+    "hot-hand": "locked",
+    "pyramid": "locked",
+    "award-investor": "locked",
+    "quant-lab": "locked",
+    "hedge-fund": "locked"
+   },
+   "why": {
+    "second-screen": "costs 1 DNA",
+    "scalper-keys": "needs Second screen",
+    "global-terminal": "opens in era II",
+    "satellite-feed": "opens in era III",
+    "market-reader": "already has it",
+    "safe-exit": "already has it",
+    "second-opinion": "opens in era II",
+    "regime-master": "opens in era III",
+    "cool-head": "costs 1 DNA",
+    "spread-sense": "needs Cool head",
+    "funding-sense": "opens in era II",
+    "iron-nerves": "opens in era III",
+    "compounding": "costs 1 DNA",
+    "hot-hand": "needs Let it run",
+    "pyramid": "opens in era II",
+    "award-investor": "opens in era III",
+    "quant-lab": "opens in era IV",
+    "hedge-fund": "opens in era IV"
+   }
+  },
+  "stocks-bear": {
+   "points": {
+    "birth": 2,
+    "badges": 0,
+    "eras": 0,
+    "deeds": 0,
+    "greenWeeks": 0,
+    "total": 2
+   },
+   "spent": 3,
+   "spare": -1,
+   "era": 0,
+   "picks": [
+    {
+     "id": "compounding",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "hot-hand",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "market-reader",
+     "at": "2026-11-28T10:53",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    }
+   ],
+   "wants": "its trading works: it wants more money from it",
+   "planned": [],
+   "state": {
+    "second-screen": "open",
+    "scalper-keys": "locked",
+    "global-terminal": "locked",
+    "satellite-feed": "locked",
+    "market-reader": "owned",
+    "safe-exit": "open",
+    "second-opinion": "locked",
+    "regime-master": "locked",
+    "cool-head": "open",
+    "spread-sense": "locked",
+    "funding-sense": "locked",
+    "iron-nerves": "locked",
+    "compounding": "owned",
+    "hot-hand": "owned",
+    "pyramid": "locked",
+    "award-investor": "locked",
+    "quant-lab": "locked",
+    "hedge-fund": "locked"
+   },
+   "why": {
+    "second-screen": "costs 1 DNA",
+    "scalper-keys": "needs Second screen",
+    "global-terminal": "opens in era II",
+    "satellite-feed": "opens in era III",
+    "market-reader": "already has it",
+    "safe-exit": "costs 1 DNA",
+    "second-opinion": "opens in era II",
+    "regime-master": "opens in era III",
+    "cool-head": "costs 1 DNA",
+    "spread-sense": "needs Cool head",
+    "funding-sense": "opens in era II",
+    "iron-nerves": "opens in era III",
+    "compounding": "already has it",
+    "hot-hand": "already has it",
+    "pyramid": "opens in era II",
+    "award-investor": "opens in era III",
+    "quant-lab": "opens in era IV",
+    "hedge-fund": "opens in era IV"
+   }
+  },
+  "crypto-bull": {
+   "points": {
+    "birth": 2,
+    "badges": 0,
+    "eras": 0,
+    "deeds": 0,
+    "greenWeeks": 0,
+    "total": 2
+   },
+   "spent": 2,
+   "spare": 0,
+   "era": 0,
+   "picks": [
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 17% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 17% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "wants": "wins only 17% of its trades: it wants better techniques",
+   "planned": [],
+   "state": {
+    "second-screen": "open",
+    "scalper-keys": "locked",
+    "global-terminal": "locked",
+    "satellite-feed": "locked",
+    "market-reader": "owned",
+    "safe-exit": "owned",
+    "second-opinion": "locked",
+    "regime-master": "locked",
+    "cool-head": "open",
+    "spread-sense": "locked",
+    "funding-sense": "locked",
+    "iron-nerves": "locked",
+    "compounding": "open",
+    "hot-hand": "locked",
+    "pyramid": "locked",
+    "award-investor": "locked",
+    "quant-lab": "locked",
+    "hedge-fund": "locked"
+   },
+   "why": {
+    "second-screen": "costs 1 DNA",
+    "scalper-keys": "needs Second screen",
+    "global-terminal": "opens in era II",
+    "satellite-feed": "opens in era III",
+    "market-reader": "already has it",
+    "safe-exit": "already has it",
+    "second-opinion": "opens in era II",
+    "regime-master": "opens in era III",
+    "cool-head": "costs 1 DNA",
+    "spread-sense": "needs Cool head",
+    "funding-sense": "opens in era II",
+    "iron-nerves": "opens in era III",
+    "compounding": "costs 1 DNA",
+    "hot-hand": "needs Let it run",
+    "pyramid": "opens in era II",
+    "award-investor": "opens in era III",
+    "quant-lab": "opens in era IV",
+    "hedge-fund": "opens in era IV"
+   }
+  },
+  "crypto-bear": {
+   "points": {
+    "birth": 2,
+    "badges": 0,
+    "eras": 0,
+    "deeds": 1,
+    "greenWeeks": 0,
+    "total": 3
+   },
+   "spent": 5,
+   "spare": -2,
+   "era": 0,
+   "picks": [
+    {
+     "id": "compounding",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "hot-hand",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-28T10:53",
+     "why": "wins only 42% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "cool-head",
+     "at": "2026-11-28T10:53",
+     "why": "wins only 42% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "wants": "wins only 42% of its trades: it wants better techniques",
+   "planned": [],
+   "state": {
+    "second-screen": "open",
+    "scalper-keys": "locked",
+    "global-terminal": "locked",
+    "satellite-feed": "locked",
+    "market-reader": "owned",
+    "safe-exit": "owned",
+    "second-opinion": "locked",
+    "regime-master": "locked",
+    "cool-head": "owned",
+    "spread-sense": "open",
+    "funding-sense": "locked",
+    "iron-nerves": "locked",
+    "compounding": "owned",
+    "hot-hand": "owned",
+    "pyramid": "locked",
+    "award-investor": "locked",
+    "quant-lab": "locked",
+    "hedge-fund": "locked"
+   },
+   "why": {
+    "second-screen": "costs 1 DNA",
+    "scalper-keys": "needs Second screen",
+    "global-terminal": "opens in era II",
+    "satellite-feed": "opens in era III",
+    "market-reader": "already has it",
+    "safe-exit": "already has it",
+    "second-opinion": "opens in era II",
+    "regime-master": "opens in era III",
+    "cool-head": "already has it",
+    "spread-sense": "costs 1 DNA",
+    "funding-sense": "opens in era II",
+    "iron-nerves": "opens in era III",
+    "compounding": "already has it",
+    "hot-hand": "already has it",
+    "pyramid": "opens in era II",
+    "award-investor": "opens in era III",
+    "quant-lab": "opens in era IV",
+    "hedge-fund": "opens in era IV"
+   }
+  }
+ },
+ "geneTree": {
+  "branches": [
+   {
+    "id": "gadgets",
+    "name": "Gadgets",
+    "text": "More to trade: more charts, faster charts, other markets."
+   },
+   {
+    "id": "techniques",
+    "name": "Techniques",
+    "text": "Better trades: reading the market, smarter exits, confirmation."
+   },
+   {
+    "id": "skills",
+    "name": "Skills",
+    "text": "Discipline: smaller losses, fewer costly trades, steadier nerves."
+   },
+   {
+    "id": "fortune",
+    "name": "Fortune",
+    "text": "More money from the same trades, always within the 3x leverage limit."
+   }
+  ],
+  "genes": [
+   {
+    "id": "second-screen",
+    "branch": "gadgets",
+    "name": "Second screen",
+    "text": "Trades 2 more charts each week (10 instead of 8).",
+    "era": 0,
+    "needs": [],
+    "cost": 1
+   },
+   {
+    "id": "scalper-keys",
+    "built": false,
+    "branch": "gadgets",
+    "name": "Scalper's keyboard",
+    "text": "Adds the 1- and 5-minute charts.",
+    "era": 0,
+    "needs": [
+     "second-screen"
+    ],
+    "cost": 1
+   },
+   {
+    "id": "global-terminal",
+    "built": false,
+    "branch": "gadgets",
+    "name": "Global terminal",
+    "text": "Can trade the other world too: crypto for a stocks bot, Lighter stocks for a crypto bot.",
+    "era": 1,
+    "needs": [
+     "scalper-keys"
+    ],
+    "cost": 2
+   },
+   {
+    "id": "satellite-feed",
+    "branch": "gadgets",
+    "name": "Satellite feed",
+    "text": "Trades 4 more charts (14).",
+    "era": 2,
+    "needs": [
+     "global-terminal"
+    ],
+    "cost": 3
+   },
+   {
+    "id": "market-reader",
+    "branch": "techniques",
+    "name": "Market reader",
+    "text": "Trades the ADX-filtered version of its strategies: it enters only when the market really trends.",
+    "era": 0,
+    "needs": [],
+    "cost": 1
+   },
+   {
+    "id": "safe-exit",
+    "branch": "techniques",
+    "name": "Safe exit",
+    "text": "Takes half the position at the first take-profit (a third otherwise); the stop still moves to break-even.",
+    "era": 0,
+    "needs": [
+     "market-reader"
+    ],
+    "cost": 1
+   },
+   {
+    "id": "second-opinion",
+    "built": false,
+    "branch": "techniques",
+    "name": "Second opinion",
+    "text": "Enters only when two strategies agree on the same chart.",
+    "era": 1,
+    "needs": [
+     "safe-exit"
+    ],
+    "cost": 2
+   },
+   {
+    "id": "regime-master",
+    "built": false,
+    "branch": "techniques",
+    "name": "Regime master",
+    "text": "Switches its strategies when the market changes from trend to range.",
+    "era": 2,
+    "needs": [
+     "second-opinion"
+    ],
+    "cost": 3
+   },
+   {
+    "id": "cool-head",
+    "branch": "skills",
+    "name": "Cool head",
+    "text": "Half the size after 3 losing trades in a row, until a winner.",
+    "era": 0,
+    "needs": [],
+    "cost": 1
+   },
+   {
+    "id": "spread-sense",
+    "branch": "skills",
+    "name": "Spread sense",
+    "text": "Skips markets where spread and slippage cost more than 0.15% a side.",
+    "era": 0,
+    "needs": [
+     "cool-head"
+    ],
+    "cost": 1
+   },
+   {
+    "id": "funding-sense",
+    "branch": "skills",
+    "name": "Funding sense",
+    "text": "Skips a trade when the funding would make it pay to hold it (longs when longs pay, shorts when shorts pay).",
+    "era": 1,
+    "needs": [
+     "spread-sense"
+    ],
+    "cost": 2
+   },
+   {
+    "id": "iron-nerves",
+    "branch": "skills",
+    "name": "Iron nerves",
+    "text": "Tighter stepped stops: smaller losses before the full stop.",
+    "era": 2,
+    "needs": [
+     "funding-sense"
+    ],
+    "cost": 3
+   },
+   {
+    "id": "compounding",
+    "branch": "fortune",
+    "name": "Let it run",
+    "text": "The last third of a winning trade has no take-profit: it rides the rising stop for a bigger win.",
+    "era": 0,
+    "needs": [],
+    "cost": 1
+   },
+   {
+    "id": "hot-hand",
+    "branch": "fortune",
+    "name": "Hot hand",
+    "text": "Risks 2.5% a trade while on a winning streak (2% otherwise).",
+    "era": 0,
+    "needs": [
+     "compounding"
+    ],
+    "cost": 1
+   },
+   {
+    "id": "pyramid",
+    "built": false,
+    "branch": "fortune",
+    "name": "Pyramid",
+    "text": "Adds once to a winning trade after its first take-profit.",
+    "era": 1,
+    "needs": [
+     "hot-hand"
+    ],
+    "cost": 2
+   },
+   {
+    "id": "award-investor",
+    "built": false,
+    "branch": "fortune",
+    "name": "Award investor",
+    "text": "Lets the locked award earn on the side (a small share traded with the account).",
+    "era": 2,
+    "needs": [
+     "pyramid"
+    ],
+    "cost": 3
+   },
+   {
+    "id": "quant-lab",
+    "built": false,
+    "branch": "capstone",
+    "name": "Quant lab",
+    "text": "Every gadget and technique working together: tests and changes its playbook every day.",
+    "era": 3,
+    "needs": [
+     "satellite-feed",
+     "regime-master"
+    ],
+    "cost": 4
+   },
+   {
+    "id": "hedge-fund",
+    "built": false,
+    "branch": "capstone",
+    "name": "Hedge fund",
+    "text": "Discipline and fortune together: runs a long and a short book at once.",
+    "era": 3,
+    "needs": [
+     "iron-nerves",
+     "award-investor"
+    ],
+    "cost": 4
+   }
+  ],
+  "devil": "Grown from the participant's genes with a few random changes; it trades the participant's charts with its own genes. Liquidated at half its 250, a new devil with new changes takes its place.",
+  "angel": "Grown from the genes of the devil you hired; every Monday it tests small gene changes on the last 14 days and keeps the best."
+ },
+ "books": {
+  "start": 1500,
+  "lent": 1250,
+  "repaid": 250,
+  "returned": 0,
+  "prizes": 0,
+  "owed": 1000,
+  "lost": 0,
+  "available": 500,
+  "atRisk": 500,
+  "profit": 0,
+  "funding": -0.43,
+  "difference": 0
+ },
+ "experienced": 0,
+ "recruitsTried": 5,
+ "fired": []
+}

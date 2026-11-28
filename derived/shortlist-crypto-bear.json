@@ -1,0 +1,570 @@
+{
+ "pickedAt": "2026-11-27T19:09:12.370Z",
+ "testShare": 0.3,
+ "maxStrategies": 4,
+ "charts": 40,
+ "chosen": [
+  "bollinger_dip_short_adx",
+  "donchian_trend_short_adx",
+  "rsi2_dip_short",
+  "bollinger_dip_short"
+ ],
+ "candidates": [
+  {
+   "id": "donchian_trend_short",
+   "name": "20-bar breakdown (short)",
+   "side": "short",
+   "pickPass": 8,
+   "pickTested": 40,
+   "pickMedianPF": 1.3796381230366075,
+   "testTrades": 268,
+   "testPF": 0.8562887831115845,
+   "testAvgPct": -0.10271564119290055,
+   "chosen": false,
+   "why": "Lost money in the newer data it had not seen (profit factor 0.86).",
+   "charts": [
+    {
+     "key": "BTC@15m",
+     "testTrades": 29,
+     "testPF": 0.7373150711593064,
+     "testAvgPct": -0.1132052183301402,
+     "testBars": 1723
+    },
+    {
+     "key": "ETH@15m",
+     "testTrades": 31,
+     "testPF": 0.7573698480406917,
+     "testAvgPct": -0.12993414363645558,
+     "testBars": 1723
+    },
+    {
+     "key": "ETH@1h",
+     "testTrades": 66,
+     "testPF": 1.2352345584800213,
+     "testAvgPct": 0.1343517831162729,
+     "testBars": 5198
+    },
+    {
+     "key": "SOL@15m",
+     "testTrades": 25,
+     "testPF": 0.5307975165248063,
+     "testAvgPct": -0.2793899207809309,
+     "testBars": 1723
+    },
+    {
+     "key": "SOL@30m",
+     "testTrades": 11,
+     "testPF": 1.4571257573925254,
+     "testAvgPct": 0.26614002144734017,
+     "testBars": 862
+    },
+    {
+     "key": "NEAR@30m",
+     "testTrades": 10,
+     "testPF": 0.7836222054782301,
+     "testAvgPct": -0.3429586263513174,
+     "testBars": 862
+    },
+    {
+     "key": "ADA@15m",
+     "testTrades": 28,
+     "testPF": 0.3526080018955932,
+     "testAvgPct": -0.511332269664267,
+     "testBars": 1723
+    },
+    {
+     "key": "ADA@1h",
+     "testTrades": 68,
+     "testPF": 0.888853629246623,
+     "testAvgPct": -0.10705885504929381,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "bollinger_dip_short_adx",
+   "name": "Upper Bollinger band fade (short), no strong trend",
+   "side": "short",
+   "pickPass": 5,
+   "pickTested": 40,
+   "pickMedianPF": 1.4082193224249815,
+   "testTrades": 70,
+   "testPF": 1.3287430011463202,
+   "testAvgPct": 0.17021777422025466,
+   "chosen": true,
+   "why": "Passed on 5 of 40 charts in the older data and still made money in the newer data (profit factor 1.33 over 70 trades).",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 21,
+     "testPF": 0.6476438946094779,
+     "testAvgPct": -0.13977953457385148,
+     "testBars": 5198
+    },
+    {
+     "key": "ETH@4h",
+     "testTrades": 8,
+     "testPF": 2.701288608609797,
+     "testAvgPct": 1.4539980719965029,
+     "testBars": 1301
+    },
+    {
+     "key": "ADA@30m",
+     "testTrades": 7,
+     "testPF": 3.441594789590486,
+     "testAvgPct": 0.36403797589915915,
+     "testBars": 862
+    },
+    {
+     "key": "ADA@1h",
+     "testTrades": 29,
+     "testPF": 1.0483585255136676,
+     "testAvgPct": 0.031829165000020546,
+     "testBars": 5198
+    },
+    {
+     "key": "SOL@5m",
+     "testTrades": 5,
+     "testPF": 0.7328289396331372,
+     "testAvgPct": -0.05053635415960511,
+     "testBars": 1728
+    }
+   ]
+  },
+  {
+   "id": "donchian_trend_short_adx",
+   "name": "20-bar breakdown (short), strong trend only",
+   "side": "short",
+   "pickPass": 5,
+   "pickTested": 40,
+   "pickMedianPF": 1.3126573802313275,
+   "testTrades": 139,
+   "testPF": 1.1711543010237,
+   "testAvgPct": 0.1152322791717956,
+   "chosen": true,
+   "why": "Passed on 5 of 40 charts in the older data and still made money in the newer data (profit factor 1.17 over 139 trades).",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 42,
+     "testPF": 1.0497601897215947,
+     "testAvgPct": 0.02801811936265806,
+     "testBars": 5198
+    },
+    {
+     "key": "ETH@15m",
+     "testTrades": 11,
+     "testPF": 0.7550429797126513,
+     "testAvgPct": -0.14114497763230355,
+     "testBars": 1723
+    },
+    {
+     "key": "ETH@1h",
+     "testTrades": 42,
+     "testPF": 0.955458608357094,
+     "testAvgPct": -0.029608174284424464,
+     "testBars": 5198
+    },
+    {
+     "key": "ETH@4h",
+     "testTrades": 8,
+     "testPF": 2.867251607696667,
+     "testAvgPct": 1.7998218588391866,
+     "testBars": 1301
+    },
+    {
+     "key": "SOL@1h",
+     "testTrades": 36,
+     "testPF": 1.115782118305873,
+     "testAvgPct": 0.08994691652321174,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "ma_cross_short",
+   "name": "20/50 average cross down (short)",
+   "side": "short",
+   "pickPass": 4,
+   "pickTested": 40,
+   "pickMedianPF": 1.8460938052648368,
+   "testTrades": 55,
+   "testPF": 0.9714828164142045,
+   "testAvgPct": -0.01522339136504441,
+   "chosen": false,
+   "why": "Lost money in the newer data it had not seen (profit factor 0.97).",
+   "charts": [
+    {
+     "key": "BTC@15m",
+     "testTrades": 12,
+     "testPF": 0.7069859099429286,
+     "testAvgPct": -0.06501062899958499,
+     "testBars": 1723
+    },
+    {
+     "key": "ETH@30m",
+     "testTrades": 8,
+     "testPF": 3.9675360912390616,
+     "testAvgPct": 0.941679180552933,
+     "testBars": 862
+    },
+    {
+     "key": "NEAR@15m",
+     "testTrades": 25,
+     "testPF": 0.4225506620726152,
+     "testAvgPct": -0.46694112092049833,
+     "testBars": 1723
+    },
+    {
+     "key": "ADA@30m",
+     "testTrades": 10,
+     "testPF": 2.0352117860241403,
+     "testAvgPct": 0.4082935601506579,
+     "testBars": 862
+    }
+   ]
+  },
+  {
+   "id": "rsi2_dip_short",
+   "name": "Short-term spike in a downtrend (short)",
+   "side": "short",
+   "pickPass": 4,
+   "pickTested": 40,
+   "pickMedianPF": 1.8451065543539913,
+   "testTrades": 124,
+   "testPF": 1.0214729913246479,
+   "testAvgPct": 0.017349947526223843,
+   "chosen": true,
+   "why": "Passed on 4 of 40 charts in the older data and still made money in the newer data (profit factor 1.02 over 124 trades).",
+   "charts": [
+    {
+     "key": "ETH@4h",
+     "testTrades": 17,
+     "testPF": 1.6255706001559882,
+     "testAvgPct": 0.32973118936348306,
+     "testBars": 1301
+    },
+    {
+     "key": "SOL@4h",
+     "testTrades": 18,
+     "testPF": 0.9364109089115531,
+     "testAvgPct": -0.04998529308562774,
+     "testBars": 1301
+    },
+    {
+     "key": "SOL@1d",
+     "testTrades": 13,
+     "testPF": 1.7969511943129206,
+     "testAvgPct": 0.8350843407414246,
+     "testBars": 548
+    },
+    {
+     "key": "NEAR@1h",
+     "testTrades": 76,
+     "testPF": 0.7886759366161097,
+     "testAvgPct": -0.1764526036845351,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "side": "short",
+   "pickPass": 4,
+   "pickTested": 40,
+   "pickMedianPF": 1.8213714764860063,
+   "testTrades": 61,
+   "testPF": 1.7009652379799074,
+   "testAvgPct": 0.3230381496902226,
+   "chosen": true,
+   "why": "Passed on 4 of 40 charts in the older data and still made money in the newer data (profit factor 1.70 over 61 trades).",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 25,
+     "testPF": 0.4785785738035854,
+     "testAvgPct": -0.24698856907121503,
+     "testBars": 5198
+    },
+    {
+     "key": "BTC@4h",
+     "testTrades": 7,
+     "testPF": 2.8718516181266813,
+     "testAvgPct": 0.928058072692463,
+     "testBars": 1301
+    },
+    {
+     "key": "ETH@1h",
+     "testTrades": 22,
+     "testPF": 1.2808763704460866,
+     "testAvgPct": 0.10894104194643313,
+     "testBars": 5198
+    },
+    {
+     "key": "SOL@4h",
+     "testTrades": 7,
+     "testPF": 4.9818409868092095,
+     "testAvgPct": 2.426704560887884,
+     "testBars": 1301
+    }
+   ]
+  },
+  {
+   "id": "ema_pullback_short_adx",
+   "name": "Bounce to the 20-bar average (short), strong trend only",
+   "side": "short",
+   "pickPass": 3,
+   "pickTested": 40,
+   "pickMedianPF": 2.4830150641990505,
+   "testTrades": 54,
+   "testPF": 1.3368408839700372,
+   "testAvgPct": 0.16794704612876019,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 38,
+     "testPF": 1.185003065751081,
+     "testAvgPct": 0.06718013210367889,
+     "testBars": 5198
+    },
+    {
+     "key": "SOL@30m",
+     "testTrades": 8,
+     "testPF": 2.1850854014978296,
+     "testAvgPct": 0.5665994461539043,
+     "testBars": 862
+    },
+    {
+     "key": "QNT@4h",
+     "testTrades": 8,
+     "testPF": 1.2132725290027886,
+     "testAvgPct": 0.24793748772275181,
+     "testBars": 1301
+    }
+   ]
+  },
+  {
+   "id": "squeeze_break_short",
+   "name": "Breakdown after a quiet spell (short)",
+   "side": "short",
+   "pickPass": 3,
+   "pickTested": 40,
+   "pickMedianPF": 1.8144009290005898,
+   "testTrades": 19,
+   "testPF": 0.3288770784857795,
+   "testAvgPct": -0.59382690219031,
+   "chosen": false,
+   "why": "Lost money in the newer data it had not seen (profit factor 0.33).",
+   "charts": [
+    {
+     "key": "SOL@1h",
+     "testTrades": 3,
+     "testPF": 0.6203634258826091,
+     "testAvgPct": -0.16262384737186383,
+     "testBars": 5198
+    },
+    {
+     "key": "NEAR@1h",
+     "testTrades": 4,
+     "testPF": 0.7785834401887978,
+     "testAvgPct": -0.14305185956968736,
+     "testBars": 5198
+    },
+    {
+     "key": "ADA@1h",
+     "testTrades": 12,
+     "testPF": 0.21013708966757186,
+     "testAvgPct": -0.851886013435129,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "rsi2_dip_short_adx",
+   "name": "Short-term spike in a downtrend (short), no strong trend",
+   "side": "short",
+   "pickPass": 3,
+   "pickTested": 40,
+   "pickMedianPF": 1.442558003448963,
+   "testTrades": 30,
+   "testPF": 0.5678300282198717,
+   "testAvgPct": -0.7166661411733591,
+   "chosen": false,
+   "why": "Lost money in the newer data it had not seen (profit factor 0.57).",
+   "charts": [
+    {
+     "key": "SOL@30m",
+     "testTrades": 10,
+     "testPF": 1.3086968004103097,
+     "testAvgPct": 0.11063178339399982,
+     "testBars": 862
+    },
+    {
+     "key": "SOL@4h",
+     "testTrades": 10,
+     "testPF": 0.14218941437887078,
+     "testAvgPct": -1.0356713444483525,
+     "testBars": 1301
+    },
+    {
+     "key": "ADA@1d",
+     "testTrades": 10,
+     "testPF": 0.6406865220237761,
+     "testAvgPct": -1.2249588624657242,
+     "testBars": 548
+    }
+   ]
+  },
+  {
+   "id": "ma_cross_short_adx",
+   "name": "20/50 average cross down (short), strong trend only",
+   "side": "short",
+   "pickPass": 2,
+   "pickTested": 40,
+   "pickMedianPF": 1.8155621521076613,
+   "testTrades": 16,
+   "testPF": 1.4235521691757125,
+   "testAvgPct": 0.4585606814984727,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "BTC@15m",
+     "testTrades": 3,
+     "testPF": 0.7900701011794418,
+     "testAvgPct": -0.03169475714877421,
+     "testBars": 1723
+    },
+    {
+     "key": "NEAR@1h",
+     "testTrades": 13,
+     "testPF": 1.4405606486498785,
+     "testAvgPct": 0.5716965519555297,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "side": "short",
+   "pickPass": 2,
+   "pickTested": 40,
+   "pickMedianPF": 1.3142572580809104,
+   "testTrades": 71,
+   "testPF": 1.0431645391173188,
+   "testAvgPct": 0.028220618914148184,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "BTC@15m",
+     "testTrades": 39,
+     "testPF": 1.475147532298438,
+     "testAvgPct": 0.10665585545024052,
+     "testBars": 1723
+    },
+    {
+     "key": "QNT@4h",
+     "testTrades": 32,
+     "testPF": 0.9427606875015598,
+     "testAvgPct": -0.06737232561421444,
+     "testBars": 1301
+    }
+   ]
+  },
+  {
+   "id": "macd_cross_short",
+   "name": "MACD momentum cross down (short)",
+   "side": "short",
+   "pickPass": 1,
+   "pickTested": 40,
+   "pickMedianPF": 2.014188162612752,
+   "testTrades": 3,
+   "testPF": 2.215050820298345,
+   "testAvgPct": 1.022416129049893,
+   "chosen": false,
+   "why": "Only 3 trades in the newer data, too few to confirm.",
+   "charts": [
+    {
+     "key": "BTC@1d",
+     "testTrades": 3,
+     "testPF": 2.215050820298345,
+     "testAvgPct": 1.022416129049893,
+     "testBars": 548
+    }
+   ]
+  },
+  {
+   "id": "supertrend_short",
+   "name": "Supertrend turns down (short)",
+   "side": "short",
+   "pickPass": 1,
+   "pickTested": 40,
+   "pickMedianPF": 2.005980568156692,
+   "testTrades": 7,
+   "testPF": 1.0458142381567017,
+   "testAvgPct": 0.0964014735642199,
+   "chosen": false,
+   "why": "Only 7 trades in the newer data, too few to confirm.",
+   "charts": [
+    {
+     "key": "NEAR@4h",
+     "testTrades": 7,
+     "testPF": 1.0458142381567017,
+     "testAvgPct": 0.0964014735642199,
+     "testBars": 1301
+    }
+   ]
+  },
+  {
+   "id": "macd_cross_short_adx",
+   "name": "MACD momentum cross down (short), strong trend only",
+   "side": "short",
+   "pickPass": 1,
+   "pickTested": 40,
+   "pickMedianPF": 1.9351109469425425,
+   "testTrades": 24,
+   "testPF": 0.5861636013321242,
+   "testAvgPct": -0.32113825187035544,
+   "chosen": false,
+   "why": "Lost money in the newer data it had not seen (profit factor 0.59).",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 24,
+     "testPF": 0.5861636013321242,
+     "testAvgPct": -0.32113825187035544,
+     "testBars": 5198
+    }
+   ]
+  },
+  {
+   "id": "supertrend_short_adx",
+   "name": "Supertrend turns down (short), strong trend only",
+   "side": "short",
+   "pickPass": 1,
+   "pickTested": 40,
+   "pickMedianPF": 1.5595051778592743,
+   "testTrades": 11,
+   "testPF": 2.8671858984990903,
+   "testAvgPct": 0.5742898947447109,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "BTC@1h",
+     "testTrades": 11,
+     "testPF": 2.8671858984990903,
+     "testAvgPct": 0.5742898947447109,
+     "testBars": 5198
+    }
+   ]
+  }
+ ],
+ "sig": "[{\"mode\":\"ladder\",\"tpR\":[1,2,3],\"fractions\":[0.3333,0.3333,0.3334],\"trailAtr\":3,\"slR\":[0.5,0.75],\"slFractions\":[0.3333,0.3333]},{\"maxLosingBars\":10,\"minTrades\":10,\"minProfitFactor\":1.2},{\"maxStrategies\":4,\"testShare\":0.3,\"refreshDays\":7},{\"stock\":10,\"crypto\":15,\"metal\":10,\"index\":5},{\"costBps\":5},[\"15m\",\"30m\",\"1h\",\"4h\",\"1d\"],[\"donchian_trend\",\"ema_pullback\",\"ma_cross\",\"rsi2_dip\",\"bollinger_dip\",\"supertrend\",\"macd_cross\",\"squeeze_break\",\"donchian_trend_short\",\"ema_pullback_short\",\"ma_cross_short\",\"rsi2_dip_short\",\"bollinger_dip_short\",\"supertrend_short\",\"macd_cross_short\",\"squeeze_break_short\",\"donchian_trend_adx\",\"ema_pullback_adx\",\"ma_cross_adx\",\"rsi2_dip_adx\",\"bollinger_dip_adx\",\"supertrend_adx\",\"macd_cross_adx\",\"donchian_trend_short_adx\",\"ema_pullback_short_adx\",\"ma_cross_short_adx\",\"rsi2_dip_short_adx\",\"bollinger_dip_short_adx\",\"supertrend_short_adx\",\"macd_cross_short_adx\"],\"short\",false,false,[{\"minOiUsd\":100000000,\"bps\":3},{\"minOiUsd\":10000000,\"bps\":5},{\"minOiUsd\":2000000,\"bps\":8},{\"minOiUsd\":500000,\"bps\":15},{\"minOiUsd\":100000,\"bps\":25},{\"minOiUsd\":0,\"bps\":40}],null,\"weekend-v3\"]",
+ "seen": 40
+}

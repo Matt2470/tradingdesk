@@ -1,0 +1,26 @@
+{
+ "used": [
+  "Leo",
+  "Ursa",
+  "Nova",
+  "Raven",
+  "Nico",
+  "Lucas",
+  "Catalina",
+  "Valeria"
+ ],
+ "fired": [],
+ "banned": {},
+ "evil": [
+  {
+   "id": "evil-crypto-bull-1",
+   "key": "hire-evil-crypto-bull-1",
+   "of": "crypto-bull",
+   "kind": "trailing",
+   "sym": "MON",
+   "name": "Evil Catalina",
+   "hiredAt": "2026-11-27T18:01",
+   "since": "2026-11-23T19:13"
+  }
+ ]
+}

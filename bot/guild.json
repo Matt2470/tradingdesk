@@ -1,0 +1,457 @@
+{
+ "gen": 1,
+ "at": "2026-11-27T19:09",
+ "candidates": [
+  {
+   "id": "g1-6",
+   "name": "Dario",
+   "type": "strategist",
+   "genes": {
+    "side": "short",
+    "family": "trend",
+    "adx": "never",
+    "speed": "any",
+    "world": "market"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 324.835,
+    "trades": 93,
+    "avgPct": 2.329,
+    "pf": 4.79,
+    "charts": 8,
+    "playbook": [
+     {
+      "key": "AMD@1h",
+      "id": "ma_cross_short",
+      "name": "20/50 average cross down (short)",
+      "testTrades": 19,
+      "testPF": 4.764286895777059,
+      "testAvgPct": 1.802755122719553
+     },
+     {
+      "key": "SOXL@1h",
+      "id": "ma_cross_short",
+      "name": "20/50 average cross down (short)",
+      "testTrades": 13,
+      "testPF": 6.381839821411041,
+      "testAvgPct": 5.666049839072825
+     },
+     {
+      "key": "NBIS@5m",
+      "id": "supertrend_short",
+      "name": "Supertrend turns down (short)",
+      "testTrades": 12,
+      "testPF": 7.611245459628047,
+      "testAvgPct": 0.9370073558978723
+     },
+     {
+      "key": "ZHIPU@1h",
+      "id": "macd_cross_short",
+      "name": "MACD momentum cross down (short)",
+      "testTrades": 12,
+      "testPF": 11.163067130276328,
+      "testAvgPct": 1.790564124762285
+     },
+     {
+      "key": "NVDA@30m",
+      "id": "ema_pullback_short",
+      "name": "Bounce to the 20-bar average (short)",
+      "testTrades": 13,
+      "testPF": 4.81160398932355,
+      "testAvgPct": 1.1316277462933002
+     },
+     {
+      "key": "XAG@4h",
+      "id": "macd_cross_short",
+      "name": "MACD momentum cross down (short)",
+      "testTrades": 7,
+      "testPF": 16.512078746089447,
+      "testAvgPct": 2.726935749230973
+     },
+     {
+      "key": "MU@30m",
+      "id": "donchian_trend_short",
+      "name": "20-bar breakdown (short)",
+      "testTrades": 6,
+      "testPF": 178.29085920224102,
+      "testAvgPct": 3.3338873551383625
+     },
+     {
+      "key": "LITE@1h",
+      "id": "ma_cross_short",
+      "name": "20/50 average cross down (short)",
+      "testTrades": 11,
+      "testPF": 3.871971015633241,
+      "testAvgPct": 2.010189029768301
+     }
+    ]
+   },
+   "text": "Stocks, gold and other Lighter markets: only sells short with trend strategies, without the ADX filter, on any chart."
+  },
+  {
+   "id": "g1-5",
+   "name": "Luna",
+   "type": "strategist",
+   "genes": {
+    "side": "short",
+    "family": "trend",
+    "adx": "any",
+    "speed": "any",
+    "world": "crypto"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 224.148,
+    "trades": 71,
+    "avgPct": 2.105,
+    "pf": 4.05,
+    "charts": 8,
+    "playbook": [
+     {
+      "key": "SYRUP@4h",
+      "id": "ema_pullback_short",
+      "name": "Bounce to the 20-bar average (short)",
+      "testTrades": 11,
+      "testPF": 4.896946704785516,
+      "testAvgPct": 3.9044780916991524
+     },
+     {
+      "key": "ETH@15m",
+      "id": "ma_cross_short",
+      "name": "20/50 average cross down (short)",
+      "testTrades": 14,
+      "testPF": 3.933456416958288,
+      "testAvgPct": 0.6565690104082021
+     },
+     {
+      "key": "AERO@4h",
+      "id": "ema_pullback_short",
+      "name": "Bounce to the 20-bar average (short)",
+      "testTrades": 9,
+      "testPF": 4.534165896468457,
+      "testAvgPct": 3.488474457146285
+     },
+     {
+      "key": "HYPE@1h",
+      "id": "ma_cross_short_adx",
+      "name": "20/50 average cross down (short), strong trend only",
+      "testTrades": 6,
+      "testPF": 9.253611543026413,
+      "testAvgPct": 1.3688040815229616
+     },
+     {
+      "key": "DOT@4h",
+      "id": "ema_pullback_short_adx",
+      "name": "Bounce to the 20-bar average (short), strong trend only",
+      "testTrades": 5,
+      "testPF": 5.20389230526295,
+      "testAvgPct": 2.7883205913111473
+     },
+     {
+      "key": "MNT@4h",
+      "id": "supertrend_short",
+      "name": "Supertrend turns down (short)",
+      "testTrades": 5,
+      "testPF": 4.493881839382179,
+      "testAvgPct": 2.208697064160556
+     },
+     {
+      "key": "BTC@1h",
+      "id": "supertrend_short_adx",
+      "name": "Supertrend turns down (short), strong trend only",
+      "testTrades": 11,
+      "testPF": 2.8671858984990903,
+      "testAvgPct": 0.5742898947447109
+     },
+     {
+      "key": "TRUMP@4h",
+      "id": "macd_cross_short",
+      "name": "MACD momentum cross down (short)",
+      "testTrades": 10,
+      "testPF": 2.905792250681909,
+      "testAvgPct": 2.6379689041682943
+     }
+    ]
+   },
+   "text": "Crypto: only sells short with trend strategies, on any chart."
+  },
+  {
+   "id": "g1-3",
+   "name": "Ada",
+   "type": "strategist",
+   "genes": {
+    "side": "long",
+    "family": "trend",
+    "adx": "never",
+    "speed": "any",
+    "world": "crypto"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 158.263,
+    "trades": 97,
+    "avgPct": 1.55,
+    "pf": 2.1,
+    "charts": 8,
+    "playbook": [
+     {
+      "key": "ENA@1h",
+      "id": "donchian_trend",
+      "name": "20-bar breakout",
+      "testTrades": 21,
+      "testPF": 2.6709102509850062,
+      "testAvgPct": 1.980235178195878
+     },
+     {
+      "key": "SOL@4h",
+      "id": "macd_cross",
+      "name": "MACD momentum cross",
+      "testTrades": 8,
+      "testPF": 2.6526175189970864,
+      "testAvgPct": 1.310227985893078
+     },
+     {
+      "key": "ZEC@1h",
+      "id": "macd_cross",
+      "name": "MACD momentum cross",
+      "testTrades": 21,
+      "testPF": 1.7775914361643665,
+      "testAvgPct": 0.7621822849211186
+     },
+     {
+      "key": "NEAR@4h",
+      "id": "ema_pullback",
+      "name": "Pullback to the 20-bar average",
+      "testTrades": 21,
+      "testPF": 1.5517416679940959,
+      "testAvgPct": 1.239289149909839
+     },
+     {
+      "key": "ARB@4h",
+      "id": "donchian_trend",
+      "name": "20-bar breakout",
+      "testTrades": 7,
+      "testPF": 2.264547917666096,
+      "testAvgPct": 3.309766963122113
+     },
+     {
+      "key": "PRL@1h",
+      "id": "ema_pullback",
+      "name": "Pullback to the 20-bar average",
+      "testTrades": 7,
+      "testPF": 2.2528040466151213,
+      "testAvgPct": 3.126566265139868
+     },
+     {
+      "key": "HYPE@4h",
+      "id": "ma_cross",
+      "name": "20/50 average crossover",
+      "testTrades": 5,
+      "testPF": 2.612955536081044,
+      "testAvgPct": 1.2650322941060543
+     },
+     {
+      "key": "BTC@1d",
+      "id": "donchian_trend",
+      "name": "20-bar breakout",
+      "testTrades": 7,
+      "testPF": 1.7528474655833683,
+      "testAvgPct": 0.6990769420331985
+     }
+    ]
+   },
+   "text": "Crypto: only buys with trend strategies, without the ADX filter, on any chart."
+  },
+  {
+   "id": "g1-2",
+   "name": "Axel",
+   "type": "strategist",
+   "genes": {
+    "side": "long",
+    "family": "mean-reversion",
+    "adx": "only",
+    "speed": "intraday",
+    "world": "market"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 6.667,
+    "trades": 59,
+    "avgPct": 0.161,
+    "pf": 1.4,
+    "charts": 5,
+    "playbook": [
+     {
+      "key": "CRCL@1h",
+      "id": "bollinger_dip_adx",
+      "name": "Lower Bollinger band bounce, no strong trend",
+      "testTrades": 12,
+      "testPF": 1.650025101197768,
+      "testAvgPct": 0.39470563148916177
+     },
+     {
+      "key": "AMZN@1h",
+      "id": "bollinger_dip_adx",
+      "name": "Lower Bollinger band bounce, no strong trend",
+      "testTrades": 8,
+      "testPF": 1.8760047755486213,
+      "testAvgPct": 0.2533823121813585
+     },
+     {
+      "key": "GOOGL@1h",
+      "id": "bollinger_dip_adx",
+      "name": "Lower Bollinger band bounce, no strong trend",
+      "testTrades": 12,
+      "testPF": 1.533780895829494,
+      "testAvgPct": 0.13495781783584557
+     },
+     {
+      "key": "WTI@1h",
+      "id": "rsi2_dip_adx",
+      "name": "Short-term dip in an uptrend, no strong trend",
+      "testTrades": 20,
+      "testPF": 1.0783468648562666,
+      "testAvgPct": 0.019228110421242825
+     },
+     {
+      "key": "SPCX@1h",
+      "id": "bollinger_dip_adx",
+      "name": "Lower Bollinger band bounce, no strong trend",
+      "testTrades": 7,
+      "testPF": 1.1406786165954725,
+      "testAvgPct": 0.10546472671751046
+     }
+    ]
+   },
+   "text": "Stocks, gold and other Lighter markets: only buys with dip-buying (mean-reversion) strategies, only with the ADX market-type filter, on 15-minute to 1-hour charts."
+  },
+  {
+   "id": "g1-1",
+   "name": "Kai",
+   "type": "strategist",
+   "genes": {
+    "side": "long",
+    "family": "any",
+    "adx": "only",
+    "speed": "scalp",
+    "world": "crypto"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 0,
+    "trades": 0,
+    "avgPct": 0,
+    "pf": 0,
+    "charts": 0,
+    "playbook": []
+   },
+   "text": "Crypto: only buys with any strategy, only with the ADX market-type filter, on 1- and 5-minute charts."
+  },
+  {
+   "id": "g1-4",
+   "name": "Maya",
+   "type": "strategist",
+   "genes": {
+    "side": "short",
+    "family": "trend",
+    "adx": "only",
+    "speed": "scalp",
+    "world": "market"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 0,
+    "trades": 0,
+    "avgPct": 0,
+    "pf": 0,
+    "charts": 0,
+    "playbook": []
+   },
+   "text": "Stocks, gold and other Lighter markets: only sells short with trend strategies, only with the ADX market-type filter, on 1- and 5-minute charts."
+  },
+  {
+   "id": "g1-8",
+   "name": "Gala",
+   "type": "builder",
+   "genes": {
+    "kind": "trailing",
+    "sym": "ZRO"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": 110.965,
+    "trades": 78,
+    "avgPct": 1.435,
+    "pf": 0,
+    "charts": 1,
+    "resultPct": 123.88,
+    "worstDropPct": -25.83,
+    "stops": 0
+   },
+   "text": "Runs improved trailing buy / sell on ZRO, re-tuned every week the angel way (trend filter, stops, the best of a few settings on the last 14 days)."
+  },
+  {
+   "id": "g1-7",
+   "name": "Sofia",
+   "type": "builder",
+   "genes": {
+    "kind": "neutral-grid",
+    "sym": "SOL"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": -0.245,
+    "trades": 17,
+    "avgPct": 0.174,
+    "pf": 0,
+    "charts": 1,
+    "resultPct": 2.1,
+    "worstDropPct": -4.69,
+    "stops": 0
+   },
+   "text": "Runs an improved neutral grid on SOL, re-tuned every week the angel way (trend filter, stops, the best of a few settings on the last 14 days)."
+  },
+  {
+   "id": "g1-9",
+   "name": "Max",
+   "type": "builder",
+   "genes": {
+    "kind": "trailing",
+    "sym": "US100"
+   },
+   "gen": 1,
+   "tryout": {
+    "fitness": -13.745,
+    "trades": 8,
+    "avgPct": -0.625,
+    "pf": 0,
+    "charts": 1,
+    "resultPct": -5.01,
+    "worstDropPct": -17.47,
+    "stops": 0
+   },
+   "text": "Runs improved trailing buy / sell on US100, re-tuned every week the angel way (trend filter, stops, the best of a few settings on the last 14 days)."
+  }
+ ],
+ "history": [
+  {
+   "gen": 1,
+   "at": "2026-11-27T19:09",
+   "best": 324.835,
+   "bestName": "Dario",
+   "avg": 90.099
+  }
+ ],
+ "names": [
+  "Kai",
+  "Axel",
+  "Ada",
+  "Maya",
+  "Luna",
+  "Dario",
+  "Sofia",
+  "Gala",
+  "Max"
+ ]
+}

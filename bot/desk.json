@@ -1,0 +1,56 @@
+{
+ "index": 183.85687203581912,
+ "high": 183.86252318716365,
+ "day": "2026-11-28",
+ "dayStart": 144.87961574668893,
+ "prev": {
+  "stocks-bull#1": 95.28606876173308,
+  "stocks-bear#1": 103.74897598304338,
+  "crypto-bull#1": 97.62456284993092,
+  "crypto-bear#1": 103.4069173674233,
+  "evil-crypto-bull-1#1": 238.27310292554986
+ },
+ "stoppedDay": "2026-11-28",
+ "halved": false,
+ "daily": {
+  "2026-11-26": 99.1804,
+  "2026-11-27": 144.9026,
+  "2026-11-28": 183.8569
+ },
+ "log": [
+  {
+   "d": "2026-11-27T20:16",
+   "msg": "Drawdown rule: the desk is 11.81% under its best. Risk per trade is halved until it is back within 3.5% of it."
+  },
+  {
+   "d": "2026-11-27T20:31",
+   "msg": "Drawdown rule lifted: the desk is back within 3.5% of its best. Full risk per trade again."
+  },
+  {
+   "d": "2026-11-28T07:45",
+   "msg": "Daily loss limit: the desk is -11.87% down today (limit 3%). Every position closed; no new trades until tomorrow."
+  },
+  {
+   "d": "2026-11-28T07:45",
+   "msg": "Drawdown rule: the desk is 11.89% under its best. Risk per trade is halved until it is back within 3.5% of it."
+  },
+  {
+   "d": "2026-11-28T07:51",
+   "msg": "Drawdown rule lifted: the desk is back within 3.5% of its best. Full risk per trade again."
+  },
+  {
+   "d": "2026-11-28T11:01",
+   "msg": "Drawdown rule: the desk is 11.61% under its best. Risk per trade is halved until it is back within 3.5% of it."
+  },
+  {
+   "d": "2026-11-28T18:16",
+   "msg": "Drawdown rule lifted: the desk is back within 3.5% of its best. Full risk per trade again."
+  }
+ ],
+ "last": {
+  "stop": true,
+  "halve": false,
+  "dayPct": 26.903,
+  "fromHighPct": -0.003
+ }
+}

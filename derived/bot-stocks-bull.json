@@ -1,0 +1,5935 @@
+{
+ "id": "stocks-bull",
+ "name": "Nico",
+ "recruit": 1,
+ "side": "both",
+ "motto": "Free to buy or sell short, on stocks, gold and every other Lighter market that is not crypto.",
+ "accountant": {
+  "startGrant": 250,
+  "grant": 250,
+  "badges": 0,
+  "streak": 0,
+  "bestStreak": 0,
+  "saves": 0,
+  "award": 0,
+  "debt": 250,
+  "repaid": 0,
+  "interestPaid": 0,
+  "hiredAt": "2026-11-23T19:13",
+  "nextInterestAt": "2026-12-07T19:13",
+  "index": 95.28606876173308,
+  "lastEquity": 238.2151719043329,
+  "events": [],
+  "months": {
+   "2026-11": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "repaid": 0,
+    "indexStart": 100,
+    "indexEnd": 95.28606876173308,
+    "trades": 6,
+    "wins": 0,
+    "pnl": -11.680979261395144
+   }
+  },
+  "daily": {
+   "2026-11-22": 100,
+   "2026-11-23": 100,
+   "2026-11-24": 98.289,
+   "2026-11-25": 95.3897,
+   "2026-11-26": 95.3929,
+   "2026-11-27": 95.2861,
+   "2026-11-28": 95.2861
+  },
+  "weekTrades": 6
+ },
+ "evil": null,
+ "tier": {
+  "level": 0,
+  "name": "Rookie",
+  "toNext": 4,
+  "tiers": [
+   4,
+   8,
+   12
+  ],
+  "names": [
+   "Rookie",
+   "Pro",
+   "Master",
+   "Experienced trader"
+  ]
+ },
+ "playbook": [
+  {
+   "key": "AMD@30m",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 7,
+   "testPF": 9.036339248644905,
+   "testAvgPct": 2.4316610635632614,
+   "score": 4.515449934959718,
+   "rate": 0.008092485549132947
+  },
+  {
+   "key": "NVDA@30m",
+   "id": "ema_pullback_short_adx",
+   "name": "Bounce to the 20-bar average (short), strong trend only",
+   "testTrades": 5,
+   "testPF": 11.791906396563835,
+   "testAvgPct": 2.0733323292770414,
+   "score": 3.8907562519182184,
+   "rate": 0.005780346820809248
+  },
+  {
+   "key": "IREN@1h",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 39,
+   "testPF": 1.9023589380437707,
+   "testAvgPct": 1.407126248178568,
+   "score": 3.0476931437850747,
+   "rate": 0.023564954682779457
+  },
+  {
+   "key": "HYUNDAIUSD@4h",
+   "id": "rsi2_dip_short",
+   "name": "Short-term spike in a downtrend (short)",
+   "testTrades": 17,
+   "testPF": 2.3708498484725573,
+   "testAvgPct": 0.6331710626736057,
+   "score": 2.9760626285159404,
+   "rate": 0.04271356783919598
+  },
+  {
+   "key": "NBIS@1h",
+   "id": "ma_cross_short",
+   "name": "20/50 average cross down (short)",
+   "testTrades": 17,
+   "testPF": 2.1640898470230265,
+   "testAvgPct": 1.2725478814145916,
+   "score": 2.7165224835412247,
+   "rate": 0.013787510137875101
+  },
+  {
+   "key": "XPD@4h",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 15,
+   "testPF": 2.218725800370489,
+   "testAvgPct": 0.6810772135558033,
+   "score": 2.6716120722603662,
+   "rate": 0.02952755905511811
+  },
+  {
+   "key": "MRNA@1d",
+   "id": "rsi2_dip_short",
+   "name": "Short-term spike in a downtrend (short)",
+   "testTrades": 7,
+   "testPF": 2.7696162944428364,
+   "testAvgPct": 1.928020425170567,
+   "score": 2.501212743321056,
+   "rate": 0.018134715025906734
+  },
+  {
+   "key": "CRCL@1h",
+   "id": "rsi2_dip_short",
+   "name": "Short-term spike in a downtrend (short)",
+   "testTrades": 53,
+   "testPF": 1.3077185574337122,
+   "testAvgPct": 0.14479891435085887,
+   "score": 2.2654834685028575,
+   "rate": 0.02271753107586798
+  },
+  {
+   "key": "INTC@15m",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 30,
+   "testPF": 1.4510643170927124,
+   "testAvgPct": 0.20768986444977486,
+   "score": 2.16406173780186,
+   "rate": 0.017361111111111112
+  },
+  {
+   "key": "MSFT@1h",
+   "id": "ma_cross_short",
+   "name": "20/50 average cross down (short)",
+   "testTrades": 23,
+   "testPF": 1.5359905013697275,
+   "testAvgPct": 0.10332173715968128,
+   "score": 2.1199913571527436,
+   "rate": 0.008771929824561403
+  }
+ ],
+ "weekend": true,
+ "lighterCrypto": false,
+ "allLighter": true,
+ "twin": {
+  "equity": 234.0770232345081,
+  "indexPct": -6.369190706196759,
+  "trades": 16,
+  "wins": 5,
+  "positions": 0
+ },
+ "kin": {
+  "kind": "devil",
+  "name": "Evil Nico",
+  "resultPct": 0,
+  "trades": 0
+ },
+ "books": {
+  "difference": 0
+ },
+ "fundingPaid": 0.1038,
+ "hungry": true,
+ "fired": null,
+ "strikes": 0,
+ "resultPct": -4.713931238266923,
+ "view": "market",
+ "at": "2026-11-28T19:01:08.110Z",
+ "startedAt": "2026-11-23T19:13",
+ "startEquity": 250,
+ "cash": 238.2151719043329,
+ "equity": 238.2151719043329,
+ "exposure": 0,
+ "shortlist": {
+  "pickedAt": "2026-11-27T19:09:12.370Z",
+  "chosen": [
+   "ema_pullback_short",
+   "ma_cross_short",
+   "rsi2_dip_short",
+   "ema_pullback_short_adx"
+  ],
+  "candidates": [
+   {
+    "id": "ema_pullback_short",
+    "name": "Bounce to the 20-bar average (short)",
+    "side": "short",
+    "pickPass": 25,
+    "pickTested": 222,
+    "pickMedianPF": 1.611095337493038,
+    "testTrades": 409,
+    "testPF": 1.760270324534037,
+    "testAvgPct": 0.5901931706599752,
+    "chosen": true,
+    "why": "Passed on 25 of 222 charts in the older data and still made money in the newer data (profit factor 1.76 over 409 trades).",
+    "charts": [
+     {
+      "key": "NVDA@30m",
+      "testTrades": 11,
+      "testPF": 10.06604228910909,
+      "testAvgPct": 1.5205312418569732,
+      "testBars": 865
+     },
+     {
+      "key": "AMD@30m",
+      "testTrades": 7,
+      "testPF": 9.036339248644905,
+      "testAvgPct": 2.4316610635632614,
+      "testBars": 865
+     },
+     {
+      "key": "MU@15m",
+      "testTrades": 27,
+      "testPF": 1.3863089087448466,
+      "testAvgPct": 0.25923445207064827,
+      "testBars": 1728
+     },
+     {
+      "key": "INTC@15m",
+      "testTrades": 30,
+      "testPF": 1.4510643170927124,
+      "testAvgPct": 0.20768986444977486,
+      "testBars": 1728
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 12,
+      "testPF": 1.5055620245830348,
+      "testAvgPct": 0.3108458000428525,
+      "testBars": 865
+     },
+     {
+      "key": "NBIS@15m",
+      "testTrades": 27,
+      "testPF": 1.180386504217857,
+      "testAvgPct": 0.12816580293898988,
+      "testBars": 1728
+     },
+     {
+      "key": "NBIS@30m",
+      "testTrades": 9,
+      "testPF": 2.6293952492885087,
+      "testAvgPct": 1.7043035935921242,
+      "testBars": 865
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 23,
+      "testPF": 1.4924877109663741,
+      "testAvgPct": 0.5154013213340207,
+      "testBars": 1233
+     },
+     {
+      "key": "NBIS@4h",
+      "testTrades": 13,
+      "testPF": 1.1126661164163707,
+      "testAvgPct": 0.2344677265572589,
+      "testBars": 308
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 39,
+      "testPF": 1.9023589380437707,
+      "testAvgPct": 1.407126248178568,
+      "testBars": 1655
+     },
+     {
+      "key": "PLTR@4h",
+      "testTrades": 8,
+      "testPF": 2.2045561963960063,
+      "testAvgPct": 0.6701885280874935,
+      "testBars": 657
+     },
+     {
+      "key": "TSLA@4h",
+      "testTrades": 10,
+      "testPF": 0,
+      "testAvgPct": -0.7091618655186955,
+      "testBars": 657
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 15,
+      "testPF": 1.1778935481650286,
+      "testAvgPct": 0.06605317525685725,
+      "testBars": 656
+     },
+     {
+      "key": "AMZN@4h",
+      "testTrades": 18,
+      "testPF": 0.9531956103095419,
+      "testAvgPct": -0.028787324732627944,
+      "testBars": 656
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 31,
+      "testPF": 0.7888175182396578,
+      "testAvgPct": -0.059740217207333295,
+      "testBars": 1728
+     },
+     {
+      "key": "ORCL@1h",
+      "testTrades": 22,
+      "testPF": 0.5721625307072684,
+      "testAvgPct": -0.30792671918298103,
+      "testBars": 1485
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 38,
+      "testPF": 1.4070689556607778,
+      "testAvgPct": 0.2576248207067023,
+      "testBars": 2333
+     },
+     {
+      "key": "XIAOMI@4h",
+      "testTrades": 5,
+      "testPF": 1.1456296609484924,
+      "testAvgPct": 0.09550058719956214,
+      "testBars": 233
+     },
+     {
+      "key": "SMIC@4h",
+      "testTrades": 3,
+      "testPF": 0.8129392941112131,
+      "testAvgPct": -0.37111135161210224,
+      "testBars": 183
+     },
+     {
+      "key": "HYUNDAIUSD@1h",
+      "testTrades": 11,
+      "testPF": 0.05044422717324577,
+      "testAvgPct": -0.5680176716990548,
+      "testBars": 1593
+     },
+     {
+      "key": "HYUNDAIUSD@4h",
+      "testTrades": 11,
+      "testPF": 1.1812601223679724,
+      "testAvgPct": 0.12270521328476977,
+      "testBars": 398
+     },
+     {
+      "key": "SOXL@4h",
+      "testTrades": 9,
+      "testPF": 7.11154173989169,
+      "testAvgPct": 9.765781936163682,
+      "testBars": 283
+     },
+     {
+      "key": "WTI@4h",
+      "testTrades": 13,
+      "testPF": 1.2577430591179524,
+      "testAvgPct": 0.199224102825812,
+      "testBars": 508
+     },
+     {
+      "key": "XPD@4h",
+      "testTrades": 15,
+      "testPF": 2.218725800370489,
+      "testAvgPct": 0.6810772135558033,
+      "testBars": 508
+     },
+     {
+      "key": "UNITREE@4h",
+      "testTrades": 2,
+      "testPF": 9.926688358893202,
+      "testAvgPct": 3.5160758146711277,
+      "testBars": 206
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short",
+    "name": "20/50 average cross down (short)",
+    "side": "short",
+    "pickPass": 19,
+    "pickTested": 222,
+    "pickMedianPF": 1.9530274042953566,
+    "testTrades": 230,
+    "testPF": 1.889167258491787,
+    "testAvgPct": 0.5496113371948135,
+    "chosen": true,
+    "why": "Passed on 19 of 222 charts in the older data and still made money in the newer data (profit factor 1.89 over 230 trades).",
+    "charts": [
+     {
+      "key": "NVDA@15m",
+      "testTrades": 15,
+      "testPF": 2.0238994109689674,
+      "testAvgPct": 0.45984986751239754,
+      "testBars": 1728
+     },
+     {
+      "key": "NVDA@30m",
+      "testTrades": 10,
+      "testPF": 2.2907960968304204,
+      "testAvgPct": 0.35493146709626405,
+      "testBars": 865
+     },
+     {
+      "key": "NVDA@4h",
+      "testTrades": 3,
+      "testPF": 3.2600672818531486,
+      "testAvgPct": 0.7225180660517467,
+      "testBars": 657
+     },
+     {
+      "key": "AMD@30m",
+      "testTrades": 6,
+      "testPF": 3.3568767930305037,
+      "testAvgPct": 1.6366477128241284,
+      "testBars": 865
+     },
+     {
+      "key": "AMD@1h",
+      "testTrades": 19,
+      "testPF": 4.764286895777059,
+      "testAvgPct": 1.802755122719553,
+      "testBars": 2095
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 7,
+      "testPF": 0.9102409273709161,
+      "testAvgPct": -0.08584840441044118,
+      "testBars": 865
+     },
+     {
+      "key": "NBIS@15m",
+      "testTrades": 17,
+      "testPF": 2.8084298565503603,
+      "testAvgPct": 0.9368254883996329,
+      "testBars": 1728
+     },
+     {
+      "key": "NBIS@30m",
+      "testTrades": 8,
+      "testPF": 2.1307044524347956,
+      "testAvgPct": 1.3895922609304656,
+      "testBars": 865
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 17,
+      "testPF": 2.1640898470230265,
+      "testAvgPct": 1.2725478814145916,
+      "testBars": 1233
+     },
+     {
+      "key": "CRWV@30m",
+      "testTrades": 9,
+      "testPF": 1.204987244692009,
+      "testAvgPct": 0.19252511254599033,
+      "testBars": 865
+     },
+     {
+      "key": "CRWV@1h",
+      "testTrades": 14,
+      "testPF": 0.8599320886930789,
+      "testAvgPct": -0.1786621082573762,
+      "testBars": 1477
+     },
+     {
+      "key": "MSFT@1h",
+      "testTrades": 23,
+      "testPF": 1.5359905013697275,
+      "testAvgPct": 0.10332173715968128,
+      "testBars": 2622
+     },
+     {
+      "key": "GOOGL@30m",
+      "testTrades": 6,
+      "testPF": 0.5865130276882169,
+      "testAvgPct": -0.07406885023596958,
+      "testBars": 865
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 4,
+      "testPF": 0.03323388344635656,
+      "testAvgPct": -0.8818233177056755,
+      "testBars": 656
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 17,
+      "testPF": 0.8376718056076025,
+      "testAvgPct": -0.047532036611122444,
+      "testBars": 1728
+     },
+     {
+      "key": "NBIS@5m",
+      "testTrades": 17,
+      "testPF": 0.6560536500094369,
+      "testAvgPct": -0.19492690017925823,
+      "testBars": 1728
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 13,
+      "testPF": 1.4506035448973504,
+      "testAvgPct": 0.4013344658975169,
+      "testBars": 1291
+     },
+     {
+      "key": "LITE@1h",
+      "testTrades": 11,
+      "testPF": 3.871971015633241,
+      "testAvgPct": 2.010189029768301,
+      "testBars": 1333
+     },
+     {
+      "key": "US100@1h",
+      "testTrades": 14,
+      "testPF": 1.1553329279591729,
+      "testAvgPct": 0.05748821303908439,
+      "testBars": 1381
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short",
+    "name": "Short-term spike in a downtrend (short)",
+    "side": "short",
+    "pickPass": 19,
+    "pickTested": 222,
+    "pickMedianPF": 1.601106039986923,
+    "testTrades": 316,
+    "testPF": 1.1769656513194504,
+    "testAvgPct": 0.09798632863435017,
+    "chosen": true,
+    "why": "Passed on 19 of 222 charts in the older data and still made money in the newer data (profit factor 1.18 over 316 trades).",
+    "charts": [
+     {
+      "key": "AMD@4h",
+      "testTrades": 9,
+      "testPF": 0.2733993769228362,
+      "testAvgPct": -1.036398868289969,
+      "testBars": 524
+     },
+     {
+      "key": "AMD@1d",
+      "testTrades": 0,
+      "testPF": 0,
+      "testAvgPct": 0,
+      "testBars": 403
+     },
+     {
+      "key": "INTC@15m",
+      "testTrades": 17,
+      "testPF": 0.5013176100975774,
+      "testAvgPct": -0.23340701437566777,
+      "testBars": 1728
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 12,
+      "testPF": 0.30537136076282045,
+      "testAvgPct": -0.5978342855161961,
+      "testBars": 865
+     },
+     {
+      "key": "IREN@30m",
+      "testTrades": 3,
+      "testPF": 0.0646920252247727,
+      "testAvgPct": -1.9069911823117345,
+      "testBars": 321
+     },
+     {
+      "key": "IREN@1d",
+      "testTrades": 2,
+      "testPF": 2.7728428366513316,
+      "testAvgPct": 3.41461040053177,
+      "testBars": 379
+     },
+     {
+      "key": "TSLA@4h",
+      "testTrades": 4,
+      "testPF": 2.2851930670061202,
+      "testAvgPct": 0.3867273843621556,
+      "testBars": 657
+     },
+     {
+      "key": "MRNA@1d",
+      "testTrades": 7,
+      "testPF": 2.7696162944428364,
+      "testAvgPct": 1.928020425170567,
+      "testBars": 386
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 53,
+      "testPF": 1.3077185574337122,
+      "testAvgPct": 0.14479891435085887,
+      "testBars": 2333
+     },
+     {
+      "key": "CRCL@4h",
+      "testTrades": 16,
+      "testPF": 3.66077191058924,
+      "testAvgPct": 1.0461192564526989,
+      "testBars": 584
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 28,
+      "testPF": 1.0744192241202926,
+      "testAvgPct": 0.014449405194219287,
+      "testBars": 1362
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 31,
+      "testPF": 0.9230269495996343,
+      "testAvgPct": -0.04865190688402996,
+      "testBars": 1291
+     },
+     {
+      "key": "XIAOMI@4h",
+      "testTrades": 2,
+      "testPF": 99,
+      "testAvgPct": 3.443033140468199,
+      "testBars": 233
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 36,
+      "testPF": 0.9920458574569736,
+      "testAvgPct": -0.005563193065492306,
+      "testBars": 1594
+     },
+     {
+      "key": "HYUNDAIUSD@4h",
+      "testTrades": 17,
+      "testPF": 2.3708498484725573,
+      "testAvgPct": 0.6331710626736057,
+      "testBars": 398
+     },
+     {
+      "key": "EWY@4h",
+      "testTrades": 10,
+      "testPF": 1.8705147587691047,
+      "testAvgPct": 0.36669955352350814,
+      "testBars": 379
+     },
+     {
+      "key": "XAG@4h",
+      "testTrades": 15,
+      "testPF": 0.8753538826329802,
+      "testAvgPct": -0.08757411361764017,
+      "testBars": 657
+     },
+     {
+      "key": "OPENAI@1h",
+      "testTrades": 27,
+      "testPF": 0.6822179830882711,
+      "testAvgPct": -0.09709924027974617,
+      "testBars": 1262
+     },
+     {
+      "key": "SPCX@1h",
+      "testTrades": 27,
+      "testPF": 0.5917301420410408,
+      "testAvgPct": -0.19289362849796451,
+      "testBars": 1212
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_short_adx",
+    "name": "Bounce to the 20-bar average (short), strong trend only",
+    "side": "short",
+    "pickPass": 17,
+    "pickTested": 222,
+    "pickMedianPF": 1.9601263420501371,
+    "testTrades": 158,
+    "testPF": 1.687054715052259,
+    "testAvgPct": 0.39120916784045423,
+    "chosen": true,
+    "why": "Passed on 17 of 222 charts in the older data and still made money in the newer data (profit factor 1.69 over 158 trades).",
+    "charts": [
+     {
+      "key": "NVDA@15m",
+      "testTrades": 10,
+      "testPF": 0.2206954558191715,
+      "testAvgPct": -0.5177857405783169,
+      "testBars": 1728
+     },
+     {
+      "key": "NVDA@30m",
+      "testTrades": 5,
+      "testPF": 11.791906396563835,
+      "testAvgPct": 2.0733323292770414,
+      "testBars": 865
+     },
+     {
+      "key": "AMD@30m",
+      "testTrades": 3,
+      "testPF": 14.78905080264041,
+      "testAvgPct": 3.698933388145086,
+      "testBars": 865
+     },
+     {
+      "key": "INTC@15m",
+      "testTrades": 13,
+      "testPF": 3.5026091059444755,
+      "testAvgPct": 0.7198934276792621,
+      "testBars": 1728
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 7,
+      "testPF": 2.3527523301740505,
+      "testAvgPct": 0.8448351483947016,
+      "testBars": 865
+     },
+     {
+      "key": "INTC@1h",
+      "testTrades": 14,
+      "testPF": 1.0291978920240463,
+      "testAvgPct": 0.012208739609284749,
+      "testBars": 2095
+     },
+     {
+      "key": "NBIS@30m",
+      "testTrades": 3,
+      "testPF": 6.850942118825009,
+      "testAvgPct": 4.2293367237063615,
+      "testBars": 865
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 8,
+      "testPF": 0.43640582742258427,
+      "testAvgPct": -0.7684150880451633,
+      "testBars": 1233
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 15,
+      "testPF": 3.146651250627504,
+      "testAvgPct": 2.2227388147332685,
+      "testBars": 1655
+     },
+     {
+      "key": "TSLA@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -0.5602240398519285,
+      "testBars": 657
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 3,
+      "testPF": 3.091079225898962,
+      "testAvgPct": 0.6965772765113094,
+      "testBars": 656
+     },
+     {
+      "key": "GOOGL@15m",
+      "testTrades": 12,
+      "testPF": 0.7262878120475071,
+      "testAvgPct": -0.08542652602077679,
+      "testBars": 1728
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 8,
+      "testPF": 2.083260771985492,
+      "testAvgPct": 0.5061696370112121,
+      "testBars": 656
+     },
+     {
+      "key": "AMZN@15m",
+      "testTrades": 11,
+      "testPF": 1.613446873861672,
+      "testAvgPct": 0.13381907217345212,
+      "testBars": 1728
+     },
+     {
+      "key": "MRNA@15m",
+      "testTrades": 17,
+      "testPF": 0.4966668678930867,
+      "testAvgPct": -0.24451983198552774,
+      "testBars": 1728
+     },
+     {
+      "key": "ORCL@1h",
+      "testTrades": 9,
+      "testPF": 0.30012648838964534,
+      "testAvgPct": -0.6114633044286477,
+      "testBars": 1485
+     },
+     {
+      "key": "BRENTOIL@1h",
+      "testTrades": 17,
+      "testPF": 0.5101108809624001,
+      "testAvgPct": -0.2967654077200216,
+      "testBars": 1788
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short",
+    "name": "Supertrend turns down (short)",
+    "side": "short",
+    "pickPass": 16,
+    "pickTested": 222,
+    "pickMedianPF": 2.1021359429633684,
+    "testTrades": 154,
+    "testPF": 1.3916075625997328,
+    "testAvgPct": 0.39298250223706277,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "NVDA@15m",
+      "testTrades": 16,
+      "testPF": 4.646629030149279,
+      "testAvgPct": 0.9096190280709098,
+      "testBars": 1728
+     },
+     {
+      "key": "MU@15m",
+      "testTrades": 7,
+      "testPF": 1.4103632106504336,
+      "testAvgPct": 0.21608636135747986,
+      "testBars": 1728
+     },
+     {
+      "key": "MU@30m",
+      "testTrades": 7,
+      "testPF": 4.115935378926862,
+      "testAvgPct": 1.1822312466789149,
+      "testBars": 865
+     },
+     {
+      "key": "MU@1h",
+      "testTrades": 19,
+      "testPF": 1.9093710194048275,
+      "testAvgPct": 0.9557766372920299,
+      "testBars": 1491
+     },
+     {
+      "key": "NBIS@15m",
+      "testTrades": 4,
+      "testPF": 4.1293391357206195,
+      "testAvgPct": 1.919022544491012,
+      "testBars": 1728
+     },
+     {
+      "key": "MSTR@4h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -3.589364881334912,
+      "testBars": 584
+     },
+     {
+      "key": "CRWV@30m",
+      "testTrades": 8,
+      "testPF": 0.75466139095728,
+      "testAvgPct": -0.362331649070454,
+      "testBars": 865
+     },
+     {
+      "key": "PLTR@4h",
+      "testTrades": 2,
+      "testPF": 99,
+      "testAvgPct": 2.8269242149855063,
+      "testBars": 657
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 7,
+      "testPF": 0.28108033177656394,
+      "testAvgPct": -1.1552448924231924,
+      "testBars": 656
+     },
+     {
+      "key": "NBIS@5m",
+      "testTrades": 10,
+      "testPF": 8.495194151016715,
+      "testAvgPct": 0.4971101877703264,
+      "testBars": 1728
+     },
+     {
+      "key": "HOOD@4h",
+      "testTrades": 7,
+      "testPF": 0.16756288597532537,
+      "testAvgPct": -2.5795661919807356,
+      "testBars": 657
+     },
+     {
+      "key": "COIN@4h",
+      "testTrades": 9,
+      "testPF": 0.43441542817777146,
+      "testAvgPct": -0.6177234852400925,
+      "testBars": 657
+     },
+     {
+      "key": "SKHY@1h",
+      "testTrades": 10,
+      "testPF": 2.153294778481492,
+      "testAvgPct": 1.6569936340809754,
+      "testBars": 980
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 13,
+      "testPF": 1.6964046635360395,
+      "testAvgPct": 0.8263558654663646,
+      "testBars": 1594
+     },
+     {
+      "key": "BRENTOIL@1h",
+      "testTrades": 15,
+      "testPF": 0.6056796179482558,
+      "testAvgPct": -0.3398741856764592,
+      "testBars": 1788
+     },
+     {
+      "key": "CBRS@1h",
+      "testTrades": 18,
+      "testPF": 2.1590573736756125,
+      "testAvgPct": 1.0712501750793126,
+      "testBars": 1419
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_short_adx",
+    "name": "20-bar breakdown (short), strong trend only",
+    "side": "short",
+    "pickPass": 16,
+    "pickTested": 222,
+    "pickMedianPF": 1.7203740353590902,
+    "testTrades": 183,
+    "testPF": 1.191936900784734,
+    "testAvgPct": 0.12299166466870723,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "XAU@1h",
+      "testTrades": 21,
+      "testPF": 1.6967054607216023,
+      "testAvgPct": 0.1912857366891381,
+      "testBars": 2628
+     },
+     {
+      "key": "NVDA@15m",
+      "testTrades": 20,
+      "testPF": 1.3654457411575516,
+      "testAvgPct": 0.15267253846556184,
+      "testBars": 1728
+     },
+     {
+      "key": "NVDA@30m",
+      "testTrades": 7,
+      "testPF": 2.267474325555667,
+      "testAvgPct": 0.8820118791996941,
+      "testBars": 865
+     },
+     {
+      "key": "INTC@15m",
+      "testTrades": 12,
+      "testPF": 0.30535027318579105,
+      "testAvgPct": -0.5498625706883203,
+      "testBars": 1728
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 6,
+      "testPF": 0.8593411027244079,
+      "testAvgPct": -0.14028421807839142,
+      "testBars": 865
+     },
+     {
+      "key": "TSLA@1h",
+      "testTrades": 23,
+      "testPF": 1.4549774677843106,
+      "testAvgPct": 0.157077886890504,
+      "testBars": 2628
+     },
+     {
+      "key": "MSFT@30m",
+      "testTrades": 9,
+      "testPF": 1.2846406263422394,
+      "testAvgPct": 0.08965957567058526,
+      "testBars": 865
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -1.0755441596024953,
+      "testBars": 656
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 9,
+      "testPF": 0.5361274301318194,
+      "testAvgPct": -0.2805789235858799,
+      "testBars": 1728
+     },
+     {
+      "key": "NBIS@5m",
+      "testTrades": 13,
+      "testPF": 0.20127394441782778,
+      "testAvgPct": -0.5095336630553381,
+      "testBars": 1728
+     },
+     {
+      "key": "AAPL@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -0.3509297789814843,
+      "testBars": 656
+     },
+     {
+      "key": "COIN@4h",
+      "testTrades": 7,
+      "testPF": 0.8931375251860892,
+      "testAvgPct": -0.2328472937225647,
+      "testBars": 657
+     },
+     {
+      "key": "SKHY@1h",
+      "testTrades": 8,
+      "testPF": 3.1393663097914346,
+      "testAvgPct": 1.8101602871700024,
+      "testBars": 980
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 17,
+      "testPF": 0.9204480652185225,
+      "testAvgPct": -0.05911882583535405,
+      "testBars": 2031
+     },
+     {
+      "key": "MINIMAX@1h",
+      "testTrades": 19,
+      "testPF": 2.5208140566510018,
+      "testAvgPct": 0.9604879048005028,
+      "testBars": 1129
+     },
+     {
+      "key": "UNITREE@1h",
+      "testTrades": 6,
+      "testPF": 0.4030225713159991,
+      "testAvgPct": -0.7306271380267656,
+      "testBars": 823
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip",
+    "name": "Short-term dip in an uptrend",
+    "side": "long",
+    "pickPass": 16,
+    "pickTested": 222,
+    "pickMedianPF": 1.6766761388200857,
+    "testTrades": 226,
+    "testPF": 0.7572097143089055,
+    "testAvgPct": -0.16402291546076866,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.76).",
+    "charts": [
+     {
+      "key": "NVDA@1d",
+      "testTrades": 12,
+      "testPF": 0.8108272636473042,
+      "testAvgPct": -0.21948483004246686,
+      "testBars": 411
+     },
+     {
+      "key": "MU@30m",
+      "testTrades": 8,
+      "testPF": 0.0649306693280066,
+      "testAvgPct": -1.1811792556810263,
+      "testBars": 865
+     },
+     {
+      "key": "MU@1h",
+      "testTrades": 13,
+      "testPF": 0.1862875412243924,
+      "testAvgPct": -0.6413820376974146,
+      "testBars": 1491
+     },
+     {
+      "key": "MU@4h",
+      "testTrades": 5,
+      "testPF": 5.660184552610761,
+      "testAvgPct": 1.1020633978082208,
+      "testBars": 373
+     },
+     {
+      "key": "MU@1d",
+      "testTrades": 12,
+      "testPF": 1.561291583667248,
+      "testAvgPct": 1.2672305987474095,
+      "testBars": 396
+     },
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 29,
+      "testPF": 1.556837351675892,
+      "testAvgPct": 0.10933562838706751,
+      "testBars": 2622
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 5,
+      "testPF": 0.29532607402540284,
+      "testAvgPct": -0.461834195287372,
+      "testBars": 656
+     },
+     {
+      "key": "META@1d",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -1.8045043086259447,
+      "testBars": 411
+     },
+     {
+      "key": "ORCL@1h",
+      "testTrades": 21,
+      "testPF": 0.28513680008716813,
+      "testAvgPct": -0.4156270109420033,
+      "testBars": 1485
+     },
+     {
+      "key": "AAPL@1h",
+      "testTrades": 48,
+      "testPF": 0.31437715727823745,
+      "testAvgPct": -0.13204845214477015,
+      "testBars": 2622
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 19,
+      "testPF": 0.7980417494452369,
+      "testAvgPct": -0.12354183083335661,
+      "testBars": 2333
+     },
+     {
+      "key": "CRCL@4h",
+      "testTrades": 7,
+      "testPF": 0.5995449094758881,
+      "testAvgPct": -0.8424104140796361,
+      "testBars": 584
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 17,
+      "testPF": 0.4393775752271844,
+      "testAvgPct": -0.19215606809784222,
+      "testBars": 1362
+     },
+     {
+      "key": "SOXL@1h",
+      "testTrades": 6,
+      "testPF": 1.083490103657767,
+      "testAvgPct": 0.10769157253274275,
+      "testBars": 1132
+     },
+     {
+      "key": "NATGAS@4h",
+      "testTrades": 13,
+      "testPF": 0.7219346526826276,
+      "testAvgPct": -0.1953555054350071,
+      "testBars": 447
+     },
+     {
+      "key": "OPENAI@1h",
+      "testTrades": 8,
+      "testPF": 0.17187460666410512,
+      "testAvgPct": -0.5427884978481983,
+      "testBars": 1262
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_short",
+    "name": "20-bar breakdown (short)",
+    "side": "short",
+    "pickPass": 15,
+    "pickTested": 222,
+    "pickMedianPF": 1.9240362388776204,
+    "testTrades": 219,
+    "testPF": 1.1808686396131416,
+    "testAvgPct": 0.14021155263924362,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "XAU@1h",
+      "testTrades": 38,
+      "testPF": 1.844582450093706,
+      "testAvgPct": 0.2151284814169534,
+      "testBars": 2628
+     },
+     {
+      "key": "NVDA@30m",
+      "testTrades": 13,
+      "testPF": 2.7741762555127427,
+      "testAvgPct": 1.028423841347416,
+      "testBars": 865
+     },
+     {
+      "key": "AMD@30m",
+      "testTrades": 15,
+      "testPF": 1.1274197492422058,
+      "testAvgPct": 0.11594007236819075,
+      "testBars": 865
+     },
+     {
+      "key": "MU@30m",
+      "testTrades": 8,
+      "testPF": 6.5375039290897305,
+      "testAvgPct": 2.129889158434325,
+      "testBars": 865
+     },
+     {
+      "key": "META@30m",
+      "testTrades": 9,
+      "testPF": 2.114671045502234,
+      "testAvgPct": 0.25658083999737025,
+      "testBars": 865
+     },
+     {
+      "key": "MRNA@1d",
+      "testTrades": 4,
+      "testPF": 0.16468408015161506,
+      "testAvgPct": -1.9389561928622032,
+      "testBars": 386
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 21,
+      "testPF": 0.7726765565822257,
+      "testAvgPct": -0.09431321608762319,
+      "testBars": 1728
+     },
+     {
+      "key": "NBIS@5m",
+      "testTrades": 25,
+      "testPF": 0.36989721162055866,
+      "testAvgPct": -0.35277639906661784,
+      "testBars": 1728
+     },
+     {
+      "key": "ORCL@4h",
+      "testTrades": 9,
+      "testPF": 0.5563433753729046,
+      "testAvgPct": -0.7524601342676375,
+      "testBars": 372
+     },
+     {
+      "key": "AAPL@4h",
+      "testTrades": 5,
+      "testPF": 0.33958717894854,
+      "testAvgPct": -0.4601501248613514,
+      "testBars": 656
+     },
+     {
+      "key": "COIN@4h",
+      "testTrades": 13,
+      "testPF": 0.7167568816772752,
+      "testAvgPct": -0.4893886231947182,
+      "testBars": 657
+     },
+     {
+      "key": "SKHY@1h",
+      "testTrades": 13,
+      "testPF": 1.8951600436659006,
+      "testAvgPct": 0.9884536880658363,
+      "testBars": 980
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 28,
+      "testPF": 0.7961408708394688,
+      "testAvgPct": -0.16562231223328847,
+      "testBars": 2031
+     },
+     {
+      "key": "ZHIPU@4h",
+      "testTrades": 9,
+      "testPF": 2.374087269770443,
+      "testAvgPct": 2.208751234348417,
+      "testBars": 282
+     },
+     {
+      "key": "UNITREE@1h",
+      "testTrades": 9,
+      "testPF": 0.3293647108478427,
+      "testAvgPct": -0.6695535786220488,
+      "testBars": 823
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_adx",
+    "name": "Short-term dip in an uptrend, no strong trend",
+    "side": "long",
+    "pickPass": 15,
+    "pickTested": 222,
+    "pickMedianPF": 1.5791052252956361,
+    "testTrades": 158,
+    "testPF": 0.9766185820940162,
+    "testAvgPct": -0.015198295829928736,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.98).",
+    "charts": [
+     {
+      "key": "NVDA@1d",
+      "testTrades": 11,
+      "testPF": 0.7344053751132703,
+      "testAvgPct": -0.3361660145443482,
+      "testBars": 411
+     },
+     {
+      "key": "AMD@1d",
+      "testTrades": 9,
+      "testPF": 1.2862457567296885,
+      "testAvgPct": 0.511117212786623,
+      "testBars": 403
+     },
+     {
+      "key": "MU@30m",
+      "testTrades": 4,
+      "testPF": 0.18838167459877958,
+      "testAvgPct": -0.805068822058862,
+      "testBars": 865
+     },
+     {
+      "key": "MU@1d",
+      "testTrades": 8,
+      "testPF": 1.5855353109520758,
+      "testAvgPct": 1.4197242850082898,
+      "testBars": 396
+     },
+     {
+      "key": "MSTR@1d",
+      "testTrades": 0,
+      "testPF": 0,
+      "testAvgPct": 0,
+      "testBars": 407
+     },
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 21,
+      "testPF": 1.0534263028434507,
+      "testAvgPct": 0.01311057733733593,
+      "testBars": 2622
+     },
+     {
+      "key": "HOOD@4h",
+      "testTrades": 11,
+      "testPF": 1.608635372628758,
+      "testAvgPct": 0.37358066298041254,
+      "testBars": 657
+     },
+     {
+      "key": "AAPL@1h",
+      "testTrades": 29,
+      "testPF": 0.23981613775118468,
+      "testAvgPct": -0.12093300574554527,
+      "testBars": 2622
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 13,
+      "testPF": 0.4352522449821578,
+      "testAvgPct": -0.36463371559783353,
+      "testBars": 2333
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 10,
+      "testPF": 0.4333304309804299,
+      "testAvgPct": -0.21090933620800664,
+      "testBars": 1362
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 13,
+      "testPF": 0.6041351010466758,
+      "testAvgPct": -0.13995538358938445,
+      "testBars": 1291
+     },
+     {
+      "key": "SKHYNIXUSD@4h",
+      "testTrades": 5,
+      "testPF": 0.4422036700545244,
+      "testAvgPct": -0.4676027592507063,
+      "testBars": 399
+     },
+     {
+      "key": "SOXL@1h",
+      "testTrades": 3,
+      "testPF": 1.895351253879847,
+      "testAvgPct": 0.9203081260804598,
+      "testBars": 1132
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 19,
+      "testPF": 0.9710399442072725,
+      "testAvgPct": -0.0074815360695165934,
+      "testBars": 2031
+     },
+     {
+      "key": "OPENAI@1h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -1.9653702417261525,
+      "testBars": 1262
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend",
+    "name": "20-bar breakout",
+    "side": "long",
+    "pickPass": 14,
+    "pickTested": 222,
+    "pickMedianPF": 1.675243722969638,
+    "testTrades": 165,
+    "testPF": 0.8218537805512885,
+    "testAvgPct": -0.20662064373450775,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.82).",
+    "charts": [
+     {
+      "key": "MRVL@1d",
+      "testTrades": 14,
+      "testPF": 1.2523541316673774,
+      "testAvgPct": 0.553391593745402,
+      "testBars": 395
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 20,
+      "testPF": 1.7299570651013056,
+      "testAvgPct": 1.0769751178806397,
+      "testBars": 1655
+     },
+     {
+      "key": "IREN@4h",
+      "testTrades": 5,
+      "testPF": 0.5615448807492078,
+      "testAvgPct": -1.4034072200219534,
+      "testBars": 467
+     },
+     {
+      "key": "PLTR@4h",
+      "testTrades": 8,
+      "testPF": 0.2815719932118,
+      "testAvgPct": -1.1167144128280764,
+      "testBars": 657
+     },
+     {
+      "key": "PLTR@1d",
+      "testTrades": 7,
+      "testPF": 0.5822264099000392,
+      "testAvgPct": -1.4083076892273678,
+      "testBars": 411
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 13,
+      "testPF": 0.3266944869885171,
+      "testAvgPct": -0.4570955107343125,
+      "testBars": 656
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 8,
+      "testPF": 0.01433219464909768,
+      "testAvgPct": -0.6530291629300606,
+      "testBars": 656
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 9,
+      "testPF": 1.5013606676962936,
+      "testAvgPct": 0.35437603742030094,
+      "testBars": 656
+     },
+     {
+      "key": "META@1d",
+      "testTrades": 7,
+      "testPF": 1.2555282413823645,
+      "testAvgPct": 0.2783048458109567,
+      "testBars": 411
+     },
+     {
+      "key": "AMZN@4h",
+      "testTrades": 11,
+      "testPF": 0.24496632315633032,
+      "testAvgPct": -0.5192579127060383,
+      "testBars": 656
+     },
+     {
+      "key": "DELL@4h",
+      "testTrades": 1,
+      "testPF": 0,
+      "testAvgPct": -2.0919261998470233,
+      "testBars": 323
+     },
+     {
+      "key": "BRENTOIL@4h",
+      "testTrades": 6,
+      "testPF": 0.5832169753309604,
+      "testAvgPct": -0.4153708998615922,
+      "testBars": 447
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 29,
+      "testPF": 0.4290392002285776,
+      "testAvgPct": -0.4001674442287283,
+      "testBars": 2031
+     },
+     {
+      "key": "XAG@1h",
+      "testTrades": 27,
+      "testPF": 0.3596629173744996,
+      "testAvgPct": -0.35706238711011085,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short",
+    "name": "MACD momentum cross down (short)",
+    "side": "short",
+    "pickPass": 14,
+    "pickTested": 222,
+    "pickMedianPF": 1.6427813853752098,
+    "testTrades": 153,
+    "testPF": 1.8766584868242662,
+    "testAvgPct": 0.6493077231454945,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "MU@30m",
+      "testTrades": 11,
+      "testPF": 0.6589620993557143,
+      "testAvgPct": -0.3437078993314318,
+      "testBars": 865
+     },
+     {
+      "key": "MSTR@4h",
+      "testTrades": 10,
+      "testPF": 1.0113835853640456,
+      "testAvgPct": 0.023919002353547825,
+      "testBars": 584
+     },
+     {
+      "key": "CRWV@4h",
+      "testTrades": 7,
+      "testPF": 1.5260700879551554,
+      "testAvgPct": 1.1513579592610446,
+      "testBars": 369
+     },
+     {
+      "key": "TSLA@4h",
+      "testTrades": 2,
+      "testPF": 16.75472603861475,
+      "testAvgPct": 3.0370351764035686,
+      "testBars": 657
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 8,
+      "testPF": 2.490402101450049,
+      "testAvgPct": 0.5857157212489664,
+      "testBars": 656
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 11,
+      "testPF": 1.55267721796204,
+      "testAvgPct": 0.32355892190057417,
+      "testBars": 656
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 22,
+      "testPF": 0.8837460308554176,
+      "testAvgPct": -0.0370178099913169,
+      "testBars": 1728
+     },
+     {
+      "key": "COIN@4h",
+      "testTrades": 14,
+      "testPF": 1.470978144863146,
+      "testAvgPct": 0.48262235523182584,
+      "testBars": 657
+     },
+     {
+      "key": "SKHYNIXUSD@4h",
+      "testTrades": 4,
+      "testPF": 5.344032161709264,
+      "testAvgPct": 3.6038827114696854,
+      "testBars": 399
+     },
+     {
+      "key": "EWY@4h",
+      "testTrades": 9,
+      "testPF": 1.568938852198642,
+      "testAvgPct": 0.7580401818017836,
+      "testBars": 379
+     },
+     {
+      "key": "XAG@1h",
+      "testTrades": 22,
+      "testPF": 1.4407649917145027,
+      "testAvgPct": 0.1750908334929446,
+      "testBars": 2628
+     },
+     {
+      "key": "XAG@4h",
+      "testTrades": 7,
+      "testPF": 16.512078746089447,
+      "testAvgPct": 2.726935749230973,
+      "testBars": 657
+     },
+     {
+      "key": "XPD@4h",
+      "testTrades": 14,
+      "testPF": 2.2380527647775397,
+      "testAvgPct": 0.6356926298355718,
+      "testBars": 508
+     },
+     {
+      "key": "ZHIPU@1h",
+      "testTrades": 12,
+      "testPF": 11.163067130276328,
+      "testAvgPct": 1.790564124762285,
+      "testBars": 1129
+     }
+    ]
+   },
+   {
+    "id": "macd_cross",
+    "name": "MACD momentum cross",
+    "side": "long",
+    "pickPass": 13,
+    "pickTested": 222,
+    "pickMedianPF": 2.0183353688321897,
+    "testTrades": 121,
+    "testPF": 1.3939556392381434,
+    "testAvgPct": 0.26129401773927396,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "AMD@1h",
+      "testTrades": 23,
+      "testPF": 3.0586478430666033,
+      "testAvgPct": 0.7662773543051568,
+      "testBars": 2095
+     },
+     {
+      "key": "INTC@4h",
+      "testTrades": 4,
+      "testPF": 1.6209344342161405,
+      "testAvgPct": 0.868088968929122,
+      "testBars": 524
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 5,
+      "testPF": 1.0797980909614948,
+      "testAvgPct": 0.04105363528262558,
+      "testBars": 1233
+     },
+     {
+      "key": "IREN@4h",
+      "testTrades": 4,
+      "testPF": 2.873299266989189,
+      "testAvgPct": 2.0071460724215138,
+      "testBars": 467
+     },
+     {
+      "key": "GOOGL@1d",
+      "testTrades": 3,
+      "testPF": 0.00520411724291575,
+      "testAvgPct": -1.1248666780398555,
+      "testBars": 411
+     },
+     {
+      "key": "MRNA@1h",
+      "testTrades": 10,
+      "testPF": 0.6308960759400842,
+      "testAvgPct": -0.3541220584544643,
+      "testBars": 720
+     },
+     {
+      "key": "MU@5m",
+      "testTrades": 15,
+      "testPF": 0.3446499245969628,
+      "testAvgPct": -0.25483004376132673,
+      "testBars": 1728
+     },
+     {
+      "key": "SOXL@1h",
+      "testTrades": 6,
+      "testPF": 6.26027045367172,
+      "testAvgPct": 4.071785757477216,
+      "testBars": 1132
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 24,
+      "testPF": 0.8503235086460905,
+      "testAvgPct": -0.0715185744704756,
+      "testBars": 2031
+     },
+     {
+      "key": "WTI@4h",
+      "testTrades": 11,
+      "testPF": 0.6776382971432857,
+      "testAvgPct": -0.3119487303999129,
+      "testBars": 508
+     },
+     {
+      "key": "XAG@4h",
+      "testTrades": 6,
+      "testPF": 0,
+      "testAvgPct": -1.8150871570455138,
+      "testBars": 657
+     },
+     {
+      "key": "XCU@4h",
+      "testTrades": 5,
+      "testPF": 0.37926643191184867,
+      "testAvgPct": -0.15573041018075212,
+      "testBars": 524
+     },
+     {
+      "key": "MINIMAX@1h",
+      "testTrades": 5,
+      "testPF": 4.554962201267239,
+      "testAvgPct": 1.082120440141202,
+      "testBars": 1129
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback",
+    "name": "Pullback to the 20-bar average",
+    "side": "long",
+    "pickPass": 13,
+    "pickTested": 222,
+    "pickMedianPF": 1.5349612884868207,
+    "testTrades": 184,
+    "testPF": 0.62754380852697,
+    "testAvgPct": -0.26317129054936067,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.63).",
+    "charts": [
+     {
+      "key": "NVDA@4h",
+      "testTrades": 9,
+      "testPF": 1.152723225080396,
+      "testAvgPct": 0.07186802620108097,
+      "testBars": 657
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 11,
+      "testPF": 0.6832223651577709,
+      "testAvgPct": -0.51995774867467,
+      "testBars": 1233
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 10,
+      "testPF": 0.5680879265795428,
+      "testAvgPct": -0.22386609087083534,
+      "testBars": 656
+     },
+     {
+      "key": "GOOGL@1d",
+      "testTrades": 10,
+      "testPF": 2.8779844294368404,
+      "testAvgPct": 0.5650736603574401,
+      "testBars": 411
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 14,
+      "testPF": 0.49832253561924555,
+      "testAvgPct": -0.38548919506008833,
+      "testBars": 656
+     },
+     {
+      "key": "MRNA@1h",
+      "testTrades": 21,
+      "testPF": 0.39232819659843693,
+      "testAvgPct": -0.552249002721994,
+      "testBars": 720
+     },
+     {
+      "key": "AAPL@4h",
+      "testTrades": 24,
+      "testPF": 0.7702665336216458,
+      "testAvgPct": -0.10462778993742401,
+      "testBars": 656
+     },
+     {
+      "key": "BMNR@4h",
+      "testTrades": 4,
+      "testPF": 0.10334631460165498,
+      "testAvgPct": -1.9904865625509662,
+      "testBars": 584
+     },
+     {
+      "key": "DELL@4h",
+      "testTrades": 3,
+      "testPF": 0.08877674433408576,
+      "testAvgPct": -1.175702451338047,
+      "testBars": 323
+     },
+     {
+      "key": "BRENTOIL@4h",
+      "testTrades": 14,
+      "testPF": 0.47174238338976904,
+      "testAvgPct": -0.4943367910402032,
+      "testBars": 447
+     },
+     {
+      "key": "WTI@4h",
+      "testTrades": 9,
+      "testPF": 3.5071860898795575,
+      "testAvgPct": 0.9245675070802256,
+      "testBars": 508
+     },
+     {
+      "key": "XAG@1h",
+      "testTrades": 50,
+      "testPF": 0.3827629608177771,
+      "testAvgPct": -0.3251606437891815,
+      "testBars": 2628
+     },
+     {
+      "key": "XPT@4h",
+      "testTrades": 5,
+      "testPF": 0.7193135707383531,
+      "testAvgPct": -0.18220642106351076,
+      "testBars": 508
+     }
+    ]
+   },
+   {
+    "id": "supertrend",
+    "name": "Supertrend turns up",
+    "side": "long",
+    "pickPass": 12,
+    "pickTested": 222,
+    "pickMedianPF": 1.925745670847236,
+    "testTrades": 115,
+    "testPF": 0.5681915712343864,
+    "testAvgPct": -0.3188601430545999,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.57).",
+    "charts": [
+     {
+      "key": "NVDA@4h",
+      "testTrades": 5,
+      "testPF": 8.224041381043387,
+      "testAvgPct": 0.560756048051746,
+      "testBars": 657
+     },
+     {
+      "key": "AMD@1h",
+      "testTrades": 14,
+      "testPF": 2.098971076886114,
+      "testAvgPct": 0.5310345099628135,
+      "testBars": 2095
+     },
+     {
+      "key": "ASML@4h",
+      "testTrades": 2,
+      "testPF": 0.36828762502814344,
+      "testAvgPct": -0.417977185141608,
+      "testBars": 484
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 4.371292691669498,
+      "testBars": 1233
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 10,
+      "testPF": 0.30886744017595535,
+      "testAvgPct": -2.0911880997946977,
+      "testBars": 1655
+     },
+     {
+      "key": "TSLA@15m",
+      "testTrades": 14,
+      "testPF": 0.14059988668979595,
+      "testAvgPct": -0.2987233501709357,
+      "testBars": 1728
+     },
+     {
+      "key": "TSLA@30m",
+      "testTrades": 7,
+      "testPF": 1.8651627552289096,
+      "testAvgPct": 0.3700785900766114,
+      "testBars": 865
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 8,
+      "testPF": 0.03989208387920963,
+      "testAvgPct": -0.9674730226651452,
+      "testBars": 656
+     },
+     {
+      "key": "AMZN@30m",
+      "testTrades": 5,
+      "testPF": 0.3281104994816547,
+      "testAvgPct": -0.23469128656690957,
+      "testBars": 865
+     },
+     {
+      "key": "BRENTOIL@1h",
+      "testTrades": 15,
+      "testPF": 0.08567645435954101,
+      "testAvgPct": -0.4991716762707545,
+      "testBars": 1788
+     },
+     {
+      "key": "WTI@1h",
+      "testTrades": 16,
+      "testPF": 0.5795780751364507,
+      "testAvgPct": -0.2345249219749328,
+      "testBars": 2031
+     },
+     {
+      "key": "XAG@1h",
+      "testTrades": 18,
+      "testPF": 0.31718729020231184,
+      "testAvgPct": -0.432546992932425,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short",
+    "name": "Upper Bollinger band fade (short)",
+    "side": "short",
+    "pickPass": 12,
+    "pickTested": 222,
+    "pickMedianPF": 1.6109941230157587,
+    "testTrades": 129,
+    "testPF": 2.88345486569932,
+    "testAvgPct": 0.6898262749836568,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "IREN@15m",
+      "testTrades": 1,
+      "testPF": 0,
+      "testAvgPct": -0.5261597680916497,
+      "testBars": 642
+     },
+     {
+      "key": "TSLA@30m",
+      "testTrades": 3,
+      "testPF": 30.602995229692695,
+      "testAvgPct": 0.806937995870573,
+      "testBars": 865
+     },
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 27,
+      "testPF": 1.105571195146248,
+      "testAvgPct": 0.029709475471173908,
+      "testBars": 2622
+     },
+     {
+      "key": "META@1h",
+      "testTrades": 24,
+      "testPF": 0.8857380569737799,
+      "testAvgPct": -0.04669763542142211,
+      "testBars": 2622
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 9,
+      "testPF": 2.387714392553087,
+      "testAvgPct": 0.8690693168228251,
+      "testBars": 656
+     },
+     {
+      "key": "IREN@5m",
+      "testTrades": 10,
+      "testPF": 1.1096179962531583,
+      "testAvgPct": 0.03255839592745405,
+      "testBars": 1728
+     },
+     {
+      "key": "HOOD@4h",
+      "testTrades": 8,
+      "testPF": 30.78495162201672,
+      "testAvgPct": 3.0520900482160025,
+      "testBars": 657
+     },
+     {
+      "key": "COIN@4h",
+      "testTrades": 5,
+      "testPF": 99,
+      "testAvgPct": 3.674850315558195,
+      "testBars": 657
+     },
+     {
+      "key": "CRCL@4h",
+      "testTrades": 7,
+      "testPF": 25.708650787916053,
+      "testAvgPct": 4.157338014338438,
+      "testBars": 584
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 9,
+      "testPF": 2.2052749789476414,
+      "testAvgPct": 0.36401245554569367,
+      "testBars": 1362
+     },
+     {
+      "key": "SPCX@1h",
+      "testTrades": 12,
+      "testPF": 0.8282395823869867,
+      "testAvgPct": -0.08661411104392265,
+      "testBars": 1212
+     },
+     {
+      "key": "MINIMAX@1h",
+      "testTrades": 14,
+      "testPF": 1.5208780262243964,
+      "testAvgPct": 0.3668024302722746,
+      "testBars": 1129
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short_adx",
+    "name": "Short-term spike in a downtrend (short), no strong trend",
+    "side": "short",
+    "pickPass": 11,
+    "pickTested": 222,
+    "pickMedianPF": 1.9875087564242655,
+    "testTrades": 121,
+    "testPF": 1.060147662393084,
+    "testAvgPct": 0.030986113367676957,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "AMD@1d",
+      "testTrades": 0,
+      "testPF": 0,
+      "testAvgPct": 0,
+      "testBars": 403
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 8,
+      "testPF": 0.5538769476100968,
+      "testAvgPct": -0.2209689738023244,
+      "testBars": 865
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 20,
+      "testPF": 0.7732877502035387,
+      "testAvgPct": -0.2900912184125944,
+      "testBars": 1655
+     },
+     {
+      "key": "TSLA@1h",
+      "testTrades": 16,
+      "testPF": 1.1632863286549346,
+      "testAvgPct": 0.026913517599338098,
+      "testBars": 2628
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 8,
+      "testPF": 2.088725427388157,
+      "testAvgPct": 0.35136734715337725,
+      "testBars": 656
+     },
+     {
+      "key": "MRNA@1d",
+      "testTrades": 5,
+      "testPF": 3.4641020858307567,
+      "testAvgPct": 2.6754251940170315,
+      "testBars": 386
+     },
+     {
+      "key": "MU@5m",
+      "testTrades": 22,
+      "testPF": 0.8749144062424177,
+      "testAvgPct": -0.03015310511552752,
+      "testBars": 1728
+     },
+     {
+      "key": "AAPL@4h",
+      "testTrades": 4,
+      "testPF": 1.9975222895103073,
+      "testAvgPct": 0.08059077299740758,
+      "testBars": 656
+     },
+     {
+      "key": "CRCL@4h",
+      "testTrades": 7,
+      "testPF": 0.7694836458010128,
+      "testAvgPct": -0.22308001089002996,
+      "testBars": 584
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 17,
+      "testPF": 0.693490794007809,
+      "testAvgPct": -0.05841664457133513,
+      "testBars": 1362
+     },
+     {
+      "key": "SPCX@1h",
+      "testTrades": 14,
+      "testPF": 0.6297425093706871,
+      "testAvgPct": -0.17172406416052238,
+      "testBars": 1212
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_adx",
+    "name": "20-bar breakout, strong trend only",
+    "side": "long",
+    "pickPass": 11,
+    "pickTested": 222,
+    "pickMedianPF": 1.9098454662108675,
+    "testTrades": 76,
+    "testPF": 1.436567820280795,
+    "testAvgPct": 0.4221794970423945,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "AMD@1d",
+      "testTrades": 7,
+      "testPF": 5.008371165999783,
+      "testAvgPct": 3.0770590790037384,
+      "testBars": 403
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 12,
+      "testPF": 1.8995732860109156,
+      "testAvgPct": 1.5565259025414147,
+      "testBars": 1655
+     },
+     {
+      "key": "IREN@4h",
+      "testTrades": 3,
+      "testPF": 1.3562532588542238,
+      "testAvgPct": 0.7071170305791915,
+      "testBars": 467
+     },
+     {
+      "key": "TSLA@15m",
+      "testTrades": 12,
+      "testPF": 0.17625889860602584,
+      "testAvgPct": -0.3355876967656848,
+      "testBars": 1728
+     },
+     {
+      "key": "MSFT@4h",
+      "testTrades": 7,
+      "testPF": 0.5792711388826898,
+      "testAvgPct": -0.30710269949666563,
+      "testBars": 656
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -1.1761694934205522,
+      "testBars": 656
+     },
+     {
+      "key": "META@1d",
+      "testTrades": 4,
+      "testPF": 3.437150573831016,
+      "testAvgPct": 1.481521924408502,
+      "testBars": 411
+     },
+     {
+      "key": "AMZN@4h",
+      "testTrades": 8,
+      "testPF": 0.2573360583854613,
+      "testAvgPct": -0.6685248816288492,
+      "testBars": 656
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 9,
+      "testPF": 1.096794746335138,
+      "testAvgPct": 0.09803792969085998,
+      "testBars": 1594
+     },
+     {
+      "key": "SAMSUNGUSD@1h",
+      "testTrades": 9,
+      "testPF": 1.152573606462413,
+      "testAvgPct": 0.10472144148361005,
+      "testBars": 1593
+     },
+     {
+      "key": "BRENTOIL@4h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -1.4754384736428265,
+      "testBars": 447
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_adx",
+    "name": "Pullback to the 20-bar average, strong trend only",
+    "side": "long",
+    "pickPass": 11,
+    "pickTested": 222,
+    "pickMedianPF": 1.510109934634525,
+    "testTrades": 108,
+    "testPF": 0.6033217577421291,
+    "testAvgPct": -0.35994384372537247,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.60).",
+    "charts": [
+     {
+      "key": "NVDA@4h",
+      "testTrades": 5,
+      "testPF": 3.388540675414038,
+      "testAvgPct": 0.6270759334177564,
+      "testBars": 657
+     },
+     {
+      "key": "MU@1h",
+      "testTrades": 5,
+      "testPF": 0,
+      "testAvgPct": -2.172918566873264,
+      "testBars": 1491
+     },
+     {
+      "key": "MRVL@1h",
+      "testTrades": 6,
+      "testPF": 0.46887187741499975,
+      "testAvgPct": -0.5153388696133626,
+      "testBars": 1427
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 7,
+      "testPF": 0.10234863370755018,
+      "testAvgPct": -1.5891973215372492,
+      "testBars": 1233
+     },
+     {
+      "key": "CRWV@1h",
+      "testTrades": 10,
+      "testPF": 0.15037789553112227,
+      "testAvgPct": -1.3961271124249912,
+      "testBars": 1477
+     },
+     {
+      "key": "PLTR@4h",
+      "testTrades": 10,
+      "testPF": 0.27647005063123553,
+      "testAvgPct": -0.7276591289758848,
+      "testBars": 657
+     },
+     {
+      "key": "TSLA@1h",
+      "testTrades": 28,
+      "testPF": 1.011357489541644,
+      "testAvgPct": 0.005729896417614876,
+      "testBars": 2628
+     },
+     {
+      "key": "MSFT@30m",
+      "testTrades": 9,
+      "testPF": 0.04570686584303697,
+      "testAvgPct": -0.38341848261577954,
+      "testBars": 865
+     },
+     {
+      "key": "META@4h",
+      "testTrades": 8,
+      "testPF": 0.9036969262749325,
+      "testAvgPct": -0.05120633918381881,
+      "testBars": 656
+     },
+     {
+      "key": "SKHY@1h",
+      "testTrades": 9,
+      "testPF": 1.56369217679058,
+      "testAvgPct": 0.477750825984976,
+      "testBars": 980
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 11,
+      "testPF": 1.3227625498055593,
+      "testAvgPct": 0.337252495531051,
+      "testBars": 1594
+     }
+    ]
+   },
+   {
+    "id": "ma_cross",
+    "name": "20/50 average crossover",
+    "side": "long",
+    "pickPass": 10,
+    "pickTested": 222,
+    "pickMedianPF": 1.917438340804374,
+    "testTrades": 124,
+    "testPF": 0.9384542754538454,
+    "testAvgPct": -0.05969812275830767,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.94).",
+    "charts": [
+     {
+      "key": "INTC@30m",
+      "testTrades": 5,
+      "testPF": 3.822791792079502,
+      "testAvgPct": 1.0035954464581143,
+      "testBars": 865
+     },
+     {
+      "key": "INTC@1h",
+      "testTrades": 14,
+      "testPF": 0.5575293117394834,
+      "testAvgPct": -0.36043428558885104,
+      "testBars": 2095
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 14,
+      "testPF": 0.5055413663714415,
+      "testAvgPct": -0.5993431616269541,
+      "testBars": 1233
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 15,
+      "testPF": 1.3823973016173055,
+      "testAvgPct": 0.7163366002297712,
+      "testBars": 1655
+     },
+     {
+      "key": "MSTR@1h",
+      "testTrades": 17,
+      "testPF": 1.5699133497372286,
+      "testAvgPct": 0.5432515407223824,
+      "testBars": 2333
+     },
+     {
+      "key": "GOOGL@30m",
+      "testTrades": 5,
+      "testPF": 0.034379552674822025,
+      "testAvgPct": -0.6507194874180203,
+      "testBars": 865
+     },
+     {
+      "key": "ORCL@1h",
+      "testTrades": 11,
+      "testPF": 0.9350877995911332,
+      "testAvgPct": -0.021402183285927225,
+      "testBars": 1485
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 22,
+      "testPF": 1.0144598313789068,
+      "testAvgPct": 0.0112330207053025,
+      "testBars": 2333
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 10,
+      "testPF": 0.05325442609270778,
+      "testAvgPct": -0.9559275873150851,
+      "testBars": 1594
+     },
+     {
+      "key": "SAMSUNGUSD@1h",
+      "testTrades": 11,
+      "testPF": 0.4704665089371809,
+      "testAvgPct": -0.5602558652870019,
+      "testBars": 1593
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short_adx",
+    "name": "Upper Bollinger band fade (short), no strong trend",
+    "side": "short",
+    "pickPass": 9,
+    "pickTested": 222,
+    "pickMedianPF": 2.2389736182950157,
+    "testTrades": 85,
+    "testPF": 1.359010827000873,
+    "testAvgPct": 0.1859814372403486,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "NVDA@30m",
+      "testTrades": 8,
+      "testPF": 10.616910362950478,
+      "testAvgPct": 1.1126262277813475,
+      "testBars": 865
+     },
+     {
+      "key": "INTC@30m",
+      "testTrades": 4,
+      "testPF": 0.04252907471479055,
+      "testAvgPct": -0.4532060572626483,
+      "testBars": 865
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 9,
+      "testPF": 0.8419156119826764,
+      "testAvgPct": -0.2694119286833878,
+      "testBars": 1655
+     },
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 17,
+      "testPF": 0.8005553281398268,
+      "testAvgPct": -0.05906590503021463,
+      "testBars": 2622
+     },
+     {
+      "key": "IREN@5m",
+      "testTrades": 8,
+      "testPF": 1.1556115469645232,
+      "testAvgPct": 0.05417104528883691,
+      "testBars": 1728
+     },
+     {
+      "key": "COIN@1h",
+      "testTrades": 21,
+      "testPF": 1.3385798251771905,
+      "testAvgPct": 0.1761270234534155,
+      "testBars": 2628
+     },
+     {
+      "key": "CRCL@4h",
+      "testTrades": 3,
+      "testPF": 11.558861817735483,
+      "testAvgPct": 4.145340377594999,
+      "testBars": 584
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 7,
+      "testPF": 1.1732661261422255,
+      "testAvgPct": 0.028149027718870068,
+      "testBars": 1362
+     },
+     {
+      "key": "SPCX@1h",
+      "testTrades": 8,
+      "testPF": 0.041863331853086015,
+      "testAvgPct": -0.5770044832194917,
+      "testBars": 1212
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short_adx",
+    "name": "20/50 average cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 9,
+    "pickTested": 222,
+    "pickMedianPF": 2.1016994598586787,
+    "testTrades": 65,
+    "testPF": 2.062422243928566,
+    "testAvgPct": 0.562216851553418,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "AMD@1h",
+      "testTrades": 10,
+      "testPF": 2.695592861162936,
+      "testAvgPct": 1.0402390049192178,
+      "testBars": 2095
+     },
+     {
+      "key": "NBIS@30m",
+      "testTrades": 3,
+      "testPF": 1.1140886234558978,
+      "testAvgPct": 0.19541217291897292,
+      "testBars": 865
+     },
+     {
+      "key": "MSFT@1h",
+      "testTrades": 11,
+      "testPF": 2.2321524001420068,
+      "testAvgPct": 0.21947177702410478,
+      "testBars": 2622
+     },
+     {
+      "key": "HOOD@1h",
+      "testTrades": 15,
+      "testPF": 0.8645723843413287,
+      "testAvgPct": -0.11110159376201682,
+      "testBars": 2628
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -0.6637571876677264,
+      "testBars": 1362
+     },
+     {
+      "key": "LITE@1h",
+      "testTrades": 6,
+      "testPF": 8.948425067706152,
+      "testAvgPct": 2.1373893379599296,
+      "testBars": 1333
+     },
+     {
+      "key": "SAMSUNGUSD@1h",
+      "testTrades": 6,
+      "testPF": 3.5117866562830145,
+      "testAvgPct": 1.6448441248680368,
+      "testBars": 1593
+     },
+     {
+      "key": "US100@1h",
+      "testTrades": 8,
+      "testPF": 4.956454658704265,
+      "testAvgPct": 0.4639374106378394,
+      "testBars": 1381
+     },
+     {
+      "key": "BRENTOIL@1h",
+      "testTrades": 4,
+      "testPF": 0.7433658313800938,
+      "testAvgPct": -0.06739563613672006,
+      "testBars": 1788
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_adx",
+    "name": "Lower Bollinger band bounce, no strong trend",
+    "side": "long",
+    "pickPass": 9,
+    "pickTested": 222,
+    "pickMedianPF": 1.645286853802723,
+    "testTrades": 80,
+    "testPF": 0.859735923963392,
+    "testAvgPct": -0.047459661230284444,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.86).",
+    "charts": [
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 12,
+      "testPF": 1.533780895829494,
+      "testAvgPct": 0.13495781783584557,
+      "testBars": 2622
+     },
+     {
+      "key": "META@1h",
+      "testTrades": 6,
+      "testPF": 0.002166966937914296,
+      "testAvgPct": -0.4985347631822674,
+      "testBars": 2622
+     },
+     {
+      "key": "AMZN@1h",
+      "testTrades": 8,
+      "testPF": 1.8760047755486213,
+      "testAvgPct": 0.2533823121813585,
+      "testBars": 2622
+     },
+     {
+      "key": "AAPL@1h",
+      "testTrades": 17,
+      "testPF": 0.41836938418681885,
+      "testAvgPct": -0.09874308932555033,
+      "testBars": 2622
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 12,
+      "testPF": 1.650025101197768,
+      "testAvgPct": 0.39470563148916177,
+      "testBars": 2333
+     },
+     {
+      "key": "STRC@1h",
+      "testTrades": 17,
+      "testPF": 0.3551613229945084,
+      "testAvgPct": -0.09616704764496734,
+      "testBars": 1822
+     },
+     {
+      "key": "SOXL@1h",
+      "testTrades": 1,
+      "testPF": 0,
+      "testAvgPct": -1.7179595532278435,
+      "testBars": 1132
+     },
+     {
+      "key": "XCU@4h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -1.3606048672668658,
+      "testBars": 524
+     },
+     {
+      "key": "XPD@1h",
+      "testTrades": 5,
+      "testPF": 0.08883811992199937,
+      "testAvgPct": -0.2871885184839463,
+      "testBars": 2031
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip",
+    "name": "Lower Bollinger band bounce",
+    "side": "long",
+    "pickPass": 9,
+    "pickTested": 222,
+    "pickMedianPF": 1.6272837798863262,
+    "testTrades": 97,
+    "testPF": 1.3132173759354135,
+    "testAvgPct": 0.1213864363587984,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "GOOGL@1h",
+      "testTrades": 16,
+      "testPF": 2.0332052891630856,
+      "testAvgPct": 0.20524177437417185,
+      "testBars": 2622
+     },
+     {
+      "key": "GOOGL@4h",
+      "testTrades": 3,
+      "testPF": 0.23497055148901963,
+      "testAvgPct": -0.8159420341957926,
+      "testBars": 656
+     },
+     {
+      "key": "AMZN@30m",
+      "testTrades": 6,
+      "testPF": 1.0282959908420657,
+      "testAvgPct": 0.01286114994808063,
+      "testBars": 865
+     },
+     {
+      "key": "HOOD@1h",
+      "testTrades": 16,
+      "testPF": 5.2082153031576714,
+      "testAvgPct": 0.8263545473019216,
+      "testBars": 2628
+     },
+     {
+      "key": "AAPL@1h",
+      "testTrades": 24,
+      "testPF": 0.49321657874778624,
+      "testAvgPct": -0.10923385099791183,
+      "testBars": 2622
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 14,
+      "testPF": 1.5188356146145872,
+      "testAvgPct": 0.3859468197078123,
+      "testBars": 2333
+     },
+     {
+      "key": "BABA@1h",
+      "testTrades": 6,
+      "testPF": 0.21501767116302675,
+      "testAvgPct": -0.27934989391839354,
+      "testBars": 1362
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 9,
+      "testPF": 0.17026022044762223,
+      "testAvgPct": -0.663004657171928,
+      "testBars": 1291
+     },
+     {
+      "key": "HYUNDAIUSD@1h",
+      "testTrades": 3,
+      "testPF": 6.800829479911146,
+      "testAvgPct": 0.8337002029943538,
+      "testBars": 1593
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short_adx",
+    "name": "MACD momentum cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 8,
+    "pickTested": 222,
+    "pickMedianPF": 1.662391896644598,
+    "testTrades": 65,
+    "testPF": 2.1694811856672396,
+    "testAvgPct": 0.5200981748201868,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "XAU@1h",
+      "testTrades": 10,
+      "testPF": 1.9229978755360821,
+      "testAvgPct": 0.25193336297796814,
+      "testBars": 2628
+     },
+     {
+      "key": "INTC@15m",
+      "testTrades": 13,
+      "testPF": 0.282305028694074,
+      "testAvgPct": -0.39120398106964654,
+      "testBars": 1728
+     },
+     {
+      "key": "GOOGL@15m",
+      "testTrades": 6,
+      "testPF": 1.9269023537339753,
+      "testAvgPct": 0.18386693265842677,
+      "testBars": 1728
+     },
+     {
+      "key": "NVDA@5m",
+      "testTrades": 4,
+      "testPF": 3.8266992153655712,
+      "testAvgPct": 0.5526173362546598,
+      "testBars": 1728
+     },
+     {
+      "key": "HOOD@4h",
+      "testTrades": 5,
+      "testPF": 1.6555045491379345,
+      "testAvgPct": 0.8392564863974021,
+      "testBars": 657
+     },
+     {
+      "key": "COIN@1h",
+      "testTrades": 12,
+      "testPF": 0.535614341099125,
+      "testAvgPct": -0.2933343296993165,
+      "testBars": 2628
+     },
+     {
+      "key": "XAG@4h",
+      "testTrades": 4,
+      "testPF": 15.16723977651549,
+      "testAvgPct": 3.625463142120493,
+      "testBars": 657
+     },
+     {
+      "key": "ZHIPU@1h",
+      "testTrades": 11,
+      "testPF": 9.457522802348567,
+      "testAvgPct": 1.6255368638537708,
+      "testBars": 1129
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_adx",
+    "name": "MACD momentum cross, strong trend only",
+    "side": "long",
+    "pickPass": 8,
+    "pickTested": 222,
+    "pickMedianPF": 1.5781650199155992,
+    "testTrades": 36,
+    "testPF": 1.738186375096574,
+    "testAvgPct": 0.2763749450212925,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "XAU@1h",
+      "testTrades": 9,
+      "testPF": 0.6959757743753685,
+      "testAvgPct": -0.07505722031374185,
+      "testBars": 2628
+     },
+     {
+      "key": "NBIS@1h",
+      "testTrades": 1,
+      "testPF": 0,
+      "testAvgPct": -0.8736701817147384,
+      "testBars": 1233
+     },
+     {
+      "key": "AMZN@15m",
+      "testTrades": 5,
+      "testPF": 0,
+      "testAvgPct": -0.29810106413486326,
+      "testBars": 1728
+     },
+     {
+      "key": "MU@5m",
+      "testTrades": 5,
+      "testPF": 0,
+      "testAvgPct": -0.37467630814677594,
+      "testBars": 1728
+     },
+     {
+      "key": "LITE@1h",
+      "testTrades": 6,
+      "testPF": 0.13828903573238044,
+      "testAvgPct": -0.5366618981608661,
+      "testBars": 1333
+     },
+     {
+      "key": "SKHYNIXUSD@1h",
+      "testTrades": 4,
+      "testPF": 9.347683363649848,
+      "testAvgPct": 2.8681106308882836,
+      "testBars": 1594
+     },
+     {
+      "key": "OPENAI@1h",
+      "testTrades": 3,
+      "testPF": 1.86338701539441,
+      "testAvgPct": 0.3195017870186567,
+      "testBars": 1262
+     },
+     {
+      "key": "MINIMAX@1h",
+      "testTrades": 3,
+      "testPF": 8.085588153130212,
+      "testAvgPct": 1.8838645170230777,
+      "testBars": 1129
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short_adx",
+    "name": "Supertrend turns down (short), strong trend only",
+    "side": "short",
+    "pickPass": 5,
+    "pickTested": 222,
+    "pickMedianPF": 2.8426635645241225,
+    "testTrades": 31,
+    "testPF": 1.780073377762884,
+    "testAvgPct": 0.6616401273322585,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "AVGO@1h",
+      "testTrades": 5,
+      "testPF": 0.35934396483960274,
+      "testAvgPct": -1.1691439785856281,
+      "testBars": 1614
+     },
+     {
+      "key": "CRWV@30m",
+      "testTrades": 4,
+      "testPF": 5.501058408453281,
+      "testAvgPct": 1.8238574510913823,
+      "testBars": 865
+     },
+     {
+      "key": "TSLA@1h",
+      "testTrades": 7,
+      "testPF": 6.121381952743739,
+      "testAvgPct": 0.8428087157203361,
+      "testBars": 2628
+     },
+     {
+      "key": "ORCL@1h",
+      "testTrades": 7,
+      "testPF": 1.1501483453215149,
+      "testAvgPct": 0.1596468945457024,
+      "testBars": 1485
+     },
+     {
+      "key": "CBRS@1h",
+      "testTrades": 8,
+      "testPF": 2.732125123710164,
+      "testAvgPct": 1.5054930955000445,
+      "testBars": 1419
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_adx",
+    "name": "20/50 average crossover, strong trend only",
+    "side": "long",
+    "pickPass": 4,
+    "pickTested": 222,
+    "pickMedianPF": 2.0166252967237774,
+    "testTrades": 25,
+    "testPF": 0.4005075263527875,
+    "testAvgPct": -0.6042375462827403,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.40).",
+    "charts": [
+     {
+      "key": "NBIS@1h",
+      "testTrades": 6,
+      "testPF": 0.11000205460904448,
+      "testAvgPct": -1.226843039417102,
+      "testBars": 1233
+     },
+     {
+      "key": "CRCL@1h",
+      "testTrades": 8,
+      "testPF": 0.738863337472521,
+      "testAvgPct": -0.2208816237742155,
+      "testBars": 2333
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 7,
+      "testPF": 0.9032018535217261,
+      "testAvgPct": -0.06149333412730039,
+      "testBars": 1291
+     },
+     {
+      "key": "LITE@1h",
+      "testTrades": 4,
+      "testPF": 0.02904471572775351,
+      "testAvgPct": -1.3868435228702671,
+      "testBars": 1333
+     }
+    ]
+   },
+   {
+    "id": "supertrend_adx",
+    "name": "Supertrend turns up, strong trend only",
+    "side": "long",
+    "pickPass": 4,
+    "pickTested": 222,
+    "pickMedianPF": 1.9479915273300779,
+    "testTrades": 20,
+    "testPF": 0.8201129430218761,
+    "testAvgPct": -0.12280836734892575,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.82).",
+    "charts": [
+     {
+      "key": "NBIS@1h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 4.371292691669498,
+      "testBars": 1233
+     },
+     {
+      "key": "IREN@1h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -3.0640286344619003,
+      "testBars": 1655
+     },
+     {
+      "key": "META@1h",
+      "testTrades": 11,
+      "testPF": 1.98821612188885,
+      "testAvgPct": 0.29551091748448594,
+      "testBars": 2622
+     },
+     {
+      "key": "DELL@1h",
+      "testTrades": 6,
+      "testPF": 0.0676217177266831,
+      "testAvgPct": -0.6583371436755928,
+      "testBars": 1291
+     }
+    ]
+   },
+   {
+    "id": "squeeze_break_short",
+    "name": "Breakdown after a quiet spell (short)",
+    "side": "short",
+    "pickPass": 1,
+    "pickTested": 222,
+    "pickMedianPF": 1.6853225517562975,
+    "testTrades": 3,
+    "testPF": 4.070650669478543,
+    "testAvgPct": 4.002755567064102,
+    "chosen": false,
+    "why": "Only 3 trades in the newer data, too few to confirm.",
+    "charts": [
+     {
+      "key": "IREN@1h",
+      "testTrades": 3,
+      "testPF": 4.070650669478543,
+      "testAvgPct": 4.002755567064102,
+      "testBars": 1655
+     }
+    ]
+   },
+   {
+    "id": "squeeze_break",
+    "name": "Breakout after a quiet spell",
+    "side": "long",
+    "pickPass": 0,
+    "pickTested": 222,
+    "pickMedianPF": 0,
+    "testTrades": 0,
+    "testPF": 0,
+    "testAvgPct": 0,
+    "chosen": false,
+    "why": "Did not pass the quality test on any chart in the older data.",
+    "charts": []
+   }
+  ],
+  "charts": 222,
+  "testShare": 0.3
+ },
+ "exits": {
+  "mode": "ladder",
+  "tpR": [
+   1,
+   2,
+   3
+  ],
+  "fractions": [
+   0.3333,
+   0.3333,
+   0.3334
+  ],
+  "trailAtr": 3,
+  "slR": [
+   0.5,
+   0.75
+  ],
+  "slFractions": [
+   0.3333,
+   0.3333
+  ]
+ },
+ "hours": {
+  "total": 95,
+  "allDay": 95,
+  "marketHoursOnly": [],
+  "notTraded": [
+   "ARM",
+   "AVGO",
+   "AXTI",
+   "CIFR",
+   "CLSK",
+   "CRML",
+   "MARA",
+   "MCHP",
+   "QCOM",
+   "RIOT",
+   "VKTX",
+   "WDC"
+  ]
+ },
+ "daily": [
+  {
+   "day": "2026-11-23",
+   "equity": 250,
+   "pnl": 0,
+   "opened": 0,
+   "closed": 0,
+   "wins": 0,
+   "losses": 0
+  },
+  {
+   "day": "2026-11-24",
+   "equity": 250,
+   "pnl": -4.09,
+   "opened": 2,
+   "closed": 1,
+   "wins": 0,
+   "losses": 1
+  },
+  {
+   "day": "2026-11-25",
+   "equity": 238.47,
+   "pnl": -3.31,
+   "opened": 2,
+   "closed": 2,
+   "wins": 0,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-26",
+   "equity": 238.48,
+   "pnl": -1.5,
+   "opened": 0,
+   "closed": 1,
+   "wins": 0,
+   "losses": 1
+  },
+  {
+   "day": "2026-11-27",
+   "equity": 238.22,
+   "pnl": -2.78,
+   "opened": 2,
+   "closed": 2,
+   "wins": 0,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-28",
+   "equity": 238.22,
+   "pnl": 0,
+   "opened": 0,
+   "closed": 0,
+   "wins": 0,
+   "losses": 0
+  }
+ ],
+ "nextCheck": "2026-11-28T19:16:00.000Z",
+ "pricesAt": "2026-11-28T19:01:08.110Z",
+ "maxLeverage": 2,
+ "riskPct": 2,
+ "maxDrawdownPct": 10,
+ "peak": 250,
+ "halted": null,
+ "checked": {
+  "at": "2026-11-28T19:01:08.110Z",
+  "markets": 217,
+  "withStrategy": 10,
+  "newBars": 307,
+  "by": "PC"
+ },
+ "positions": [],
+ "pending": [],
+ "trades": [
+  {
+   "symbol": "ASML",
+   "side": "long",
+   "strategyId": "bollinger_dip",
+   "entryDate": "2026-11-24T10:00",
+   "exitDate": "2026-11-24T11:00",
+   "entry": 1381.5801999999999,
+   "exit": 1356.4422,
+   "qty": 0.030155686944558124,
+   "pnl": -0.7580536584122997,
+   "retPct": -1.8195107312626413,
+   "reason": "sl1",
+   "key": "ASML@1h",
+   "tf": "1h",
+   "explain": "Opened by Lower Bollinger band bounce. Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Bought at 1381.58, closed at 1356.44 (-1.82%)."
+  },
+  {
+   "symbol": "ASML",
+   "side": "long",
+   "strategyId": "bollinger_dip",
+   "entryDate": "2026-11-24T10:00",
+   "exitDate": "2026-11-24T11:00",
+   "entry": 1381.5801999999999,
+   "exit": 1356.4422,
+   "qty": 0.030155686944558124,
+   "pnl": -0.7580536584122997,
+   "retPct": -1.8195107312626413,
+   "reason": "sl2",
+   "key": "ASML@1h",
+   "tf": "1h",
+   "explain": "Opened by Lower Bollinger band bounce. Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Bought at 1381.58, closed at 1356.44 (-1.82%)."
+  },
+  {
+   "symbol": "ASML",
+   "side": "long",
+   "strategyId": "bollinger_dip",
+   "entryDate": "2026-11-24T10:00",
+   "exitDate": "2026-11-24T13:00",
+   "entry": 1381.5801999999999,
+   "exit": 1352.2464,
+   "qty": 0.030164734555402573,
+   "pnl": -0.8848462905012645,
+   "retPct": -2.1232064559118524,
+   "reason": "sl3",
+   "funding": 0.0008,
+   "key": "ASML@1h",
+   "tf": "1h",
+   "explain": "Opened by Lower Bollinger band bounce. Why it closed: full stop: the price reached the stop-loss set at the entry. Bought at 1381.58, closed at 1352.25 (-2.12%)."
+  },
+  {
+   "symbol": "MRNA",
+   "side": "long",
+   "strategyId": "macd_cross",
+   "entryDate": "2026-11-24T15:00",
+   "exitDate": "2026-11-24T15:00",
+   "entry": 227.15693,
+   "exit": 223.3512209068688,
+   "qty": 0.18164642399798367,
+   "pnl": -0.6912934475438891,
+   "retPct": -1.675365613160551,
+   "reason": "sl1",
+   "key": "MRNA@1h",
+   "tf": "1h",
+   "explain": "Opened by MACD momentum cross. Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Bought at 227.16, closed at 223.35 (-1.68%)."
+  },
+  {
+   "symbol": "MRNA",
+   "side": "long",
+   "strategyId": "macd_cross",
+   "entryDate": "2026-11-24T15:00",
+   "exitDate": "2026-11-24T15:00",
+   "entry": 227.15693,
+   "exit": 221.6752963603032,
+   "qty": 0.18164642399798367,
+   "pnl": -0.995719148317972,
+   "retPct": -2.41314831984073,
+   "reason": "sl2",
+   "key": "MRNA@1h",
+   "tf": "1h",
+   "explain": "Opened by MACD momentum cross. Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Bought at 227.16, closed at 221.68 (-2.41%)."
+  },
+  {
+   "symbol": "MRNA",
+   "side": "long",
+   "strategyId": "macd_cross",
+   "entryDate": "2026-11-24T15:00",
+   "exitDate": "2026-11-25T01:00",
+   "entry": 227.15693,
+   "exit": 226.18359,
+   "qty": 0.1817009233751208,
+   "pnl": -0.17685677675793626,
+   "retPct": -0.4284879180221246,
+   "reason": "time-stop",
+   "funding": 0.0118,
+   "key": "MRNA@1h",
+   "tf": "1h",
+   "explain": "Opened by MACD momentum cross. Why it closed: too long at a loss: no progress after the maximum number of bars. Bought at 227.16, closed at 226.18 (-0.43%)."
+  },
+  {
+   "symbol": "AVGO",
+   "side": "short",
+   "strategyId": "rsi2_dip_short",
+   "entryDate": "2026-11-25T18:30",
+   "exitDate": "2026-11-25T19:00",
+   "entry": 292.02768,
+   "exit": 297.4283385567043,
+   "qty": 0.14022526120639778,
+   "pnl": -0.7573087568004337,
+   "retPct": -1.8493652919149062,
+   "reason": "sl1",
+   "key": "AVGO@30m",
+   "tf": "30m",
+   "explain": "Opened by Short-term spike in a downtrend (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 292.03, closed at 297.43 (-1.85%)."
+  },
+  {
+   "symbol": "AVGO",
+   "side": "short",
+   "strategyId": "rsi2_dip_short",
+   "entryDate": "2026-11-25T18:30",
+   "exitDate": "2026-11-25T20:00",
+   "entry": 292.02768,
+   "exit": 299.3978678350565,
+   "qty": 0.14022526120639778,
+   "pnl": -1.0334865143110168,
+   "retPct": -2.52379768762212,
+   "reason": "sl2",
+   "key": "AVGO@30m",
+   "tf": "30m",
+   "explain": "Opened by Short-term spike in a downtrend (short). Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 292.03, closed at 299.40 (-2.52%)."
+  },
+  {
+   "symbol": "AVGO",
+   "side": "short",
+   "strategyId": "rsi2_dip_short",
+   "entryDate": "2026-11-25T18:30",
+   "exitDate": "2026-11-25T22:30",
+   "entry": 292.02768,
+   "exit": 301.63172000000003,
+   "qty": 0.14026733299193828,
+   "pnl": -1.3471330767479026,
+   "retPct": -3.288743039700903,
+   "reason": "sl3",
+   "funding": -0.0012,
+   "key": "AVGO@30m",
+   "tf": "30m",
+   "explain": "Opened by Short-term spike in a downtrend (short). Why it closed: full stop: the price reached the stop-loss set at the entry. Sold short at 292.03, closed at 301.63 (-3.29%)."
+  },
+  {
+   "symbol": "CRCL",
+   "side": "short",
+   "strategyId": "rsi2_dip_short",
+   "entryDate": "2026-11-25T20:00",
+   "exitDate": "2026-11-26T06:00",
+   "entry": 48.081503999999995,
+   "exit": 49.01017679999999,
+   "qty": 1.6120459906609501,
+   "pnl": -1.4970632638758687,
+   "retPct": -1.9314553887498809,
+   "reason": "rule",
+   "funding": 0.1165,
+   "key": "CRCL@1h",
+   "tf": "1h",
+   "explain": "Opened by Short-term spike in a downtrend (short). Why it closed: the strategy's own exit signal fired. Sold short at 48.08, closed at 49.01 (-1.93%)."
+  },
+  {
+   "symbol": "SOXL",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-27T00:00",
+   "exitDate": "2026-11-27T00:00",
+   "entry": 33.203416,
+   "exit": 36.566252631799884,
+   "qty": 0.2428650495929,
+   "pnl": -0.8167154853549004,
+   "retPct": -10.127983915269102,
+   "reason": "sl1",
+   "key": "SOXL@4h",
+   "tf": "4h",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 33.20, closed at 36.57 (-10.13%)."
+  },
+  {
+   "symbol": "INTC",
+   "side": "short",
+   "strategyId": "ema_pullback_short_adx",
+   "entryDate": "2026-11-27T16:00",
+   "exitDate": "2026-11-27T16:45",
+   "entry": 55.8562792,
+   "exit": 56.56630317645323,
+   "qty": 0.7140957616984831,
+   "pnl": -0.5070251122895544,
+   "retPct": -1.2711623234173963,
+   "reason": "sl1",
+   "key": "INTC@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short), strong trend only. Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 55.86, closed at 56.57 (-1.27%)."
+  },
+  {
+   "symbol": "INTC",
+   "side": "short",
+   "strategyId": "ema_pullback_short_adx",
+   "entryDate": "2026-11-27T16:00",
+   "exitDate": "2026-11-27T17:45",
+   "entry": 55.8562792,
+   "exit": 56.876594364679846,
+   "qty": 1.4284057735504911,
+   "pnl": -1.4574240720698082,
+   "retPct": -1.8266794338851033,
+   "reason": "sl2",
+   "funding": -0.0009,
+   "key": "INTC@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short), strong trend only. Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 55.86, closed at 56.88 (-1.83%)."
+  },
+  {
+   "symbol": "SOXL",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-27T00:00",
+   "exitDate": "2026-11-27T20:45",
+   "entry": 33.203416,
+   "exit": 33.203416,
+   "qty": 0.48580296598735806,
+   "pnl": 0,
+   "retPct": 0,
+   "reason": "weekend",
+   "funding": -0.0233,
+   "key": "SOXL@4h",
+   "tf": "4h",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: weekend pause: everything closes from Friday 22:00 to Monday 00:00 (Madrid). Sold short at 33.20, closed at 33.20 (+0.00%)."
+  }
+ ],
+ "equityCurve": [
+  {
+   "d": "2026-11-28T09:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T09:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T10:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T11:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T12:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T13:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T14:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T15:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T16:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T17:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:02",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:03",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:04",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:05",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:06",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:07",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:08",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:09",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:10",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:11",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:12",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:13",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:14",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:15",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:16",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:17",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:18",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:19",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:20",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:21",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:22",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:23",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:24",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:25",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:26",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:27",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:28",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:29",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:30",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:31",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:32",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:33",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:34",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:35",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:36",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:37",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:38",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:39",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:40",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:41",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:42",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:43",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:44",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:45",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:46",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:47",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:48",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:49",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:50",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:51",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:52",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:53",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:54",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:55",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:56",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:57",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:58",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T18:59",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T19:00",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T19:01",
+   "equity": 238.22
+  },
+  {
+   "d": "2026-11-28T19:02",
+   "equity": 238.22
+  }
+ ],
+ "log": [
+  {
+   "d": "2026-11-27T20:45",
+   "msg": "Weekend pause: 1 position closed and orders cancelled. Trading starts again on Monday."
+  },
+  {
+   "d": "2026-11-27T20:45",
+   "msg": "SOXL 4h: closed at 33.20 (weekend), +0.00."
+  },
+  {
+   "d": "2026-11-27T17:45",
+   "msg": "INTC 15m: closed at 56.88 (sl2), -1.46."
+  },
+  {
+   "d": "2026-11-27T16:45",
+   "msg": "INTC 15m: sold 0.7141 (part) at 56.57 (sl1), -0.51."
+  },
+  {
+   "d": "2026-11-27T16:00",
+   "msg": "INTC 15m: sold short 2.1425 at 55.86, stop 57.14, first take-profit 54.66 (Bounce to the 20-bar average (short), strong trend only)."
+  },
+  {
+   "d": "2026-11-27T00:00",
+   "msg": "SOXL 4h: sold 0.2429 (part) at 36.57 (sl1), -0.82."
+  },
+  {
+   "d": "2026-11-27T00:00",
+   "msg": "SOXL 4h: sold short 0.7287 at 33.20, stop 39.84, first take-profit 26.62 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-27T03:00",
+   "msg": "CRCL 1h: short sale skipped, Lucas already holds CRCL short (the desk's correlation cap)."
+  },
+  {
+   "d": "2026-11-27T02:00",
+   "msg": "CRCL 1h: short sale skipped, Lucas already holds CRCL short (the desk's correlation cap)."
+  },
+  {
+   "d": "2026-11-26T22:00",
+   "msg": "CRCL 1h: short sale skipped, Lucas already holds CRCL short (the desk's correlation cap)."
+  },
+  {
+   "d": "2026-11-26T08:00",
+   "msg": "SOXL 4h: short sale skipped, Lucas is already short NBIS, which moves with SOXL (correlation 0.80) (the desk's correlation cap)."
+  },
+  {
+   "d": "2026-11-26T06:00",
+   "msg": "CRCL 1h: closed at 49.01 (rule), -1.50."
+  },
+  {
+   "d": "2026-11-25T20:00",
+   "msg": "CRCL 1h: sold short 1.6120 at 48.08, stop 51.13, first take-profit 45.11 (Short-term spike in a downtrend (short))."
+  },
+  {
+   "d": "2026-11-25T22:30",
+   "msg": "AVGO 30m: closed at 301.63 (sl3), -1.35."
+  },
+  {
+   "d": "2026-11-25T20:00",
+   "msg": "AVGO 30m: sold 0.1402 (part) at 299.40 (sl2), -1.03."
+  },
+  {
+   "d": "2026-11-25T19:00",
+   "msg": "AVGO 30m: sold 0.1402 (part) at 297.43 (sl1), -0.76."
+  },
+  {
+   "d": "2026-11-25T18:30",
+   "msg": "AVGO 30m: sold short 0.4207 at 292.03, stop 300.17, first take-profit 284.47 (Short-term spike in a downtrend (short))."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "msg": "Leo is now called Nico."
+  },
+  {
+   "d": "2026-11-25T01:00",
+   "msg": "MRNA 1h: closed at 226.18 (time-stop), -0.18."
+  },
+  {
+   "d": "2026-11-24T15:00",
+   "msg": "MRNA 1h: sold 0.1816 (part) at 221.68 (sl2), -1.00."
+  },
+  {
+   "d": "2026-11-24T15:00",
+   "msg": "MRNA 1h: sold 0.1816 (part) at 223.35 (sl1), -0.69."
+  },
+  {
+   "d": "2026-11-24T15:00",
+   "msg": "MRNA 1h: bought 0.5450 at 227.16, stop 220.22, first take-profit 233.64 (MACD momentum cross)."
+  },
+  {
+   "d": "2026-11-24T13:00",
+   "msg": "ASML 1h: closed at 1352.25 (sl3), -0.88."
+  },
+  {
+   "d": "2026-11-24T11:00",
+   "msg": "ASML 1h: sold 0.0302 (part) at 1356.44 (sl2), -0.76."
+  },
+  {
+   "d": "2026-11-24T11:00",
+   "msg": "ASML 1h: sold 0.0302 (part) at 1356.44 (sl1), -0.76."
+  },
+  {
+   "d": "2026-11-24T10:00",
+   "msg": "ASML 1h: bought 0.0905 at 1381.58, stop 1355.13, first take-profit 1405.27 (Lower Bollinger band bounce)."
+  },
+  {
+   "d": "2026-11-23T19:13",
+   "msg": "Leo joins the competition with a 250 USD grant (a loan from the accountant)."
+  }
+ ]
+}

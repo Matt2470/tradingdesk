@@ -1,0 +1,6185 @@
+{
+ "id": "crypto-bull",
+ "name": "Catalina",
+ "recruit": 1,
+ "side": "both",
+ "motto": "Free to buy or sell short, on any crypto Lighter trades.",
+ "accountant": {
+  "startGrant": 250,
+  "grant": 250,
+  "badges": 0,
+  "streak": 0,
+  "bestStreak": 0,
+  "saves": 0,
+  "award": 0,
+  "debt": 250,
+  "repaid": 0,
+  "interestPaid": 0,
+  "hiredAt": "2026-11-23T19:13",
+  "nextInterestAt": "2026-12-07T19:13",
+  "index": 97.62456284993092,
+  "lastEquity": 244.06140712482764,
+  "events": [],
+  "months": {
+   "2026-11": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "repaid": 0,
+    "indexStart": 100,
+    "indexEnd": 97.62456284993092,
+    "trades": 6,
+    "wins": 1,
+    "pnl": -6.049322481762397
+   }
+  },
+  "daily": {
+   "2026-11-22": 100,
+   "2026-11-23": 99.0174,
+   "2026-11-24": 100.9959,
+   "2026-11-25": 99.3771,
+   "2026-11-26": 97.8552,
+   "2026-11-27": 97.6246,
+   "2026-11-28": 97.6246
+  },
+  "weekTrades": 6
+ },
+ "evil": null,
+ "tier": {
+  "level": 0,
+  "name": "Rookie",
+  "toNext": 4,
+  "tiers": [
+   4,
+   8,
+   12
+  ],
+  "names": [
+   "Rookie",
+   "Pro",
+   "Master",
+   "Experienced trader"
+  ]
+ },
+ "playbook": [
+  {
+   "key": "APT@1h",
+   "id": "bollinger_dip_short_adx",
+   "name": "Upper Bollinger band fade (short), no strong trend",
+   "testTrades": 16,
+   "testPF": 6.642117975438757,
+   "testAvgPct": 1.2829245327906569,
+   "score": 6.15224460689137,
+   "rate": 0.0060882800608828
+  },
+  {
+   "key": "SYRUP@4h",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 10,
+   "testPF": 6.06134693834934,
+   "testAvgPct": 4.506647102510079,
+   "score": 5.206963425791126,
+   "rate": 0.015220700152207
+  },
+  {
+   "key": "MON@1h",
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "testTrades": 19,
+   "testPF": 3.905756105092785,
+   "testAvgPct": 1.5505803251461083,
+   "score": 5.081505848473435,
+   "rate": 0.007229832572298325
+  },
+  {
+   "key": "AERO@4h",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 9,
+   "testPF": 4.534165896468457,
+   "testAvgPct": 3.488474457146285,
+   "score": 4.534165896468457,
+   "rate": 0.0136986301369863
+  },
+  {
+   "key": "SPX@4h",
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "testTrades": 7,
+   "testPF": 16.506130649830002,
+   "testAvgPct": 3.5885955068088196,
+   "score": 4.515449934959718,
+   "rate": 0.0106544901065449
+  },
+  {
+   "key": "DOT@4h",
+   "id": "ema_pullback_short_adx",
+   "name": "Bounce to the 20-bar average (short), strong trend only",
+   "testTrades": 5,
+   "testPF": 5.20389230526295,
+   "testAvgPct": 2.7883205913111473,
+   "score": 3.8907562519182184,
+   "rate": 0.0076103500761035
+  },
+  {
+   "key": "WIF@4h",
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "testTrades": 5,
+   "testPF": 19.92917293354456,
+   "testAvgPct": 3.1725400875308285,
+   "score": 3.8907562519182184,
+   "rate": 0.0076103500761035
+  },
+  {
+   "key": "LDO@4h",
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "testTrades": 15,
+   "testPF": 2.7401387047530443,
+   "testAvgPct": 1.8329959163425966,
+   "score": 3.299455769642064,
+   "rate": 0.0228310502283105
+  }
+ ],
+ "weekend": true,
+ "lighterCrypto": true,
+ "allLighter": false,
+ "twin": {
+  "equity": 249.7200085939804,
+  "indexPct": -0.11199656240784561,
+  "trades": 4,
+  "wins": 6,
+  "positions": 0
+ },
+ "kin": {
+  "kind": "devil",
+  "name": "Evil Catalina II",
+  "resultPct": 0,
+  "trades": 0
+ },
+ "books": {
+  "difference": 0
+ },
+ "fundingPaid": -0.1107,
+ "hungry": false,
+ "fired": null,
+ "strikes": 0,
+ "resultPct": -2.375437150069075,
+ "view": "crypto",
+ "at": "2026-11-28T19:01:08.110Z",
+ "startedAt": "2026-11-23T19:13",
+ "startEquity": 250,
+ "cash": 244.06140712482764,
+ "equity": 244.06140712482764,
+ "exposure": 0,
+ "shortlist": {
+  "pickedAt": "2026-11-27T19:09:12.370Z",
+  "chosen": [
+   "bollinger_dip_short",
+   "bollinger_dip_short_adx",
+   "ema_pullback_short",
+   "ema_pullback_short_adx"
+  ],
+  "candidates": [
+   {
+    "id": "donchian_trend_short",
+    "name": "20-bar breakdown (short)",
+    "side": "short",
+    "pickPass": 29,
+    "pickTested": 208,
+    "pickMedianPF": 1.5500077963428127,
+    "testTrades": 532,
+    "testPF": 0.5999584517250169,
+    "testAvgPct": -0.5782400997327143,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.60).",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 29,
+      "testPF": 0.7373150711593064,
+      "testAvgPct": -0.1132052183301402,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@15m",
+      "testTrades": 31,
+      "testPF": 0.7573698480406917,
+      "testAvgPct": -0.12993414363645558,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 66,
+      "testPF": 1.2352345584800213,
+      "testAvgPct": 0.1343517831162729,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@15m",
+      "testTrades": 25,
+      "testPF": 0.5307975165248063,
+      "testAvgPct": -0.2793899207809309,
+      "testBars": 1723
+     },
+     {
+      "key": "SOL@30m",
+      "testTrades": 11,
+      "testPF": 1.4571257573925254,
+      "testAvgPct": 0.26614002144734017,
+      "testBars": 862
+     },
+     {
+      "key": "NEAR@30m",
+      "testTrades": 10,
+      "testPF": 0.7836222054782301,
+      "testAvgPct": -0.3429586263513174,
+      "testBars": 862
+     },
+     {
+      "key": "ADA@15m",
+      "testTrades": 28,
+      "testPF": 0.3526080018955932,
+      "testAvgPct": -0.511332269664267,
+      "testBars": 1723
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 68,
+      "testPF": 0.888853629246623,
+      "testAvgPct": -0.10705885504929381,
+      "testBars": 5198
+     },
+     {
+      "key": "BNB@1h",
+      "testTrades": 30,
+      "testPF": 1.135716701022259,
+      "testAvgPct": 0.07520799743209268,
+      "testBars": 2628
+     },
+     {
+      "key": "BNB@4h",
+      "testTrades": 7,
+      "testPF": 1.1638770626969965,
+      "testAvgPct": 0.14274962294511065,
+      "testBars": 657
+     },
+     {
+      "key": "XRP@4h",
+      "testTrades": 10,
+      "testPF": 1.3578774771155,
+      "testAvgPct": 0.3517189204957482,
+      "testBars": 657
+     },
+     {
+      "key": "LINK@4h",
+      "testTrades": 8,
+      "testPF": 0.043008178417231875,
+      "testAvgPct": -2.248492247664021,
+      "testBars": 657
+     },
+     {
+      "key": "SUI@1h",
+      "testTrades": 32,
+      "testPF": 1.0648819906008082,
+      "testAvgPct": 0.05697417523346235,
+      "testBars": 2628
+     },
+     {
+      "key": "SUI@4h",
+      "testTrades": 13,
+      "testPF": 0.18830565894895823,
+      "testAvgPct": -2.6796777526380335,
+      "testBars": 657
+     },
+     {
+      "key": "ARB@4h",
+      "testTrades": 8,
+      "testPF": 0.7286205091699532,
+      "testAvgPct": -0.8569884779840424,
+      "testBars": 657
+     },
+     {
+      "key": "AAVE@4h",
+      "testTrades": 9,
+      "testPF": 0.4955774557696929,
+      "testAvgPct": -1.9178527770317022,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 11,
+      "testPF": 0.3191412959401492,
+      "testAvgPct": -2.128836230915177,
+      "testBars": 657
+     },
+     {
+      "key": "EIGEN@4h",
+      "testTrades": 16,
+      "testPF": 0.15548460897148678,
+      "testAvgPct": -2.8971921119071835,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@4h",
+      "testTrades": 10,
+      "testPF": 0.31190835314802623,
+      "testAvgPct": -2.2493189080471176,
+      "testBars": 657
+     },
+     {
+      "key": "STRK@4h",
+      "testTrades": 14,
+      "testPF": 0.10938727505087642,
+      "testAvgPct": -3.854289599775789,
+      "testBars": 657
+     },
+     {
+      "key": "JUP@4h",
+      "testTrades": 9,
+      "testPF": 0.6193791054832242,
+      "testAvgPct": -0.5364773007493695,
+      "testBars": 657
+     },
+     {
+      "key": "PYTH@4h",
+      "testTrades": 10,
+      "testPF": 0.8868109293479166,
+      "testAvgPct": -0.24725330634914044,
+      "testBars": 657
+     },
+     {
+      "key": "WLD@4h",
+      "testTrades": 8,
+      "testPF": 0.632613806241653,
+      "testAvgPct": -0.8009306559643024,
+      "testBars": 657
+     },
+     {
+      "key": "BERA@4h",
+      "testTrades": 13,
+      "testPF": 0.33635201920934066,
+      "testAvgPct": -1.8056662628929843,
+      "testBars": 657
+     },
+     {
+      "key": "ZEC@4h",
+      "testTrades": 8,
+      "testPF": 1.3690701113549322,
+      "testAvgPct": 1.1278760021581185,
+      "testBars": 657
+     },
+     {
+      "key": "FARTCOIN@4h",
+      "testTrades": 11,
+      "testPF": 0.6928636151931051,
+      "testAvgPct": -0.8591440885159642,
+      "testBars": 657
+     },
+     {
+      "key": "S@4h",
+      "testTrades": 10,
+      "testPF": 1.9459905117429388,
+      "testAvgPct": 0.863128505264885,
+      "testBars": 657
+     },
+     {
+      "key": "GRAM@4h",
+      "testTrades": 12,
+      "testPF": 0.21518103705420172,
+      "testAvgPct": -1.1077430651910858,
+      "testBars": 657
+     },
+     {
+      "key": "SPX@4h",
+      "testTrades": 15,
+      "testPF": 0.47629229994479805,
+      "testAvgPct": -1.5503199867880706,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short",
+    "name": "Upper Bollinger band fade (short)",
+    "side": "short",
+    "pickPass": 25,
+    "pickTested": 208,
+    "pickMedianPF": 1.8604459696790998,
+    "testTrades": 230,
+    "testPF": 1.826654324076248,
+    "testAvgPct": 0.6388808816803995,
+    "chosen": true,
+    "why": "Passed on 25 of 208 charts in the older data and still made money in the newer data (profit factor 1.83 over 230 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 25,
+      "testPF": 0.4785785738035854,
+      "testAvgPct": -0.24698856907121503,
+      "testBars": 5198
+     },
+     {
+      "key": "BTC@4h",
+      "testTrades": 7,
+      "testPF": 2.8718516181266813,
+      "testAvgPct": 0.928058072692463,
+      "testBars": 1301
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 22,
+      "testPF": 1.2808763704460866,
+      "testAvgPct": 0.10894104194643313,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 7,
+      "testPF": 4.9818409868092095,
+      "testAvgPct": 2.426704560887884,
+      "testBars": 1301
+     },
+     {
+      "key": "XRP@4h",
+      "testTrades": 6,
+      "testPF": 3.1940054688294466,
+      "testAvgPct": 1.5973495293071451,
+      "testBars": 657
+     },
+     {
+      "key": "XMR@4h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 11.822839112535114,
+      "testBars": 657
+     },
+     {
+      "key": "APT@4h",
+      "testTrades": 4,
+      "testPF": 0.6436867986322725,
+      "testAvgPct": -1.236851748856036,
+      "testBars": 657
+     },
+     {
+      "key": "OP@4h",
+      "testTrades": 4,
+      "testPF": 9.9537714415801,
+      "testAvgPct": 2.074377235031572,
+      "testBars": 657
+     },
+     {
+      "key": "AAVE@1h",
+      "testTrades": 13,
+      "testPF": 0.9050830344279233,
+      "testAvgPct": -0.06893270567609813,
+      "testBars": 2628
+     },
+     {
+      "key": "AAVE@4h",
+      "testTrades": 2,
+      "testPF": 5.814382337220326,
+      "testAvgPct": 2.1702249698757154,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@1h",
+      "testTrades": 18,
+      "testPF": 1.2039605962033717,
+      "testAvgPct": 0.1435597547710444,
+      "testBars": 2628
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 4,
+      "testPF": 4.12863885359707,
+      "testAvgPct": 1.6779298616224845,
+      "testBars": 657
+     },
+     {
+      "key": "ETHFI@1h",
+      "testTrades": 10,
+      "testPF": 0.6828800009656127,
+      "testAvgPct": -0.41106694075652256,
+      "testBars": 2628
+     },
+     {
+      "key": "1000PEPE@1h",
+      "testTrades": 13,
+      "testPF": 1.0793470070034619,
+      "testAvgPct": 0.07288242585498281,
+      "testBars": 2628
+     },
+     {
+      "key": "1000BONK@4h",
+      "testTrades": 9,
+      "testPF": 1.7547258551961562,
+      "testAvgPct": 1.1631712779101133,
+      "testBars": 657
+     },
+     {
+      "key": "WIF@4h",
+      "testTrades": 5,
+      "testPF": 19.92917293354456,
+      "testAvgPct": 3.1725400875308285,
+      "testBars": 657
+     },
+     {
+      "key": "TRUMP@4h",
+      "testTrades": 8,
+      "testPF": 0.799766109515012,
+      "testAvgPct": -0.4065134986862,
+      "testBars": 657
+     },
+     {
+      "key": "GRASS@1h",
+      "testTrades": 17,
+      "testPF": 1.5006527698918561,
+      "testAvgPct": 0.3378924504816282,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 4,
+      "testPF": 4.013583156050746,
+      "testAvgPct": 2.1727807627225006,
+      "testBars": 657
+     },
+     {
+      "key": "SYRUP@4h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 2.0236744809309926,
+      "testBars": 657
+     },
+     {
+      "key": "ZORA@4h",
+      "testTrades": 5,
+      "testPF": 1.449154842188247,
+      "testAvgPct": 0.6353095767440005,
+      "testBars": 657
+     },
+     {
+      "key": "MON@1h",
+      "testTrades": 19,
+      "testPF": 3.905756105092785,
+      "testAvgPct": 1.5505803251461083,
+      "testBars": 2628
+     },
+     {
+      "key": "MEGA@1h",
+      "testTrades": 11,
+      "testPF": 1.3186880679354085,
+      "testAvgPct": 0.21654252156398798,
+      "testBars": 2628
+     },
+     {
+      "key": "BB@1h",
+      "testTrades": 8,
+      "testPF": 0.22932048329619661,
+      "testAvgPct": -0.8468122487872732,
+      "testBars": 1111
+     },
+     {
+      "key": "SPX@4h",
+      "testTrades": 7,
+      "testPF": 16.506130649830002,
+      "testAvgPct": 3.5885955068088196,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short_adx",
+    "name": "Upper Bollinger band fade (short), no strong trend",
+    "side": "short",
+    "pickPass": 24,
+    "pickTested": 208,
+    "pickMedianPF": 1.7515333445713068,
+    "testTrades": 222,
+    "testPF": 1.588063110647339,
+    "testAvgPct": 0.3676988826225225,
+    "chosen": true,
+    "why": "Passed on 24 of 208 charts in the older data and still made money in the newer data (profit factor 1.59 over 222 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 21,
+      "testPF": 0.6476438946094779,
+      "testAvgPct": -0.13977953457385148,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 8,
+      "testPF": 2.701288608609797,
+      "testAvgPct": 1.4539980719965029,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@30m",
+      "testTrades": 7,
+      "testPF": 3.441594789590486,
+      "testAvgPct": 0.36403797589915915,
+      "testBars": 862
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 29,
+      "testPF": 1.0483585255136676,
+      "testAvgPct": 0.031829165000020546,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@5m",
+      "testTrades": 5,
+      "testPF": 0.7328289396331372,
+      "testAvgPct": -0.05053635415960511,
+      "testBars": 1728
+     },
+     {
+      "key": "XRP@1h",
+      "testTrades": 15,
+      "testPF": 0.40626047636294993,
+      "testAvgPct": -0.4385866044432215,
+      "testBars": 2628
+     },
+     {
+      "key": "DOGE@1h",
+      "testTrades": 12,
+      "testPF": 1.0293979055688691,
+      "testAvgPct": 0.016400379391372583,
+      "testBars": 2628
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 10,
+      "testPF": 1.1689219304807137,
+      "testAvgPct": 0.11083788350882781,
+      "testBars": 2628
+     },
+     {
+      "key": "XMR@4h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 11.822839112535114,
+      "testBars": 657
+     },
+     {
+      "key": "APT@1h",
+      "testTrades": 16,
+      "testPF": 6.642117975438757,
+      "testAvgPct": 1.2829245327906569,
+      "testBars": 2628
+     },
+     {
+      "key": "OP@4h",
+      "testTrades": 2,
+      "testPF": 99,
+      "testAvgPct": 3.720975808082189,
+      "testBars": 657
+     },
+     {
+      "key": "AAVE@1h",
+      "testTrades": 10,
+      "testPF": 0.677880728963442,
+      "testAvgPct": -0.24877014802937786,
+      "testBars": 2628
+     },
+     {
+      "key": "AAVE@4h",
+      "testTrades": 2,
+      "testPF": 5.814382337220326,
+      "testAvgPct": 2.1702249698757154,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@1h",
+      "testTrades": 15,
+      "testPF": 1.1024462385033502,
+      "testAvgPct": 0.0688095827743279,
+      "testBars": 2628
+     },
+     {
+      "key": "STRK@4h",
+      "testTrades": 2,
+      "testPF": 1.3534028724780174,
+      "testAvgPct": 0.1579962270319441,
+      "testBars": 657
+     },
+     {
+      "key": "GMX@1h",
+      "testTrades": 10,
+      "testPF": 2.8389929322426517,
+      "testAvgPct": 0.6116001479609652,
+      "testBars": 2628
+     },
+     {
+      "key": "1000PEPE@1h",
+      "testTrades": 11,
+      "testPF": 0.8046432642560746,
+      "testAvgPct": -0.18089657961100006,
+      "testBars": 2628
+     },
+     {
+      "key": "1000BONK@4h",
+      "testTrades": 6,
+      "testPF": 2.2420449594705065,
+      "testAvgPct": 1.6295377830632691,
+      "testBars": 657
+     },
+     {
+      "key": "TRUMP@4h",
+      "testTrades": 6,
+      "testPF": 2.0047761809262714,
+      "testAvgPct": 1.0850320244958418,
+      "testBars": 657
+     },
+     {
+      "key": "GRASS@1h",
+      "testTrades": 13,
+      "testPF": 1.1778209049452057,
+      "testAvgPct": 0.13816645991337692,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 3,
+      "testPF": 3.265099598009951,
+      "testAvgPct": 2.1775030265106405,
+      "testBars": 657
+     },
+     {
+      "key": "WLFI@4h",
+      "testTrades": 6,
+      "testPF": 2.4553180102242784,
+      "testAvgPct": 0.40982398023952116,
+      "testBars": 657
+     },
+     {
+      "key": "ZORA@4h",
+      "testTrades": 5,
+      "testPF": 1.449154842188247,
+      "testAvgPct": 0.6353095767440005,
+      "testBars": 657
+     },
+     {
+      "key": "MEGA@1h",
+      "testTrades": 7,
+      "testPF": 0.5577672326697776,
+      "testAvgPct": -0.3403810365209967,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short",
+    "name": "MACD momentum cross down (short)",
+    "side": "short",
+    "pickPass": 23,
+    "pickTested": 208,
+    "pickMedianPF": 1.7813858642544584,
+    "testTrades": 237,
+    "testPF": 0.8921150569416313,
+    "testAvgPct": -0.17357202654189555,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.89).",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 3,
+      "testPF": 2.215050820298345,
+      "testAvgPct": 1.022416129049893,
+      "testBars": 548
+     },
+     {
+      "key": "BNB@1h",
+      "testTrades": 23,
+      "testPF": 0.5327216461096523,
+      "testAvgPct": -0.21575714308282204,
+      "testBars": 2628
+     },
+     {
+      "key": "DOT@4h",
+      "testTrades": 7,
+      "testPF": 0.21087872183482662,
+      "testAvgPct": -2.5251105907297595,
+      "testBars": 657
+     },
+     {
+      "key": "LINK@4h",
+      "testTrades": 12,
+      "testPF": 1.0032966812902553,
+      "testAvgPct": 0.004410726302610006,
+      "testBars": 657
+     },
+     {
+      "key": "SUI@4h",
+      "testTrades": 10,
+      "testPF": 0.5220001353001934,
+      "testAvgPct": -0.9243317378134716,
+      "testBars": 657
+     },
+     {
+      "key": "AAVE@4h",
+      "testTrades": 12,
+      "testPF": 1.2942131029663242,
+      "testAvgPct": 0.4560161397487507,
+      "testBars": 657
+     },
+     {
+      "key": "ETHFI@4h",
+      "testTrades": 3,
+      "testPF": 0.4397593614267185,
+      "testAvgPct": -1.6676578234934503,
+      "testBars": 657
+     },
+     {
+      "key": "STRK@4h",
+      "testTrades": 14,
+      "testPF": 0.2837604235442735,
+      "testAvgPct": -2.1386672403542897,
+      "testBars": 657
+     },
+     {
+      "key": "JUP@4h",
+      "testTrades": 10,
+      "testPF": 0.39656957053334263,
+      "testAvgPct": -1.6871973036493841,
+      "testBars": 657
+     },
+     {
+      "key": "HYPE@4h",
+      "testTrades": 9,
+      "testPF": 1.0524785698312447,
+      "testAvgPct": 0.07623187475516631,
+      "testBars": 657
+     },
+     {
+      "key": "POL@4h",
+      "testTrades": 7,
+      "testPF": 1.4262478153668956,
+      "testAvgPct": 0.5986920120053891,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@4h",
+      "testTrades": 11,
+      "testPF": 3.7978051160493798,
+      "testAvgPct": 2.0233102321235936,
+      "testBars": 657
+     },
+     {
+      "key": "1000BONK@4h",
+      "testTrades": 8,
+      "testPF": 1.6810573572659244,
+      "testAvgPct": 0.70218983655029,
+      "testBars": 657
+     },
+     {
+      "key": "1000SHIB@4h",
+      "testTrades": 11,
+      "testPF": 0.8388444032408593,
+      "testAvgPct": -0.1921374898555278,
+      "testBars": 657
+     },
+     {
+      "key": "WIF@4h",
+      "testTrades": 12,
+      "testPF": 0.3683297668945872,
+      "testAvgPct": -1.3072674433399483,
+      "testBars": 657
+     },
+     {
+      "key": "TRUMP@4h",
+      "testTrades": 10,
+      "testPF": 2.905792250681909,
+      "testAvgPct": 2.6379689041682943,
+      "testBars": 657
+     },
+     {
+      "key": "FARTCOIN@4h",
+      "testTrades": 10,
+      "testPF": 0.695538107831544,
+      "testAvgPct": -0.7132754085793115,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@4h",
+      "testTrades": 10,
+      "testPF": 0.37147766644176866,
+      "testAvgPct": -2.215093166854035,
+      "testBars": 657
+     },
+     {
+      "key": "S@4h",
+      "testTrades": 8,
+      "testPF": 1.1349746645744911,
+      "testAvgPct": 0.24294510831522464,
+      "testBars": 657
+     },
+     {
+      "key": "WLFI@4h",
+      "testTrades": 14,
+      "testPF": 0.7220652520144555,
+      "testAvgPct": -0.24528952489910982,
+      "testBars": 657
+     },
+     {
+      "key": "SYRUP@4h",
+      "testTrades": 10,
+      "testPF": 1.4673441126287434,
+      "testAvgPct": 0.7424036062442029,
+      "testBars": 657
+     },
+     {
+      "key": "GRAM@4h",
+      "testTrades": 14,
+      "testPF": 1.002749952747409,
+      "testAvgPct": 0.0025364768497768064,
+      "testBars": 657
+     },
+     {
+      "key": "AZTEC@4h",
+      "testTrades": 9,
+      "testPF": 3.007467972365428,
+      "testAvgPct": 1.772628285350937,
+      "testBars": 519
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_short",
+    "name": "Bounce to the 20-bar average (short)",
+    "side": "short",
+    "pickPass": 23,
+    "pickTested": 208,
+    "pickMedianPF": 1.4109337269931097,
+    "testTrades": 420,
+    "testPF": 1.0757300275694268,
+    "testAvgPct": 0.09911958793072105,
+    "chosen": true,
+    "why": "Passed on 23 of 208 charts in the older data and still made money in the newer data (profit factor 1.08 over 420 trades).",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 39,
+      "testPF": 1.475147532298438,
+      "testAvgPct": 0.10665585545024052,
+      "testBars": 1723
+     },
+     {
+      "key": "QNT@4h",
+      "testTrades": 32,
+      "testPF": 0.9427606875015598,
+      "testAvgPct": -0.06737232561421444,
+      "testBars": 1301
+     },
+     {
+      "key": "XRP@4h",
+      "testTrades": 17,
+      "testPF": 0.8922548668038947,
+      "testAvgPct": -0.13371613776354718,
+      "testBars": 657
+     },
+     {
+      "key": "DOGE@4h",
+      "testTrades": 18,
+      "testPF": 1.4923325820586122,
+      "testAvgPct": 0.36332875561914724,
+      "testBars": 657
+     },
+     {
+      "key": "DOT@4h",
+      "testTrades": 14,
+      "testPF": 1.1513765169228203,
+      "testAvgPct": 0.23165665739282357,
+      "testBars": 657
+     },
+     {
+      "key": "FIL@4h",
+      "testTrades": 14,
+      "testPF": 0.9394391734905437,
+      "testAvgPct": -0.1025790269824663,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 15,
+      "testPF": 2.7401387047530443,
+      "testAvgPct": 1.8329959163425966,
+      "testBars": 657
+     },
+     {
+      "key": "ENA@4h",
+      "testTrades": 11,
+      "testPF": 1.1148059435982167,
+      "testAvgPct": 0.29563413625202545,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@4h",
+      "testTrades": 13,
+      "testPF": 0.7790086738876261,
+      "testAvgPct": -0.7357884610268711,
+      "testBars": 657
+     },
+     {
+      "key": "JUP@4h",
+      "testTrades": 6,
+      "testPF": 0.2892902885286928,
+      "testAvgPct": -1.7340632737738104,
+      "testBars": 657
+     },
+     {
+      "key": "TAO@1h",
+      "testTrades": 52,
+      "testPF": 0.6409531042124341,
+      "testAvgPct": -0.36289032764650625,
+      "testBars": 2628
+     },
+     {
+      "key": "POL@4h",
+      "testTrades": 25,
+      "testPF": 0.5456650405526254,
+      "testAvgPct": -0.7837173922383884,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@4h",
+      "testTrades": 9,
+      "testPF": 4.534165896468457,
+      "testAvgPct": 3.488474457146285,
+      "testBars": 657
+     },
+     {
+      "key": "TRUMP@4h",
+      "testTrades": 21,
+      "testPF": 2.0776107914073143,
+      "testAvgPct": 1.3089149057518692,
+      "testBars": 657
+     },
+     {
+      "key": "FARTCOIN@4h",
+      "testTrades": 14,
+      "testPF": 1.0820407472245244,
+      "testAvgPct": 0.1514674619281545,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@4h",
+      "testTrades": 17,
+      "testPF": 0.743064395565463,
+      "testAvgPct": -0.6665536990711791,
+      "testBars": 657
+     },
+     {
+      "key": "RAY@1h",
+      "testTrades": 1,
+      "testPF": 99,
+      "testAvgPct": 1.4927740991180334,
+      "testBars": 556
+     },
+     {
+      "key": "LINEA@1h",
+      "testTrades": 25,
+      "testPF": 0.33197509490926863,
+      "testAvgPct": -0.5870611650682309,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 10,
+      "testPF": 1.31441130942454,
+      "testAvgPct": 0.2503884380906412,
+      "testBars": 657
+     },
+     {
+      "key": "SYRUP@4h",
+      "testTrades": 10,
+      "testPF": 6.06134693834934,
+      "testAvgPct": 4.506647102510079,
+      "testBars": 657
+     },
+     {
+      "key": "ZORA@4h",
+      "testTrades": 16,
+      "testPF": 0.6935765266036525,
+      "testAvgPct": -0.4399942970667809,
+      "testBars": 657
+     },
+     {
+      "key": "XPL@4h",
+      "testTrades": 18,
+      "testPF": 0.6582732691046296,
+      "testAvgPct": -0.876991985191219,
+      "testBars": 657
+     },
+     {
+      "key": "RIVER@1h",
+      "testTrades": 23,
+      "testPF": 1.0003816408767543,
+      "testAvgPct": 0.00022737082386990918,
+      "testBars": 2226
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short",
+    "name": "20/50 average cross down (short)",
+    "side": "short",
+    "pickPass": 21,
+    "pickTested": 208,
+    "pickMedianPF": 1.7490210771435182,
+    "testTrades": 278,
+    "testPF": 0.9405567425818746,
+    "testAvgPct": -0.07217126655388839,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.94).",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 12,
+      "testPF": 0.7069859099429286,
+      "testAvgPct": -0.06501062899958499,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@30m",
+      "testTrades": 8,
+      "testPF": 3.9675360912390616,
+      "testAvgPct": 0.941679180552933,
+      "testBars": 862
+     },
+     {
+      "key": "NEAR@15m",
+      "testTrades": 25,
+      "testPF": 0.4225506620726152,
+      "testAvgPct": -0.46694112092049833,
+      "testBars": 1723
+     },
+     {
+      "key": "ADA@30m",
+      "testTrades": 10,
+      "testPF": 2.0352117860241403,
+      "testAvgPct": 0.4082935601506579,
+      "testBars": 862
+     },
+     {
+      "key": "XRP@1h",
+      "testTrades": 23,
+      "testPF": 1.100681933825582,
+      "testAvgPct": 0.06764148017770678,
+      "testBars": 2628
+     },
+     {
+      "key": "OP@4h",
+      "testTrades": 6,
+      "testPF": 1.4125076250359723,
+      "testAvgPct": 0.5982707663261752,
+      "testBars": 657
+     },
+     {
+      "key": "SEI@4h",
+      "testTrades": 3,
+      "testPF": 1.7105010402395722,
+      "testAvgPct": 0.6332457162925501,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@1h",
+      "testTrades": 26,
+      "testPF": 1.750143721798353,
+      "testAvgPct": 1.0800798983891153,
+      "testBars": 2628
+     },
+     {
+      "key": "PYTH@4h",
+      "testTrades": 3,
+      "testPF": 0.15584321451748528,
+      "testAvgPct": -3.0314093089592227,
+      "testBars": 657
+     },
+     {
+      "key": "WLD@1h",
+      "testTrades": 22,
+      "testPF": 1.6099634708254456,
+      "testAvgPct": 0.6690486257750181,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@1h",
+      "testTrades": 21,
+      "testPF": 2.7290282547108906,
+      "testAvgPct": 0.9496269467691579,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@4h",
+      "testTrades": 5,
+      "testPF": 3.8140406805240525,
+      "testAvgPct": 1.390090785577473,
+      "testBars": 657
+     },
+     {
+      "key": "POL@1h",
+      "testTrades": 22,
+      "testPF": 1.151103234842714,
+      "testAvgPct": 0.12815330978023162,
+      "testBars": 2628
+     },
+     {
+      "key": "BERA@4h",
+      "testTrades": 5,
+      "testPF": 0.4362138912787507,
+      "testAvgPct": -1.683154727458542,
+      "testBars": 657
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 25,
+      "testPF": 0.42632174532924455,
+      "testAvgPct": -0.957776317889296,
+      "testBars": 2628
+     },
+     {
+      "key": "ASTER@1h",
+      "testTrades": 24,
+      "testPF": 1.1219250589026302,
+      "testAvgPct": 0.07192060277579782,
+      "testBars": 2628
+     },
+     {
+      "key": "XPL@4h",
+      "testTrades": 6,
+      "testPF": 0.011375773182996726,
+      "testAvgPct": -1.4950828971874888,
+      "testBars": 657
+     },
+     {
+      "key": "STBL@4h",
+      "testTrades": 5,
+      "testPF": 0.21772458702992864,
+      "testAvgPct": -3.110344429910729,
+      "testBars": 657
+     },
+     {
+      "key": "USELESS@1h",
+      "testTrades": 17,
+      "testPF": 0.9175621909054036,
+      "testAvgPct": -0.22209618011403945,
+      "testBars": 2628
+     },
+     {
+      "key": "RIVER@4h",
+      "testTrades": 7,
+      "testPF": 0,
+      "testAvgPct": -3.131149176829401,
+      "testBars": 557
+     },
+     {
+      "key": "FF@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -2.946789080330333,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_short_adx",
+    "name": "20-bar breakdown (short), strong trend only",
+    "side": "short",
+    "pickPass": 21,
+    "pickTested": 208,
+    "pickMedianPF": 1.7216878563010274,
+    "testTrades": 310,
+    "testPF": 0.7889236503449315,
+    "testAvgPct": -0.25442928430980943,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.79).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 42,
+      "testPF": 1.0497601897215947,
+      "testAvgPct": 0.02801811936265806,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@15m",
+      "testTrades": 11,
+      "testPF": 0.7550429797126513,
+      "testAvgPct": -0.14114497763230355,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 42,
+      "testPF": 0.955458608357094,
+      "testAvgPct": -0.029608174284424464,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 8,
+      "testPF": 2.867251607696667,
+      "testAvgPct": 1.7998218588391866,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@1h",
+      "testTrades": 36,
+      "testPF": 1.115782118305873,
+      "testAvgPct": 0.08994691652321174,
+      "testBars": 5198
+     },
+     {
+      "key": "BNB@4h",
+      "testTrades": 5,
+      "testPF": 1.2662142219565784,
+      "testAvgPct": 0.2852647822784067,
+      "testBars": 657
+     },
+     {
+      "key": "DOGE@1h",
+      "testTrades": 18,
+      "testPF": 0.6888786601103101,
+      "testAvgPct": -0.3426301564571352,
+      "testBars": 2628
+     },
+     {
+      "key": "AVAX@1h",
+      "testTrades": 14,
+      "testPF": 0.2260830360868531,
+      "testAvgPct": -1.2966695391342495,
+      "testBars": 2628
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 17,
+      "testPF": 0.4261419136455178,
+      "testAvgPct": -0.7905090528591102,
+      "testBars": 2628
+     },
+     {
+      "key": "LTC@4h",
+      "testTrades": 7,
+      "testPF": 1.724347654795737,
+      "testAvgPct": 0.5652027807778415,
+      "testBars": 657
+     },
+     {
+      "key": "SUI@1h",
+      "testTrades": 15,
+      "testPF": 0.8484535533365762,
+      "testAvgPct": -0.162029188261405,
+      "testBars": 2628
+     },
+     {
+      "key": "SUI@4h",
+      "testTrades": 6,
+      "testPF": 0.3818160729786079,
+      "testAvgPct": -2.1365558580356727,
+      "testBars": 657
+     },
+     {
+      "key": "APT@4h",
+      "testTrades": 8,
+      "testPF": 0.8741536296022583,
+      "testAvgPct": -0.2968486567752493,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 4,
+      "testPF": 0.7250030924765156,
+      "testAvgPct": -0.8105693879826594,
+      "testBars": 657
+     },
+     {
+      "key": "TAO@1h",
+      "testTrades": 18,
+      "testPF": 0.629488250631923,
+      "testAvgPct": -0.4220502858192973,
+      "testBars": 2628
+     },
+     {
+      "key": "MNT@4h",
+      "testTrades": 5,
+      "testPF": 0.5564386208234726,
+      "testAvgPct": -0.4957650520056641,
+      "testBars": 657
+     },
+     {
+      "key": "BERA@4h",
+      "testTrades": 9,
+      "testPF": 0,
+      "testAvgPct": -3.193523304040075,
+      "testBars": 657
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 15,
+      "testPF": 1.6748823434190614,
+      "testAvgPct": 1.010220812973266,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 9,
+      "testPF": 0.363197797271333,
+      "testAvgPct": -1.3111174262348426,
+      "testBars": 657
+     },
+     {
+      "key": "S@4h",
+      "testTrades": 5,
+      "testPF": 2.7358284222571565,
+      "testAvgPct": 1.8061224292589941,
+      "testBars": 657
+     },
+     {
+      "key": "USELESS@1h",
+      "testTrades": 16,
+      "testPF": 0.554047530723851,
+      "testAvgPct": -0.950832852526307,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_short_adx",
+    "name": "Bounce to the 20-bar average (short), strong trend only",
+    "side": "short",
+    "pickPass": 19,
+    "pickTested": 208,
+    "pickMedianPF": 1.585709617371344,
+    "testTrades": 179,
+    "testPF": 1.011150037440167,
+    "testAvgPct": 0.010968160487773238,
+    "chosen": true,
+    "why": "Passed on 19 of 208 charts in the older data and still made money in the newer data (profit factor 1.01 over 179 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 38,
+      "testPF": 1.185003065751081,
+      "testAvgPct": 0.06718013210367889,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@30m",
+      "testTrades": 8,
+      "testPF": 2.1850854014978296,
+      "testAvgPct": 0.5665994461539043,
+      "testBars": 862
+     },
+     {
+      "key": "QNT@4h",
+      "testTrades": 8,
+      "testPF": 1.2132725290027886,
+      "testAvgPct": 0.24793748772275181,
+      "testBars": 1301
+     },
+     {
+      "key": "AVAX@1h",
+      "testTrades": 18,
+      "testPF": 0.8932034089282049,
+      "testAvgPct": -0.06992609942355493,
+      "testBars": 2628
+     },
+     {
+      "key": "DOT@4h",
+      "testTrades": 5,
+      "testPF": 5.20389230526295,
+      "testAvgPct": 2.7883205913111473,
+      "testBars": 657
+     },
+     {
+      "key": "TRX@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -1.2316164742813578,
+      "testBars": 657
+     },
+     {
+      "key": "ENA@4h",
+      "testTrades": 5,
+      "testPF": 3.07545838487726,
+      "testAvgPct": 3.2018887752336127,
+      "testBars": 657
+     },
+     {
+      "key": "EIGEN@4h",
+      "testTrades": 7,
+      "testPF": 1.086060172880633,
+      "testAvgPct": 0.1456088405050769,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@1h",
+      "testTrades": 7,
+      "testPF": 0,
+      "testAvgPct": -1.4617410554612493,
+      "testBars": 2628
+     },
+     {
+      "key": "TAO@1h",
+      "testTrades": 12,
+      "testPF": 0.5955758393627483,
+      "testAvgPct": -0.44070827116141426,
+      "testBars": 2628
+     },
+     {
+      "key": "POL@4h",
+      "testTrades": 4,
+      "testPF": 0.05700343223352458,
+      "testAvgPct": -2.271730733518041,
+      "testBars": 657
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 10,
+      "testPF": 1.2245372753172545,
+      "testAvgPct": 0.25485555038554414,
+      "testBars": 2628
+     },
+     {
+      "key": "1000BONK@4h",
+      "testTrades": 5,
+      "testPF": 0.7840726035188407,
+      "testAvgPct": -0.5065047385563028,
+      "testBars": 657
+     },
+     {
+      "key": "FARTCOIN@4h",
+      "testTrades": 6,
+      "testPF": 0.1107062229485632,
+      "testAvgPct": -1.4631361259870606,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@1h",
+      "testTrades": 7,
+      "testPF": 2.6161738832775465,
+      "testAvgPct": 1.7292675420890247,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 5,
+      "testPF": 1.633652208353027,
+      "testAvgPct": 0.5218492167115214,
+      "testBars": 657
+     },
+     {
+      "key": "WLFI@4h",
+      "testTrades": 11,
+      "testPF": 0.40345311077586565,
+      "testAvgPct": -1.0381967051317258,
+      "testBars": 657
+     },
+     {
+      "key": "MEGA@1h",
+      "testTrades": 11,
+      "testPF": 1.06932909900946,
+      "testAvgPct": 0.04593923216520115,
+      "testBars": 2628
+     },
+     {
+      "key": "RIVER@1h",
+      "testTrades": 9,
+      "testPF": 0.48274482524739754,
+      "testAvgPct": -0.39461349132173607,
+      "testBars": 2226
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip",
+    "name": "Lower Bollinger band bounce",
+    "side": "long",
+    "pickPass": 18,
+    "pickTested": 208,
+    "pickMedianPF": 1.6564723262300922,
+    "testTrades": 186,
+    "testPF": 1.079160915387238,
+    "testAvgPct": 0.08441545046135687,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@4h",
+      "testTrades": 11,
+      "testPF": 4.2671194715963034,
+      "testAvgPct": 1.012294999520521,
+      "testBars": 1301
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 11,
+      "testPF": 3.121815497023811,
+      "testAvgPct": 1.3502389387770062,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 9,
+      "testPF": 1.0028136865712813,
+      "testAvgPct": 0.0036419785362160123,
+      "testBars": 1301
+     },
+     {
+      "key": "QNT@4h",
+      "testTrades": 8,
+      "testPF": 0.21570530851864825,
+      "testAvgPct": -2.398355007794785,
+      "testBars": 1301
+     },
+     {
+      "key": "BNB@1h",
+      "testTrades": 13,
+      "testPF": 0.7863563624714539,
+      "testAvgPct": -0.0782310453343893,
+      "testBars": 2628
+     },
+     {
+      "key": "XLM@1h",
+      "testTrades": 8,
+      "testPF": 0.9748173184757523,
+      "testAvgPct": -0.030619203810942852,
+      "testBars": 2527
+     },
+     {
+      "key": "XMR@1h",
+      "testTrades": 14,
+      "testPF": 0.4780970331756677,
+      "testAvgPct": -0.6261435598380131,
+      "testBars": 2628
+     },
+     {
+      "key": "FIL@1h",
+      "testTrades": 10,
+      "testPF": 0,
+      "testAvgPct": -2.591158600319738,
+      "testBars": 2628
+     },
+     {
+      "key": "LDO@1h",
+      "testTrades": 9,
+      "testPF": 0.2454287270944002,
+      "testAvgPct": -1.0115374527606191,
+      "testBars": 2628
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 15,
+      "testPF": 1.2799967616993668,
+      "testAvgPct": 0.32954325083632635,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@1h",
+      "testTrades": 18,
+      "testPF": 0.8246147764161572,
+      "testAvgPct": -0.15215619847700332,
+      "testBars": 2628
+     },
+     {
+      "key": "MORPHO@1h",
+      "testTrades": 12,
+      "testPF": 1.5403156915401448,
+      "testAvgPct": 0.4163678838513558,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@4h",
+      "testTrades": 5,
+      "testPF": 7.377448105063189,
+      "testAvgPct": 3.9936953338265226,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@1h",
+      "testTrades": 14,
+      "testPF": 2.600756408539429,
+      "testAvgPct": 1.4420533404414766,
+      "testBars": 2628
+     },
+     {
+      "key": "LIT@1h",
+      "testTrades": 7,
+      "testPF": 3.509846138238744,
+      "testAvgPct": 1.9494606385873838,
+      "testBars": 2370
+     },
+     {
+      "key": "STBL@1h",
+      "testTrades": 10,
+      "testPF": 2.3068904089752102,
+      "testAvgPct": 0.4305244309501302,
+      "testBars": 2628
+     },
+     {
+      "key": "RIVER@1h",
+      "testTrades": 5,
+      "testPF": 1.9909039626084841,
+      "testAvgPct": 0.4155114812331977,
+      "testBars": 2226
+     },
+     {
+      "key": "SPX@1h",
+      "testTrades": 7,
+      "testPF": 0,
+      "testAvgPct": -1.92516408022653,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend",
+    "name": "20-bar breakout",
+    "side": "long",
+    "pickPass": 14,
+    "pickTested": 208,
+    "pickMedianPF": 1.5557506505403018,
+    "testTrades": 273,
+    "testPF": 1.049029731775636,
+    "testAvgPct": 0.08751880163322928,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 7,
+      "testPF": 1.7528474655833683,
+      "testAvgPct": 0.6990769420331985,
+      "testBars": 548
+     },
+     {
+      "key": "ETH@1d",
+      "testTrades": 9,
+      "testPF": 0.8416988487064849,
+      "testAvgPct": -0.43555162064220077,
+      "testBars": 548
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 66,
+      "testPF": 1.0950519166931265,
+      "testAvgPct": 0.13416393773592097,
+      "testBars": 5198
+     },
+     {
+      "key": "NEAR@4h",
+      "testTrades": 19,
+      "testPF": 1.0254476053284642,
+      "testAvgPct": 0.08166072803940973,
+      "testBars": 1301
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 25,
+      "testPF": 1.3423390494504337,
+      "testAvgPct": 0.305829910799499,
+      "testBars": 2628
+     },
+     {
+      "key": "XLM@1h",
+      "testTrades": 25,
+      "testPF": 0.7175486580668582,
+      "testAvgPct": -0.37352464975833116,
+      "testBars": 2527
+     },
+     {
+      "key": "ARB@4h",
+      "testTrades": 7,
+      "testPF": 2.264547917666096,
+      "testAvgPct": 3.309766963122113,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 6,
+      "testPF": 0.9223526536706865,
+      "testAvgPct": -0.11526485742347632,
+      "testBars": 657
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 22,
+      "testPF": 2.5987213411875074,
+      "testAvgPct": 1.8587997961162495,
+      "testBars": 2628
+     },
+     {
+      "key": "WLD@1h",
+      "testTrades": 24,
+      "testPF": 0.6195992040856999,
+      "testAvgPct": -0.8156388615043796,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@4h",
+      "testTrades": 9,
+      "testPF": 1.388342373043783,
+      "testAvgPct": 0.47214493228737076,
+      "testBars": 657
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 35,
+      "testPF": 0.8053890843100008,
+      "testAvgPct": -0.34459882167844186,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@4h",
+      "testTrades": 11,
+      "testPF": 0.8841938756044623,
+      "testAvgPct": -0.39385078788746614,
+      "testBars": 657
+     },
+     {
+      "key": "MON@4h",
+      "testTrades": 8,
+      "testPF": 0.4536003768094217,
+      "testAvgPct": -2.1807469765968546,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short_adx",
+    "name": "Short-term spike in a downtrend (short), no strong trend",
+    "side": "short",
+    "pickPass": 14,
+    "pickTested": 208,
+    "pickMedianPF": 1.4051533436189256,
+    "testTrades": 213,
+    "testPF": 0.738939542458237,
+    "testAvgPct": -0.24714841589964798,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.74).",
+    "charts": [
+     {
+      "key": "SOL@30m",
+      "testTrades": 10,
+      "testPF": 1.3086968004103097,
+      "testAvgPct": 0.11063178339399982,
+      "testBars": 862
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 10,
+      "testPF": 0.14218941437887078,
+      "testAvgPct": -1.0356713444483525,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@1d",
+      "testTrades": 10,
+      "testPF": 0.6406865220237761,
+      "testAvgPct": -1.2249588624657242,
+      "testBars": 548
+     },
+     {
+      "key": "XMR@4h",
+      "testTrades": 2,
+      "testPF": 0.5387120635212117,
+      "testAvgPct": -0.6383341843665504,
+      "testBars": 657
+     },
+     {
+      "key": "SUI@1h",
+      "testTrades": 40,
+      "testPF": 0.2662896275590235,
+      "testAvgPct": -0.5351821083765745,
+      "testBars": 2628
+     },
+     {
+      "key": "LDO@1h",
+      "testTrades": 31,
+      "testPF": 0.6355853430809213,
+      "testAvgPct": -0.19839461695775895,
+      "testBars": 2628
+     },
+     {
+      "key": "ZRO@4h",
+      "testTrades": 8,
+      "testPF": 1.2331447452594155,
+      "testAvgPct": 0.27313572961600846,
+      "testBars": 657
+     },
+     {
+      "key": "GMX@4h",
+      "testTrades": 6,
+      "testPF": 0.4615366963441742,
+      "testAvgPct": -0.7835247055467608,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@4h",
+      "testTrades": 5,
+      "testPF": 1.962498205562632,
+      "testAvgPct": 0.6732220219552716,
+      "testBars": 657
+     },
+     {
+      "key": "WIF@4h",
+      "testTrades": 5,
+      "testPF": 0.18373933468592943,
+      "testAvgPct": -2.258768918419399,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@1h",
+      "testTrades": 36,
+      "testPF": 1.5715996540008799,
+      "testAvgPct": 0.38024670307647196,
+      "testBars": 2628
+     },
+     {
+      "key": "GRASS@1h",
+      "testTrades": 33,
+      "testPF": 0.5252455143816012,
+      "testAvgPct": -0.37361623703216856,
+      "testBars": 2628
+     },
+     {
+      "key": "GRASS@4h",
+      "testTrades": 7,
+      "testPF": 4.536655792055558,
+      "testAvgPct": 1.8581707402148877,
+      "testBars": 657
+     },
+     {
+      "key": "ZORA@4h",
+      "testTrades": 10,
+      "testPF": 0.5563735208559191,
+      "testAvgPct": -0.6231386313460114,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short",
+    "name": "Short-term spike in a downtrend (short)",
+    "side": "short",
+    "pickPass": 12,
+    "pickTested": 208,
+    "pickMedianPF": 1.5168099105766584,
+    "testTrades": 319,
+    "testPF": 1.1065753829301832,
+    "testAvgPct": 0.07483150342354691,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "ETH@4h",
+      "testTrades": 17,
+      "testPF": 1.6255706001559882,
+      "testAvgPct": 0.32973118936348306,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 18,
+      "testPF": 0.9364109089115531,
+      "testAvgPct": -0.04998529308562774,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@1d",
+      "testTrades": 13,
+      "testPF": 1.7969511943129206,
+      "testAvgPct": 0.8350843407414246,
+      "testBars": 548
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 76,
+      "testPF": 0.7886759366161097,
+      "testAvgPct": -0.1764526036845351,
+      "testBars": 5198
+     },
+     {
+      "key": "XMR@4h",
+      "testTrades": 4,
+      "testPF": 0.959914474611101,
+      "testAvgPct": -0.04283420732090182,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@4h",
+      "testTrades": 10,
+      "testPF": 1.26141850496647,
+      "testAvgPct": 0.3678404506652688,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@4h",
+      "testTrades": 8,
+      "testPF": 1.8605110803696985,
+      "testAvgPct": 0.4818625928877264,
+      "testBars": 657
+     },
+     {
+      "key": "PUMP@1h",
+      "testTrades": 47,
+      "testPF": 1.1891810363595612,
+      "testAvgPct": 0.14152764613452629,
+      "testBars": 2628
+     },
+     {
+      "key": "LINEA@4h",
+      "testTrades": 11,
+      "testPF": 1.2742255890697642,
+      "testAvgPct": 0.12769632257353225,
+      "testBars": 657
+     },
+     {
+      "key": "MEGA@1h",
+      "testTrades": 47,
+      "testPF": 0.8876905545643778,
+      "testAvgPct": -0.07098312050493663,
+      "testBars": 2628
+     },
+     {
+      "key": "GRAM@1h",
+      "testTrades": 50,
+      "testPF": 1.0135709214575004,
+      "testAvgPct": 0.004941624214242513,
+      "testBars": 2628
+     },
+     {
+      "key": "SPX@4h",
+      "testTrades": 18,
+      "testPF": 1.7351581920334505,
+      "testAvgPct": 0.521697456376506,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_adx",
+    "name": "Lower Bollinger band bounce, no strong trend",
+    "side": "long",
+    "pickPass": 11,
+    "pickTested": 208,
+    "pickMedianPF": 1.7701977658938666,
+    "testTrades": 90,
+    "testPF": 0.9319814099054264,
+    "testAvgPct": -0.06844194266722162,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.93).",
+    "charts": [
+     {
+      "key": "BTC@4h",
+      "testTrades": 10,
+      "testPF": 3.351707843266078,
+      "testAvgPct": 0.8015269480791603,
+      "testBars": 1301
+     },
+     {
+      "key": "BNB@1h",
+      "testTrades": 11,
+      "testPF": 0.8339978055495741,
+      "testAvgPct": -0.06253964719643668,
+      "testBars": 2628
+     },
+     {
+      "key": "XMR@1h",
+      "testTrades": 12,
+      "testPF": 0.3977496469251666,
+      "testAvgPct": -0.6708855461527432,
+      "testBars": 2628
+     },
+     {
+      "key": "SEI@1h",
+      "testTrades": 7,
+      "testPF": 3.51439559024726,
+      "testAvgPct": 0.9864116754203177,
+      "testBars": 2628
+     },
+     {
+      "key": "FIL@1h",
+      "testTrades": 8,
+      "testPF": 0,
+      "testAvgPct": -2.3527252133178425,
+      "testBars": 2628
+     },
+     {
+      "key": "LDO@1h",
+      "testTrades": 7,
+      "testPF": 0.14549309398476545,
+      "testAvgPct": -1.6184996972065275,
+      "testBars": 2628
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 13,
+      "testPF": 1.4559737571496603,
+      "testAvgPct": 0.4613558535984452,
+      "testBars": 2628
+     },
+     {
+      "key": "ZRO@1h",
+      "testTrades": 11,
+      "testPF": 4.086721773877482,
+      "testAvgPct": 1.847647320017127,
+      "testBars": 2628
+     },
+     {
+      "key": "STBL@1h",
+      "testTrades": 2,
+      "testPF": 1.8263849286590164,
+      "testAvgPct": 0.5406797585552331,
+      "testBars": 2628
+     },
+     {
+      "key": "RIVER@1h",
+      "testTrades": 3,
+      "testPF": 3.023645812862683,
+      "testAvgPct": 0.9312238916451693,
+      "testBars": 2226
+     },
+     {
+      "key": "SPX@1h",
+      "testTrades": 6,
+      "testPF": 0,
+      "testAvgPct": -2.064473599635963,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_adx",
+    "name": "20-bar breakout, strong trend only",
+    "side": "long",
+    "pickPass": 11,
+    "pickTested": 208,
+    "pickMedianPF": 1.745928933883965,
+    "testTrades": 172,
+    "testPF": 1.3317448115983055,
+    "testAvgPct": 0.46884373829160453,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 1,
+      "testPF": 0,
+      "testAvgPct": -2.6274329681581388,
+      "testBars": 548
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 22,
+      "testPF": 1.4850517682044875,
+      "testAvgPct": 0.23855661007506065,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 6,
+      "testPF": 1.0312557901360127,
+      "testAvgPct": 0.03711148823705146,
+      "testBars": 1301
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 37,
+      "testPF": 1.3209457354727157,
+      "testAvgPct": 0.512799194366497,
+      "testBars": 5198
+     },
+     {
+      "key": "NEAR@4h",
+      "testTrades": 11,
+      "testPF": 1.189341367014413,
+      "testAvgPct": 0.7063968834133871,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 22,
+      "testPF": 2.281032826576032,
+      "testAvgPct": 1.1814868167658092,
+      "testBars": 5198
+     },
+     {
+      "key": "HYPE@4h",
+      "testTrades": 5,
+      "testPF": 0.5804093471590553,
+      "testAvgPct": -0.7186349813381933,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@1h",
+      "testTrades": 22,
+      "testPF": 1.2814767356682841,
+      "testAvgPct": 0.3259586997820078,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 21,
+      "testPF": 0.9213952293667356,
+      "testAvgPct": -0.15646450245986956,
+      "testBars": 2628
+     },
+     {
+      "key": "XPL@1h",
+      "testTrades": 14,
+      "testPF": 2.4501352143100683,
+      "testAvgPct": 1.5414145709209008,
+      "testBars": 2628
+     },
+     {
+      "key": "GRAM@1h",
+      "testTrades": 11,
+      "testPF": 1.2811980607705473,
+      "testAvgPct": 0.2899117995942212,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip",
+    "name": "Short-term dip in an uptrend",
+    "side": "long",
+    "pickPass": 10,
+    "pickTested": 208,
+    "pickMedianPF": 2.6045589745544078,
+    "testTrades": 89,
+    "testPF": 0.4453923498028858,
+    "testAvgPct": -1.1249143135761681,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.45).",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 5,
+      "testPF": 0.6229739759385258,
+      "testAvgPct": -0.65265001251794,
+      "testBars": 548
+     },
+     {
+      "key": "SOL@1d",
+      "testTrades": 6,
+      "testPF": 0.5577442798432398,
+      "testAvgPct": -1.4869777925727146,
+      "testBars": 548
+     },
+     {
+      "key": "QNT@1d",
+      "testTrades": 7,
+      "testPF": 0.3555848157904061,
+      "testAvgPct": -2.5680776391293683,
+      "testBars": 548
+     },
+     {
+      "key": "SUI@4h",
+      "testTrades": 8,
+      "testPF": 0.35573225712142814,
+      "testAvgPct": -1.266282150240413,
+      "testBars": 657
+     },
+     {
+      "key": "TIA@4h",
+      "testTrades": 11,
+      "testPF": 0.0745177169978337,
+      "testAvgPct": -3.1037905783428594,
+      "testBars": 657
+     },
+     {
+      "key": "AAVE@4h",
+      "testTrades": 10,
+      "testPF": 0.26331552965357496,
+      "testAvgPct": -1.4518182234486339,
+      "testBars": 657
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 10,
+      "testPF": 1.0981974726110524,
+      "testAvgPct": 0.08298177866069337,
+      "testBars": 657
+     },
+     {
+      "key": "TAO@4h",
+      "testTrades": 11,
+      "testPF": 0.41448751595629785,
+      "testAvgPct": -1.0978597167679043,
+      "testBars": 657
+     },
+     {
+      "key": "NMR@4h",
+      "testTrades": 9,
+      "testPF": 0.55721361515614,
+      "testAvgPct": -0.6019499828732172,
+      "testBars": 657
+     },
+     {
+      "key": "MET@4h",
+      "testTrades": 12,
+      "testPF": 1.541113207415521,
+      "testAvgPct": 0.4582175937943926,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short_adx",
+    "name": "MACD momentum cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 9,
+    "pickTested": 208,
+    "pickMedianPF": 1.701273056846101,
+    "testTrades": 86,
+    "testPF": 0.4931092665612489,
+    "testAvgPct": -0.5826163128056552,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.49).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 24,
+      "testPF": 0.5861636013321242,
+      "testAvgPct": -0.32113825187035544,
+      "testBars": 5198
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 10,
+      "testPF": 0.48964701687761636,
+      "testAvgPct": -0.37795472590206297,
+      "testBars": 2628
+     },
+     {
+      "key": "AAVE@1h",
+      "testTrades": 7,
+      "testPF": 2.297690303737665,
+      "testAvgPct": 0.8906507964375179,
+      "testBars": 2628
+     },
+     {
+      "key": "PENDLE@4h",
+      "testTrades": 4,
+      "testPF": 1.1040336811883258,
+      "testAvgPct": 0.21053264519934123,
+      "testBars": 657
+     },
+     {
+      "key": "ETHFI@1h",
+      "testTrades": 11,
+      "testPF": 0.4297097872904627,
+      "testAvgPct": -0.7793930645126856,
+      "testBars": 2628
+     },
+     {
+      "key": "JUP@1h",
+      "testTrades": 10,
+      "testPF": 0.17990874930353498,
+      "testAvgPct": -0.6681723071347401,
+      "testBars": 2628
+     },
+     {
+      "key": "MEGA@1h",
+      "testTrades": 9,
+      "testPF": 0.6074628561779988,
+      "testAvgPct": -0.41688888478775926,
+      "testBars": 2628
+     },
+     {
+      "key": "USELESS@1h",
+      "testTrades": 7,
+      "testPF": 0,
+      "testAvgPct": -3.116183940385182,
+      "testBars": 2628
+     },
+     {
+      "key": "CC@1h",
+      "testTrades": 4,
+      "testPF": 0.09165858489001966,
+      "testAvgPct": -1.2186223566160308,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "macd_cross",
+    "name": "MACD momentum cross",
+    "side": "long",
+    "pickPass": 9,
+    "pickTested": 208,
+    "pickMedianPF": 1.4051202591268617,
+    "testTrades": 129,
+    "testPF": 0.738451882117515,
+    "testAvgPct": -0.33881590044098236,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.74).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 48,
+      "testPF": 1.002689605018522,
+      "testAvgPct": 0.0009514882714080445,
+      "testBars": 5198
+     },
+     {
+      "key": "BTC@1d",
+      "testTrades": 6,
+      "testPF": 0.014269251071582677,
+      "testAvgPct": -1.9919391948064387,
+      "testBars": 548
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 8,
+      "testPF": 2.6526175189970864,
+      "testAvgPct": 1.310227985893078,
+      "testBars": 1301
+     },
+     {
+      "key": "NEAR@4h",
+      "testTrades": 11,
+      "testPF": 0.034369525074390055,
+      "testAvgPct": -3.263929512639159,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@4h",
+      "testTrades": 6,
+      "testPF": 1.3431470542361181,
+      "testAvgPct": 0.5554112680724598,
+      "testBars": 1301
+     },
+     {
+      "key": "ARB@4h",
+      "testTrades": 4,
+      "testPF": 0.11199445590908765,
+      "testAvgPct": -4.177367722715265,
+      "testBars": 657
+     },
+     {
+      "key": "AERO@1h",
+      "testTrades": 18,
+      "testPF": 1.0637231454200589,
+      "testAvgPct": 0.08273489823538187,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 21,
+      "testPF": 1.7775914361643665,
+      "testAvgPct": 0.7621822849211186,
+      "testBars": 2628
+     },
+     {
+      "key": "MON@4h",
+      "testTrades": 7,
+      "testPF": 0.5227832404050596,
+      "testAvgPct": -1.4997056489062337,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short",
+    "name": "Supertrend turns down (short)",
+    "side": "short",
+    "pickPass": 8,
+    "pickTested": 208,
+    "pickMedianPF": 2.053371428250065,
+    "testTrades": 90,
+    "testPF": 0.9233226942959821,
+    "testAvgPct": -0.10476402891795525,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.92).",
+    "charts": [
+     {
+      "key": "NEAR@4h",
+      "testTrades": 7,
+      "testPF": 1.0458142381567017,
+      "testAvgPct": 0.0964014735642199,
+      "testBars": 1301
+     },
+     {
+      "key": "BCH@4h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -2.5742212009791667,
+      "testBars": 657
+     },
+     {
+      "key": "XMR@1h",
+      "testTrades": 13,
+      "testPF": 0.7292407266442427,
+      "testAvgPct": -0.3132570406659457,
+      "testBars": 2628
+     },
+     {
+      "key": "TAO@1h",
+      "testTrades": 22,
+      "testPF": 1.4859242203508718,
+      "testAvgPct": 0.3747677931188614,
+      "testBars": 2628
+     },
+     {
+      "key": "MNT@4h",
+      "testTrades": 6,
+      "testPF": 1.7809253423379117,
+      "testAvgPct": 1.038083160913125,
+      "testBars": 657
+     },
+     {
+      "key": "FARTCOIN@1h",
+      "testTrades": 21,
+      "testPF": 1.0327076605739665,
+      "testAvgPct": 0.0402658618036147,
+      "testBars": 2628
+     },
+     {
+      "key": "ZORA@4h",
+      "testTrades": 6,
+      "testPF": 0.06710038325885555,
+      "testAvgPct": -2.8304526815288056,
+      "testBars": 657
+     },
+     {
+      "key": "RIVER@4h",
+      "testTrades": 12,
+      "testPF": 1.2036624507042952,
+      "testAvgPct": 0.27959789926937556,
+      "testBars": 557
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_adx",
+    "name": "20/50 average crossover, strong trend only",
+    "side": "long",
+    "pickPass": 8,
+    "pickTested": 208,
+    "pickMedianPF": 1.8812539794774223,
+    "testTrades": 53,
+    "testPF": 1.420901774753832,
+    "testAvgPct": 0.5431888536287076,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "ICP@1h",
+      "testTrades": 6,
+      "testPF": 0.3222234392764224,
+      "testAvgPct": -1.027618501640938,
+      "testBars": 2628
+     },
+     {
+      "key": "AAVE@1h",
+      "testTrades": 8,
+      "testPF": 2.3503463917591367,
+      "testAvgPct": 1.382521607539457,
+      "testBars": 2628
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 8,
+      "testPF": 1.037510511587059,
+      "testAvgPct": 0.08292624351056382,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@1h",
+      "testTrades": 5,
+      "testPF": 3.8583802147574264,
+      "testAvgPct": 0.7582906429182257,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 8,
+      "testPF": 2.8970454132384464,
+      "testAvgPct": 2.2012410611409288,
+      "testBars": 2628
+     },
+     {
+      "key": "1000PEPE@1h",
+      "testTrades": 3,
+      "testPF": 0,
+      "testAvgPct": -2.6762063158744454,
+      "testBars": 2628
+     },
+     {
+      "key": "MON@1h",
+      "testTrades": 8,
+      "testPF": 1.5446783269803763,
+      "testAvgPct": 0.6022330565360812,
+      "testBars": 2628
+     },
+     {
+      "key": "GRAM@1h",
+      "testTrades": 7,
+      "testPF": 1.8483376879117135,
+      "testAvgPct": 0.7200728907690124,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "supertrend",
+    "name": "Supertrend turns up",
+    "side": "long",
+    "pickPass": 8,
+    "pickTested": 208,
+    "pickMedianPF": 1.79275714388055,
+    "testTrades": 94,
+    "testPF": 1.040561528392379,
+    "testAvgPct": 0.06183146329425457,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "NEAR@4h",
+      "testTrades": 9,
+      "testPF": 1.5091369115926498,
+      "testAvgPct": 1.1528450701583504,
+      "testBars": 1301
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 14,
+      "testPF": 1.9120339803711683,
+      "testAvgPct": 0.6050711764636374,
+      "testBars": 2628
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 10,
+      "testPF": 3.05630759410263,
+      "testAvgPct": 2.38539295683229,
+      "testBars": 2628
+     },
+     {
+      "key": "WLD@1h",
+      "testTrades": 7,
+      "testPF": 0.498244604634338,
+      "testAvgPct": -0.7701710028437626,
+      "testBars": 2628
+     },
+     {
+      "key": "SYRUP@1h",
+      "testTrades": 18,
+      "testPF": 1.1768771909779412,
+      "testAvgPct": 0.18257658612420105,
+      "testBars": 2628
+     },
+     {
+      "key": "MON@1h",
+      "testTrades": 6,
+      "testPF": 1.1892106523881565,
+      "testAvgPct": 0.17453951311066374,
+      "testBars": 2628
+     },
+     {
+      "key": "VVV@1h",
+      "testTrades": 18,
+      "testPF": 0.6725822367904184,
+      "testAvgPct": -0.5261407273234705,
+      "testBars": 2628
+     },
+     {
+      "key": "USELESS@1h",
+      "testTrades": 12,
+      "testPF": 0.31067703559053617,
+      "testAvgPct": -2.1966883031458218,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "ma_cross",
+    "name": "20/50 average crossover",
+    "side": "long",
+    "pickPass": 8,
+    "pickTested": 208,
+    "pickMedianPF": 1.7176428208978711,
+    "testTrades": 112,
+    "testPF": 0.9768261619018599,
+    "testAvgPct": -0.030327453209427202,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.98).",
+    "charts": [
+     {
+      "key": "ETH@4h",
+      "testTrades": 8,
+      "testPF": 0.855209790988028,
+      "testAvgPct": -0.12096015533283949,
+      "testBars": 1301
+     },
+     {
+      "key": "ICP@4h",
+      "testTrades": 3,
+      "testPF": 0.5959016514113158,
+      "testAvgPct": -0.5788723514867135,
+      "testBars": 657
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 20,
+      "testPF": 0.8485235876434163,
+      "testAvgPct": -0.2990907881530142,
+      "testBars": 2628
+     },
+     {
+      "key": "ZRO@1h",
+      "testTrades": 23,
+      "testPF": 1.169720381728998,
+      "testAvgPct": 0.23572752590465668,
+      "testBars": 2628
+     },
+     {
+      "key": "TAO@1h",
+      "testTrades": 28,
+      "testPF": 0.7932977383262765,
+      "testAvgPct": -0.24229462579157263,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@1h",
+      "testTrades": 21,
+      "testPF": 1.067943757939171,
+      "testAvgPct": 0.051818149035488016,
+      "testBars": 2628
+     },
+     {
+      "key": "APEX@4h",
+      "testTrades": 5,
+      "testPF": 0.6487545047099069,
+      "testAvgPct": -0.9252926334589182,
+      "testBars": 657
+     },
+     {
+      "key": "XPL@4h",
+      "testTrades": 4,
+      "testPF": 5.742293653023056,
+      "testAvgPct": 2.5475594411583935,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_adx",
+    "name": "MACD momentum cross, strong trend only",
+    "side": "long",
+    "pickPass": 8,
+    "pickTested": 208,
+    "pickMedianPF": 1.6410742712641009,
+    "testTrades": 56,
+    "testPF": 0.8387637064848908,
+    "testAvgPct": -0.2417150076002872,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.84).",
+    "charts": [
+     {
+      "key": "NEAR@4h",
+      "testTrades": 8,
+      "testPF": 0.0422851371936429,
+      "testAvgPct": -3.6178830189811393,
+      "testBars": 1301
+     },
+     {
+      "key": "XLM@1h",
+      "testTrades": 6,
+      "testPF": 0.6484157557762535,
+      "testAvgPct": -0.3906428559934952,
+      "testBars": 2527
+     },
+     {
+      "key": "AAVE@1h",
+      "testTrades": 4,
+      "testPF": 0.9158782091251353,
+      "testAvgPct": -0.06863122595566906,
+      "testBars": 2628
+     },
+     {
+      "key": "ZRO@4h",
+      "testTrades": 5,
+      "testPF": 1.268685141605296,
+      "testAvgPct": 0.6059961488836942,
+      "testBars": 657
+     },
+     {
+      "key": "WLD@1h",
+      "testTrades": 7,
+      "testPF": 2.286262156166654,
+      "testAvgPct": 1.3514949615317664,
+      "testBars": 2628
+     },
+     {
+      "key": "AERO@1h",
+      "testTrades": 9,
+      "testPF": 1.1723499806515163,
+      "testAvgPct": 0.24724123109664387,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 7,
+      "testPF": 1.4116990707329982,
+      "testAvgPct": 0.5876301713254356,
+      "testBars": 2628
+     },
+     {
+      "key": "PAXG@1h",
+      "testTrades": 10,
+      "testPF": 0.6454317160941389,
+      "testAvgPct": -0.08036219882719893,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_adx",
+    "name": "Short-term dip in an uptrend, no strong trend",
+    "side": "long",
+    "pickPass": 7,
+    "pickTested": 208,
+    "pickMedianPF": 2.1606276332553866,
+    "testTrades": 69,
+    "testPF": 0.7477399363645392,
+    "testAvgPct": -0.31260262999655797,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.75).",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 4,
+      "testPF": 0.8085087739517843,
+      "testAvgPct": -0.3192663026787651,
+      "testBars": 548
+     },
+     {
+      "key": "LDO@4h",
+      "testTrades": 5,
+      "testPF": 6.1107228142935925,
+      "testAvgPct": 1.082543995828129,
+      "testBars": 657
+     },
+     {
+      "key": "ZRO@1h",
+      "testTrades": 27,
+      "testPF": 0.7965702398020075,
+      "testAvgPct": -0.2390354746556429,
+      "testBars": 2628
+     },
+     {
+      "key": "SYRUP@4h",
+      "testTrades": 9,
+      "testPF": 0.241794958616083,
+      "testAvgPct": -2.134805462820715,
+      "testBars": 657
+     },
+     {
+      "key": "LIT@4h",
+      "testTrades": 5,
+      "testPF": 0.7944327232968581,
+      "testAvgPct": -0.2020049586513184,
+      "testBars": 593
+     },
+     {
+      "key": "MET@4h",
+      "testTrades": 8,
+      "testPF": 1.2306574357272608,
+      "testAvgPct": 0.2818974334520048,
+      "testBars": 657
+     },
+     {
+      "key": "BB@1h",
+      "testTrades": 11,
+      "testPF": 0.7868637363021821,
+      "testAvgPct": -0.11665308467806645,
+      "testBars": 1111
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_adx",
+    "name": "Pullback to the 20-bar average, strong trend only",
+    "side": "long",
+    "pickPass": 7,
+    "pickTested": 208,
+    "pickMedianPF": 1.996368752253312,
+    "testTrades": 62,
+    "testPF": 0.9881110448997419,
+    "testAvgPct": -0.020756473177029125,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.99).",
+    "charts": [
+     {
+      "key": "BTC@30m",
+      "testTrades": 4,
+      "testPF": 2.123084284828108,
+      "testAvgPct": 0.34692750492379204,
+      "testBars": 862
+     },
+     {
+      "key": "BTC@4h",
+      "testTrades": 12,
+      "testPF": 0.8053240031703387,
+      "testAvgPct": -0.14452567129441482,
+      "testBars": 1301
+     },
+     {
+      "key": "NEAR@4h",
+      "testTrades": 11,
+      "testPF": 0.8882777455536893,
+      "testAvgPct": -0.3501872108172066,
+      "testBars": 1301
+     },
+     {
+      "key": "GRASS@1h",
+      "testTrades": 15,
+      "testPF": 0.7366333311837743,
+      "testAvgPct": -0.5310639591081652,
+      "testBars": 2628
+     },
+     {
+      "key": "GRASS@4h",
+      "testTrades": 3,
+      "testPF": 2.042535542819956,
+      "testAvgPct": 4.157240726560184,
+      "testBars": 657
+     },
+     {
+      "key": "XPL@1h",
+      "testTrades": 14,
+      "testPF": 0.7329498121725814,
+      "testAvgPct": -0.29208745717590034,
+      "testBars": 2628
+     },
+     {
+      "key": "XPL@4h",
+      "testTrades": 3,
+      "testPF": 1.4091769971581756,
+      "testAvgPct": 0.8317392084186,
+      "testBars": 657
+     }
+    ]
+   },
+   {
+    "id": "squeeze_break_short",
+    "name": "Breakdown after a quiet spell (short)",
+    "side": "short",
+    "pickPass": 6,
+    "pickTested": 208,
+    "pickMedianPF": 1.8054351043328958,
+    "testTrades": 26,
+    "testPF": 0.6318218302812998,
+    "testAvgPct": -0.3413913536757788,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.63).",
+    "charts": [
+     {
+      "key": "SOL@1h",
+      "testTrades": 3,
+      "testPF": 0.6203634258826091,
+      "testAvgPct": -0.16262384737186383,
+      "testBars": 5198
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 4,
+      "testPF": 0.7785834401887978,
+      "testAvgPct": -0.14305185956968736,
+      "testBars": 5198
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 12,
+      "testPF": 0.21013708966757186,
+      "testAvgPct": -0.851886013435129,
+      "testBars": 5198
+     },
+     {
+      "key": "LINK@1h",
+      "testTrades": 2,
+      "testPF": 99,
+      "testAvgPct": 0.5080679991751333,
+      "testBars": 2628
+     },
+     {
+      "key": "ENA@1h",
+      "testTrades": 3,
+      "testPF": 3.061963325058316,
+      "testAvgPct": 1.9499946569698956,
+      "testBars": 2628
+     },
+     {
+      "key": "ZEC@1h",
+      "testTrades": 2,
+      "testPF": 0,
+      "testAvgPct": -2.229792011607156,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short_adx",
+    "name": "20/50 average cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 4,
+    "pickTested": 208,
+    "pickMedianPF": 2.053273037663907,
+    "testTrades": 29,
+    "testPF": 1.175637037881131,
+    "testAvgPct": 0.17447200817318198,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 3,
+      "testPF": 0.7900701011794418,
+      "testAvgPct": -0.03169475714877421,
+      "testBars": 1723
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 13,
+      "testPF": 1.4405606486498785,
+      "testAvgPct": 0.5716965519555297,
+      "testBars": 5198
+     },
+     {
+      "key": "AVAX@1h",
+      "testTrades": 7,
+      "testPF": 0,
+      "testAvgPct": -1.4985867365844363,
+      "testBars": 2628
+     },
+     {
+      "key": "HYPE@1h",
+      "testTrades": 6,
+      "testPF": 9.253611543026413,
+      "testAvgPct": 1.3688040815229616,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback",
+    "name": "Pullback to the 20-bar average",
+    "side": "long",
+    "pickPass": 4,
+    "pickTested": 208,
+    "pickMedianPF": 1.2426249716831952,
+    "testTrades": 90,
+    "testPF": 1.1543061563594,
+    "testAvgPct": 0.23447572322913676,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "SOL@4h",
+      "testTrades": 23,
+      "testPF": 0.9072671369553672,
+      "testAvgPct": -0.10523166915160322,
+      "testBars": 1301
+     },
+     {
+      "key": "NEAR@4h",
+      "testTrades": 21,
+      "testPF": 1.5517416679940959,
+      "testAvgPct": 1.239289149909839,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@1d",
+      "testTrades": 10,
+      "testPF": 1.3796977981749485,
+      "testAvgPct": 0.984040924650599,
+      "testBars": 548
+     },
+     {
+      "key": "XPL@1h",
+      "testTrades": 36,
+      "testPF": 0.6715192720099863,
+      "testAvgPct": -0.34284271981953957,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short_adx",
+    "name": "Supertrend turns down (short), strong trend only",
+    "side": "short",
+    "pickPass": 3,
+    "pickTested": 208,
+    "pickMedianPF": 1.2843127299219328,
+    "testTrades": 25,
+    "testPF": 1.0766683096768754,
+    "testAvgPct": 0.068001250213777,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 11,
+      "testPF": 2.8671858984990903,
+      "testAvgPct": 0.5742898947447109,
+      "testBars": 5198
+     },
+     {
+      "key": "PENDLE@1h",
+      "testTrades": 8,
+      "testPF": 0.6451356026451455,
+      "testAvgPct": -0.4808179057624711,
+      "testBars": 2628
+     },
+     {
+      "key": "TRUMP@1h",
+      "testTrades": 6,
+      "testPF": 0.9030808467838488,
+      "testAvgPct": -0.12843572345793808,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "squeeze_break",
+    "name": "Breakout after a quiet spell",
+    "side": "long",
+    "pickPass": 2,
+    "pickTested": 208,
+    "pickMedianPF": 2.2171097444803527,
+    "testTrades": 7,
+    "testPF": 0.1245624747022966,
+    "testAvgPct": -1.3739823518787389,
+    "chosen": false,
+    "why": "Only 7 trades in the newer data, too few to confirm.",
+    "charts": [
+     {
+      "key": "LINK@1h",
+      "testTrades": 4,
+      "testPF": 0,
+      "testAvgPct": -1.5888166845645935,
+      "testBars": 2628
+     },
+     {
+      "key": "WLD@1h",
+      "testTrades": 3,
+      "testPF": 0.2954998320565722,
+      "testAvgPct": -1.0875365749642663,
+      "testBars": 2628
+     }
+    ]
+   },
+   {
+    "id": "supertrend_adx",
+    "name": "Supertrend turns up, strong trend only",
+    "side": "long",
+    "pickPass": 0,
+    "pickTested": 208,
+    "pickMedianPF": 0,
+    "testTrades": 0,
+    "testPF": 0,
+    "testAvgPct": 0,
+    "chosen": false,
+    "why": "Did not pass the quality test on any chart in the older data.",
+    "charts": []
+   }
+  ],
+  "charts": 208,
+  "testShare": 0.3
+ },
+ "exits": {
+  "mode": "ladder",
+  "tpR": [
+   1,
+   2,
+   3
+  ],
+  "fractions": [
+   0.3333,
+   0.3333,
+   0.3334
+  ],
+  "trailAtr": 3,
+  "slR": [
+   0.5,
+   0.75
+  ],
+  "slFractions": [
+   0.3333,
+   0.3333
+  ]
+ },
+ "hours": {
+  "total": 30,
+  "allDay": 30,
+  "marketHoursOnly": [],
+  "notTraded": []
+ },
+ "daily": [
+  {
+   "day": "2026-11-23",
+   "equity": 250,
+   "pnl": 0,
+   "opened": 0,
+   "closed": 0,
+   "wins": 0,
+   "losses": 0
+  },
+  {
+   "day": "2026-11-24",
+   "equity": 250,
+   "pnl": -1.36,
+   "opened": 3,
+   "closed": 1,
+   "wins": 0,
+   "losses": 1
+  },
+  {
+   "day": "2026-11-25",
+   "equity": 250,
+   "pnl": 2.29,
+   "opened": 1,
+   "closed": 1,
+   "wins": 1,
+   "losses": 0
+  },
+  {
+   "day": "2026-11-26",
+   "equity": 244.08,
+   "pnl": -5.15,
+   "opened": 2,
+   "closed": 2,
+   "wins": 0,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-27",
+   "equity": 244.06,
+   "pnl": -1.83,
+   "opened": 0,
+   "closed": 2,
+   "wins": 0,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-28",
+   "equity": 244.06,
+   "pnl": 0,
+   "opened": 0,
+   "closed": 0,
+   "wins": 0,
+   "losses": 0
+  }
+ ],
+ "nextCheck": "2026-11-28T19:16:00.000Z",
+ "pricesAt": "2026-11-28T19:01:08.110Z",
+ "maxLeverage": 2,
+ "riskPct": 2,
+ "maxDrawdownPct": 10,
+ "peak": 258.0693146928812,
+ "halted": null,
+ "checked": {
+  "at": "2026-11-28T19:01:08.110Z",
+  "markets": 214,
+  "withStrategy": 8,
+  "newBars": 195,
+  "by": "PC"
+ },
+ "positions": [],
+ "pending": [],
+ "trades": [
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-24T02:00",
+   "exitDate": "2026-11-24T05:00",
+   "entry": 2.9676154484748842,
+   "exit": 3.0305450109143566,
+   "qty": 13.903605660485612,
+   "pnl": -0.8749478205453304,
+   "retPct": -2.1205430262810188,
+   "reason": "sl1",
+   "key": "NEAR@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 2.9676, closed at 3.0305 (-2.12%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-24T02:00",
+   "exitDate": "2026-11-24T07:00",
+   "entry": 2.9676154484748842,
+   "exit": 3.0270128091573714,
+   "qty": 27.811382819819258,
+   "pnl": -1.6519227364275304,
+   "retPct": -2.001518111553602,
+   "reason": "time-stop",
+   "funding": -0.0193,
+   "key": "NEAR@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: too long at a loss: no progress after the maximum number of bars. Sold short at 2.9676, closed at 3.0270 (-2.00%)."
+  },
+  {
+   "symbol": "ADA",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-24T05:00",
+   "exitDate": "2026-11-24T13:00",
+   "entry": 0.1479859639853239,
+   "exit": 0.1438073801470588,
+   "qty": 279.26132800911137,
+   "pnl": 1.1669168718713243,
+   "retPct": 2.8236352460288106,
+   "reason": "tp1",
+   "key": "ADA@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: take-profit 1: the price moved one R (the risk it took) its way, so a part was sold and the stop moved to the entry price. Sold short at 0.1480, closed at 0.1438 (+2.82%)."
+  },
+  {
+   "symbol": "ADA",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-24T05:00",
+   "exitDate": "2026-11-25T12:00",
+   "entry": 0.1479859639853239,
+   "exit": 0.1394807363148114,
+   "qty": 279.26132800911137,
+   "pnl": 2.3751811742871642,
+   "retPct": 5.74732051707011,
+   "reason": "tp2",
+   "key": "ADA@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: take-profit 2: the price moved two R its way, so another part was sold and the stop moved up to the first take-profit. Sold short at 0.1480, closed at 0.1395 (+5.75%)."
+  },
+  {
+   "symbol": "ADA",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-24T05:00",
+   "exitDate": "2026-11-25T17:00",
+   "entry": 0.1479859639853239,
+   "exit": 0.1405318984739685,
+   "qty": 279.34511478619186,
+   "pnl": 2.0822567858933714,
+   "retPct": 5.037008450405911,
+   "reason": "trail",
+   "funding": 0.0267,
+   "key": "ADA@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: rising stop: after the first take-profit the stop followed the price, and the price came back to it, keeping the profit. Sold short at 0.1480, closed at 0.1405 (+5.04%)."
+  },
+  {
+   "symbol": "MON",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-25T17:00",
+   "exitDate": "2026-11-25T17:00",
+   "entry": 0.010764615,
+   "exit": 0.01140440119262555,
+   "qty": 1357.0661747682536,
+   "pnl": -0.8682322010959013,
+   "retPct": -5.943419180579612,
+   "reason": "sl1",
+   "key": "MON@1h",
+   "tf": "1h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 0.0108, closed at 0.0114 (-5.94%)."
+  },
+  {
+   "symbol": "MON",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-25T17:00",
+   "exitDate": "2026-11-25T17:00",
+   "entry": 0.010764615,
+   "exit": 0.011718909288938328,
+   "qty": 1357.0661747682536,
+   "pnl": -1.295040500292727,
+   "retPct": -8.86510375836318,
+   "reason": "sl2",
+   "key": "MON@1h",
+   "tf": "1h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 0.0108, closed at 0.0117 (-8.87%)."
+  },
+  {
+   "symbol": "MON",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-25T17:00",
+   "exitDate": "2026-11-26T03:00",
+   "entry": 0.010764615,
+   "exit": 0.01097644,
+   "qty": 1357.4733353367408,
+   "pnl": -0.2875467892577059,
+   "retPct": -1.9677898373513747,
+   "reason": "time-stop",
+   "funding": -0.0032,
+   "key": "MON@1h",
+   "tf": "1h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: too long at a loss: no progress after the maximum number of bars. Sold short at 0.0108, closed at 0.0110 (-1.97%)."
+  },
+  {
+   "symbol": "WIF",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T12:00",
+   "exitDate": "2026-11-26T00:00",
+   "entry": 0.123268335,
+   "exit": 0.1277586,
+   "qty": 566.3142670026223,
+   "pnl": -2.542901132122526,
+   "retPct": -3.6426751444318617,
+   "reason": "rule",
+   "funding": -0.0658,
+   "key": "WIF@4h",
+   "tf": "4h",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: the strategy's own exit signal fired. Sold short at 0.1233, closed at 0.1278 (-3.64%)."
+  },
+  {
+   "symbol": "WIF",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-26T04:00",
+   "exitDate": "2026-11-26T16:00",
+   "entry": 0.13134082500000002,
+   "exit": 0.13799841761599513,
+   "qty": 143.13709450230454,
+   "pnl": -0.9529484634335363,
+   "retPct": -5.068943807833626,
+   "reason": "sl1",
+   "key": "WIF@4h",
+   "tf": "4h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 0.1313, closed at 0.1380 (-5.07%)."
+  },
+  {
+   "symbol": "WIF",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-26T04:00",
+   "exitDate": "2026-11-26T16:00",
+   "entry": 0.13134082500000002,
+   "exit": 0.1408992864239927,
+   "qty": 143.13709450230454,
+   "pnl": -1.3681703961426703,
+   "retPct": -7.277601175409587,
+   "reason": "sl2",
+   "key": "WIF@4h",
+   "tf": "4h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 0.1313, closed at 0.1409 (-7.28%)."
+  },
+  {
+   "symbol": "AERO",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-26T08:00",
+   "exitDate": "2026-11-27T00:00",
+   "entry": 0.39804204000000004,
+   "exit": 0.4137371940700321,
+   "qty": 57.05066783577039,
+   "pnl": -0.8954190214806399,
+   "retPct": -3.9430895465293325,
+   "reason": "sl1",
+   "key": "AERO@4h",
+   "tf": "4h",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 0.3980, closed at 0.4137 (-3.94%)."
+  },
+  {
+   "symbol": "WIF",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-26T04:00",
+   "exitDate": "2026-11-27T20:00",
+   "entry": 0.13134082500000002,
+   "exit": 0.14130296,
+   "qty": 143.18003992519755,
+   "pnl": -1.4263788870402054,
+   "retPct": -7.584949310315348,
+   "reason": "weekend",
+   "funding": -0.022,
+   "key": "WIF@4h",
+   "tf": "4h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: weekend pause: everything closes from Friday 22:00 to Monday 00:00 (Madrid). Sold short at 0.1313, closed at 0.1413 (-7.58%)."
+  },
+  {
+   "symbol": "AERO",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-26T08:00",
+   "exitDate": "2026-11-27T20:00",
+   "entry": 0.39804204000000004,
+   "exit": 0.39374974,
+   "qty": 114.11845258358272,
+   "pnl": 0.48983063402451515,
+   "retPct": 1.078353432215362,
+   "reason": "weekend",
+   "funding": -0.0271,
+   "key": "AERO@4h",
+   "tf": "4h",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: weekend pause: everything closes from Friday 22:00 to Monday 00:00 (Madrid). Sold short at 0.3980, closed at 0.3937 (+1.08%)."
+  }
+ ],
+ "equityCurve": [
+  {
+   "d": "2026-11-28T09:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T09:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T10:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T11:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T12:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T13:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T14:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T15:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T16:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T17:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:02",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:03",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:04",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:05",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:06",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:07",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:08",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:09",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:10",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:11",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:12",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:13",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:14",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:15",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:16",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:17",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:18",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:19",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:20",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:21",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:22",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:23",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:24",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:25",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:26",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:27",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:28",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:29",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:30",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:31",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:32",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:33",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:34",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:35",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:36",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:37",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:38",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:39",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:40",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:41",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:42",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:43",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:44",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:45",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:46",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:47",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:48",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:49",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:50",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:51",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:52",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:53",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:54",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:55",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:56",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:57",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:58",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T18:59",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T19:00",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T19:01",
+   "equity": 244.06
+  },
+  {
+   "d": "2026-11-28T19:02",
+   "equity": 244.06
+  }
+ ],
+ "log": [
+  {
+   "d": "2026-11-27T20:00",
+   "msg": "Weekend pause: 2 positions closed and orders cancelled. Trading starts again on Monday."
+  },
+  {
+   "d": "2026-11-27T20:00",
+   "msg": "AERO 4h: closed at 0.39 (weekend), +0.49."
+  },
+  {
+   "d": "2026-11-27T20:00",
+   "msg": "WIF 4h: closed at 0.14 (weekend), -1.43."
+  },
+  {
+   "d": "2026-11-27T16:00",
+   "msg": "SYRUP 4h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-27T12:00",
+   "msg": "SYRUP 4h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-27T11:00",
+   "msg": "MON 1h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-27T10:00",
+   "msg": "MON 1h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-27T00:00",
+   "msg": "AERO 4h: sold 57.0507 (part) at 0.41 (sl1), -0.90."
+  },
+  {
+   "d": "2026-11-26T16:00",
+   "msg": "WIF 4h: sold 143.1371 (part) at 0.14 (sl2), -1.37."
+  },
+  {
+   "d": "2026-11-26T16:00",
+   "msg": "WIF 4h: sold 143.1371 (part) at 0.14 (sl1), -0.95."
+  },
+  {
+   "d": "2026-11-26T08:00",
+   "msg": "AERO 4h: sold short 171.1691 at 0.40, stop 0.43, first take-profit 0.37 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-26T04:00",
+   "msg": "WIF 4h: sold short 429.4542 at 0.13, stop 0.14, first take-profit 0.12 (Upper Bollinger band fade (short))."
+  },
+  {
+   "d": "2026-11-26T00:00",
+   "msg": "WIF 4h: closed at 0.13 (rule), -2.54."
+  },
+  {
+   "d": "2026-11-26T03:00",
+   "msg": "MON 1h: closed at 0.01 (time-stop), -0.29."
+  },
+  {
+   "d": "2026-11-25T19:00",
+   "msg": "STRK 1h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "msg": "STRK 1h: short sale skipped, already 2 short positions in \"Lighter crypto\" (they tend to move together)."
+  },
+  {
+   "d": "2026-11-25T17:00",
+   "msg": "MON 1h: sold 1357.0662 (part) at 0.01 (sl2), -1.30."
+  },
+  {
+   "d": "2026-11-25T17:00",
+   "msg": "MON 1h: sold 1357.0662 (part) at 0.01 (sl1), -0.87."
+  },
+  {
+   "d": "2026-11-25T17:00",
+   "msg": "MON 1h: sold short 4071.6057 at 0.01, stop 0.01, first take-profit 0.01 (Upper Bollinger band fade (short))."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "msg": "Nova is now called Catalina."
+  },
+  {
+   "d": "2026-11-25T17:00",
+   "msg": "ADA 30m: closed at 0.14 (trail), +2.08."
+  },
+  {
+   "d": "2026-11-25T14:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T13:30",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T13:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T12:00",
+   "msg": "ADA 30m: sold 279.2613 (part) at 0.14 (tp2), +2.38."
+  },
+  {
+   "d": "2026-11-25T11:30",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T11:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T10:30",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T10:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T09:30",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T09:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T02:30",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T02:00",
+   "msg": "ADA 30m: stop moved to 0.14 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T01:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T01:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T00:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T00:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T23:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T23:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T22:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T22:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T21:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T21:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T20:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T19:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T19:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T18:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T17:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T16:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T15:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T15:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T14:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T13:30",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T13:00",
+   "msg": "ADA 30m: stop moved to 0.15 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T13:00",
+   "msg": "ADA 30m: sold 279.2613 (part) at 0.14 (tp1), +1.17."
+  },
+  {
+   "d": "2026-11-24T12:00",
+   "msg": "WIF 4h: sold short 566.3143 at 0.12, stop 0.13, first take-profit 0.11 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-24T07:00",
+   "msg": "NEAR 30m: closed at 3.03 (time-stop), -1.65."
+  },
+  {
+   "d": "2026-11-24T05:00",
+   "msg": "NEAR 30m: sold 13.9036 (part) at 3.03 (sl1), -0.87."
+  },
+  {
+   "d": "2026-11-24T05:00",
+   "msg": "ADA 30m: sold short 837.8678 at 0.15, stop 0.15, first take-profit 0.14 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-24T02:00",
+   "msg": "NEAR 30m: sold short 41.7150 at 2.97, stop 3.09, first take-profit 2.85 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-23T19:13",
+   "msg": "Nova joins the competition with a 250 USD grant (a loan from the accountant)."
+  }
+ ]
+}

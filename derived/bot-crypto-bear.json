@@ -1,0 +1,3869 @@
+{
+ "id": "crypto-bear",
+ "name": "Valeria",
+ "recruit": 1,
+ "side": "short",
+ "motto": "Sells weakness in crypto.",
+ "accountant": {
+  "startGrant": 250,
+  "grant": 250,
+  "badges": 0,
+  "streak": 0,
+  "bestStreak": 0,
+  "saves": 0,
+  "award": 0,
+  "debt": 250,
+  "repaid": 0,
+  "interestPaid": 0,
+  "hiredAt": "2026-11-23T19:13",
+  "nextInterestAt": "2026-12-07T19:13",
+  "index": 103.4069173674233,
+  "lastEquity": 258.5172934185577,
+  "events": [],
+  "months": {
+   "2026-11": {
+    "badges": 0,
+    "saves": 0,
+    "interest": 0,
+    "repaid": 0,
+    "indexStart": 100,
+    "indexEnd": 103.4069173674233,
+    "trades": 12,
+    "wins": 5,
+    "pnl": 8.467168074041815
+   }
+  },
+  "daily": {
+   "2026-11-22": 100,
+   "2026-11-23": 101.9042,
+   "2026-11-24": 103.3561,
+   "2026-11-25": 104.094,
+   "2026-11-26": 103.3767,
+   "2026-11-27": 103.4069,
+   "2026-11-28": 103.4069
+  },
+  "weekTrades": 12
+ },
+ "evil": null,
+ "tier": {
+  "level": 0,
+  "name": "Rookie",
+  "toNext": 4,
+  "tiers": [
+   4,
+   8,
+   12
+  ],
+  "names": [
+   "Rookie",
+   "Pro",
+   "Master",
+   "Experienced trader"
+  ]
+ },
+ "playbook": [
+  {
+   "key": "SOL@4h",
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "testTrades": 7,
+   "testPF": 4.9818409868092095,
+   "testAvgPct": 2.426704560887884,
+   "score": 4.49905071197346,
+   "rate": 0.005380476556495004
+  },
+  {
+   "key": "ADA@30m",
+   "id": "bollinger_dip_short_adx",
+   "name": "Upper Bollinger band fade (short), no strong trend",
+   "testTrades": 7,
+   "testPF": 3.441594789590486,
+   "testAvgPct": 0.36403797589915915,
+   "score": 3.108069793762813,
+   "rate": 0.008120649651972157
+  },
+  {
+   "key": "ETH@4h",
+   "id": "donchian_trend_short_adx",
+   "name": "20-bar breakdown (short), strong trend only",
+   "testTrades": 8,
+   "testPF": 2.867251607696667,
+   "testAvgPct": 1.7998218588391866,
+   "score": 2.7360533693224065,
+   "rate": 0.006149116064565719
+  },
+  {
+   "key": "BTC@4h",
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "testTrades": 7,
+   "testPF": 2.8718516181266813,
+   "testAvgPct": 0.928058072692463,
+   "score": 2.5935404404568168,
+   "rate": 0.005380476556495004
+  }
+ ],
+ "weekend": true,
+ "lighterCrypto": false,
+ "allLighter": false,
+ "twin": {
+  "equity": 254.8570067438224,
+  "indexPct": 1.9428026975289558,
+  "trades": 4,
+  "wins": 5,
+  "positions": 0
+ },
+ "kin": {
+  "kind": "devil",
+  "name": "Evil Valeria",
+  "resultPct": 0,
+  "trades": 0
+ },
+ "books": {
+  "difference": 0
+ },
+ "fundingPaid": -0.0501,
+ "hungry": false,
+ "fired": null,
+ "strikes": 0,
+ "resultPct": 3.406917367423304,
+ "view": "crypto",
+ "at": "2026-11-28T19:01:08.110Z",
+ "startedAt": "2026-11-23T19:13",
+ "startEquity": 250,
+ "cash": 258.5172934185577,
+ "equity": 258.5172934185577,
+ "exposure": 0,
+ "shortlist": {
+  "pickedAt": "2026-11-27T19:09:12.370Z",
+  "chosen": [
+   "bollinger_dip_short_adx",
+   "donchian_trend_short_adx",
+   "rsi2_dip_short",
+   "bollinger_dip_short"
+  ],
+  "candidates": [
+   {
+    "id": "donchian_trend_short",
+    "name": "20-bar breakdown (short)",
+    "side": "short",
+    "pickPass": 8,
+    "pickTested": 40,
+    "pickMedianPF": 1.3796381230366075,
+    "testTrades": 268,
+    "testPF": 0.8562887831115845,
+    "testAvgPct": -0.10271564119290055,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.86).",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 29,
+      "testPF": 0.7373150711593064,
+      "testAvgPct": -0.1132052183301402,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@15m",
+      "testTrades": 31,
+      "testPF": 0.7573698480406917,
+      "testAvgPct": -0.12993414363645558,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 66,
+      "testPF": 1.2352345584800213,
+      "testAvgPct": 0.1343517831162729,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@15m",
+      "testTrades": 25,
+      "testPF": 0.5307975165248063,
+      "testAvgPct": -0.2793899207809309,
+      "testBars": 1723
+     },
+     {
+      "key": "SOL@30m",
+      "testTrades": 11,
+      "testPF": 1.4571257573925254,
+      "testAvgPct": 0.26614002144734017,
+      "testBars": 862
+     },
+     {
+      "key": "NEAR@30m",
+      "testTrades": 10,
+      "testPF": 0.7836222054782301,
+      "testAvgPct": -0.3429586263513174,
+      "testBars": 862
+     },
+     {
+      "key": "ADA@15m",
+      "testTrades": 28,
+      "testPF": 0.3526080018955932,
+      "testAvgPct": -0.511332269664267,
+      "testBars": 1723
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 68,
+      "testPF": 0.888853629246623,
+      "testAvgPct": -0.10705885504929381,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short_adx",
+    "name": "Upper Bollinger band fade (short), no strong trend",
+    "side": "short",
+    "pickPass": 5,
+    "pickTested": 40,
+    "pickMedianPF": 1.4082193224249815,
+    "testTrades": 70,
+    "testPF": 1.3287430011463202,
+    "testAvgPct": 0.17021777422025466,
+    "chosen": true,
+    "why": "Passed on 5 of 40 charts in the older data and still made money in the newer data (profit factor 1.33 over 70 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 21,
+      "testPF": 0.6476438946094779,
+      "testAvgPct": -0.13977953457385148,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 8,
+      "testPF": 2.701288608609797,
+      "testAvgPct": 1.4539980719965029,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@30m",
+      "testTrades": 7,
+      "testPF": 3.441594789590486,
+      "testAvgPct": 0.36403797589915915,
+      "testBars": 862
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 29,
+      "testPF": 1.0483585255136676,
+      "testAvgPct": 0.031829165000020546,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@5m",
+      "testTrades": 5,
+      "testPF": 0.7328289396331372,
+      "testAvgPct": -0.05053635415960511,
+      "testBars": 1728
+     }
+    ]
+   },
+   {
+    "id": "donchian_trend_short_adx",
+    "name": "20-bar breakdown (short), strong trend only",
+    "side": "short",
+    "pickPass": 5,
+    "pickTested": 40,
+    "pickMedianPF": 1.3126573802313275,
+    "testTrades": 139,
+    "testPF": 1.1711543010237,
+    "testAvgPct": 0.1152322791717956,
+    "chosen": true,
+    "why": "Passed on 5 of 40 charts in the older data and still made money in the newer data (profit factor 1.17 over 139 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 42,
+      "testPF": 1.0497601897215947,
+      "testAvgPct": 0.02801811936265806,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@15m",
+      "testTrades": 11,
+      "testPF": 0.7550429797126513,
+      "testAvgPct": -0.14114497763230355,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 42,
+      "testPF": 0.955458608357094,
+      "testAvgPct": -0.029608174284424464,
+      "testBars": 5198
+     },
+     {
+      "key": "ETH@4h",
+      "testTrades": 8,
+      "testPF": 2.867251607696667,
+      "testAvgPct": 1.7998218588391866,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@1h",
+      "testTrades": 36,
+      "testPF": 1.115782118305873,
+      "testAvgPct": 0.08994691652321174,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short",
+    "name": "20/50 average cross down (short)",
+    "side": "short",
+    "pickPass": 4,
+    "pickTested": 40,
+    "pickMedianPF": 1.8460938052648368,
+    "testTrades": 55,
+    "testPF": 0.9714828164142045,
+    "testAvgPct": -0.01522339136504441,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.97).",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 12,
+      "testPF": 0.7069859099429286,
+      "testAvgPct": -0.06501062899958499,
+      "testBars": 1723
+     },
+     {
+      "key": "ETH@30m",
+      "testTrades": 8,
+      "testPF": 3.9675360912390616,
+      "testAvgPct": 0.941679180552933,
+      "testBars": 862
+     },
+     {
+      "key": "NEAR@15m",
+      "testTrades": 25,
+      "testPF": 0.4225506620726152,
+      "testAvgPct": -0.46694112092049833,
+      "testBars": 1723
+     },
+     {
+      "key": "ADA@30m",
+      "testTrades": 10,
+      "testPF": 2.0352117860241403,
+      "testAvgPct": 0.4082935601506579,
+      "testBars": 862
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short",
+    "name": "Short-term spike in a downtrend (short)",
+    "side": "short",
+    "pickPass": 4,
+    "pickTested": 40,
+    "pickMedianPF": 1.8451065543539913,
+    "testTrades": 124,
+    "testPF": 1.0214729913246479,
+    "testAvgPct": 0.017349947526223843,
+    "chosen": true,
+    "why": "Passed on 4 of 40 charts in the older data and still made money in the newer data (profit factor 1.02 over 124 trades).",
+    "charts": [
+     {
+      "key": "ETH@4h",
+      "testTrades": 17,
+      "testPF": 1.6255706001559882,
+      "testAvgPct": 0.32973118936348306,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 18,
+      "testPF": 0.9364109089115531,
+      "testAvgPct": -0.04998529308562774,
+      "testBars": 1301
+     },
+     {
+      "key": "SOL@1d",
+      "testTrades": 13,
+      "testPF": 1.7969511943129206,
+      "testAvgPct": 0.8350843407414246,
+      "testBars": 548
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 76,
+      "testPF": 0.7886759366161097,
+      "testAvgPct": -0.1764526036845351,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "bollinger_dip_short",
+    "name": "Upper Bollinger band fade (short)",
+    "side": "short",
+    "pickPass": 4,
+    "pickTested": 40,
+    "pickMedianPF": 1.8213714764860063,
+    "testTrades": 61,
+    "testPF": 1.7009652379799074,
+    "testAvgPct": 0.3230381496902226,
+    "chosen": true,
+    "why": "Passed on 4 of 40 charts in the older data and still made money in the newer data (profit factor 1.70 over 61 trades).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 25,
+      "testPF": 0.4785785738035854,
+      "testAvgPct": -0.24698856907121503,
+      "testBars": 5198
+     },
+     {
+      "key": "BTC@4h",
+      "testTrades": 7,
+      "testPF": 2.8718516181266813,
+      "testAvgPct": 0.928058072692463,
+      "testBars": 1301
+     },
+     {
+      "key": "ETH@1h",
+      "testTrades": 22,
+      "testPF": 1.2808763704460866,
+      "testAvgPct": 0.10894104194643313,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 7,
+      "testPF": 4.9818409868092095,
+      "testAvgPct": 2.426704560887884,
+      "testBars": 1301
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_short_adx",
+    "name": "Bounce to the 20-bar average (short), strong trend only",
+    "side": "short",
+    "pickPass": 3,
+    "pickTested": 40,
+    "pickMedianPF": 2.4830150641990505,
+    "testTrades": 54,
+    "testPF": 1.3368408839700372,
+    "testAvgPct": 0.16794704612876019,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 38,
+      "testPF": 1.185003065751081,
+      "testAvgPct": 0.06718013210367889,
+      "testBars": 5198
+     },
+     {
+      "key": "SOL@30m",
+      "testTrades": 8,
+      "testPF": 2.1850854014978296,
+      "testAvgPct": 0.5665994461539043,
+      "testBars": 862
+     },
+     {
+      "key": "QNT@4h",
+      "testTrades": 8,
+      "testPF": 1.2132725290027886,
+      "testAvgPct": 0.24793748772275181,
+      "testBars": 1301
+     }
+    ]
+   },
+   {
+    "id": "squeeze_break_short",
+    "name": "Breakdown after a quiet spell (short)",
+    "side": "short",
+    "pickPass": 3,
+    "pickTested": 40,
+    "pickMedianPF": 1.8144009290005898,
+    "testTrades": 19,
+    "testPF": 0.3288770784857795,
+    "testAvgPct": -0.59382690219031,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.33).",
+    "charts": [
+     {
+      "key": "SOL@1h",
+      "testTrades": 3,
+      "testPF": 0.6203634258826091,
+      "testAvgPct": -0.16262384737186383,
+      "testBars": 5198
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 4,
+      "testPF": 0.7785834401887978,
+      "testAvgPct": -0.14305185956968736,
+      "testBars": 5198
+     },
+     {
+      "key": "ADA@1h",
+      "testTrades": 12,
+      "testPF": 0.21013708966757186,
+      "testAvgPct": -0.851886013435129,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "rsi2_dip_short_adx",
+    "name": "Short-term spike in a downtrend (short), no strong trend",
+    "side": "short",
+    "pickPass": 3,
+    "pickTested": 40,
+    "pickMedianPF": 1.442558003448963,
+    "testTrades": 30,
+    "testPF": 0.5678300282198717,
+    "testAvgPct": -0.7166661411733591,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.57).",
+    "charts": [
+     {
+      "key": "SOL@30m",
+      "testTrades": 10,
+      "testPF": 1.3086968004103097,
+      "testAvgPct": 0.11063178339399982,
+      "testBars": 862
+     },
+     {
+      "key": "SOL@4h",
+      "testTrades": 10,
+      "testPF": 0.14218941437887078,
+      "testAvgPct": -1.0356713444483525,
+      "testBars": 1301
+     },
+     {
+      "key": "ADA@1d",
+      "testTrades": 10,
+      "testPF": 0.6406865220237761,
+      "testAvgPct": -1.2249588624657242,
+      "testBars": 548
+     }
+    ]
+   },
+   {
+    "id": "ma_cross_short_adx",
+    "name": "20/50 average cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 2,
+    "pickTested": 40,
+    "pickMedianPF": 1.8155621521076613,
+    "testTrades": 16,
+    "testPF": 1.4235521691757125,
+    "testAvgPct": 0.4585606814984727,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 3,
+      "testPF": 0.7900701011794418,
+      "testAvgPct": -0.03169475714877421,
+      "testBars": 1723
+     },
+     {
+      "key": "NEAR@1h",
+      "testTrades": 13,
+      "testPF": 1.4405606486498785,
+      "testAvgPct": 0.5716965519555297,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "ema_pullback_short",
+    "name": "Bounce to the 20-bar average (short)",
+    "side": "short",
+    "pickPass": 2,
+    "pickTested": 40,
+    "pickMedianPF": 1.3142572580809104,
+    "testTrades": 71,
+    "testPF": 1.0431645391173188,
+    "testAvgPct": 0.028220618914148184,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@15m",
+      "testTrades": 39,
+      "testPF": 1.475147532298438,
+      "testAvgPct": 0.10665585545024052,
+      "testBars": 1723
+     },
+     {
+      "key": "QNT@4h",
+      "testTrades": 32,
+      "testPF": 0.9427606875015598,
+      "testAvgPct": -0.06737232561421444,
+      "testBars": 1301
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short",
+    "name": "MACD momentum cross down (short)",
+    "side": "short",
+    "pickPass": 1,
+    "pickTested": 40,
+    "pickMedianPF": 2.014188162612752,
+    "testTrades": 3,
+    "testPF": 2.215050820298345,
+    "testAvgPct": 1.022416129049893,
+    "chosen": false,
+    "why": "Only 3 trades in the newer data, too few to confirm.",
+    "charts": [
+     {
+      "key": "BTC@1d",
+      "testTrades": 3,
+      "testPF": 2.215050820298345,
+      "testAvgPct": 1.022416129049893,
+      "testBars": 548
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short",
+    "name": "Supertrend turns down (short)",
+    "side": "short",
+    "pickPass": 1,
+    "pickTested": 40,
+    "pickMedianPF": 2.005980568156692,
+    "testTrades": 7,
+    "testPF": 1.0458142381567017,
+    "testAvgPct": 0.0964014735642199,
+    "chosen": false,
+    "why": "Only 7 trades in the newer data, too few to confirm.",
+    "charts": [
+     {
+      "key": "NEAR@4h",
+      "testTrades": 7,
+      "testPF": 1.0458142381567017,
+      "testAvgPct": 0.0964014735642199,
+      "testBars": 1301
+     }
+    ]
+   },
+   {
+    "id": "macd_cross_short_adx",
+    "name": "MACD momentum cross down (short), strong trend only",
+    "side": "short",
+    "pickPass": 1,
+    "pickTested": 40,
+    "pickMedianPF": 1.9351109469425425,
+    "testTrades": 24,
+    "testPF": 0.5861636013321242,
+    "testAvgPct": -0.32113825187035544,
+    "chosen": false,
+    "why": "Lost money in the newer data it had not seen (profit factor 0.59).",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 24,
+      "testPF": 0.5861636013321242,
+      "testAvgPct": -0.32113825187035544,
+      "testBars": 5198
+     }
+    ]
+   },
+   {
+    "id": "supertrend_short_adx",
+    "name": "Supertrend turns down (short), strong trend only",
+    "side": "short",
+    "pickPass": 1,
+    "pickTested": 40,
+    "pickMedianPF": 1.5595051778592743,
+    "testTrades": 11,
+    "testPF": 2.8671858984990903,
+    "testAvgPct": 0.5742898947447109,
+    "chosen": false,
+    "why": "Confirmed, but 4 better ones were already chosen.",
+    "charts": [
+     {
+      "key": "BTC@1h",
+      "testTrades": 11,
+      "testPF": 2.8671858984990903,
+      "testAvgPct": 0.5742898947447109,
+      "testBars": 5198
+     }
+    ]
+   }
+  ],
+  "charts": 40,
+  "testShare": 0.3
+ },
+ "exits": {
+  "mode": "ladder",
+  "tpR": [
+   1,
+   2,
+   3
+  ],
+  "fractions": [
+   0.3333,
+   0.3333,
+   0.3334
+  ],
+  "trailAtr": 3,
+  "slR": [
+   0.5,
+   0.75
+  ],
+  "slFractions": [
+   0.3333,
+   0.3333
+  ]
+ },
+ "hours": {
+  "total": 30,
+  "allDay": 30,
+  "marketHoursOnly": [],
+  "notTraded": []
+ },
+ "daily": [
+  {
+   "day": "2026-11-23",
+   "equity": 250,
+   "pnl": 1.49,
+   "opened": 2,
+   "closed": 1,
+   "wins": 1,
+   "losses": 0
+  },
+  {
+   "day": "2026-11-24",
+   "equity": 250,
+   "pnl": 6.79,
+   "opened": 3,
+   "closed": 4,
+   "wins": 2,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-25",
+   "equity": 250,
+   "pnl": 1.91,
+   "opened": 3,
+   "closed": 3,
+   "wins": 1,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-26",
+   "equity": 258.44,
+   "pnl": -1.8,
+   "opened": 2,
+   "closed": 2,
+   "wins": 0,
+   "losses": 2
+  },
+  {
+   "day": "2026-11-27",
+   "equity": 258.52,
+   "pnl": 0.07,
+   "opened": 2,
+   "closed": 2,
+   "wins": 1,
+   "losses": 1
+  },
+  {
+   "day": "2026-11-28",
+   "equity": 258.52,
+   "pnl": 0,
+   "opened": 0,
+   "closed": 0,
+   "wins": 0,
+   "losses": 0
+  }
+ ],
+ "nextCheck": "2026-11-28T19:16:00.000Z",
+ "pricesAt": "2026-11-28T19:01:08.110Z",
+ "maxLeverage": 2,
+ "riskPct": 2,
+ "maxDrawdownPct": 10,
+ "peak": 261.2582006414462,
+ "halted": null,
+ "checked": {
+  "at": "2026-11-28T19:01:08.110Z",
+  "markets": 40,
+  "withStrategy": 4,
+  "newBars": 108,
+  "by": "PC"
+ },
+ "positions": [],
+ "pending": [],
+ "trades": [
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "rsi2_dip_short",
+   "entryDate": "2026-11-23T16:00",
+   "exitDate": "2026-11-23T20:00",
+   "entry": 1771.114,
+   "exit": 1730.8850295410155,
+   "qty": 0.037025509250776086,
+   "pnl": 1.4894981178783313,
+   "retPct": 2.2713936233909604,
+   "reason": "rule",
+   "key": "ETH@4h",
+   "tf": "4h",
+   "explain": "Opened by Short-term spike in a downtrend (short). Why it closed: the strategy's own exit signal fired. Sold short at 1771.11, closed at 1730.89 (+2.27%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T09:00",
+   "exitDate": "2026-11-24T10:45",
+   "entry": 2.975511498093605,
+   "exit": 2.9169796333802767,
+   "qty": 14.314126817712785,
+   "pnl": 0.8378325343837905,
+   "retPct": 1.967119426385322,
+   "reason": "tp1",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: take-profit 1: the price moved one R (the risk it took) its way, so a part was sold and the stop moved to the entry price. Sold short at 2.9755, closed at 2.9170 (+1.97%)."
+  },
+  {
+   "symbol": "SOL",
+   "side": "short",
+   "strategyId": "bollinger_dip_short",
+   "entryDate": "2026-11-23T16:00",
+   "exitDate": "2026-11-24T12:00",
+   "entry": 75.57219561004639,
+   "exit": 70.86541683197021,
+   "qty": 0.8524800813067878,
+   "pnl": 4.012435155427449,
+   "retPct": 6.2281884760411526,
+   "reason": "rule",
+   "funding": -0.0093,
+   "key": "SOL@4h",
+   "tf": "4h",
+   "explain": "Opened by Upper Bollinger band fade (short). Why it closed: the strategy's own exit signal fired. Sold short at 75.57, closed at 70.87 (+6.23%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T09:00",
+   "exitDate": "2026-11-24T13:15",
+   "entry": 2.975511498093605,
+   "exit": 2.8554707686688556,
+   "qty": 14.314126817712785,
+   "pnl": 1.7182782242766097,
+   "retPct": 4.034288877783165,
+   "reason": "tp2",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: take-profit 2: the price moved two R its way, so another part was sold and the stop moved up to the first take-profit. Sold short at 2.9755, closed at 2.8555 (+4.03%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T09:00",
+   "exitDate": "2026-11-24T15:45",
+   "entry": 2.975511498093605,
+   "exit": 2.793961903957435,
+   "qty": 14.318421485224851,
+   "pnl": 2.5995036093131882,
+   "retPct": 6.101458329180975,
+   "reason": "tp3",
+   "funding": 0.0045,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: take-profit 3: the price moved three R its way, so the rest was sold. Sold short at 2.9755, closed at 2.7940 (+6.10%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T18:00",
+   "exitDate": "2026-11-24T18:30",
+   "entry": 2.859069847226143,
+   "exit": 2.8982004679285023,
+   "qty": 15.193538081414768,
+   "pnl": -0.5945325757906946,
+   "retPct": -1.368648644254833,
+   "reason": "sl1",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 2.8591, closed at 2.8982 (-1.37%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T18:00",
+   "exitDate": "2026-11-24T21:30",
+   "entry": 2.859069847226143,
+   "exit": 2.8648316824436186,
+   "qty": 30.391634680105692,
+   "pnl": -0.1751115910164904,
+   "retPct": -0.2015283125407219,
+   "reason": "time-stop",
+   "funding": -0.0031,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: too long at a loss: no progress after the maximum number of bars. Sold short at 2.8591, closed at 2.8648 (-0.20%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T21:45",
+   "exitDate": "2026-11-24T22:15",
+   "entry": 2.847875257730484,
+   "exit": 2.8781158415809127,
+   "qty": 15.208406867299477,
+   "pnl": -0.45991110310200234,
+   "retPct": -1.061864762803122,
+   "reason": "sl1",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 2.8479, closed at 2.8781 (-1.06%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-24T21:45",
+   "exitDate": "2026-11-24T22:30",
+   "entry": 2.847875257730484,
+   "exit": 2.885642196178436,
+   "qty": 30.42137671295698,
+   "pnl": -1.1489222618201993,
+   "retPct": -1.3261444069726958,
+   "reason": "rule",
+   "funding": -0.0016,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: the strategy's own exit signal fired. Sold short at 2.8479, closed at 2.8856 (-1.33%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T00:15",
+   "exitDate": "2026-11-25T04:30",
+   "entry": 2.856271259427071,
+   "exit": 2.863230855345726,
+   "qty": 45.214297480629924,
+   "pnl": -0.31467324021104626,
+   "retPct": -0.2436601879350464,
+   "reason": "rule",
+   "funding": -0.0139,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: the strategy's own exit signal fired. Sold short at 2.8563, closed at 2.8632 (-0.24%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T07:15",
+   "exitDate": "2026-11-25T08:30",
+   "entry": 2.8515734256505967,
+   "exit": 2.878554745734788,
+   "qty": 15.07717734560722,
+   "pnl": -0.4068021479279461,
+   "retPct": -0.946190613276432,
+   "reason": "sl1",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 2.8516, closed at 2.8786 (-0.95%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T07:15",
+   "exitDate": "2026-11-25T08:45",
+   "entry": 2.8515734256505967,
+   "exit": 2.8619303473234177,
+   "qty": 30.15887829677868,
+   "pnl": -0.31235314025987754,
+   "retPct": -0.36320024515792415,
+   "reason": "rule",
+   "funding": -0.0113,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: the strategy's own exit signal fired. Sold short at 2.8516, closed at 2.8619 (-0.36%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T09:15",
+   "exitDate": "2026-11-25T12:00",
+   "entry": 2.853172652721405,
+   "exit": 2.8072002983262148,
+   "qty": 15.027382530823822,
+   "pnl": 0.6908441553391264,
+   "retPct": 1.6112713806975987,
+   "reason": "tp1",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: take-profit 1: the price moved one R (the risk it took) its way, so a part was sold and the stop moved to the entry price. Sold short at 2.8532, closed at 2.8072 (+1.61%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T09:15",
+   "exitDate": "2026-11-25T14:15",
+   "entry": 2.853172652721405,
+   "exit": 2.7583733439783273,
+   "qty": 15.027382530823822,
+   "pnl": 1.424585476139902,
+   "retPct": 3.3225927864076743,
+   "reason": "tp2",
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: take-profit 2: the price moved two R its way, so another part was sold and the stop moved up to the first take-profit. Sold short at 2.8532, closed at 2.7584 (+3.32%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ema_pullback_short",
+   "entryDate": "2026-11-25T09:15",
+   "exitDate": "2026-11-25T15:00",
+   "entry": 2.853172652721405,
+   "exit": 2.797793743357485,
+   "qty": 15.031891196449635,
+   "pnl": 0.8324497401364961,
+   "retPct": 1.940958929039882,
+   "reason": "trail",
+   "funding": -0.0071,
+   "key": "NEAR@15m",
+   "tf": "15m",
+   "explain": "Opened by Bounce to the 20-bar average (short). Why it closed: rising stop: after the first take-profit the stop followed the price, and the price came back to it, keeping the profit. Sold short at 2.8532, closed at 2.7978 (+1.94%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T08:45",
+   "exitDate": "2026-11-26T08:45",
+   "entry": 1688.4233746948244,
+   "exit": 1697.825735668462,
+   "qty": 0.02568559968348409,
+   "pnl": -0.2415052800484676,
+   "retPct": -0.5568722344499122,
+   "reason": "sl1",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 1688.42, closed at 1697.83 (-0.56%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T08:45",
+   "exitDate": "2026-11-26T09:00",
+   "entry": 1688.4233746948244,
+   "exit": 1702.0202371391679,
+   "qty": 0.02568559968348409,
+   "pnl": -0.3492435656968065,
+   "retPct": -0.8052993489740645,
+   "reason": "sl2",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 1688.42, closed at 1702.02 (-0.81%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T08:45",
+   "exitDate": "2026-11-26T11:15",
+   "entry": 1688.4233746948244,
+   "exit": 1694.9383827270508,
+   "qty": 0.02569330613403419,
+   "pnl": -0.1673920958376854,
+   "retPct": -0.3858634113854231,
+   "reason": "time-stop",
+   "funding": -0.0021,
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: too long at a loss: no progress after the maximum number of bars. Sold short at 1688.42, closed at 1694.94 (-0.39%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T17:45",
+   "exitDate": "2026-11-26T18:15",
+   "entry": 1688.273395288086,
+   "exit": 1699.1828222906543,
+   "qty": 0.02561325191347904,
+   "pnl": -0.27942590204849077,
+   "retPct": -0.6461884095914749,
+   "reason": "sl1",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 1688.27, closed at 1699.18 (-0.65%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T17:45",
+   "exitDate": "2026-11-26T19:15",
+   "entry": 1688.273395288086,
+   "exit": 1704.1309017831495,
+   "qty": 0.02561325191347904,
+   "pnl": -0.4061623085776912,
+   "retPct": -0.9392736116864198,
+   "reason": "sl2",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 2: the loss reached three quarters of the risk, so another part was sold. Sold short at 1688.27, closed at 1704.13 (-0.94%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-26T17:45",
+   "exitDate": "2026-11-26T20:15",
+   "entry": 1688.273395288086,
+   "exit": 1702.1404938842772,
+   "qty": 0.025620936657527488,
+   "pnl": -0.3552880547567038,
+   "retPct": -0.8213775467228235,
+   "reason": "time-stop",
+   "funding": -0.0037,
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: too long at a loss: no progress after the maximum number of bars. Sold short at 1688.27, closed at 1702.14 (-0.82%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-27T13:15",
+   "exitDate": "2026-11-27T14:30",
+   "entry": 1718.9241094238282,
+   "exit": 1703.544200092253,
+   "qty": 0.02505597424495189,
+   "pnl": 0.3853586121016425,
+   "retPct": 0.8947404511494339,
+   "reason": "tp1",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: take-profit 1: the price moved one R (the risk it took) its way, so a part was sold and the stop moved to the entry price. Sold short at 1718.92, closed at 1703.54 (+0.89%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-27T13:15",
+   "exitDate": "2026-11-27T14:30",
+   "entry": 1718.9241094238282,
+   "exit": 1687.1326267958343,
+   "qty": 0.02505597424495189,
+   "pnl": 0.7965665699358506,
+   "retPct": 1.8494989077004753,
+   "reason": "tp2",
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: take-profit 2: the price moved two R its way, so another part was sold and the stop moved up to the first take-profit. Sold short at 1718.92, closed at 1687.13 (+1.85%)."
+  },
+  {
+   "symbol": "ETH",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-27T13:15",
+   "exitDate": "2026-11-27T14:45",
+   "entry": 1718.9241094238282,
+   "exit": 1670.7210534994156,
+   "qty": 0.025063491788979788,
+   "pnl": 1.2081368963652497,
+   "retPct": 2.804257364251528,
+   "reason": "tp3",
+   "funding": -0.001,
+   "key": "ETH@15m",
+   "tf": "15m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: take-profit 3: the price moved three R its way, so the rest was sold. Sold short at 1718.92, closed at 1670.72 (+2.80%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-27T16:30",
+   "exitDate": "2026-11-27T19:30",
+   "entry": 3.0001978746414184,
+   "exit": 3.055619931445151,
+   "qty": 14.48830928795197,
+   "pnl": -0.8029719003469188,
+   "retPct": -1.8472800501652342,
+   "reason": "sl1",
+   "key": "NEAR@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: stepped stop 1: the loss reached half the risk, so a part was sold to keep the loss small. Sold short at 3.0002, closed at 3.0556 (-1.85%)."
+  },
+  {
+   "symbol": "NEAR",
+   "side": "short",
+   "strategyId": "ma_cross_short",
+   "entryDate": "2026-11-27T16:30",
+   "exitDate": "2026-11-27T20:45",
+   "entry": 3.0001978746414184,
+   "exit": 3.052439952278137,
+   "qty": 28.980965503383075,
+   "pnl": -1.5140258498147996,
+   "retPct": -1.741287735661845,
+   "reason": "weekend",
+   "funding": -0.0014,
+   "key": "NEAR@30m",
+   "tf": "30m",
+   "explain": "Opened by 20/50 average cross down (short). Why it closed: weekend pause: everything closes from Friday 22:00 to Monday 00:00 (Madrid). Sold short at 3.0002, closed at 3.0524 (-1.74%)."
+  }
+ ],
+ "equityCurve": [
+  {
+   "d": "2026-11-28T09:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T09:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T10:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T11:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T12:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T13:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T14:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T15:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T16:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T17:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:02",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:03",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:04",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:05",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:06",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:07",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:08",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:09",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:10",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:11",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:12",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:13",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:14",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:15",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:16",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:17",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:18",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:19",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:20",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:21",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:22",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:23",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:24",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:25",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:26",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:27",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:28",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:29",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:30",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:31",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:32",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:33",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:34",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:35",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:36",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:37",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:38",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:39",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:40",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:41",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:42",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:43",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:44",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:45",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:46",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:47",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:48",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:49",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:50",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:51",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:52",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:53",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:54",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:55",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:56",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:57",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:58",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T18:59",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T19:00",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T19:01",
+   "equity": 258.52
+  },
+  {
+   "d": "2026-11-28T19:02",
+   "equity": 258.52
+  }
+ ],
+ "log": [
+  {
+   "d": "2026-11-27T20:45",
+   "msg": "Weekend pause: 1 position closed and orders cancelled. Trading starts again on Monday."
+  },
+  {
+   "d": "2026-11-27T20:45",
+   "msg": "NEAR 30m: closed at 3.05 (weekend), -1.51."
+  },
+  {
+   "d": "2026-11-27T19:30",
+   "msg": "NEAR 30m: sold 14.4883 (part) at 3.06 (sl1), -0.80."
+  },
+  {
+   "d": "2026-11-27T16:30",
+   "msg": "NEAR 30m: sold short 43.4693 at 3.00, stop 3.10, first take-profit 2.90 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-27T14:45",
+   "msg": "ETH 15m: closed at 1670.72 (tp3), +1.21."
+  },
+  {
+   "d": "2026-11-27T14:30",
+   "msg": "ETH 15m: stop moved to 1703.03 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-27T14:30",
+   "msg": "ETH 15m: sold 0.0251 (part) at 1687.13 (tp2), +0.80."
+  },
+  {
+   "d": "2026-11-27T14:30",
+   "msg": "ETH 15m: sold 0.0251 (part) at 1703.54 (tp1), +0.39."
+  },
+  {
+   "d": "2026-11-27T13:15",
+   "msg": "ETH 15m: sold short 0.0752 at 1718.92, stop 1735.85, first take-profit 1703.03 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-26T20:15",
+   "msg": "ETH 15m: closed at 1702.14 (time-stop), -0.36."
+  },
+  {
+   "d": "2026-11-26T19:15",
+   "msg": "ETH 15m: sold 0.0256 (part) at 1704.13 (sl2), -0.41."
+  },
+  {
+   "d": "2026-11-26T18:15",
+   "msg": "ETH 15m: sold 0.0256 (part) at 1699.18 (sl1), -0.28."
+  },
+  {
+   "d": "2026-11-26T17:45",
+   "msg": "ETH 15m: sold short 0.0768 at 1688.27, stop 1708.57, first take-profit 1668.99 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-26T11:15",
+   "msg": "ETH 15m: closed at 1694.94 (time-stop), -0.17."
+  },
+  {
+   "d": "2026-11-26T09:00",
+   "msg": "ETH 15m: sold 0.0257 (part) at 1702.02 (sl2), -0.35."
+  },
+  {
+   "d": "2026-11-26T08:45",
+   "msg": "ETH 15m: sold 0.0257 (part) at 1697.83 (sl1), -0.24."
+  },
+  {
+   "d": "2026-11-26T08:45",
+   "msg": "ETH 15m: sold short 0.0771 at 1688.42, stop 1705.70, first take-profit 1672.16 (20/50 average cross down (short))."
+  },
+  {
+   "d": "2026-11-25T18:00",
+   "msg": "Raven is now called Valeria."
+  },
+  {
+   "d": "2026-11-25T15:00",
+   "msg": "NEAR 15m: closed at 2.80 (trail), +0.83."
+  },
+  {
+   "d": "2026-11-25T14:30",
+   "msg": "NEAR 15m: stop moved to 2.80 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T14:15",
+   "msg": "NEAR 15m: stop moved to 2.81 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T14:15",
+   "msg": "NEAR 15m: sold 15.0274 (part) at 2.76 (tp2), +1.42."
+  },
+  {
+   "d": "2026-11-25T14:00",
+   "msg": "NEAR 15m: stop moved to 2.83 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T13:30",
+   "msg": "NEAR 15m: stop moved to 2.84 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T13:00",
+   "msg": "NEAR 15m: stop moved to 2.85 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T12:00",
+   "msg": "NEAR 15m: stop moved to 2.85 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-25T12:00",
+   "msg": "NEAR 15m: sold 15.0274 (part) at 2.81 (tp1), +0.69."
+  },
+  {
+   "d": "2026-11-25T09:15",
+   "msg": "NEAR 15m: sold short 45.0867 at 2.85, stop 2.90, first take-profit 2.81 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-25T08:45",
+   "msg": "NEAR 15m: closed at 2.86 (rule), -0.31."
+  },
+  {
+   "d": "2026-11-25T08:30",
+   "msg": "NEAR 15m: sold 15.0772 (part) at 2.88 (sl1), -0.41."
+  },
+  {
+   "d": "2026-11-25T07:15",
+   "msg": "NEAR 15m: sold short 45.2361 at 2.85, stop 2.90, first take-profit 2.80 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-25T04:30",
+   "msg": "NEAR 15m: closed at 2.86 (rule), -0.31."
+  },
+  {
+   "d": "2026-11-25T00:15",
+   "msg": "NEAR 15m: sold short 45.2143 at 2.86, stop 2.91, first take-profit 2.81 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-24T22:30",
+   "msg": "NEAR 15m: closed at 2.89 (rule), -1.15."
+  },
+  {
+   "d": "2026-11-24T22:15",
+   "msg": "NEAR 15m: sold 15.2084 (part) at 2.88 (sl1), -0.46."
+  },
+  {
+   "d": "2026-11-24T21:45",
+   "msg": "NEAR 15m: sold short 45.6298 at 2.85, stop 2.90, first take-profit 2.79 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-24T21:30",
+   "msg": "NEAR 15m: closed at 2.86 (time-stop), -0.18."
+  },
+  {
+   "d": "2026-11-24T18:30",
+   "msg": "NEAR 15m: sold 15.1935 (part) at 2.90 (sl1), -0.59."
+  },
+  {
+   "d": "2026-11-24T18:00",
+   "msg": "NEAR 15m: sold short 45.5852 at 2.86, stop 2.93, first take-profit 2.79 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-24T15:45",
+   "msg": "NEAR 15m: closed at 2.79 (tp3), +2.60."
+  },
+  {
+   "d": "2026-11-24T15:30",
+   "msg": "NEAR 15m: stop moved to 2.90 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T15:15",
+   "msg": "NEAR 15m: stop moved to 2.90 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T13:15",
+   "msg": "NEAR 15m: stop moved to 2.92 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T13:15",
+   "msg": "NEAR 15m: sold 14.3141 (part) at 2.86 (tp2), +1.72."
+  },
+  {
+   "d": "2026-11-24T13:00",
+   "msg": "NEAR 15m: stop moved to 2.95 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T12:45",
+   "msg": "NEAR 15m: stop moved to 2.96 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T12:30",
+   "msg": "NEAR 15m: stop moved to 2.96 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T12:00",
+   "msg": "SOL 4h: closed at 70.87 (rule), +4.01."
+  },
+  {
+   "d": "2026-11-24T11:30",
+   "msg": "NEAR 15m: stop moved to 2.96 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T11:15",
+   "msg": "NEAR 15m: stop moved to 2.97 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T10:45",
+   "msg": "NEAR 15m: stop moved to 2.98 (protecting the profit)."
+  },
+  {
+   "d": "2026-11-24T10:45",
+   "msg": "NEAR 15m: sold 14.3141 (part) at 2.92 (tp1), +0.84."
+  },
+  {
+   "d": "2026-11-24T09:00",
+   "msg": "NEAR 15m: sold short 42.9467 at 2.98, stop 3.04, first take-profit 2.92 (Bounce to the 20-bar average (short))."
+  },
+  {
+   "d": "2026-11-23T20:00",
+   "msg": "ETH 4h: closed at 1730.89 (rule), +1.49."
+  },
+  {
+   "d": "2026-11-23T16:00",
+   "msg": "SOL 4h: sold short 0.8525 at 75.57, stop 81.47, first take-profit 69.75 (Upper Bollinger band fade (short))."
+  },
+  {
+   "d": "2026-11-23T16:00",
+   "msg": "ETH 4h: sold short 0.0370 at 1771.11, stop 1907.04, first take-profit 1636.96 (Short-term spike in a downtrend (short))."
+  },
+  {
+   "d": "2026-11-23T19:13",
+   "msg": "Raven joins the competition with a 250 USD grant (a loan from the accountant)."
+  }
+ ]
+}

@@ -1,0 +1,125 @@
+{
+ "genomes": {
+  "stocks-bull": {
+   "who": "stocks-bull|1",
+   "picks": [
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 0% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 0% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "total": 2,
+   "era": 0
+  },
+  "stocks-bear": {
+   "who": "stocks-bear|1",
+   "picks": [
+    {
+     "id": "compounding",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "hot-hand",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "market-reader",
+     "at": "2026-11-28T10:53",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    }
+   ],
+   "total": 2,
+   "era": 0
+  },
+  "crypto-bull": {
+   "who": "crypto-bull|1",
+   "picks": [
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 17% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-27T19:47",
+     "why": "wins only 17% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "total": 2,
+   "era": 0
+  },
+  "crypto-bear": {
+   "who": "crypto-bear|1",
+   "picks": [
+    {
+     "id": "compounding",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "hot-hand",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "market-reader",
+     "at": "2026-11-27T19:47",
+     "why": "its trading works: it wants more money from it",
+     "by": "bot"
+    },
+    {
+     "id": "safe-exit",
+     "at": "2026-11-28T10:53",
+     "why": "wins only 42% of its trades: it wants better techniques",
+     "by": "bot"
+    },
+    {
+     "id": "cool-head",
+     "at": "2026-11-28T10:53",
+     "why": "wins only 42% of its trades: it wants better techniques",
+     "by": "bot"
+    }
+   ],
+   "total": 3,
+   "era": 0
+  }
+ },
+ "plans": {
+  "stocks-bull": [
+   "second-screen",
+   "scalper-keys",
+   "global-terminal",
+   "quant-lab",
+   "hedge-fund",
+   "compounding",
+   "hot-hand",
+   "pyramid",
+   "award-investor",
+   "iron-nerves",
+   "funding-sense",
+   "spread-sense",
+   "cool-head",
+   "second-opinion",
+   "regime-master",
+   "satellite-feed"
+  ]
+ },
+ "at": "2026-11-28T19:01:08.110Z"
+}

@@ -1,0 +1,1613 @@
+{
+ "pickedAt": "2026-11-27T19:09:12.370Z",
+ "testShare": 0.3,
+ "maxStrategies": 4,
+ "charts": 222,
+ "chosen": [
+  "ema_pullback_short",
+  "ma_cross_short",
+  "rsi2_dip_short",
+  "ema_pullback_short_adx"
+ ],
+ "candidates": [
+  {
+   "id": "ema_pullback_short",
+   "name": "Bounce to the 20-bar average (short)",
+   "side": "short",
+   "pickPass": 25,
+   "pickTested": 222,
+   "pickMedianPF": 1.611095337493038,
+   "testTrades": 409,
+   "testPF": 1.760270324534037,
+   "testAvgPct": 0.5901931706599752,
+   "chosen": true,
+   "why": "Passed on 25 of 222 charts in the older data and still made money in the newer data (profit factor 1.76 over 409 trades).",
+   "charts": [
+    {
+     "key": "NVDA@30m",
+     "testTrades": 11,
+     "testPF": 10.06604228910909,
+     "testAvgPct": 1.5205312418569732,
+     "testBars": 865
+    },
+    {
+     "key": "AMD@30m",
+     "testTrades": 7,
+     "testPF": 9.036339248644905,
+     "testAvgPct": 2.4316610635632614,
+     "testBars": 865
+    },
+    {
+     "key": "MU@15m",
+     "testTrades": 27,
+     "testPF": 1.3863089087448466,
+     "testAvgPct": 0.25923445207064827,
+     "testBars": 1728
+    },
+    {
+     "key": "INTC@15m",
+     "testTrades": 30,
+     "testPF": 1.4510643170927124,
+     "testAvgPct": 0.20768986444977486,
+     "testBars": 1728
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 12,
+     "testPF": 1.5055620245830348,
+     "testAvgPct": 0.3108458000428525,
+     "testBars": 865
+    },
+    {
+     "key": "NBIS@15m",
+     "testTrades": 27,
+     "testPF": 1.180386504217857,
+     "testAvgPct": 0.12816580293898988,
+     "testBars": 1728
+    },
+    {
+     "key": "NBIS@30m",
+     "testTrades": 9,
+     "testPF": 2.6293952492885087,
+     "testAvgPct": 1.7043035935921242,
+     "testBars": 865
+    },
+    {
+     "key": "NBIS@1h",
+     "testTrades": 23,
+     "testPF": 1.4924877109663741,
+     "testAvgPct": 0.5154013213340207,
+     "testBars": 1233
+    },
+    {
+     "key": "NBIS@4h",
+     "testTrades": 13,
+     "testPF": 1.1126661164163707,
+     "testAvgPct": 0.2344677265572589,
+     "testBars": 308
+    },
+    {
+     "key": "IREN@1h",
+     "testTrades": 39,
+     "testPF": 1.9023589380437707,
+     "testAvgPct": 1.407126248178568,
+     "testBars": 1655
+    },
+    {
+     "key": "PLTR@4h",
+     "testTrades": 8,
+     "testPF": 2.2045561963960063,
+     "testAvgPct": 0.6701885280874935,
+     "testBars": 657
+    },
+    {
+     "key": "TSLA@4h",
+     "testTrades": 10,
+     "testPF": 0,
+     "testAvgPct": -0.7091618655186955,
+     "testBars": 657
+    },
+    {
+     "key": "MSFT@4h",
+     "testTrades": 15,
+     "testPF": 1.1778935481650286,
+     "testAvgPct": 0.06605317525685725,
+     "testBars": 656
+    },
+    {
+     "key": "AMZN@4h",
+     "testTrades": 18,
+     "testPF": 0.9531956103095419,
+     "testAvgPct": -0.028787324732627944,
+     "testBars": 656
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 31,
+     "testPF": 0.7888175182396578,
+     "testAvgPct": -0.059740217207333295,
+     "testBars": 1728
+    },
+    {
+     "key": "ORCL@1h",
+     "testTrades": 22,
+     "testPF": 0.5721625307072684,
+     "testAvgPct": -0.30792671918298103,
+     "testBars": 1485
+    },
+    {
+     "key": "CRCL@1h",
+     "testTrades": 38,
+     "testPF": 1.4070689556607778,
+     "testAvgPct": 0.2576248207067023,
+     "testBars": 2333
+    },
+    {
+     "key": "XIAOMI@4h",
+     "testTrades": 5,
+     "testPF": 1.1456296609484924,
+     "testAvgPct": 0.09550058719956214,
+     "testBars": 233
+    },
+    {
+     "key": "SMIC@4h",
+     "testTrades": 3,
+     "testPF": 0.8129392941112131,
+     "testAvgPct": -0.37111135161210224,
+     "testBars": 183
+    },
+    {
+     "key": "HYUNDAIUSD@1h",
+     "testTrades": 11,
+     "testPF": 0.05044422717324577,
+     "testAvgPct": -0.5680176716990548,
+     "testBars": 1593
+    },
+    {
+     "key": "HYUNDAIUSD@4h",
+     "testTrades": 11,
+     "testPF": 1.1812601223679724,
+     "testAvgPct": 0.12270521328476977,
+     "testBars": 398
+    },
+    {
+     "key": "SOXL@4h",
+     "testTrades": 9,
+     "testPF": 7.11154173989169,
+     "testAvgPct": 9.765781936163682,
+     "testBars": 283
+    },
+    {
+     "key": "WTI@4h",
+     "testTrades": 13,
+     "testPF": 1.2577430591179524,
+     "testAvgPct": 0.199224102825812,
+     "testBars": 508
+    },
+    {
+     "key": "XPD@4h",
+     "testTrades": 15,
+     "testPF": 2.218725800370489,
+     "testAvgPct": 0.6810772135558033,
+     "testBars": 508
+    },
+    {
+     "key": "UNITREE@4h",
+     "testTrades": 2,
+     "testPF": 9.926688358893202,
+     "testAvgPct": 3.5160758146711277,
+     "testBars": 206
+    }
+   ]
+  },
+  {
+   "id": "ma_cross_short",
+   "name": "20/50 average cross down (short)",
+   "side": "short",
+   "pickPass": 19,
+   "pickTested": 222,
+   "pickMedianPF": 1.9530274042953566,
+   "testTrades": 230,
+   "testPF": 1.889167258491787,
+   "testAvgPct": 0.5496113371948135,
+   "chosen": true,
+   "why": "Passed on 19 of 222 charts in the older data and still made money in the newer data (profit factor 1.89 over 230 trades).",
+   "charts": [
+    {
+     "key": "NVDA@15m",
+     "testTrades": 15,
+     "testPF": 2.0238994109689674,
+     "testAvgPct": 0.45984986751239754,
+     "testBars": 1728
+    },
+    {
+     "key": "NVDA@30m",
+     "testTrades": 10,
+     "testPF": 2.2907960968304204,
+     "testAvgPct": 0.35493146709626405,
+     "testBars": 865
+    },
+    {
+     "key": "NVDA@4h",
+     "testTrades": 3,
+     "testPF": 3.2600672818531486,
+     "testAvgPct": 0.7225180660517467,
+     "testBars": 657
+    },
+    {
+     "key": "AMD@30m",
+     "testTrades": 6,
+     "testPF": 3.3568767930305037,
+     "testAvgPct": 1.6366477128241284,
+     "testBars": 865
+    },
+    {
+     "key": "AMD@1h",
+     "testTrades": 19,
+     "testPF": 4.764286895777059,
+     "testAvgPct": 1.802755122719553,
+     "testBars": 2095
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 7,
+     "testPF": 0.9102409273709161,
+     "testAvgPct": -0.08584840441044118,
+     "testBars": 865
+    },
+    {
+     "key": "NBIS@15m",
+     "testTrades": 17,
+     "testPF": 2.8084298565503603,
+     "testAvgPct": 0.9368254883996329,
+     "testBars": 1728
+    },
+    {
+     "key": "NBIS@30m",
+     "testTrades": 8,
+     "testPF": 2.1307044524347956,
+     "testAvgPct": 1.3895922609304656,
+     "testBars": 865
+    },
+    {
+     "key": "NBIS@1h",
+     "testTrades": 17,
+     "testPF": 2.1640898470230265,
+     "testAvgPct": 1.2725478814145916,
+     "testBars": 1233
+    },
+    {
+     "key": "CRWV@30m",
+     "testTrades": 9,
+     "testPF": 1.204987244692009,
+     "testAvgPct": 0.19252511254599033,
+     "testBars": 865
+    },
+    {
+     "key": "CRWV@1h",
+     "testTrades": 14,
+     "testPF": 0.8599320886930789,
+     "testAvgPct": -0.1786621082573762,
+     "testBars": 1477
+    },
+    {
+     "key": "MSFT@1h",
+     "testTrades": 23,
+     "testPF": 1.5359905013697275,
+     "testAvgPct": 0.10332173715968128,
+     "testBars": 2622
+    },
+    {
+     "key": "GOOGL@30m",
+     "testTrades": 6,
+     "testPF": 0.5865130276882169,
+     "testAvgPct": -0.07406885023596958,
+     "testBars": 865
+    },
+    {
+     "key": "META@4h",
+     "testTrades": 4,
+     "testPF": 0.03323388344635656,
+     "testAvgPct": -0.8818233177056755,
+     "testBars": 656
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 17,
+     "testPF": 0.8376718056076025,
+     "testAvgPct": -0.047532036611122444,
+     "testBars": 1728
+    },
+    {
+     "key": "NBIS@5m",
+     "testTrades": 17,
+     "testPF": 0.6560536500094369,
+     "testAvgPct": -0.19492690017925823,
+     "testBars": 1728
+    },
+    {
+     "key": "DELL@1h",
+     "testTrades": 13,
+     "testPF": 1.4506035448973504,
+     "testAvgPct": 0.4013344658975169,
+     "testBars": 1291
+    },
+    {
+     "key": "LITE@1h",
+     "testTrades": 11,
+     "testPF": 3.871971015633241,
+     "testAvgPct": 2.010189029768301,
+     "testBars": 1333
+    },
+    {
+     "key": "US100@1h",
+     "testTrades": 14,
+     "testPF": 1.1553329279591729,
+     "testAvgPct": 0.05748821303908439,
+     "testBars": 1381
+    }
+   ]
+  },
+  {
+   "id": "rsi2_dip_short",
+   "name": "Short-term spike in a downtrend (short)",
+   "side": "short",
+   "pickPass": 19,
+   "pickTested": 222,
+   "pickMedianPF": 1.601106039986923,
+   "testTrades": 316,
+   "testPF": 1.1769656513194504,
+   "testAvgPct": 0.09798632863435017,
+   "chosen": true,
+   "why": "Passed on 19 of 222 charts in the older data and still made money in the newer data (profit factor 1.18 over 316 trades).",
+   "charts": [
+    {
+     "key": "AMD@4h",
+     "testTrades": 9,
+     "testPF": 0.2733993769228362,
+     "testAvgPct": -1.036398868289969,
+     "testBars": 524
+    },
+    {
+     "key": "AMD@1d",
+     "testTrades": 0,
+     "testPF": 0,
+     "testAvgPct": 0,
+     "testBars": 403
+    },
+    {
+     "key": "INTC@15m",
+     "testTrades": 17,
+     "testPF": 0.5013176100975774,
+     "testAvgPct": -0.23340701437566777,
+     "testBars": 1728
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 12,
+     "testPF": 0.30537136076282045,
+     "testAvgPct": -0.5978342855161961,
+     "testBars": 865
+    },
+    {
+     "key": "IREN@30m",
+     "testTrades": 3,
+     "testPF": 0.0646920252247727,
+     "testAvgPct": -1.9069911823117345,
+     "testBars": 321
+    },
+    {
+     "key": "IREN@1d",
+     "testTrades": 2,
+     "testPF": 2.7728428366513316,
+     "testAvgPct": 3.41461040053177,
+     "testBars": 379
+    },
+    {
+     "key": "TSLA@4h",
+     "testTrades": 4,
+     "testPF": 2.2851930670061202,
+     "testAvgPct": 0.3867273843621556,
+     "testBars": 657
+    },
+    {
+     "key": "MRNA@1d",
+     "testTrades": 7,
+     "testPF": 2.7696162944428364,
+     "testAvgPct": 1.928020425170567,
+     "testBars": 386
+    },
+    {
+     "key": "CRCL@1h",
+     "testTrades": 53,
+     "testPF": 1.3077185574337122,
+     "testAvgPct": 0.14479891435085887,
+     "testBars": 2333
+    },
+    {
+     "key": "CRCL@4h",
+     "testTrades": 16,
+     "testPF": 3.66077191058924,
+     "testAvgPct": 1.0461192564526989,
+     "testBars": 584
+    },
+    {
+     "key": "BABA@1h",
+     "testTrades": 28,
+     "testPF": 1.0744192241202926,
+     "testAvgPct": 0.014449405194219287,
+     "testBars": 1362
+    },
+    {
+     "key": "DELL@1h",
+     "testTrades": 31,
+     "testPF": 0.9230269495996343,
+     "testAvgPct": -0.04865190688402996,
+     "testBars": 1291
+    },
+    {
+     "key": "XIAOMI@4h",
+     "testTrades": 2,
+     "testPF": 99,
+     "testAvgPct": 3.443033140468199,
+     "testBars": 233
+    },
+    {
+     "key": "SKHYNIXUSD@1h",
+     "testTrades": 36,
+     "testPF": 0.9920458574569736,
+     "testAvgPct": -0.005563193065492306,
+     "testBars": 1594
+    },
+    {
+     "key": "HYUNDAIUSD@4h",
+     "testTrades": 17,
+     "testPF": 2.3708498484725573,
+     "testAvgPct": 0.6331710626736057,
+     "testBars": 398
+    },
+    {
+     "key": "EWY@4h",
+     "testTrades": 10,
+     "testPF": 1.8705147587691047,
+     "testAvgPct": 0.36669955352350814,
+     "testBars": 379
+    },
+    {
+     "key": "XAG@4h",
+     "testTrades": 15,
+     "testPF": 0.8753538826329802,
+     "testAvgPct": -0.08757411361764017,
+     "testBars": 657
+    },
+    {
+     "key": "OPENAI@1h",
+     "testTrades": 27,
+     "testPF": 0.6822179830882711,
+     "testAvgPct": -0.09709924027974617,
+     "testBars": 1262
+    },
+    {
+     "key": "SPCX@1h",
+     "testTrades": 27,
+     "testPF": 0.5917301420410408,
+     "testAvgPct": -0.19289362849796451,
+     "testBars": 1212
+    }
+   ]
+  },
+  {
+   "id": "ema_pullback_short_adx",
+   "name": "Bounce to the 20-bar average (short), strong trend only",
+   "side": "short",
+   "pickPass": 17,
+   "pickTested": 222,
+   "pickMedianPF": 1.9601263420501371,
+   "testTrades": 158,
+   "testPF": 1.687054715052259,
+   "testAvgPct": 0.39120916784045423,
+   "chosen": true,
+   "why": "Passed on 17 of 222 charts in the older data and still made money in the newer data (profit factor 1.69 over 158 trades).",
+   "charts": [
+    {
+     "key": "NVDA@15m",
+     "testTrades": 10,
+     "testPF": 0.2206954558191715,
+     "testAvgPct": -0.5177857405783169,
+     "testBars": 1728
+    },
+    {
+     "key": "NVDA@30m",
+     "testTrades": 5,
+     "testPF": 11.791906396563835,
+     "testAvgPct": 2.0733323292770414,
+     "testBars": 865
+    },
+    {
+     "key": "AMD@30m",
+     "testTrades": 3,
+     "testPF": 14.78905080264041,
+     "testAvgPct": 3.698933388145086,
+     "testBars": 865
+    },
+    {
+     "key": "INTC@15m",
+     "testTrades": 13,
+     "testPF": 3.5026091059444755,
+     "testAvgPct": 0.7198934276792621,
+     "testBars": 1728
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 7,
+     "testPF": 2.3527523301740505,
+     "testAvgPct": 0.8448351483947016,
+     "testBars": 865
+    },
+    {
+     "key": "INTC@1h",
+     "testTrades": 14,
+     "testPF": 1.0291978920240463,
+     "testAvgPct": 0.012208739609284749,
+     "testBars": 2095
+    },
+    {
+     "key": "NBIS@30m",
+     "testTrades": 3,
+     "testPF": 6.850942118825009,
+     "testAvgPct": 4.2293367237063615,
+     "testBars": 865
+    },
+    {
+     "key": "NBIS@1h",
+     "testTrades": 8,
+     "testPF": 0.43640582742258427,
+     "testAvgPct": -0.7684150880451633,
+     "testBars": 1233
+    },
+    {
+     "key": "IREN@1h",
+     "testTrades": 15,
+     "testPF": 3.146651250627504,
+     "testAvgPct": 2.2227388147332685,
+     "testBars": 1655
+    },
+    {
+     "key": "TSLA@4h",
+     "testTrades": 3,
+     "testPF": 0,
+     "testAvgPct": -0.5602240398519285,
+     "testBars": 657
+    },
+    {
+     "key": "MSFT@4h",
+     "testTrades": 3,
+     "testPF": 3.091079225898962,
+     "testAvgPct": 0.6965772765113094,
+     "testBars": 656
+    },
+    {
+     "key": "GOOGL@15m",
+     "testTrades": 12,
+     "testPF": 0.7262878120475071,
+     "testAvgPct": -0.08542652602077679,
+     "testBars": 1728
+    },
+    {
+     "key": "GOOGL@4h",
+     "testTrades": 8,
+     "testPF": 2.083260771985492,
+     "testAvgPct": 0.5061696370112121,
+     "testBars": 656
+    },
+    {
+     "key": "AMZN@15m",
+     "testTrades": 11,
+     "testPF": 1.613446873861672,
+     "testAvgPct": 0.13381907217345212,
+     "testBars": 1728
+    },
+    {
+     "key": "MRNA@15m",
+     "testTrades": 17,
+     "testPF": 0.4966668678930867,
+     "testAvgPct": -0.24451983198552774,
+     "testBars": 1728
+    },
+    {
+     "key": "ORCL@1h",
+     "testTrades": 9,
+     "testPF": 0.30012648838964534,
+     "testAvgPct": -0.6114633044286477,
+     "testBars": 1485
+    },
+    {
+     "key": "BRENTOIL@1h",
+     "testTrades": 17,
+     "testPF": 0.5101108809624001,
+     "testAvgPct": -0.2967654077200216,
+     "testBars": 1788
+    }
+   ]
+  },
+  {
+   "id": "supertrend_short",
+   "name": "Supertrend turns down (short)",
+   "side": "short",
+   "pickPass": 16,
+   "pickTested": 222,
+   "pickMedianPF": 2.1021359429633684,
+   "testTrades": 154,
+   "testPF": 1.3916075625997328,
+   "testAvgPct": 0.39298250223706277,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "NVDA@15m",
+     "testTrades": 16,
+     "testPF": 4.646629030149279,
+     "testAvgPct": 0.9096190280709098,
+     "testBars": 1728
+    },
+    {
+     "key": "MU@15m",
+     "testTrades": 7,
+     "testPF": 1.4103632106504336,
+     "testAvgPct": 0.21608636135747986,
+     "testBars": 1728
+    },
+    {
+     "key": "MU@30m",
+     "testTrades": 7,
+     "testPF": 4.115935378926862,
+     "testAvgPct": 1.1822312466789149,
+     "testBars": 865
+    },
+    {
+     "key": "MU@1h",
+     "testTrades": 19,
+     "testPF": 1.9093710194048275,
+     "testAvgPct": 0.9557766372920299,
+     "testBars": 1491
+    },
+    {
+     "key": "NBIS@15m",
+     "testTrades": 4,
+     "testPF": 4.1293391357206195,
+     "testAvgPct": 1.919022544491012,
+     "testBars": 1728
+    },
+    {
+     "key": "MSTR@4h",
+     "testTrades": 2,
+     "testPF": 0,
+     "testAvgPct": -3.589364881334912,
+     "testBars": 584
+    },
+    {
+     "key": "CRWV@30m",
+     "testTrades": 8,
+     "testPF": 0.75466139095728,
+     "testAvgPct": -0.362331649070454,
+     "testBars": 865
+    },
+    {
+     "key": "PLTR@4h",
+     "testTrades": 2,
+     "testPF": 99,
+     "testAvgPct": 2.8269242149855063,
+     "testBars": 657
+    },
+    {
+     "key": "META@4h",
+     "testTrades": 7,
+     "testPF": 0.28108033177656394,
+     "testAvgPct": -1.1552448924231924,
+     "testBars": 656
+    },
+    {
+     "key": "NBIS@5m",
+     "testTrades": 10,
+     "testPF": 8.495194151016715,
+     "testAvgPct": 0.4971101877703264,
+     "testBars": 1728
+    },
+    {
+     "key": "HOOD@4h",
+     "testTrades": 7,
+     "testPF": 0.16756288597532537,
+     "testAvgPct": -2.5795661919807356,
+     "testBars": 657
+    },
+    {
+     "key": "COIN@4h",
+     "testTrades": 9,
+     "testPF": 0.43441542817777146,
+     "testAvgPct": -0.6177234852400925,
+     "testBars": 657
+    },
+    {
+     "key": "SKHY@1h",
+     "testTrades": 10,
+     "testPF": 2.153294778481492,
+     "testAvgPct": 1.6569936340809754,
+     "testBars": 980
+    },
+    {
+     "key": "SKHYNIXUSD@1h",
+     "testTrades": 13,
+     "testPF": 1.6964046635360395,
+     "testAvgPct": 0.8263558654663646,
+     "testBars": 1594
+    },
+    {
+     "key": "BRENTOIL@1h",
+     "testTrades": 15,
+     "testPF": 0.6056796179482558,
+     "testAvgPct": -0.3398741856764592,
+     "testBars": 1788
+    },
+    {
+     "key": "CBRS@1h",
+     "testTrades": 18,
+     "testPF": 2.1590573736756125,
+     "testAvgPct": 1.0712501750793126,
+     "testBars": 1419
+    }
+   ]
+  },
+  {
+   "id": "donchian_trend_short_adx",
+   "name": "20-bar breakdown (short), strong trend only",
+   "side": "short",
+   "pickPass": 16,
+   "pickTested": 222,
+   "pickMedianPF": 1.7203740353590902,
+   "testTrades": 183,
+   "testPF": 1.191936900784734,
+   "testAvgPct": 0.12299166466870723,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "XAU@1h",
+     "testTrades": 21,
+     "testPF": 1.6967054607216023,
+     "testAvgPct": 0.1912857366891381,
+     "testBars": 2628
+    },
+    {
+     "key": "NVDA@15m",
+     "testTrades": 20,
+     "testPF": 1.3654457411575516,
+     "testAvgPct": 0.15267253846556184,
+     "testBars": 1728
+    },
+    {
+     "key": "NVDA@30m",
+     "testTrades": 7,
+     "testPF": 2.267474325555667,
+     "testAvgPct": 0.8820118791996941,
+     "testBars": 865
+    },
+    {
+     "key": "INTC@15m",
+     "testTrades": 12,
+     "testPF": 0.30535027318579105,
+     "testAvgPct": -0.5498625706883203,
+     "testBars": 1728
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 6,
+     "testPF": 0.8593411027244079,
+     "testAvgPct": -0.14028421807839142,
+     "testBars": 865
+    },
+    {
+     "key": "TSLA@1h",
+     "testTrades": 23,
+     "testPF": 1.4549774677843106,
+     "testAvgPct": 0.157077886890504,
+     "testBars": 2628
+    },
+    {
+     "key": "MSFT@30m",
+     "testTrades": 9,
+     "testPF": 1.2846406263422394,
+     "testAvgPct": 0.08965957567058526,
+     "testBars": 865
+    },
+    {
+     "key": "MSFT@4h",
+     "testTrades": 3,
+     "testPF": 0,
+     "testAvgPct": -1.0755441596024953,
+     "testBars": 656
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 9,
+     "testPF": 0.5361274301318194,
+     "testAvgPct": -0.2805789235858799,
+     "testBars": 1728
+    },
+    {
+     "key": "NBIS@5m",
+     "testTrades": 13,
+     "testPF": 0.20127394441782778,
+     "testAvgPct": -0.5095336630553381,
+     "testBars": 1728
+    },
+    {
+     "key": "AAPL@4h",
+     "testTrades": 3,
+     "testPF": 0,
+     "testAvgPct": -0.3509297789814843,
+     "testBars": 656
+    },
+    {
+     "key": "COIN@4h",
+     "testTrades": 7,
+     "testPF": 0.8931375251860892,
+     "testAvgPct": -0.2328472937225647,
+     "testBars": 657
+    },
+    {
+     "key": "SKHY@1h",
+     "testTrades": 8,
+     "testPF": 3.1393663097914346,
+     "testAvgPct": 1.8101602871700024,
+     "testBars": 980
+    },
+    {
+     "key": "WTI@1h",
+     "testTrades": 17,
+     "testPF": 0.9204480652185225,
+     "testAvgPct": -0.05911882583535405,
+     "testBars": 2031
+    },
+    {
+     "key": "MINIMAX@1h",
+     "testTrades": 19,
+     "testPF": 2.5208140566510018,
+     "testAvgPct": 0.9604879048005028,
+     "testBars": 1129
+    },
+    {
+     "key": "UNITREE@1h",
+     "testTrades": 6,
+     "testPF": 0.4030225713159991,
+     "testAvgPct": -0.7306271380267656,
+     "testBars": 823
+    }
+   ]
+  },
+  {
+   "id": "donchian_trend_short",
+   "name": "20-bar breakdown (short)",
+   "side": "short",
+   "pickPass": 15,
+   "pickTested": 222,
+   "pickMedianPF": 1.9240362388776204,
+   "testTrades": 219,
+   "testPF": 1.1808686396131416,
+   "testAvgPct": 0.14021155263924362,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "XAU@1h",
+     "testTrades": 38,
+     "testPF": 1.844582450093706,
+     "testAvgPct": 0.2151284814169534,
+     "testBars": 2628
+    },
+    {
+     "key": "NVDA@30m",
+     "testTrades": 13,
+     "testPF": 2.7741762555127427,
+     "testAvgPct": 1.028423841347416,
+     "testBars": 865
+    },
+    {
+     "key": "AMD@30m",
+     "testTrades": 15,
+     "testPF": 1.1274197492422058,
+     "testAvgPct": 0.11594007236819075,
+     "testBars": 865
+    },
+    {
+     "key": "MU@30m",
+     "testTrades": 8,
+     "testPF": 6.5375039290897305,
+     "testAvgPct": 2.129889158434325,
+     "testBars": 865
+    },
+    {
+     "key": "META@30m",
+     "testTrades": 9,
+     "testPF": 2.114671045502234,
+     "testAvgPct": 0.25658083999737025,
+     "testBars": 865
+    },
+    {
+     "key": "MRNA@1d",
+     "testTrades": 4,
+     "testPF": 0.16468408015161506,
+     "testAvgPct": -1.9389561928622032,
+     "testBars": 386
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 21,
+     "testPF": 0.7726765565822257,
+     "testAvgPct": -0.09431321608762319,
+     "testBars": 1728
+    },
+    {
+     "key": "NBIS@5m",
+     "testTrades": 25,
+     "testPF": 0.36989721162055866,
+     "testAvgPct": -0.35277639906661784,
+     "testBars": 1728
+    },
+    {
+     "key": "ORCL@4h",
+     "testTrades": 9,
+     "testPF": 0.5563433753729046,
+     "testAvgPct": -0.7524601342676375,
+     "testBars": 372
+    },
+    {
+     "key": "AAPL@4h",
+     "testTrades": 5,
+     "testPF": 0.33958717894854,
+     "testAvgPct": -0.4601501248613514,
+     "testBars": 656
+    },
+    {
+     "key": "COIN@4h",
+     "testTrades": 13,
+     "testPF": 0.7167568816772752,
+     "testAvgPct": -0.4893886231947182,
+     "testBars": 657
+    },
+    {
+     "key": "SKHY@1h",
+     "testTrades": 13,
+     "testPF": 1.8951600436659006,
+     "testAvgPct": 0.9884536880658363,
+     "testBars": 980
+    },
+    {
+     "key": "WTI@1h",
+     "testTrades": 28,
+     "testPF": 0.7961408708394688,
+     "testAvgPct": -0.16562231223328847,
+     "testBars": 2031
+    },
+    {
+     "key": "ZHIPU@4h",
+     "testTrades": 9,
+     "testPF": 2.374087269770443,
+     "testAvgPct": 2.208751234348417,
+     "testBars": 282
+    },
+    {
+     "key": "UNITREE@1h",
+     "testTrades": 9,
+     "testPF": 0.3293647108478427,
+     "testAvgPct": -0.6695535786220488,
+     "testBars": 823
+    }
+   ]
+  },
+  {
+   "id": "macd_cross_short",
+   "name": "MACD momentum cross down (short)",
+   "side": "short",
+   "pickPass": 14,
+   "pickTested": 222,
+   "pickMedianPF": 1.6427813853752098,
+   "testTrades": 153,
+   "testPF": 1.8766584868242662,
+   "testAvgPct": 0.6493077231454945,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "MU@30m",
+     "testTrades": 11,
+     "testPF": 0.6589620993557143,
+     "testAvgPct": -0.3437078993314318,
+     "testBars": 865
+    },
+    {
+     "key": "MSTR@4h",
+     "testTrades": 10,
+     "testPF": 1.0113835853640456,
+     "testAvgPct": 0.023919002353547825,
+     "testBars": 584
+    },
+    {
+     "key": "CRWV@4h",
+     "testTrades": 7,
+     "testPF": 1.5260700879551554,
+     "testAvgPct": 1.1513579592610446,
+     "testBars": 369
+    },
+    {
+     "key": "TSLA@4h",
+     "testTrades": 2,
+     "testPF": 16.75472603861475,
+     "testAvgPct": 3.0370351764035686,
+     "testBars": 657
+    },
+    {
+     "key": "MSFT@4h",
+     "testTrades": 8,
+     "testPF": 2.490402101450049,
+     "testAvgPct": 0.5857157212489664,
+     "testBars": 656
+    },
+    {
+     "key": "META@4h",
+     "testTrades": 11,
+     "testPF": 1.55267721796204,
+     "testAvgPct": 0.32355892190057417,
+     "testBars": 656
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 22,
+     "testPF": 0.8837460308554176,
+     "testAvgPct": -0.0370178099913169,
+     "testBars": 1728
+    },
+    {
+     "key": "COIN@4h",
+     "testTrades": 14,
+     "testPF": 1.470978144863146,
+     "testAvgPct": 0.48262235523182584,
+     "testBars": 657
+    },
+    {
+     "key": "SKHYNIXUSD@4h",
+     "testTrades": 4,
+     "testPF": 5.344032161709264,
+     "testAvgPct": 3.6038827114696854,
+     "testBars": 399
+    },
+    {
+     "key": "EWY@4h",
+     "testTrades": 9,
+     "testPF": 1.568938852198642,
+     "testAvgPct": 0.7580401818017836,
+     "testBars": 379
+    },
+    {
+     "key": "XAG@1h",
+     "testTrades": 22,
+     "testPF": 1.4407649917145027,
+     "testAvgPct": 0.1750908334929446,
+     "testBars": 2628
+    },
+    {
+     "key": "XAG@4h",
+     "testTrades": 7,
+     "testPF": 16.512078746089447,
+     "testAvgPct": 2.726935749230973,
+     "testBars": 657
+    },
+    {
+     "key": "XPD@4h",
+     "testTrades": 14,
+     "testPF": 2.2380527647775397,
+     "testAvgPct": 0.6356926298355718,
+     "testBars": 508
+    },
+    {
+     "key": "ZHIPU@1h",
+     "testTrades": 12,
+     "testPF": 11.163067130276328,
+     "testAvgPct": 1.790564124762285,
+     "testBars": 1129
+    }
+   ]
+  },
+  {
+   "id": "bollinger_dip_short",
+   "name": "Upper Bollinger band fade (short)",
+   "side": "short",
+   "pickPass": 12,
+   "pickTested": 222,
+   "pickMedianPF": 1.6109941230157587,
+   "testTrades": 129,
+   "testPF": 2.88345486569932,
+   "testAvgPct": 0.6898262749836568,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "IREN@15m",
+     "testTrades": 1,
+     "testPF": 0,
+     "testAvgPct": -0.5261597680916497,
+     "testBars": 642
+    },
+    {
+     "key": "TSLA@30m",
+     "testTrades": 3,
+     "testPF": 30.602995229692695,
+     "testAvgPct": 0.806937995870573,
+     "testBars": 865
+    },
+    {
+     "key": "GOOGL@1h",
+     "testTrades": 27,
+     "testPF": 1.105571195146248,
+     "testAvgPct": 0.029709475471173908,
+     "testBars": 2622
+    },
+    {
+     "key": "META@1h",
+     "testTrades": 24,
+     "testPF": 0.8857380569737799,
+     "testAvgPct": -0.04669763542142211,
+     "testBars": 2622
+    },
+    {
+     "key": "META@4h",
+     "testTrades": 9,
+     "testPF": 2.387714392553087,
+     "testAvgPct": 0.8690693168228251,
+     "testBars": 656
+    },
+    {
+     "key": "IREN@5m",
+     "testTrades": 10,
+     "testPF": 1.1096179962531583,
+     "testAvgPct": 0.03255839592745405,
+     "testBars": 1728
+    },
+    {
+     "key": "HOOD@4h",
+     "testTrades": 8,
+     "testPF": 30.78495162201672,
+     "testAvgPct": 3.0520900482160025,
+     "testBars": 657
+    },
+    {
+     "key": "COIN@4h",
+     "testTrades": 5,
+     "testPF": 99,
+     "testAvgPct": 3.674850315558195,
+     "testBars": 657
+    },
+    {
+     "key": "CRCL@4h",
+     "testTrades": 7,
+     "testPF": 25.708650787916053,
+     "testAvgPct": 4.157338014338438,
+     "testBars": 584
+    },
+    {
+     "key": "BABA@1h",
+     "testTrades": 9,
+     "testPF": 2.2052749789476414,
+     "testAvgPct": 0.36401245554569367,
+     "testBars": 1362
+    },
+    {
+     "key": "SPCX@1h",
+     "testTrades": 12,
+     "testPF": 0.8282395823869867,
+     "testAvgPct": -0.08661411104392265,
+     "testBars": 1212
+    },
+    {
+     "key": "MINIMAX@1h",
+     "testTrades": 14,
+     "testPF": 1.5208780262243964,
+     "testAvgPct": 0.3668024302722746,
+     "testBars": 1129
+    }
+   ]
+  },
+  {
+   "id": "rsi2_dip_short_adx",
+   "name": "Short-term spike in a downtrend (short), no strong trend",
+   "side": "short",
+   "pickPass": 11,
+   "pickTested": 222,
+   "pickMedianPF": 1.9875087564242655,
+   "testTrades": 121,
+   "testPF": 1.060147662393084,
+   "testAvgPct": 0.030986113367676957,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "AMD@1d",
+     "testTrades": 0,
+     "testPF": 0,
+     "testAvgPct": 0,
+     "testBars": 403
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 8,
+     "testPF": 0.5538769476100968,
+     "testAvgPct": -0.2209689738023244,
+     "testBars": 865
+    },
+    {
+     "key": "IREN@1h",
+     "testTrades": 20,
+     "testPF": 0.7732877502035387,
+     "testAvgPct": -0.2900912184125944,
+     "testBars": 1655
+    },
+    {
+     "key": "TSLA@1h",
+     "testTrades": 16,
+     "testPF": 1.1632863286549346,
+     "testAvgPct": 0.026913517599338098,
+     "testBars": 2628
+    },
+    {
+     "key": "META@4h",
+     "testTrades": 8,
+     "testPF": 2.088725427388157,
+     "testAvgPct": 0.35136734715337725,
+     "testBars": 656
+    },
+    {
+     "key": "MRNA@1d",
+     "testTrades": 5,
+     "testPF": 3.4641020858307567,
+     "testAvgPct": 2.6754251940170315,
+     "testBars": 386
+    },
+    {
+     "key": "MU@5m",
+     "testTrades": 22,
+     "testPF": 0.8749144062424177,
+     "testAvgPct": -0.03015310511552752,
+     "testBars": 1728
+    },
+    {
+     "key": "AAPL@4h",
+     "testTrades": 4,
+     "testPF": 1.9975222895103073,
+     "testAvgPct": 0.08059077299740758,
+     "testBars": 656
+    },
+    {
+     "key": "CRCL@4h",
+     "testTrades": 7,
+     "testPF": 0.7694836458010128,
+     "testAvgPct": -0.22308001089002996,
+     "testBars": 584
+    },
+    {
+     "key": "BABA@1h",
+     "testTrades": 17,
+     "testPF": 0.693490794007809,
+     "testAvgPct": -0.05841664457133513,
+     "testBars": 1362
+    },
+    {
+     "key": "SPCX@1h",
+     "testTrades": 14,
+     "testPF": 0.6297425093706871,
+     "testAvgPct": -0.17172406416052238,
+     "testBars": 1212
+    }
+   ]
+  },
+  {
+   "id": "bollinger_dip_short_adx",
+   "name": "Upper Bollinger band fade (short), no strong trend",
+   "side": "short",
+   "pickPass": 9,
+   "pickTested": 222,
+   "pickMedianPF": 2.2389736182950157,
+   "testTrades": 85,
+   "testPF": 1.359010827000873,
+   "testAvgPct": 0.1859814372403486,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "NVDA@30m",
+     "testTrades": 8,
+     "testPF": 10.616910362950478,
+     "testAvgPct": 1.1126262277813475,
+     "testBars": 865
+    },
+    {
+     "key": "INTC@30m",
+     "testTrades": 4,
+     "testPF": 0.04252907471479055,
+     "testAvgPct": -0.4532060572626483,
+     "testBars": 865
+    },
+    {
+     "key": "IREN@1h",
+     "testTrades": 9,
+     "testPF": 0.8419156119826764,
+     "testAvgPct": -0.2694119286833878,
+     "testBars": 1655
+    },
+    {
+     "key": "GOOGL@1h",
+     "testTrades": 17,
+     "testPF": 0.8005553281398268,
+     "testAvgPct": -0.05906590503021463,
+     "testBars": 2622
+    },
+    {
+     "key": "IREN@5m",
+     "testTrades": 8,
+     "testPF": 1.1556115469645232,
+     "testAvgPct": 0.05417104528883691,
+     "testBars": 1728
+    },
+    {
+     "key": "COIN@1h",
+     "testTrades": 21,
+     "testPF": 1.3385798251771905,
+     "testAvgPct": 0.1761270234534155,
+     "testBars": 2628
+    },
+    {
+     "key": "CRCL@4h",
+     "testTrades": 3,
+     "testPF": 11.558861817735483,
+     "testAvgPct": 4.145340377594999,
+     "testBars": 584
+    },
+    {
+     "key": "BABA@1h",
+     "testTrades": 7,
+     "testPF": 1.1732661261422255,
+     "testAvgPct": 0.028149027718870068,
+     "testBars": 1362
+    },
+    {
+     "key": "SPCX@1h",
+     "testTrades": 8,
+     "testPF": 0.041863331853086015,
+     "testAvgPct": -0.5770044832194917,
+     "testBars": 1212
+    }
+   ]
+  },
+  {
+   "id": "ma_cross_short_adx",
+   "name": "20/50 average cross down (short), strong trend only",
+   "side": "short",
+   "pickPass": 9,
+   "pickTested": 222,
+   "pickMedianPF": 2.1016994598586787,
+   "testTrades": 65,
+   "testPF": 2.062422243928566,
+   "testAvgPct": 0.562216851553418,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "AMD@1h",
+     "testTrades": 10,
+     "testPF": 2.695592861162936,
+     "testAvgPct": 1.0402390049192178,
+     "testBars": 2095
+    },
+    {
+     "key": "NBIS@30m",
+     "testTrades": 3,
+     "testPF": 1.1140886234558978,
+     "testAvgPct": 0.19541217291897292,
+     "testBars": 865
+    },
+    {
+     "key": "MSFT@1h",
+     "testTrades": 11,
+     "testPF": 2.2321524001420068,
+     "testAvgPct": 0.21947177702410478,
+     "testBars": 2622
+    },
+    {
+     "key": "HOOD@1h",
+     "testTrades": 15,
+     "testPF": 0.8645723843413287,
+     "testAvgPct": -0.11110159376201682,
+     "testBars": 2628
+    },
+    {
+     "key": "BABA@1h",
+     "testTrades": 2,
+     "testPF": 0,
+     "testAvgPct": -0.6637571876677264,
+     "testBars": 1362
+    },
+    {
+     "key": "LITE@1h",
+     "testTrades": 6,
+     "testPF": 8.948425067706152,
+     "testAvgPct": 2.1373893379599296,
+     "testBars": 1333
+    },
+    {
+     "key": "SAMSUNGUSD@1h",
+     "testTrades": 6,
+     "testPF": 3.5117866562830145,
+     "testAvgPct": 1.6448441248680368,
+     "testBars": 1593
+    },
+    {
+     "key": "US100@1h",
+     "testTrades": 8,
+     "testPF": 4.956454658704265,
+     "testAvgPct": 0.4639374106378394,
+     "testBars": 1381
+    },
+    {
+     "key": "BRENTOIL@1h",
+     "testTrades": 4,
+     "testPF": 0.7433658313800938,
+     "testAvgPct": -0.06739563613672006,
+     "testBars": 1788
+    }
+   ]
+  },
+  {
+   "id": "macd_cross_short_adx",
+   "name": "MACD momentum cross down (short), strong trend only",
+   "side": "short",
+   "pickPass": 8,
+   "pickTested": 222,
+   "pickMedianPF": 1.662391896644598,
+   "testTrades": 65,
+   "testPF": 2.1694811856672396,
+   "testAvgPct": 0.5200981748201868,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "XAU@1h",
+     "testTrades": 10,
+     "testPF": 1.9229978755360821,
+     "testAvgPct": 0.25193336297796814,
+     "testBars": 2628
+    },
+    {
+     "key": "INTC@15m",
+     "testTrades": 13,
+     "testPF": 0.282305028694074,
+     "testAvgPct": -0.39120398106964654,
+     "testBars": 1728
+    },
+    {
+     "key": "GOOGL@15m",
+     "testTrades": 6,
+     "testPF": 1.9269023537339753,
+     "testAvgPct": 0.18386693265842677,
+     "testBars": 1728
+    },
+    {
+     "key": "NVDA@5m",
+     "testTrades": 4,
+     "testPF": 3.8266992153655712,
+     "testAvgPct": 0.5526173362546598,
+     "testBars": 1728
+    },
+    {
+     "key": "HOOD@4h",
+     "testTrades": 5,
+     "testPF": 1.6555045491379345,
+     "testAvgPct": 0.8392564863974021,
+     "testBars": 657
+    },
+    {
+     "key": "COIN@1h",
+     "testTrades": 12,
+     "testPF": 0.535614341099125,
+     "testAvgPct": -0.2933343296993165,
+     "testBars": 2628
+    },
+    {
+     "key": "XAG@4h",
+     "testTrades": 4,
+     "testPF": 15.16723977651549,
+     "testAvgPct": 3.625463142120493,
+     "testBars": 657
+    },
+    {
+     "key": "ZHIPU@1h",
+     "testTrades": 11,
+     "testPF": 9.457522802348567,
+     "testAvgPct": 1.6255368638537708,
+     "testBars": 1129
+    }
+   ]
+  },
+  {
+   "id": "supertrend_short_adx",
+   "name": "Supertrend turns down (short), strong trend only",
+   "side": "short",
+   "pickPass": 5,
+   "pickTested": 222,
+   "pickMedianPF": 2.8426635645241225,
+   "testTrades": 31,
+   "testPF": 1.780073377762884,
+   "testAvgPct": 0.6616401273322585,
+   "chosen": false,
+   "why": "Confirmed, but 4 better ones were already chosen.",
+   "charts": [
+    {
+     "key": "AVGO@1h",
+     "testTrades": 5,
+     "testPF": 0.35934396483960274,
+     "testAvgPct": -1.1691439785856281,
+     "testBars": 1614
+    },
+    {
+     "key": "CRWV@30m",
+     "testTrades": 4,
+     "testPF": 5.501058408453281,
+     "testAvgPct": 1.8238574510913823,
+     "testBars": 865
+    },
+    {
+     "key": "TSLA@1h",
+     "testTrades": 7,
+     "testPF": 6.121381952743739,
+     "testAvgPct": 0.8428087157203361,
+     "testBars": 2628
+    },
+    {
+     "key": "ORCL@1h",
+     "testTrades": 7,
+     "testPF": 1.1501483453215149,
+     "testAvgPct": 0.1596468945457024,
+     "testBars": 1485
+    },
+    {
+     "key": "CBRS@1h",
+     "testTrades": 8,
+     "testPF": 2.732125123710164,
+     "testAvgPct": 1.5054930955000445,
+     "testBars": 1419
+    }
+   ]
+  },
+  {
+   "id": "squeeze_break_short",
+   "name": "Breakdown after a quiet spell (short)",
+   "side": "short",
+   "pickPass": 1,
+   "pickTested": 222,
+   "pickMedianPF": 1.6853225517562975,
+   "testTrades": 3,
+   "testPF": 4.070650669478543,
+   "testAvgPct": 4.002755567064102,
+   "chosen": false,
+   "why": "Only 3 trades in the newer data, too few to confirm.",
+   "charts": [
+    {
+     "key": "IREN@1h",
+     "testTrades": 3,
+     "testPF": 4.070650669478543,
+     "testAvgPct": 4.002755567064102,
+     "testBars": 1655
+    }
+   ]
+  }
+ ],
+ "sig": "[{\"mode\":\"ladder\",\"tpR\":[1,2,3],\"fractions\":[0.3333,0.3333,0.3334],\"trailAtr\":3,\"slR\":[0.5,0.75],\"slFractions\":[0.3333,0.3333]},{\"maxLosingBars\":10,\"minTrades\":10,\"minProfitFactor\":1.2},{\"maxStrategies\":4,\"testShare\":0.3,\"refreshDays\":7},{\"stock\":10,\"crypto\":15,\"metal\":10,\"index\":5},{\"costBps\":5},[\"15m\",\"30m\",\"1h\",\"4h\",\"1d\"],[\"donchian_trend\",\"ema_pullback\",\"ma_cross\",\"rsi2_dip\",\"bollinger_dip\",\"supertrend\",\"macd_cross\",\"squeeze_break\",\"donchian_trend_short\",\"ema_pullback_short\",\"ma_cross_short\",\"rsi2_dip_short\",\"bollinger_dip_short\",\"supertrend_short\",\"macd_cross_short\",\"squeeze_break_short\",\"donchian_trend_adx\",\"ema_pullback_adx\",\"ma_cross_adx\",\"rsi2_dip_adx\",\"bollinger_dip_adx\",\"supertrend_adx\",\"macd_cross_adx\",\"donchian_trend_short_adx\",\"ema_pullback_short_adx\",\"ma_cross_short_adx\",\"rsi2_dip_short_adx\",\"bollinger_dip_short_adx\",\"supertrend_short_adx\",\"macd_cross_short_adx\"],\"short\",false,true,[{\"minOiUsd\":100000000,\"bps\":3},{\"minOiUsd\":10000000,\"bps\":5},{\"minOiUsd\":2000000,\"bps\":8},{\"minOiUsd\":500000,\"bps\":15},{\"minOiUsd\":100000,\"bps\":25},{\"minOiUsd\":0,\"bps\":40}],null,\"weekend-v3\"]",
+ "seen": 228
+}
